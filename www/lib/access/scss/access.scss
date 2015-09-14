@@ -1,0 +1,62 @@
+      //sass variable
+      $light: #ffffff !default;
+      $stable: #f8f8f8 !default;
+      $positive: #7ee1ea !default;
+      $calm: #11c1f3 !default;
+      $balanced: #33cd5f !default;
+      $energized: #ffc900 !default;
+      $assertive: #ef473a !default;
+      $royal: #886aea !default;
+      $dark: #e6e6e6 !default;
+      $white:#fff !default;
+      $base-color:#303030 !default;
+      $icon-color:#9e9ea3 !default;
+      $font-family-sans-serif:"Lato",
+      "Helvetica Neue",
+      "Roboto",
+      "Segoe UI",
+      sans-serif !default;
+      $font-family-light-sans-serif:"Lato",
+      "HelveticaNeue-Light",
+      "Roboto-Light",
+      "Segoe UI-Light",
+      sans-serif-light !default;
+      $button-border-radius: 0px !default;
+      $button-border-width: 0px !default;
+      $login-bg-image:url('../img/background/1.jpg') no-repeat center center;
+      // sass mixing
+      @mixin transition($transition-property,
+      $transition-time) {
+          -webkit-transition: $transition-property $transition-time;
+          -moz-transition: $transition-property $transition-time;
+          -ms-transition: $transition-property $transition-time;
+          -o-transition: $transition-property $transition-time;
+          transition: $transition-property $transition-time;
+      }
+      
+      @mixin clip-path($clip) {
+          -webkit-clip-path: $clip;
+          -moz-clip-path: $clip;
+          -ms-clip-path: $clip;
+          clip-path: $clip;
+      }
+      
+      // end
+      //sass start
+      @font-face {
+          font-family: 'Lato';
+          src: url("../fonts/Lato-Bold.ttf");
+          font-weight: 700;
+      }
+      
+      @font-face {
+          font-family: 'Lato';
+          src: url(../fonts/Lato-Light.ttf);
+          font-weight: 300;
+      }
+      
+      @font-face {
+          font-family: 'Lato';
+          src: url(../fonts/Lato-Regular.ttf);
+      }
+      
