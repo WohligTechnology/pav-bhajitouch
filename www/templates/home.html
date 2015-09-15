@@ -1,0 +1,92 @@
+<ion-view view-title="Home">
+    <ion-content>
+
+        <ion-slide-box on-slide-changed="slideHasChanged($index)">
+            <ion-slide ng-repeat="slide in slides">
+                <img ng-src="{{slide.image}}" class="full-image">
+            </ion-slide>
+        </ion-slide-box>
+        <div class="home-pro">
+
+            <div class="hm-pro">
+                <figure>
+                    <img src="img/product/1.jpg" class="full-image">
+                    <div class="layer">
+                        <div class="pro-txt">
+                            <div class="pro-price">
+                                <figcaption class="pro-name">Product name</figcaption>
+                                <p>Price</p>
+                            </div>
+                            <div class="btn-shop">
+                                <button class="button button-small button-positive">
+                                    Shop Now
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </figure>
+
+
+            </div>
+            <div class="row padzero">
+                <div class="col col-50 padzero">
+                    <div class="hm-pro box-img text-center">
+                        <figure>
+                            <img src="img/product/2.jpg" class="full-image">
+                            <div class="layer pro-pr text-center">
+                                <div class="btns-shop">
+                                    <h4>Product Name</h4>
+                                    <p>Price</p>
+
+                                    <button class="button button-small button-positive">
+                                        Shop Now
+                                    </button>
+                                </div>
+                            </div>
+                        </figure>
+                    </div>
+                </div>
+                <div class="col col-50 padzero">
+                    <div class="hm-pro box-img text-center">
+                        <figure>
+                            <img src="img/product/3.jpg" class="full-image">
+                            <div class="layer pro-pr text-center">
+                                <div class="btns-shop">
+                                    <h4>Product Name</h4>
+                                    <p>Price</p>
+
+                                    <button class="button button-small button-positive">
+                                        Shop Now
+                                    </button>
+                                </div>
+                            </div>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hm-pro">
+                <figure>
+                    <img src="img/product/4.jpg" class="full-image">
+                    <div class="layer">
+                        <div class="pro-txt">
+                            <div class="pro-price">
+                                <figcaption class="pro-name">Product name</figcaption>
+                                <p>Price</p>
+                            </div>
+                            <div class="btn-shop">
+                                <button class="button button-small button-positive">
+                                    Shop Now
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </figure>
+
+
+            </div>
+        </div>
+
+       
+    </ion-content>
+</ion-view>
