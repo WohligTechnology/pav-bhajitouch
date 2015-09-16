@@ -62,7 +62,7 @@
           height: 180px !important;
           overflow: hidden;
           img {
-              height: 100%;
+              height: auto;
           }
       }
       
@@ -93,8 +93,8 @@
               overflow: hidden;
               figure {
                   height: 180px;
-                  img {
-                      height: 100%;
+                  img{
+                  height:auto;
                   }
               }
               .layer {
@@ -138,8 +138,8 @@
           .box-img {
               figure {
                   height: 160px !important;
-                  img {
-                      height: 100%;
+                  img{
+                  height:auto;
                   }
               }
               .pro-pr {
