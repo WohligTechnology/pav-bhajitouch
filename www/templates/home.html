@@ -1,5 +1,6 @@
 <ion-view view-title="Home">
-    <ion-content>
+<!--<ion-view view-title="Home" hide-nav-bar="searchbar">-->
+    <ion-content ng-class="{'no-header':searchbar}">
 
         <ion-slide-box on-slide-changed="slideHasChanged($index)">
             <ion-slide ng-repeat="slide in slides">

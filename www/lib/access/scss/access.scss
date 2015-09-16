@@ -84,7 +84,7 @@
       
       //********  scss star *********
       .home-pro {
-          margin-top: 15px;
+          margin-top: 10px;
           .hm-pro {
               height: 100%;
               width: 100%;
@@ -93,8 +93,8 @@
               overflow: hidden;
               figure {
                   height: 180px;
-                  img{
-                  height:auto;
+                  img {
+                      height: auto;
                   }
               }
               .layer {
@@ -138,8 +138,8 @@
           .box-img {
               figure {
                   height: 160px !important;
-                  img{
-                  height:auto;
+                  img {
+                      height: auto;
                   }
               }
               .pro-pr {
@@ -167,26 +167,42 @@
               padding-top: 10px;
               padding-bottom: 10px;
               margin: 0px !important;
-              font-size: 14px ;
+              font-size: 14px;
               font-weight: 600 !important;
           }
-          p{
+          p {
               font-size: 11px !important;
               font-weight: 300 !important;
               line-height: 100%;
               padding-left: 10px;
               padding-right: 10px;
-                  padding-bottom:2px;
+              padding-bottom: 2px;
               margin: 0px !important;
           }
-          .item-input-inset{
+          .item-input-inset {
               padding: 10px;
-          .item-input-wrapper{
-          }
-              .btn-subscribe{    
+              .item-input-wrapper {}
+              .btn-subscribe {
                   min-height: 20px;
                   line-height: 29px;
                   border-radius: 4px;
               }
+          }
+      }
+      
+      .no-header {
+          .scroll-content {
+              top: 0px !important;
+          }
+      }
+      
+      .search-bar {
+          height: 44px !important;
+          position: fixed;
+          padding-top: 0px !important;
+          padding-bottom: 0px !important;
+          z-index: 11 !important;
+          .item-input-inset {
+              background-color: #F8F8F8 !important;
           }
       }
