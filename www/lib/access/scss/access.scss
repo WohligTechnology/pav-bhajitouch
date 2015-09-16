@@ -181,7 +181,11 @@
           }
           .item-input-inset {
               padding: 10px;
-              .item-input-wrapper {}
+              .item-input-wrapper {
+                  input {
+                      width: 100%;
+                  }
+              }
               .btn-subscribe {
                   min-height: 20px;
                   line-height: 29px;
