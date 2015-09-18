@@ -1,0 +1,38 @@
+<ion-view view-title="Product">
+    <ion-content>
+        <div class="row" ng-repeat="product in products">
+            <div class="col" ng-repeat="item in product">
+                <div class="product">
+                    <div class="image-holder-product">
+                        <img class="brand-image" src="img/products/2.png" alt="">
+                    </div>
+                    <h2>{{item.name}}
+<!--                    <h3 class="item-note">{{item.company}}</h3></h2>-->
+                    <div class="rating">
+                        <ul>
+                            <li><i class="icon star ion-ios-star-outline"s></i></li>
+                            <li><i class="icon star ion-ios-star-outline"s></i></li>
+                            <li><i class="icon star ion-ios-star-outline"s></i></li>
+                            <li><i class="icon star ion-ios-star-outline"s></i></li>
+                            <li><i class="icon star ion-ios-star-outline"s></i></li>
+                        </ul>
+                    </div>
+                   
+                    
+                        <div class="row">
+                            <div class="col col-50">
+                                <h3>{{item.price}}</h3>
+                            </div>
+                            <div class="col heart col-25">
+                                <i class="icon ion-ios-heart"></i></button>
+                            </div>
+                            <div class="col cart col-25">
+                            <i class="icon ion-android-cart"></i>
+                            </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
