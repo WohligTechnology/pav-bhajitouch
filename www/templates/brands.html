@@ -1,5 +1,13 @@
 <ion-view view-title="Brands">
     <ion-content>
-
+        <div class="margin-brands">
+            <div class="row" ng-repeat="brand in brands">
+                <div class="col" ng-repeat="brnd in brand">
+                    <div class="image-holder">
+                        <img class="brand-image" src="{{brnd.image}}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
     </ion-content>
 </ion-view>
