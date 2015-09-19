@@ -212,9 +212,6 @@
               //                  width: 100%;
               //              }
           }
-          .button-icon::before{
-              font-size: 10px;
-          }
       }
       
       .no-border {
@@ -339,31 +336,34 @@
       
       .about {
           padding: 10px;
-          p{
-                  font-size: 14px;
-    line-height: 140%;
+          p {
+              font-size: 14px;
+              line-height: 140%;
           }
-          h4{
+          h4 {
               font-size: 15px;
           }
-              
       }
       
       .clientele {
-          .clnt{
+          .clnt {
               border: 1px solid #ddd;
-               padding: 10px;
-              width:100%;
-          .image-holder-clientele {
-            
-              @extend .image-holder;
-              height: 200px !important;
-          }
-              h4{
+              padding: 10px;
+              width: 100%;
+              .image-holder-clientele {
+                  @extend .image-holder;
+                  height: 200px !important;
+              }
+              h4 {
                   text-align: center;
                   font-size: 14px;
-                  margin:0px;
-                  
+                  margin: 0px;
               }
           }
+      }
+      
+      .bar .button.button-icon.nav-button .icon:before,
+      .bar .button.button-icon.nav-button:before {
+          font-size: 25px;
+          line-height: 32px;
       }
