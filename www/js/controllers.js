@@ -21,6 +21,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('PlaylistCtrl', function ($scope, $stateParams) {})
+    .controller('NewArrivalsCtrl', function ($scope, $stateParams) {})
     .controller('ProductCtrl', function ($scope, $stateParams) {
         $scope.addwishlist = false;
         $scope.addWishlist = function () {
@@ -255,13 +256,14 @@ angular.module('starter.controllers', [])
                                             }];
         $scope.brands = _.chunk($scope.brands, 3);
     })
-    .controller('AboutCtrl', function ($scope, $stateParams) {
+    .controller('AboutCtrl', function ($scope,$ionicScrollDelegate, $stateParams) {
         $scope.activate = true;
         $scope.tab = {
             left: true,
             right: false
         }
         $scope.clickTab = function (side) {
+            $ionicScrollDelegate.scrollTop();
             if (side === "left") {
                 $scope.tab.left = true;
                 $scope.tab.right = false;
