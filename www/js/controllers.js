@@ -21,6 +21,8 @@ angular.module('starter.controllers', [])
 })
 
 .controller('PlaylistCtrl', function ($scope, $stateParams) {})
+    .controller('DealsCtrl', function ($scope, $stateParams) {})
+    .controller('ExclusiveCtrl', function ($scope, $stateParams) {})
     .controller('NewArrivalsCtrl', function ($scope, $stateParams) {})
     .controller('ProductCtrl', function ($scope, $stateParams) {
         $scope.addwishlist = false;

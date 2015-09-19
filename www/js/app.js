@@ -85,6 +85,24 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
+  .state('app.deals', {
+      url: '/deals',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/deals.html',
+          controller: 'DealsCtrl'
+        }
+      }
+    })
+      .state('app.exclusive', {
+      url: '/exclusive',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/exclusive.html',
+          controller: 'ExclusiveCtrl'
+        }
+      }
+    })
       .state('app.about', {
       url: '/about',
       views: {
