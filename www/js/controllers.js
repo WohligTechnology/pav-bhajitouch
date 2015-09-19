@@ -22,12 +22,12 @@ angular.module('starter.controllers', [])
 
 .controller('PlaylistCtrl', function ($scope, $stateParams) {})
     .controller('ProductCtrl', function ($scope, $stateParams) {
-    $scope.addwishlist=false;
-    $scope.addWishlist=function(){
-    $scope.addwishlist=true;
-        console.log($scope.addwishlist);
-    };
-    $scope.products = [{
+        $scope.addwishlist = false;
+        $scope.addWishlist = function () {
+            $scope.addwishlist = true;
+            console.log($scope.addwishlist);
+        };
+        $scope.products = [{
             "name": "N4L 4S0",
             "company": "Apple Systems",
             "price": "Rs.5,807",
@@ -254,4 +254,19 @@ angular.module('starter.controllers', [])
             image: "img/brands/tommy.jpg"
                                             }];
         $scope.brands = _.chunk($scope.brands, 3);
+    })
+    .controller('AboutCtrl', function ($scope, $stateParams) {
+        $scope.activate = true;
+    $scope.tab={left:true,right:false}
+    $scope.clickTab=function(side){
+    if(side==="left"){
+    $scope.tab.left=true;
+    $scope.tab.right = false;
+    }
+        else{
+            $scope.tab.right=true;
+    $scope.tab.left = false;
+            console.log("here");
+        }
+    };
     });

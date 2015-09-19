@@ -1,0 +1,20 @@
+<ion-view view-title="About Us">
+    <div class="bar bar-subheader tabs-about bar-stable">
+        <div class="row">
+            <div class="col" ng-class="{'active-tab':tab.left}">
+                <button class="button button-clear" ng-click="clickTab('left')"><h5>ABOUT</h5></button>
+            </div>
+            <div class="col" ng-class="{'active-tab':tab.right}">
+                <button class="button button-clear" ng-click="clickTab('right')"><h5>OUR CLIENTELE</h5></button>
+            </div>
+        </div>
+    </div>    
+    <ion-content class="has-subheader">
+        <div class="about" ng-show="tab.left">
+            
+        </div>
+        <div class="clientele" ng-show="tab.right">
+            
+        </div>
+    </ion-content>
+</ion-view>
