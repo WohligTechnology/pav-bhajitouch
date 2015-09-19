@@ -257,16 +257,31 @@ angular.module('starter.controllers', [])
     })
     .controller('AboutCtrl', function ($scope, $stateParams) {
         $scope.activate = true;
-    $scope.tab={left:true,right:false}
-    $scope.clickTab=function(side){
-    if(side==="left"){
-    $scope.tab.left=true;
-    $scope.tab.right = false;
-    }
-        else{
-            $scope.tab.right=true;
-    $scope.tab.left = false;
-            console.log("here");
+        $scope.tab = {
+            left: true,
+            right: false
         }
-    };
+        $scope.clickTab = function (side) {
+            if (side === "left") {
+                $scope.tab.left = true;
+                $scope.tab.right = false;
+            } else {
+                $scope.tab.right = true;
+                $scope.tab.left = false;
+                console.log("here");
+            }
+        };
+        $scope.clientele = [{
+            image: 'img/clientele/BipashaBasu.JPG',
+            caption: 'Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada'
+        }, {
+            image: 'img/clientele/KarishmaKapoor.jpg',
+            caption: 'consectetur adipisicing elit. Adipisci necessitatibus alias'
+        }, {
+            image: 'img/clientele/MSG.jpg',
+            caption: 'assumenda ipsam minus repellendus'
+        }, {
+            image: 'img/clientele/NicolasAnelka.jpg',
+            caption: 'sequi aliquam pariatur unde nihil omnis sint!'
+        }];
     });
