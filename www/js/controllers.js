@@ -1,9 +1,27 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $location,$ionicPopup) {
     $scope.searchbar = false;
-    $scope.searchToggle = function () {
+    $scope.search = function () {
         $scope.searchbar = $scope.searchbar === true ? false : true;
+    };
+    $scope.user = {
+        cart: 2
+    };
+    $scope.cartCheck = function () {
+        if ($scope.user.cart === 0)
+            $scope.showAlert();
+        else
+            $location.path('/app/cart');
+    };
+    $scope.showAlert = function () {
+        var alertPopup = $ionicPopup.alert({
+            title: 'Cart',
+            template: 'There is nothing here. Keep shopping!'
+        });
+        alertPopup.then(function (res) {
+            console.log('Thank you for not eating my delicious ice cream cone');
+        });
     };
 })
 
@@ -24,8 +42,9 @@ angular.module('starter.controllers', [])
     .controller('DealsCtrl', function ($scope, $stateParams) {})
     .controller('ExclusiveCtrl', function ($scope, $stateParams) {})
     .controller('NewArrivalsCtrl', function ($scope, $stateParams) {})
+    .controller('CartCtrl', function ($scope, $stateParams) {})
     .controller('DistributionCtrl', function ($scope, $stateParams) {
- $scope.brands = [{
+        $scope.brands = [{
             image: "img/brands/acmemade.jpeg"
                                     }, {
             image: "img/brands/Adidas.png"
@@ -77,9 +96,19 @@ angular.module('starter.controllers', [])
                                     }, {
             image: "img/brands/tommy.jpg"
                                             }];
-        $scope.brands = _.chunk($scope.brands, 3);})
-    .controller('ProductCtrl', function ($scope, $stateParams) {
+        $scope.brands = _.chunk($scope.brands, 3);
+    })
+    .controller('ProductCtrl', function ($scope, $stateParams, $timeout) {
         $scope.addwishlist = false;
+        $scope.params = $stateParams;
+        $scope.subheader_search = false;
+        $scope.searchToggle = function () {
+            $scope.subheader_search = $scope.subheader_search === true ? false : true;
+        };
+        if ($scope.params.var === 'search')
+            $timeout($scope.searchToggle, 1000);
+        else
+            $scope.subheader_search = false;
         $scope.addWishlist = function () {
             $scope.addwishlist = true;
             console.log($scope.addwishlist);
@@ -258,7 +287,7 @@ angular.module('starter.controllers', [])
         $scope.products = _.chunk($scope.products, 2);
     })
     .controller('BrandsCtrl', function ($scope, $stateParams, $rootScope) {
-    $rootScope.nosearch=true;
+        $rootScope.nosearch = true;
         $scope.brands = [{
             image: "img/brands/acmemade.jpeg"
                                     }, {
@@ -313,7 +342,7 @@ angular.module('starter.controllers', [])
                                             }];
         $scope.brands = _.chunk($scope.brands, 3);
     })
-    .controller('AboutCtrl', function ($scope,$ionicScrollDelegate, $stateParams) {
+    .controller('AboutCtrl', function ($scope, $ionicScrollDelegate, $stateParams) {
         $scope.activate = true;
         $scope.tab = {
             left: true,

@@ -231,17 +231,31 @@
       }
       
       .sidemenu-header {
-          padding: 35px !important;
-          padding-left: 25px !important;
-          h2 {
-              font-size: 21px !important;
+          padding: 30px 25px 25px 25px !important;
+          .col-75 {
+              h2 {
+                  font-size: 21px !important;
+              }
+              p {
+                  line-height: 90%;
+                  font-size: 11px !important;
+              }
           }
-          h4 {
-              margin: 0px !important;
-          }
-          p {
-              line-height: 90%;
-              font-size: 11px !important;
+          .col-25 {
+              .button {
+                  border-style: solid !important;
+                  border-color: #7EE1EA !important;
+                  border-width: 1px !important;
+                  border-radius: 50%;
+                  width: 45px;
+                  height: 50px;
+              }
+              .cart {
+                  font-size: 35px;
+                  border-style: solid;
+                  border-width: 1px;
+                  border-color: black;
+              }
           }
       }
       
@@ -366,4 +380,21 @@
       .bar .button.button-icon.nav-button:before {
           font-size: 25px;
           line-height: 32px;
+      }
+      
+      .custom-badge {
+          background-color: red;
+          color: white;
+          z-index: 1;
+          display: inline-block;
+          padding: 1px 6px;
+          min-width: 10px;
+          border-radius: 10px;
+          vertical-align: baseline;
+          text-align: center;
+          white-space: nowrap;
+          font-weight: bold;
+          font-size: 14px;
+          line-height: 16px;
+          position: absolute;
       }

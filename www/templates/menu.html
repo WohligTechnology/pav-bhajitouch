@@ -3,21 +3,27 @@
         <ion-nav-bar class="bar-stable" side="secondary">
             <ion-nav-back-button>
             </ion-nav-back-button>
-            <div class="search-bar item-input-inset" ng-show="searchbar">
+            <!--            <div class="search-bar item-input-inset" ng-show="searchbar">-->
+            <!--
+               <div class="search-bar item-input-inset" >
                 <label class="item-input-wrapper">
                     <i class="icon ion-ios-search placeholder-icon"></i>
                     <input type="search" placeholder="Search">
                 </label>
-                <button class="button button-clear button-icon ion-android-close" ng-click="searchToggle()">
+                <button class="button button-clear button-icon ion-android-close">
+                <button class="button button-clear button-icon ion-android-close" >
                 </button>
             </div>
+-->
             <ion-nav-buttons side="left">
-                <button class="button  button-icon button-clear ion-navicon" menu-toggle="left" ng-hide="searchbar">
+                <!--                <button class="button  button-icon button-clear ion-navicon" menu-toggle="left" ng-hide="searchbar">-->
+                <button class="button  button-icon button-clear ion-navicon" menu-toggle="left">
                 </button>
             </ion-nav-buttons>
             <ion-nav-buttons side="right" ng-hide="nosearch">
-                <button class="button nav-button button-icon button-clear ion-ios-search-strong" ng-click="searchToggle()" ng-hide="searchbar">
-                </button>
+                <!--                <button class="button nav-button button-icon button-clear ion-ios-search-strong" ng-click="searchToggle()" ng-hide="searchbar">-->
+                <a href="#/app/product/search" class="button nav-button button-icon button-clear ion-ios-search-strong" ng-click="search()">
+                </a>
             </ion-nav-buttons>
         </ion-nav-bar>
         <ion-nav-view name="menuContent"></ion-nav-view>
@@ -27,8 +33,17 @@
         <ion-content>
             <ion-list>
                 <ion-item class="sidemenu-header no-border" menu-close ng-click="login()">
-                    <h2>Rohan Gada</h2>
-                    <p>Mumbai</p>
+                    <div class="row">
+                        <div class="col-75">
+                            <h2>Rohan Gada</h2>
+                            <p>Mumbai</p>
+                        </div>
+                        <div class="col-25">
+                            <button class="button button-clear button-icon button-calm cart ion-ios-cart" ng-click="cartCheck()"><span class="custom-badge" >{{user.cart}}</span></button>
+                            
+                        </div>
+                            
+                    </div>
                 </ion-item>
                 <ion-item class="sidemenu-item no-border" menu-close href="#/app/home">
                     Home
@@ -36,7 +51,7 @@
                 <ion-item class="sidemenu-item no-border" menu-close href="#/app/brands">
                     Brands
                 </ion-item>
-                <ion-item class="sidemenu-item no-border" menu-close href="#/app/product">
+                <ion-item class="sidemenu-item no-border" menu-close href="#/app/product/nosearch">
                     Product
                 </ion-item>
                 <ion-item class="sidemenu-item no-border" menu-close href="#/app/exclusive">

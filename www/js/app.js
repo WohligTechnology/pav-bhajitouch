@@ -68,7 +68,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       }
     })
       .state('app.product', {
-      url: '/product',
+      url: '/product/:var',
       views: {
         'menuContent': {
           templateUrl: 'templates/product.html',
@@ -119,6 +119,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         'menuContent': {
           templateUrl: 'templates/about.html',
           controller: 'AboutCtrl'
+        }
+      }
+    })
+      .state('app.cart', {
+      url: '/cart',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/cart.html',
+          controller: 'CartCtrl'
         }
       }
     })
