@@ -1,12 +1,13 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $location,$ionicPopup) {
+.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $location, $ionicPopup) {
+    
     $scope.searchbar = false;
     $scope.search = function () {
         $scope.searchbar = $scope.searchbar === true ? false : true;
     };
     $scope.user = {
-        cart: 2
+        cart: 1
     };
     $scope.cartCheck = function () {
         if ($scope.user.cart === 0)
@@ -42,7 +43,12 @@ angular.module('starter.controllers', [])
     .controller('DealsCtrl', function ($scope, $stateParams) {})
     .controller('ExclusiveCtrl', function ($scope, $stateParams) {})
     .controller('NewArrivalsCtrl', function ($scope, $stateParams) {})
-    .controller('CartCtrl', function ($scope, $stateParams) {})
+    .controller('CartCtrl', function ($scope, $stateParams,$location,$ionicHistory) {
+$scope.goHome=function(){
+     console.log($ionicHistory.viewHistory());
+    $location.path('app/home');
+};
+})
     .controller('DistributionCtrl', function ($scope, $stateParams) {
         $scope.brands = [{
             image: "img/brands/acmemade.jpeg"

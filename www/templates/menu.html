@@ -21,7 +21,10 @@
                 </button>
             </ion-nav-buttons>
             <ion-nav-buttons side="right" ng-hide="nosearch">
-                <!--                <button class="button nav-button button-icon button-clear ion-ios-search-strong" ng-click="searchToggle()" ng-hide="searchbar">-->
+                <button class="button cart-button button-icon button-clear icon ln-cart" ng-click="cartCheck()">
+                    <span class="custom-badge">{{user.cart}}</span>
+                    
+                </button>
                 <a href="#/app/product/search" class="button nav-button button-icon button-clear ion-ios-search-strong" ng-click="search()">
                 </a>
             </ion-nav-buttons>
@@ -32,42 +35,32 @@
     <ion-side-menu side="left">
         <ion-content>
             <ion-list>
-                <ion-item class="sidemenu-header no-border" menu-close ng-click="login()">
-                    <div class="row">
-                        <div class="col-75">
-                            <h2>Rohan Gada</h2>
-                            <p>Mumbai</p>
-                        </div>
-                        <div class="col-25">
-                            <button class="button button-clear button-icon button-calm cart ion-ios-cart" ng-click="cartCheck()"><span class="custom-badge" >{{user.cart}}</span></button>
-                            
-                        </div>
-                            
-                    </div>
+                <ion-item class="sidemenu-item no-border" menu-close href="" ng-click="login()">
+            <i class="icon ion-log-in"></i>Login</div>
                 </ion-item>
                 <ion-item class="sidemenu-item no-border" menu-close href="#/app/home">
-                    Home
+                   <i class="icon ln-home3"></i> Home
                 </ion-item>
                 <ion-item class="sidemenu-item no-border" menu-close href="#/app/brands">
-                    Brands
+                    <i class="icon ln-tags"></i>Brands
                 </ion-item>
                 <ion-item class="sidemenu-item no-border" menu-close href="#/app/product/nosearch">
-                    Product
+                    <i class="icon ln-icons2"></i>Product
                 </ion-item>
                 <ion-item class="sidemenu-item no-border" menu-close href="#/app/exclusive">
-                    Exclusive
+                    <i class="icon ln-gift"></i>Exclusive
                 </ion-item>
                 <ion-item class="sidemenu-item no-border" menu-close href="#/app/newarrivals">
-                    New arrivals
+                    <i class="icon ln-lightning-bolt"></i>New arrivals
                 </ion-item>
                 <ion-item class="sidemenu-item no-border" menu-close href="#/app/deals">
-                    Deals
+                    <i class="icon ln-thumbs-up"></i>Deals
                 </ion-item>
                 <ion-item class="sidemenu-item no-border" menu-close href="#/app/distribution">
-                    Distribution
+                    <i class="icon ln-users"></i>Distribution
                 </ion-item>
                 <ion-item class="sidemenu-item no-border" menu-close href="#/app/about">
-                    About Us
+                    <i class="icon ln-accessibility"></i>About Us
                 </ion-item>
             </ion-list>
         </ion-content>
