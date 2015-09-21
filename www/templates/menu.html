@@ -15,7 +15,7 @@
                 <button class="button  button-icon button-clear ion-navicon" menu-toggle="left" ng-hide="searchbar">
                 </button>
             </ion-nav-buttons>
-            <ion-nav-buttons side="right">
+            <ion-nav-buttons side="right" ng-hide="nosearch">
                 <button class="button nav-button button-icon button-clear ion-ios-search-strong" ng-click="searchToggle()" ng-hide="searchbar">
                 </button>
             </ion-nav-buttons>
@@ -48,7 +48,7 @@
                 <ion-item class="sidemenu-item no-border" menu-close href="#/app/deals">
                     Deals
                 </ion-item>
-                <ion-item class="sidemenu-item no-border" menu-close href="#/app/playlists">
+                <ion-item class="sidemenu-item no-border" menu-close href="#/app/distribution">
                     Distribution
                 </ion-item>
                 <ion-item class="sidemenu-item no-border" menu-close href="#/app/about">

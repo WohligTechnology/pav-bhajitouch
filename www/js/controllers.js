@@ -24,6 +24,60 @@ angular.module('starter.controllers', [])
     .controller('DealsCtrl', function ($scope, $stateParams) {})
     .controller('ExclusiveCtrl', function ($scope, $stateParams) {})
     .controller('NewArrivalsCtrl', function ($scope, $stateParams) {})
+    .controller('DistributionCtrl', function ($scope, $stateParams) {
+ $scope.brands = [{
+            image: "img/brands/acmemade.jpeg"
+                                    }, {
+            image: "img/brands/Adidas.png"
+
+                                    }, {
+            image: "img/brands/adonit.png"
+
+                                    }, {
+            image: "img/brands/apple.png"
+
+                                    }, {
+            image: "img/brands/autodrive.png"
+
+                                    }, {
+            image: "img/brands/autodrive.png"
+
+                                    }, {
+            image: "img/brands/beats.png"
+
+                                    }, {
+            image: "img/brands/dell.png"
+
+                                    }, {
+            image: "img/brands/gstarraw.png"
+
+                                    }, {
+            image: "img/brands/dolcegabbana.jpg"
+
+                                    }, {
+            image: "img/brands/gas.jpg"
+                                    }, {
+            image: "img/brands/hp.png"
+
+                                    }, {
+            image: "img/brands/jackjones.png"
+
+                                    }, {
+            image: "img/brands/levis.png"
+
+                                    }, {
+            image: "img/brands/logo.png"
+
+                                    }, {
+            image: "img/brands/motorola.png"
+
+                                    }, {
+            image: "img/brands/sony.png"
+
+                                    }, {
+            image: "img/brands/tommy.jpg"
+                                            }];
+        $scope.brands = _.chunk($scope.brands, 3);})
     .controller('ProductCtrl', function ($scope, $stateParams) {
         $scope.addwishlist = false;
         $scope.addWishlist = function () {
@@ -203,7 +257,8 @@ angular.module('starter.controllers', [])
         }];
         $scope.products = _.chunk($scope.products, 2);
     })
-    .controller('BrandsCtrl', function ($scope, $stateParams) {
+    .controller('BrandsCtrl', function ($scope, $stateParams, $rootScope) {
+    $rootScope.nosearch=true;
         $scope.brands = [{
             image: "img/brands/acmemade.jpeg"
                                     }, {

@@ -76,15 +76,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
-  .state('app.newarrivals', {
-      url: '/newarrivals',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/newarrivals.html',
-          controller: 'NewArrivalsCtrl'
-        }
-      }
-    })
+ 
   .state('app.deals', {
       url: '/deals',
       views: {
@@ -100,6 +92,24 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         'menuContent': {
           templateUrl: 'templates/exclusive.html',
           controller: 'ExclusiveCtrl'
+        }
+      }
+    })
+   .state('app.newarrivals', {
+      url: '/newarrivals',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/newarrivals.html',
+          controller: 'NewArrivalsCtrl'
+        }
+      }
+    })
+   .state('app.distribution', {
+      url: '/distribution',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/distribution.html',
+          controller: 'DistributionCtrl'
         }
       }
     })
