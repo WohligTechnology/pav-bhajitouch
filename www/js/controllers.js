@@ -45,7 +45,7 @@ angular.module('starter.controllers', [])
             $scope.closeLogin();
         }, 1000);
     };
-    $scope.openSignup =function(){
+    $scope.openSignup = function () {
         $scope.closeLogin();
         $scope.signup();
     };
@@ -70,7 +70,29 @@ angular.module('starter.controllers', [])
         }, 1000);
     };
     //    -----------------END- SIGNUP MODAL-------------------------
-
+    //   ---------------------FORGOT PASSWORD
+    $ionicModal.fromTemplateUrl('templates/forgotpassword.html', {
+        scope: $scope
+    }).then(function (modal) {
+        $scope.modalFrgt = modal;
+    });
+    $scope.closeFrgt = function () {
+        $scope.modalFrgt.hide();
+    };
+    $scope.frgt = function () {
+        $scope.modalFrgt.show();
+    };
+    $scope.doFrgt = function () {
+        console.log('Doing Signup', $scope.loginData);
+        $timeout(function () {
+            $scope.closeLogin();
+        }, 1000);
+    };
+    $scope.openFrgt = function () {
+        $scope.closeLogin();
+        $scope.frgt();
+    };
+    //    --------------------END- FORGOT PASSWORD
 })
 
 .controller('HomeCtrl', function ($scope) {

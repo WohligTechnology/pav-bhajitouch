@@ -3,10 +3,10 @@
       $stable: #f8f8f8 !default;
       $positive: #7ee1ea !default;
       $calm: #7EE1EA !default;
-      $balanced: #33cd5f !default;
+      $balanced: #d34836 !default;
       $energized: #ffc900 !default;
       $assertive: #ef473a !default;
-      $royal: #886aea !default;
+      $royal: #3b5998 !default;
       $dark: #e6e6e6 !default;
       $white:#fff !default;
       $base-color:#303030 !default;
@@ -291,7 +291,7 @@
           padding: 5px;
           .image-holder-product {
               @extend .image-holder;
-              height: 120px;
+              height: 100px;
               margin: 0px;
           }
           .product-details {
@@ -386,10 +386,12 @@
           }
       }
       
-      .bar .button.button-icon.nav-button .icon:before,
-      .bar .button.button-icon.nav-button:before {
-          font-size: 25px;
-          line-height: 32px;
+      .nav-button {
+          .bar .button.button-icon.icon:before,
+          .bar .button.button-icon:before {
+              font-size: 25px;
+              line-height: 32px;
+          }
       }
       
       .custom-badge {
@@ -523,6 +525,7 @@
               .item {
                   @extend .no-border;
                   border-bottom-width: 1px !important;
+                  border-color: $positive;
                   margin: 0px 20px;
                   padding: 0px 0 0px 16px;
               }
@@ -530,25 +533,87 @@
                   width: 88%;
                   margin: 20px;
                   font-size: 13px !important;
+                  border-radius: 4px;
+              }
+              .log {
+                  margin: 0 20px;
+                  line-height: 0;
+                  .frgt-password {
+                      text-decoration: none;
+                      color:black;
+                      float: right;
+                  }
+                  .register {
+                      text-decoration: none;
+                      color:black;
+                      float: left;
+                  }
               }
           }
-          h2{
-          font-size: 13px;
-    margin: 0px;
-    text-align: center;
+          h2 {
+              clear: both;
+              font-size: 13px;
+              margin: 10px 0px;
+              text-align: center;
           }
           .signup-link {
-         @extend .login-form ;
+              .social-login {
+                  width: 88%;
+                  margin: 5px 20px;
+                  font-size: 13px !important;
+                  border-radius: 4px;
+              }
+          }
       }
+      
+      .signup {
+          @extend .login;
+          .signup-form {
+              @extend .login-form;
+          }
+          .signup-button {
+              @extend .login-button;
+          }
       }
-.signup{
-@extend .login;
-    .signup-form{
-    @extend .login-form;
-    }
-    .signup-button{
-    @extend .login-button;
-    }
-}
       
+      .modal-close {
+          padding-right: 10px !important;
+      }
       
+      .bar .button.button-clear .icon:before,
+      .bar .button.button-clear.icon:before,
+      .bar .button.button-clear.icon-left:before {
+          font-size: 15px !important;
+      }
+      
+      .forgot-password {
+          ::-webkit-input-placeholder {
+              color: grey;
+          }
+          h3 {
+              font-size: 13px;
+              text-align: center;
+                  margin: 20px 20px 10px 20px !important;
+          }
+          input[type="email"] {
+              padding-right: 5px;
+          }
+          .col-75 {
+              label {
+                  padding-left: 10px;
+                  padding-right: 10px;
+              }
+          }
+          .item {
+              @extend .no-border;
+              border-bottom-width: 1px !important;
+              border-color: $positive;
+              margin: 0px 20px;
+              padding: 0px 0 0px 16px;
+          }
+          .btn-frgt {
+              min-height: 33px;
+              line-height: 35px;
+              border-radius: 4px;
+          }
+      }
