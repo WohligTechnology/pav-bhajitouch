@@ -1,7 +1,7 @@
 angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function ($scope, $ionicModal, $timeout, $location, $ionicPopup) {
-    
+
     $scope.searchbar = false;
     $scope.search = function () {
         $scope.searchbar = $scope.searchbar === true ? false : true;
@@ -24,6 +24,53 @@ angular.module('starter.controllers', [])
             console.log('Thank you for not eating my delicious ice cream cone');
         });
     };
+
+    $scope.loginData = {};
+    //    -------------------LOGIN MODAL---------------------
+    $ionicModal.fromTemplateUrl('templates/login.html', {
+        scope: $scope
+    }).then(function (modal) {
+        $scope.modal = modal;
+    });
+    $scope.closeLogin = function () {
+        $scope.modal.hide();
+    };
+    $scope.login = function () {
+        $scope.modal.show();
+        $scope.closeSignup();
+    };
+    $scope.doLogin = function () {
+        console.log('Doing login', $scope.loginData);
+        $timeout(function () {
+            $scope.closeLogin();
+        }, 1000);
+    };
+    $scope.openSignup =function(){
+        $scope.closeLogin();
+        $scope.signup();
+    };
+    //    -------------------END- LOGIN MODAL----------------------
+
+    //    --------------------SIGNUP MODAL-------------------------
+    $ionicModal.fromTemplateUrl('templates/signup.html', {
+        scope: $scope
+    }).then(function (modal) {
+        $scope.modalSignup = modal;
+    });
+    $scope.closeSignup = function () {
+        $scope.modalSignup.hide();
+    };
+    $scope.signup = function () {
+        $scope.modalSignup.show();
+    };
+    $scope.doSignup = function () {
+        console.log('Doing Signup', $scope.loginData);
+        $timeout(function () {
+            $scope.closeLogin();
+        }, 1000);
+    };
+    //    -----------------END- SIGNUP MODAL-------------------------
+
 })
 
 .controller('HomeCtrl', function ($scope) {
@@ -43,12 +90,12 @@ angular.module('starter.controllers', [])
     .controller('DealsCtrl', function ($scope, $stateParams) {})
     .controller('ExclusiveCtrl', function ($scope, $stateParams) {})
     .controller('NewArrivalsCtrl', function ($scope, $stateParams) {})
-    .controller('CartCtrl', function ($scope, $stateParams,$location,$ionicHistory) {
-$scope.goHome=function(){
-     console.log($ionicHistory.viewHistory());
-    $location.path('app/home');
-};
-})
+    .controller('CartCtrl', function ($scope, $stateParams, $location, $ionicHistory) {
+        $scope.goHome = function () {
+            console.log($ionicHistory.viewHistory());
+            $location.path('app/home');
+        };
+    })
     .controller('DistributionCtrl', function ($scope, $stateParams) {
         $scope.brands = [{
             image: "img/brands/acmemade.jpeg"
