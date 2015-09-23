@@ -456,7 +456,7 @@
           h4 {
               font-size: 13px;
               margin: 0;
-              min-height: 25px;
+              min-height: 20px;
           }
           h5 {
               font-size: 11px;
@@ -581,7 +581,20 @@
               }
           }
       }
-      
+      .wishlist{
+      @extend .product-cart;
+          .image-holder-wishlist {
+              @extend .image-holder-cart;
+              .wishlist-image {
+                  @extend .cart-image;
+              }
+          }
+          h5{
+          font-size: 13px;
+              color: black;
+          }
+          
+      }
       .login {
           ::-webkit-input-placeholder {
               color: grey;

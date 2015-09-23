@@ -168,6 +168,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
+      .state('app.mywishlist', {
+      url: '/mywishlist',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/mywishlist.html',
+          controller: 'MyWishlistCtrl'
+        }
+      }
+    })
 
   .state('app.single', {
     url: '/playlists/:playlistId',

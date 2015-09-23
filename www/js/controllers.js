@@ -123,6 +123,9 @@ angular.module('starter.controllers', [])
     .controller('MyOrdersCtrl', function ($scope, $stateParams, $location, $ionicHistory) {
     
     })
+    .controller('MyWishlistCtrl', function ($scope, $stateParams, $location, $ionicHistory) {
+    
+    })
     .controller('DistributionCtrl', function ($scope, $stateParams) {
         $scope.brands = [{
             image: "img/brands/acmemade.jpeg"
