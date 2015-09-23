@@ -406,7 +406,7 @@
           text-align: center;
           white-space: nowrap;
           font-weight: bold;
-          font-size: 14px;
+          font-size: 15px;
           line-height: 16px;
           position: absolute;
           top: 0;
@@ -569,7 +569,7 @@
       .signup {
           @extend .login;
           .signup-form {
-              @extend .login.login-form;
+              @extend .login-form;
           }
           .signup-button {
               @extend .login-button;
@@ -580,11 +580,11 @@
           padding-right: 10px !important;
       }
       
-      .bar .button.button-clear .icon:before,
-      .bar .button.button-clear.icon:before,
-      .bar .button.button-clear.icon-left:before {
-          font-size: 15px !important;
-      }
+//      .bar .button.button-clear .icon:before,
+//      .bar .button.button-clear.icon:before,
+//      .bar .button.button-clear.icon-left:before {
+//          font-size: 15px !important;
+//      }
       
       .forgot-password {
           ::-webkit-input-placeholder {
@@ -655,3 +655,11 @@
               }
           }
       }
+.transparent-nav{
+.bar.bar-positive {
+  background-color: rgba(255,255,255,.1) !important; /* or transparent, or background:none */
+}
+}
+.scroll-content {
+  overflow: visible !important;
+}

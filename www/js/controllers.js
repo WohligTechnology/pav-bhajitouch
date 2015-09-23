@@ -1,7 +1,7 @@
 angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function ($scope, $ionicModal, $timeout, $location, $ionicPopup) {
-
+    $scope.transparent_header=false;
     $scope.searchbar = false;
     $scope.search = function () {
         $scope.searchbar = $scope.searchbar === true ? false : true;
@@ -112,6 +112,7 @@ angular.module('starter.controllers', [])
     .controller('DealsCtrl', function ($scope, $stateParams) {})
     .controller('ExclusiveCtrl', function ($scope, $stateParams) {})
     .controller('NewArrivalsCtrl', function ($scope, $stateParams) {})
+    
     .controller('ContactUsCtrl', function ($scope, $stateParams) {})
     .controller('CartCtrl', function ($scope, $stateParams, $location, $ionicHistory) {
         $scope.goHome = function () {
@@ -177,14 +178,7 @@ angular.module('starter.controllers', [])
     .controller('ProductCtrl', function ($scope, $stateParams, $timeout) {
         $scope.addwishlist = false;
         $scope.params = $stateParams;
-        $scope.subheader_search = false;
-        $scope.searchToggle = function () {
-            $scope.subheader_search = $scope.subheader_search === true ? false : true;
-        };
-        if ($scope.params.var === 'search')
-            $timeout($scope.searchToggle, 1000);
-        else
-            $scope.subheader_search = false;
+        
         $scope.addWishlist = function () {
             $scope.addwishlist = true;
             console.log($scope.addwishlist);
@@ -362,6 +356,8 @@ angular.module('starter.controllers', [])
         }];
         $scope.products = _.chunk($scope.products, 2);
     })
+.controller('ProductDetailCtrl', function ($scope, $stateParams) {
+$scope.transparent_header=true;})
     .controller('BrandsCtrl', function ($scope, $stateParams, $rootScope) {
         $rootScope.nosearch = true;
         $scope.brands = [{

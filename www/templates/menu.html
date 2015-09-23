@@ -1,6 +1,6 @@
 <ion-side-menus enable-menu-with-back-views="false">
     <ion-side-menu-content>
-        <ion-nav-bar class="bar-positive" side="secondary">
+        <ion-nav-bar class="bar-positive" side="secondary" ng-class="{'transparent-nav':transparent_header}">
             <ion-nav-back-button>
             </ion-nav-back-button>
             <!--            <div class="search-bar item-input-inset" ng-show="searchbar">-->
@@ -25,7 +25,7 @@
                     <span class="custom-badge">{{user.cart}}</span>
                     </i>
                 </button>
-                <a href="#/app/product/search" class="button nav-button button-icon button-clear ion-ios-search-strong" ng-click="search()">
+                <a href="#/app/searchresult" class="button nav-button button-icon button-clear ion-ios-search-strong" ng-click="search()">
                 </a>
             </ion-nav-buttons>
         </ion-nav-bar>
@@ -44,7 +44,7 @@
                 <ion-item class="sidemenu-item no-border" menu-close href="#/app/brands">
                     <i class="icon ln-tags"></i>Brands
                 </ion-item>
-                <ion-item class="sidemenu-item no-border" menu-close href="#/app/product/nosearch">
+                <ion-item class="sidemenu-item no-border" menu-close href="#/app/product">
                     <i class="icon ln-icons2"></i>Product
                 </ion-item>
                 <ion-item class="sidemenu-item no-border" menu-close href="#/app/exclusive">
