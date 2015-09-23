@@ -218,6 +218,30 @@
           border-width: 0px !important;
       }
       
+      .no-padding {
+          padding: 0px !important;
+      }
+      
+      .no-margin {
+          margin: 0px !important;
+      }
+      
+      .brdr-red {
+          border: 1px solid red;
+      }
+      
+      .brdr-blue {
+          border: 1px solid blue;
+      }
+      
+      .brdr-green {
+          border: 1px solid green;
+      }
+      
+      .brdr-grey {
+          border: 1px solid grey;
+      }
+      
       .sidemenu-item {
           border-bottom-width: 1px !important;
           margin-bottom: 1px !important;
@@ -426,15 +450,16 @@
                   @extend .brand-image;
               }
           }
-          .col-50 {
-              padding-left: 5px;
+          .col {
+              padding-left: 10px;
           }
           h4 {
-              font-size: 14px;
+              font-size: 13px;
               margin: 0;
+              min-height: 25px;
           }
           h5 {
-              font-size: 12px;
+              font-size: 11px;
               color: #999;
               margin: 0px;
           }
@@ -491,12 +516,12 @@
       
       .col-40 {
           -webkit-box-flex: 0;
-          -webkit-flex: 0 0 40%;
+          -webkit-flex: 0 0 70px;
           -moz-box-flex: 0;
-          -moz-flex: 0 0 40%;
-          -ms-flex: 0 0 40%;
-          flex: 0 0 40%;
-          max-width: 40%;
+          -moz-flex: 0 0 70px;
+          -ms-flex: 0 0 70px;
+          flex: 0 0 70px;
+          max-width: 70px;
       }
       
       .col-60 {
@@ -507,6 +532,54 @@
           -ms-flex: 0 0 60%;
           flex: 0 0 60%;
           max-width: 60%;
+      }
+      
+      .order {
+          position: relative;
+          @extend .product-cart;
+          .image-holder-order {
+              @extend .image-holder-cart;
+              .order-image {
+                  @extend .cart-image;
+              }
+          }
+          .id-order {
+              h2 {
+                  padding-left: 5px !important;
+                  font-size: 11px;
+                  margin: 0px;
+                  span {
+                      float: right;
+                  }
+              }
+          }
+          h4 {
+              min-height: 20px;
+          }
+          .payment {
+              padding: 1px 6px;
+              font-size: 10px;
+          }
+          .total-ship {
+              h3 {
+                  font-size: 11px;
+                  float: right;
+                  clear: left;
+                  margin: 0px;
+                  position: absolute;
+                  right: 5px;
+                  bottom: 5px;
+              }
+              h2{
+                  font-size: 13px;
+                  float: right;
+                  clear: left;
+                  margin: 0px;
+                  position: absolute;
+                  left: 85px;
+                  bottom: 5px;
+              }
+          }
       }
       
       .login {
@@ -580,12 +653,11 @@
           padding-right: 10px !important;
       }
       
-//      .bar .button.button-clear .icon:before,
-//      .bar .button.button-clear.icon:before,
-//      .bar .button.button-clear.icon-left:before {
-//          font-size: 15px !important;
-//      }
-      
+      //      .bar .button.button-clear .icon:before,
+      //      .bar .button.button-clear.icon:before,
+      //      .bar .button.button-clear.icon-left:before {
+      //          font-size: 15px !important;
+      //      }
       .forgot-password {
           ::-webkit-input-placeholder {
               color: grey;
@@ -655,11 +727,14 @@
               }
           }
       }
-.transparent-nav{
-.bar.bar-positive {
-  background-color: rgba(255,255,255,.1) !important; /* or transparent, or background:none */
-}
-}
-.scroll-content {
-  overflow: visible !important;
-}
+      
+      .transparent-nav {
+          .bar.bar-positive {
+              background-color: rgba(255, 255, 255, .1) !important;
+              /* or transparent, or background:none */
+          }
+      }
+      
+      .scroll-content {
+          overflow: visible !important;
+      }

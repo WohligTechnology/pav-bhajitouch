@@ -120,6 +120,9 @@ angular.module('starter.controllers', [])
             $location.path('app/home');
         };
     })
+    .controller('MyOrdersCtrl', function ($scope, $stateParams, $location, $ionicHistory) {
+    
+    })
     .controller('DistributionCtrl', function ($scope, $stateParams) {
         $scope.brands = [{
             image: "img/brands/acmemade.jpeg"
