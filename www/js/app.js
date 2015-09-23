@@ -122,6 +122,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
+      .state('app.contactus', {
+      url: '/contactus',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/contactus.html',
+          controller: 'ContactUsCtrl'
+        }
+      }
+    })
       .state('app.cart', {
       url: '/cart',
       views: {

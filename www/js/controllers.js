@@ -112,6 +112,7 @@ angular.module('starter.controllers', [])
     .controller('DealsCtrl', function ($scope, $stateParams) {})
     .controller('ExclusiveCtrl', function ($scope, $stateParams) {})
     .controller('NewArrivalsCtrl', function ($scope, $stateParams) {})
+    .controller('ContactUsCtrl', function ($scope, $stateParams) {})
     .controller('CartCtrl', function ($scope, $stateParams, $location, $ionicHistory) {
         $scope.goHome = function () {
             console.log($ionicHistory.viewHistory());

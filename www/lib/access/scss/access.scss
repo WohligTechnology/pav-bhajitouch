@@ -540,12 +540,12 @@
                   line-height: 0;
                   .frgt-password {
                       text-decoration: none;
-                      color:black;
+                      color: black;
                       float: right;
                   }
                   .register {
                       text-decoration: none;
-                      color:black;
+                      color: black;
                       float: left;
                   }
               }
@@ -569,7 +569,7 @@
       .signup {
           @extend .login;
           .signup-form {
-              @extend .login-form;
+              @extend .login.login-form;
           }
           .signup-button {
               @extend .login-button;
@@ -593,7 +593,7 @@
           h3 {
               font-size: 13px;
               text-align: center;
-                  margin: 20px 20px 10px 20px !important;
+              margin: 20px 20px 10px 20px !important;
           }
           input[type="email"] {
               padding-right: 5px;
@@ -615,5 +615,43 @@
               min-height: 33px;
               line-height: 35px;
               border-radius: 4px;
+          }
+      }
+      
+      .contactus {
+          .contactus-addr {
+              border: 1px solid #ddd;
+              h2 {
+                  font-size: 14px;
+                  font-weight: 600;
+                  text-align: center;
+                  margin: 10px 0px;
+              }
+              p {
+                  margin: 10px;
+                  font-size: 13px;
+              }
+              .google-maps {
+                  margin: 10px;
+              }
+          }
+          .get-in-touch {
+              border: 1px solid #ddd;
+              @extend .login;
+              ::-webkit-input-placeholder {
+                  color: grey;
+              }
+              h2 {
+                  font-size: 14px;
+                  font-weight: 600;
+                  text-align: center;
+                  margin: 10px 0px;
+              }
+              .contact-form {
+                  @extend .login-form;
+                  .contact-button {
+                      @extend .login-button;
+                  }
+              }
           }
       }
