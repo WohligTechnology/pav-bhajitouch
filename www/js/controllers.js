@@ -1,7 +1,7 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $location, $ionicPopup) {
-    $scope.transparent_header=false;
+.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $location, $ionicPopup, $rootScope) {
+    $rootScope.transparent_header = false;
     $scope.searchbar = false;
     $scope.search = function () {
         $scope.searchbar = $scope.searchbar === true ? false : true;
@@ -112,8 +112,8 @@ angular.module('starter.controllers', [])
     .controller('DealsCtrl', function ($scope, $stateParams) {})
     .controller('ExclusiveCtrl', function ($scope, $stateParams) {})
     .controller('NewArrivalsCtrl', function ($scope, $stateParams) {})
-    
-    .controller('ContactUsCtrl', function ($scope, $stateParams) {})
+
+.controller('ContactUsCtrl', function ($scope, $stateParams) {})
     .controller('CartCtrl', function ($scope, $stateParams, $location, $ionicHistory) {
         $scope.goHome = function () {
             console.log($ionicHistory.viewHistory());
@@ -121,10 +121,10 @@ angular.module('starter.controllers', [])
         };
     })
     .controller('MyOrdersCtrl', function ($scope, $stateParams, $location, $ionicHistory) {
-    
+
     })
     .controller('MyWishlistCtrl', function ($scope, $stateParams, $location, $ionicHistory) {
-    
+
     })
     .controller('DistributionCtrl', function ($scope, $stateParams) {
         $scope.brands = [{
@@ -184,7 +184,7 @@ angular.module('starter.controllers', [])
     .controller('ProductCtrl', function ($scope, $stateParams, $timeout) {
         $scope.addwishlist = false;
         $scope.params = $stateParams;
-        
+
         $scope.addWishlist = function () {
             $scope.addwishlist = true;
             console.log($scope.addwishlist);
@@ -362,8 +362,32 @@ angular.module('starter.controllers', [])
         }];
         $scope.products = _.chunk($scope.products, 2);
     })
-.controller('ProductDetailCtrl', function ($scope, $stateParams) {
-$scope.transparent_header=true;})
+    .controller('ProductDetailCtrl', function ($scope, $stateParams, $rootScope, $ionicScrollDelegate) {
+        $rootScope.transparent_header = true;
+        $scope.activate = true;
+        $scope.tab = {
+            left: true,
+            right: false
+        }
+        $scope.pageScrolled = function () {
+            if($ionicScrollDelegate.getScrollPosition().top > 100)
+                $rootScope.transparent_header = false;
+            else if($ionicScrollDelegate.getScrollPosition().top < 0)
+                $rootScope.transparent_header = true;
+        };
+        $scope.clickTab = function (side) {
+
+            if (side === "left") {
+                $scope.tab.left = true;
+                $scope.tab.right = false;
+            } else {
+                $scope.tab.right = true;
+                $scope.tab.left = false;
+                console.log("here");
+            }
+        };
+
+    })
     .controller('BrandsCtrl', function ($scope, $stateParams, $rootScope) {
         $rootScope.nosearch = true;
         $scope.brands = [{

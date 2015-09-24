@@ -1,5 +1,88 @@
 <ion-view view-title="Product Detail">
-  <ion-content>
-    <h1>Playlist</h1>
-  </ion-content>
+   <div class="bar bar-subheader bar-positive" ng-hide="transparent_header">
+       <h1 class="title">5 Dell Inspiron 3541 (Notebook)</h1>
+   </div>
+    <ion-content ng-class="{'no-header':transparent_header}" on-scroll="pageScrolled()">
+        <div class="product-detail">
+            <ion-slide-box on-slide-changed="slideHasChanged($index)">
+                <ion-slide>
+                    <div class="image-holder-productimg"><img src="img/products/iphone2.jpg" class="product-img" alt=""></div>
+                </ion-slide>
+                <ion-slide>
+                    <div class="image-holder-productimg"><img src="img/products/iphone6.jpg" class="product-img" alt=""></div>
+                </ion-slide>
+                <ion-slide>
+                    <div class="image-holder-productimg"><img src="img/products/iphone6ho.jpg" class="product-img" alt=""></div>
+                </ion-slide>
+            </ion-slide-box>
+            <div class="row">
+                <div class="detail">
+                    <div class="col">
+
+                        <div class="name-other">
+                            <h2>5 Dell Inspiron 3541 (Notebook)</h2>
+                            <div class="row">
+                                <div class="col user-rating">
+                                    <ul>
+                                        <li><i class="icon star ion-ios-star-outline" s></i></li>
+                                        <li><i class="icon star ion-ios-star-outline" s></i></li>
+                                        <li><i class="icon star ion-ios-star-outline" s></i></li>
+                                        <li><i class="icon star ion-ios-star-outline" s></i></li>
+                                        <li><i class="icon star ion-ios-star-outline" s></i></li>
+                                    </ul>
+                                </div>
+                                <div class="col">
+                                    <h3>Availability : <span>In Stock</span></h3>
+                                </div>
+                            </div>
+                            <div class="price">
+                                <span>Price : Rs. 60000</span>
+                            </div>
+                            <button class="button btn-productdetail icon-left ion-android-cart button-positive">Add to cart</button>
+                            <button class="button btn-productdetail icon-left ion-ios-heart button-positive">Add to wislist</button>
+                            <div class="tabs-detail">
+                                <div class="row">
+                                    <div class="col" ng-class="{'active-tab':tab.left}">
+                                        <button class="button button-clear" ng-click="clickTab('left')">
+                                            <h5>DESCRIPTION</h5></button>
+                                    </div>
+                                    <div class="col" ng-class="{'active-tab':tab.right}">
+                                        <button class="button button-clear" ng-click="clickTab('right')">
+                                            <h5>SPECIFICATION</h5></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="description" ng-show="tab.left">
+                                
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum sit reprehenderit iusto harum minima. Assumenda, accusamus, perspiciatis inventore tempora qui pariatur quisquam? Deleniti, placeat ea nostrum officiis obcaecati temporibus quod. Ullam, in, adipisci autem at fugit ab tempore enim ratione nesciunt alias corporis vitae quo quod nostrum itaque vero iure?</p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore, id blanditiis deserunt in molestiae excepturi incidunt molestias dolor sunt dolore obcaecati non repellat mollitia error placeat est exercitationem sit voluptates iure autem saepe voluptas harum unde perferendis modi provident labore voluptatum. Repudiandae, aspernatur sit harum quod vero quos sequi voluptas!</p>
+                               
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis, aperiam, enim odit placeat minus ab vero molestiae ad fugit maiores eaque saepe debitis assumenda ut ipsam eius sit repellendus dolore.</p>
+                                    <ul>
+                                        <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae, in magni illo dolore dicta vero.</li>
+                                        <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti, minus, aspernatur voluptatem doloribus labore modi.</li>
+                                        <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora, exercitationem quia id accusamus beatae sunt? Dolorum mollitia sint debitis delectus.</li>
+                                    </ul>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis, accusantium, provident ab quo sed blanditiis perspiciatis distinctio aut voluptatibus cum odio quaerat iure vel dolorum fugit explicabo suscipit tenetur. Sed!</p>
+                                
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis, aperiam, enim odit placeat minus ab vero molestiae ad fugit maiores eaque saepe debitis assumenda ut ipsam eius sit repellendus dolore.</p>
+                                    <ul>
+                                        <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae, in magni illo dolore dicta vero.</li>
+                                        <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti, minus, aspernatur voluptatem doloribus labore modi.</li>
+                                        <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora, exercitationem quia id accusamus beatae sunt? Dolorum mollitia sint debitis delectus.</li>
+                                    </ul>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis, accusantium, provident ab quo sed blanditiis perspiciatis distinctio aut voluptatibus cum odio quaerat iure vel dolorum fugit explicabo suscipit tenetur. Sed!</p>
+                                
+                            </div>
+                            <div class="specification" ng-show="tab.right">
+
+                                <h1>Hi</h1>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
 </ion-view>

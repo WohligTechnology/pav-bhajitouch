@@ -751,11 +751,100 @@
       
       .transparent-nav {
           .bar.bar-positive {
-              background-color: rgba(255, 255, 255, .1) !important;
+              background-color: rgba(255, 255, 255, 0) !important;
               /* or transparent, or background:none */
+          }
+          .bar.bar-positive .title {
+              color: $positive;
+              display: none;
+          }
+          .bar-positive .button.button-clear {
+              color: $positive !important;
           }
       }
       
       .scroll-content {
           overflow: visible !important;
+      }
+      
+      .product-detail {
+          .slider-slide {
+              height: 260px !important;
+              .image-holder-productimg {
+                  @extend .image-holder;
+                  height: inherit;
+                  .product-img {
+                      @extend .brand-image;
+                  }
+              }
+          }
+          .slider-pager {
+              height: 5px !important;
+          }
+          .detail {
+              border: 1px solid #ddd;
+              width: 100%;
+              .name-other {
+                  .row {
+                      padding: 0px 5px;
+                  }
+                  .col {
+                      padding: 0px;
+                  }
+                  h2 {
+                      font-size: 17px;
+                      font-weight: 600;
+                      min-height: 32px;
+                      text-align: center;
+                      margin: 0px;
+                  }
+                  .user-rating {
+                      ul {
+                          text-align: left;
+                          margin-bottom: 3px;
+                          li {
+                              display: inline-block;
+                          }
+                      }
+                      .star {
+                          font-size: 16px;
+                      }
+                  }
+                  h3 {
+                      font-size: 15px;
+                      text-align: right;
+                      margin: 0px;
+                      span {
+                          color: $positive;
+                      }
+                  }
+                  .price {
+                      span {
+                          margin: 5px;
+                          font-size: 16px;
+                          font-weight: 500;
+                      }
+                  }
+                  .tabs-detail {
+                      margin-top: 5px;
+                      @extend .tabs-about;
+                      .button {
+                          min-height: 40px;
+                          h5 {
+                              font-size: 13px;
+                          }
+                      }
+                  }
+                  .btn-productdetail{
+                   width: 100%;
+                  margin: 2px;
+                      min-height: 40px;
+                  font-size: 13px !important;
+                  border-radius: 4px;
+                  }
+                  .description{
+                  padding: 5px;
+                  }
+              }
+          }
       }
