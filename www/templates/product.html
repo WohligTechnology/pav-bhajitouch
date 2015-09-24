@@ -1,33 +1,34 @@
 <ion-view view-title="Product">
-   <div class="bar bar-subheader bar-stable item-input-inset" ng-show="subheader_search">
-       <label class="item-input-wrapper">
-    <i class="icon ion-ios-search placeholder-icon"></i>
-    <input type="search" placeholder="Search">
-  </label>
-  <button class="button button-clear button-icon ion-ios-close-empty" ng-click="searchToggle()">
-  </button>
-   </div>
+    <div class="bar bar-subheader bar-stable item-input-inset" ng-show="subheader_search">
+        <label class="item-input-wrapper">
+            <i class="icon ion-ios-search placeholder-icon"></i>
+            <input type="search" placeholder="Search">
+        </label>
+        <button class="button button-clear button-icon ion-ios-close-empty" ng-click="searchToggle()">
+        </button>
+    </div>
     <ion-content>
         <div class="row" ng-repeat="product in products">
             <div class="col" ng-repeat="item in product">
-                <div class="product">
-                    <div class="image-holder-product">
-                        <img class="brand-image" src="img/products/5.png" alt="">
-                    </div>
-                    <div class="product-details">
-                    <h2>{{item.name}}</h2>
-<!--                    <h3 class="item-note">{{item.company}}</h3></h2>-->
-                    <div class="rating">
-                        <ul>
-                            <li><i class="icon star ion-ios-star-outline"s></i></li>
-                            <li><i class="icon star ion-ios-star-outline"s></i></li>
-                            <li><i class="icon star ion-ios-star-outline"s></i></li>
-                            <li><i class="icon star ion-ios-star-outline"s></i></li>
-                            <li><i class="icon star ion-ios-star-outline"s></i></li>
-                        </ul>
-                    </div>
-                   </div>
-                    
+                <a href="#/app/productdetail" style="text-decoration: none;">
+                    <div class="product">
+                        <div class="image-holder-product">
+                            <img class="brand-image" src="img/products/5.png" alt="">
+                        </div>
+                        <div class="product-details">
+                            <h2>{{item.name}}</h2>
+                            <!--                    <h3 class="item-note">{{item.company}}</h3></h2>-->
+                            <div class="rating">
+                                <ul>
+                                    <li><i class="icon star ion-ios-star-outline" s></i></li>
+                                    <li><i class="icon star ion-ios-star-outline" s></i></li>
+                                    <li><i class="icon star ion-ios-star-outline" s></i></li>
+                                    <li><i class="icon star ion-ios-star-outline" s></i></li>
+                                    <li><i class="icon star ion-ios-star-outline" s></i></li>
+                                </ul>
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col col-33">
                                 <h3>{{item.price}}</h3>
@@ -36,11 +37,12 @@
                                 <i class="icon ion-ios-heart"></i></button>
                             </div>
                             <div class="col cart col-33">
-                            <i class="icon ion-android-cart"></i>
+                                <i class="icon ion-android-cart"></i>
                             </div>
                         </div>
-                    
-                </div>
+
+                    </div>
+                </a>
             </div>
         </div>
     </ion-content>

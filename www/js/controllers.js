@@ -122,7 +122,17 @@ angular.module('starter.controllers', [])
         };
     })
     .controller('CheckoutCtrl', function ($scope, $stateParams) {
-        
+    $scope.different_address=false; 
+    $scope.address_select="Ship to different address";
+    $scope.toggleAddress=function(){
+    if($scope.different_address === false){
+    $scope.different_address = true;
+        $scope.address_select="Ship to same address";
+    }else{
+       $scope.different_address=false; 
+    $scope.address_select="Ship to different address";  
+    }
+    };
     })
     .controller('MyOrdersCtrl', function ($scope, $stateParams, $location, $ionicHistory) {
 
@@ -187,6 +197,7 @@ angular.module('starter.controllers', [])
     })
     .controller('ProductCtrl', function ($scope, $stateParams, $timeout) {
         $scope.addwishlist = false;
+    $rootScope.transparent_header = false;
         $scope.params = $stateParams;
 
         $scope.addWishlist = function () {

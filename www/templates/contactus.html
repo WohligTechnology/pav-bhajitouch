@@ -18,26 +18,27 @@
                     <div class="get-in-touch">
                         <h2>Get in touch</h2>
                         <div class="list contact-form">
-                            <label class="item item-input item-floating-label">
-                                <span class="input-label">Name</span>
-                                <input type="text" placeholder="Name*" required>
-                            </label>
-                            <label class="item item-input item-floating-label">
-                                <span class="input-label">Email</span>
-                                <input type="email" placeholder="Email*" required>
-                            </label>
-                            <label class="item item-input item-floating-label">
-                                <span class="input-label">Telephone</span>
-                                <input type="tel" placeholder="Telephone">
-                            </label>
-                            <label class="item item-input item-floating-label">
-                                <span class="input-label">Query</span>
-                                <textarea name="" id="" cols="30" rows="6" placeholder="Query*"></textarea>
-                            </label>
-                            <button class="button button-positive contact-button" type="submit">
-                                Done
-                            </button>
-
+                            <form ng-submit="doLogin()">
+                                <label class="item item-input item-floating-label">
+                                    <span class="input-label">Name</span>
+                                    <input type="text" placeholder="Name*" required>
+                                </label>
+                                <label class="item item-input item-floating-label">
+                                    <span class="input-label">Email</span>
+                                    <input type="email" placeholder="Email*" required>
+                                </label>
+                                <label class="item item-input item-floating-label">
+                                    <span class="input-label">Telephone</span>
+                                    <input type="tel" placeholder="Telephone">
+                                </label>
+                                <label class="item item-input item-floating-label">
+                                    <span class="input-label">Query</span>
+                                    <textarea name="" id="" cols="30" rows="6" placeholder="Query*"></textarea>
+                                </label>
+                                <button class="button button-positive contact-button" type="submit">
+                                    Done
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>

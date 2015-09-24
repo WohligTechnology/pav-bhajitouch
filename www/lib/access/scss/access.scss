@@ -313,6 +313,7 @@
       .product {
           border: 1px solid #ddd;
           padding: 5px;
+          text-decoration: none;
           .image-holder-product {
               @extend .image-holder;
               height: 100px;
@@ -611,8 +612,14 @@
               color: darkgrey;
               font-size: 14px;
           }
+          span {
+              padding: 0px;
+          }
+          textarea,
           input[type="text"],
-          input[type="password"] {
+          input[type="password"],
+          input[type="email"],
+          input[type="tel"] {
               font-size: 13px;
           }
           .login-form {
@@ -835,16 +842,68 @@
                           }
                       }
                   }
-                  .btn-productdetail{
-                   width: 100%;
-                  margin: 2px;
+                  .btn-productdetail {
+                      width: 100%;
+                      margin: 2px;
                       min-height: 40px;
-                  font-size: 13px !important;
-                  border-radius: 4px;
+                      font-size: 13px !important;
+                      border-radius: 4px;
                   }
-                  .description{
-                  padding: 5px;
+                  .description {
+                      padding: 5px;
+                  }
+                  .specification {
+                      padding: 10px;
                   }
               }
+          }
+      }
+      
+      .checkout {
+          .billing {
+              border: 1px solid #ddd;
+              @extend .login;
+              ::-webkit-input-placeholder {
+                  color: grey;
+              }
+              h2 {
+                  font-size: 14px;
+                  font-weight: 600;
+                  text-align: center;
+                  margin: 10px 0px;
+              }
+              .checkout-form {
+                  @extend .login-form;
+                  .checkout-button {
+                      @extend .login-button;
+                      margin: 10px 20px 10px 20px;
+                  }
+                  .item-select {
+                      margin: 10px 20px 0px 20px;
+                      .input-label {
+                          padding: 5px 0px 0px 0px;
+                          color: #959595;
+                          font-size: 13px;
+                          margin-bottom: 5px;
+                      }
+                  }
+              }
+              .radio-select {}
+          }
+          .shipping {
+              @extend .billing;
+          }
+          .order-review {
+              width: 100%;
+              border: 1px solid #ddd;
+              .item .item-note {
+                  color: black !important;
+              }
+          }
+          .order-button {
+              width: 88%;
+              margin: 20px;
+              font-size: 13px !important;
+              border-radius: 4px;
           }
       }

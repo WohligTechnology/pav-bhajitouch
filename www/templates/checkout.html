@@ -1,5 +1,131 @@
 <ion-view view-title="Checkout">
-  <ion-content>
-    
-  </ion-content>
+    <ion-content>
+        <div class="checkout">
+            <div class="row">
+                <div class="col">
+                    <div class="billing">
+                        <h2>Billing information</h2>
+                        <div class="list checkout-form">
+                            <form ng-submit="doLogin()">
+                                <label class="item item-input item-floating-label">
+                                    <span class="input-label">First Name</span>
+                                    <input type="text" placeholder="First Name*" required>
+                                </label>
+                                <label class="item item-input item-floating-label">
+                                    <span class="input-label">Last Name</span>
+                                    <input type="text" placeholder="Last Name*" required>
+                                </label>
+                                <label class="item item-input item-floating-label">
+                                    <span class="input-label">Company</span>
+                                    <input type="text" placeholder="Company">
+                                </label>
+
+                                <label class="item item-input item-floating-label">
+                                    <span class="input-label">Email</span>
+                                    <input type="email" placeholder="Email*" required>
+                                </label>
+                                <label class="item item-input item-floating-label">
+                                    <span class="input-label">Address</span>
+                                    <textarea name="" id="" cols="30" rows="3" placeholder="Address*" required></textarea>
+                                </label>
+                                <label class="item item-input item-floating-label">
+                                    <span class="input-label">City</span>
+                                    <input type="text" placeholder="City*" required>
+                                </label>
+                                <label class="item item-input item-floating-label">
+                                    <span class="input-label">State/Province</span>
+                                    <input type="text" placeholder="State/Province*" required>
+                                </label>
+                                <label class="item item-input item-floating-label">
+                                    <span class="input-label">Zip/Postal</span>
+                                    <input type="text" placeholder="Zip/Postal*" required>
+                                </label>
+                                <label class="item item-input item-select">
+                                    <div class="input-label">
+                                        Select Country
+                                    </div>
+                                    <select>
+                                        <option>Select country</option>
+                                        <option selected>India</option>
+                                        <option>Red</option>
+                                    </select>
+                                </label>
+
+                                <label class="item item-input item-floating-label">
+                                    <span class="input-label">Telephone</span>
+                                    <input type="tel" placeholder="Telephone">
+                                </label>
+                                <button class="button button-positive checkout-button" type="submit" ng-click="toggleAddress()" ng-bind="address_select">
+                                </button>
+                                <div class="checkout-form2" ng-show="different_address">
+                                    <h2>Shipping information</h2>
+                                    <label class="item item-input item-floating-label">
+                                        <span class="input-label">Shipping Name</span>
+                                        <input type="text" placeholder="Shipping Name*" required>
+                                    </label>
+
+                                    <label class="item item-input item-floating-label">
+                                        <span class="input-label">Address</span>
+                                        <textarea name="" id="" cols="30" rows="3" placeholder="Address*" required></textarea>
+                                    </label>
+                                    <label class="item item-input item-floating-label">
+                                        <span class="input-label">City</span>
+                                        <input type="text" placeholder="City*" required>
+                                    </label>
+                                    <label class="item item-input item-floating-label">
+                                        <span class="input-label">State/Province</span>
+                                        <input type="text" placeholder="State/Province*" required>
+                                    </label>
+                                    <label class="item item-input item-floating-label">
+                                        <span class="input-label">Zip/Postal</span>
+                                        <input type="text" placeholder="Zip/Postal*" required>
+                                    </label>
+                                    <label class="item item-input item-select">
+                                        <div class="input-label">
+                                            Select Country
+                                        </div>
+                                        <select>
+                                            <option>Select country</option>
+                                            <option selected>India</option>
+                                            <option>Red</option>
+                                        </select>
+                                    </label>
+
+                                    <label class="item item-input item-floating-label">
+                                        <span class="input-label">Telephone</span>
+                                        <input type="tel" placeholder="Telephone">
+                                    </label>
+                                </div>
+                                <button class="button button-positive checkout-button" type="submit" ng-click="paymentOption()">
+                                    Continue
+                                </button>
+                            </form>
+                            <div class="payment">
+                                <h2>Payment information</h2>
+
+                            </div>
+                            
+
+                        </div>
+                        <div class="order-review">
+                                <h2>Order review</h2>
+                                <div class="item item-icon-left"><i class="icon ln-cash"></i>
+                                    <h3>Sub total <span class="item-note">Rs.1000</span></h3>
+                                </div>
+                                <div class="item item-icon-left">
+                                    <h3><i class="icon ln-ticket"></i>Discount amount
+                <span class="item-note">Rs.1000</span></h3></div>
+                                <div class="item item-icon-left">
+                                    <h3><i class="icon ln-cash"></i>Total amount
+                <span class="item-note">Rs.1000</span></h3></div>
+                            </div>
+                    </div>
+                    <button class="button button-positive order-button" type="submit" ng-click="paymentOption()">
+                                    Order
+                                </button>
+
+                </div>
+            </div>
+        </div>
+    </ion-content>
 </ion-view>
