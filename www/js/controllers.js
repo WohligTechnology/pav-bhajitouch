@@ -2,6 +2,7 @@ angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function ($scope, $ionicModal, $timeout, $location, $ionicPopup, $rootScope) {
     $rootScope.transparent_header = false;
+
     $scope.searchbar = false;
     $scope.search = function () {
         $scope.searchbar = $scope.searchbar === true ? false : true;
@@ -119,6 +120,9 @@ angular.module('starter.controllers', [])
             console.log($ionicHistory.viewHistory());
             $location.path('app/home');
         };
+    })
+    .controller('CheckoutCtrl', function ($scope, $stateParams) {
+        
     })
     .controller('MyOrdersCtrl', function ($scope, $stateParams, $location, $ionicHistory) {
 
@@ -370,9 +374,9 @@ angular.module('starter.controllers', [])
             right: false
         }
         $scope.pageScrolled = function () {
-            if($ionicScrollDelegate.getScrollPosition().top > 100)
+            if ($ionicScrollDelegate.getScrollPosition().top > 100)
                 $rootScope.transparent_header = false;
-            else if($ionicScrollDelegate.getScrollPosition().top < 0)
+            else if ($ionicScrollDelegate.getScrollPosition().top < 0)
                 $rootScope.transparent_header = true;
         };
         $scope.clickTab = function (side) {

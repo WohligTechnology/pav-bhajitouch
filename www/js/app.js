@@ -159,6 +159,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
+      .state('app.checkout', {
+      url: '/checkout',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/checkout.html',
+          controller: 'CheckoutCtrl'
+        }
+      }
+    })
       .state('app.myorders', {
       url: '/myorders',
       views: {
