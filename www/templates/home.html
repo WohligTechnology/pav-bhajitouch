@@ -1,6 +1,12 @@
 <ion-view view-title="Home">
-<!--<ion-view view-title="Home" hide-nav-bar="searchbar">-->
-    <ion-content >
+    <ion-header-bar>
+        <h1 class="title">Forgot Password?</h1>
+        <div class="buttons">
+            <button class="button modal-close button-clear button-icon " ng-click="closeFrgt()"><i class="icon ion-ios-close-empty"></i>                    </button>
+        </div>
+    </ion-header-bar>
+    <!--<ion-view view-title="Home" hide-nav-bar="searchbar">-->
+    <ion-content>
 
         <ion-slide-box on-slide-changed="slideHasChanged($index)">
             <ion-slide ng-repeat="slide in slides">

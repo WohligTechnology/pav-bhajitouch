@@ -186,6 +186,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
+  .state('app.myaccount', {
+      url: '/myaccount',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/myaccount.html',
+          controller: 'MyAccountCtrl'
+        }
+      }
+    })
 
   .state('app.single', {
     url: '/playlists/:playlistId',

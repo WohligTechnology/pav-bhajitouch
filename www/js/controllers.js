@@ -113,6 +113,7 @@ angular.module('starter.controllers', [])
     .controller('DealsCtrl', function ($scope, $stateParams) {})
     .controller('ExclusiveCtrl', function ($scope, $stateParams) {})
     .controller('NewArrivalsCtrl', function ($scope, $stateParams) {})
+    .controller('MyAccountCtrl', function ($scope, $stateParams) {})
 
 .controller('ContactUsCtrl', function ($scope, $stateParams) {})
     .controller('CartCtrl', function ($scope, $stateParams, $location, $ionicHistory) {
@@ -195,9 +196,10 @@ angular.module('starter.controllers', [])
                                             }];
         $scope.brands = _.chunk($scope.brands, 3);
     })
-    .controller('ProductCtrl', function ($scope, $stateParams, $timeout) {
+    .controller('ProductCtrl', function ($scope, $stateParams, $timeout,$rootScope) {
         $scope.addwishlist = false;
     $rootScope.transparent_header = false;
+    console.log( $rootScope.transparent_header);
         $scope.params = $stateParams;
 
         $scope.addWishlist = function () {
@@ -384,11 +386,19 @@ angular.module('starter.controllers', [])
             left: true,
             right: false
         }
-        $scope.pageScrolled = function () {
-            if ($ionicScrollDelegate.getScrollPosition().top > 100)
+        var i=0;
+        $scope.pageScrolled = function () {     
+            console.log(++i);
+            if ($ionicScrollDelegate.getScrollPosition().top > 240)
+            {
                 $rootScope.transparent_header = false;
-            else if ($ionicScrollDelegate.getScrollPosition().top < 0)
+                $scope.$apply();
+            }
+            else
+            {
                 $rootScope.transparent_header = true;
+                $scope.$apply();
+            }
         };
         $scope.clickTab = function (side) {
 
