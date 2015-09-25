@@ -1,5 +1,5 @@
 <ion-view view-title="About Us">
-    <div class="bar bar-subheader tabs-about bar-stable">
+    <div class="bar bar-subheader bar-light tabs-about bar-stable">
         <div class="row">
             <div class="col" ng-class="{'active-tab':tab.left}">
                 <button class="button button-clear" ng-click="clickTab('left')">
@@ -24,12 +24,14 @@
 Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula. Ut molestie a, ultricies porta urna. Vestibulum commodo volutpat a, convallis ac, laoreet enim</p>
         </div>
         <div class="clientele" ng-show="tab.right">
-            
-                <div class="clnt" ng-repeat="clnt in clientele">
+            <div class="row" ng-repeat="clnt in clientele">
+                <div class="col">
+                <div class="card no-margin clnt" >
                     <div class="image-holder-clientele"><img src="{{clnt.image}}" class="brand-image"></div>
                     <h4>{{clnt.caption}}</h4>
                 </div>
-            
+            </div>
+            </div>
         </div>
     </ion-content>
 </ion-view>

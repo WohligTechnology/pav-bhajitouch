@@ -35,41 +35,44 @@
     <ion-side-menu side="left">
         <ion-content>
             <ion-list>
+
+                <ion-item class="sidemenu-mainitem no-border" menu-close href="#/app/home">
+                    <i class="icon ln-home3"></i><span>Home</span>
+                </ion-item>
+                <ion-item class="sidemenu-mainitem no-border" menu-close href="#/app/brands">
+                    <i class="icon ln-tags"></i><span>Brands</span>
+                </ion-item>
+                <ion-item class="sidemenu-mainitem no-border" menu-close href="#/app/productcategories">
+                    <i class="icon ln-icons2"></i><span>Product</span>
+                </ion-item>
+                <ion-item class="sidemenu-mainitem no-border" menu-close href="#/app/newarrivals">
+                    <i class="icon ln-lightning-bolt"></i><span>New arrivals</span>
+                </ion-item>
+                <ion-item class="sidemenu-mainitem no-border" menu-close href="#/app/deals">
+                    <i class="icon ln-thumbs-up"></i><span>Deals</span>
+                </ion-item>
+                <div class="border-separator"></div>
                 <ion-item class="sidemenu-item no-border" menu-close href="" ng-click="login()">
-            <i class="icon ion-log-in"></i>Login</div>
-                </ion-item>
-                <ion-item class="sidemenu-item no-border" menu-close href="#/app/home">
-                   <i class="icon ln-home3"></i> Home
-                </ion-item>
-                <ion-item class="sidemenu-item no-border" menu-close href="#/app/brands">
-                    <i class="icon ln-tags"></i>Brands
-                </ion-item>
-                <ion-item class="sidemenu-item no-border" menu-close href="#/app/product">
-                    <i class="icon ln-icons2"></i>Product
-                </ion-item>
-                <ion-item class="sidemenu-item no-border" menu-close href="#/app/exclusive">
-                    <i class="icon ln-gift"></i>Exclusive
-                </ion-item>
-                <ion-item class="sidemenu-item no-border" menu-close href="#/app/newarrivals">
-                    <i class="icon ln-lightning-bolt"></i>New arrivals
-                </ion-item>
-                <ion-item class="sidemenu-item no-border" menu-close href="#/app/deals">
-                    <i class="icon ln-thumbs-up"></i>Deals
+                   <span>Login</span>
                 </ion-item>
                 <ion-item class="sidemenu-item no-border" menu-close href="#/app/distribution">
-                    <i class="icon ln-users"></i>Distribution
+                    <span>Distribution</span>
+                </ion-item>
+                
+                <ion-item class="sidemenu-item no-border" menu-close href="#/app/myaccount">
+                    <span>My Account</span>
+                </ion-item>
+                <ion-item class="sidemenu-item no-border" menu-close href="#/app/mywishlist">
+                    <span>My Wishlist</span>
                 </ion-item>
                 <ion-item class="sidemenu-item no-border" menu-close href="#/app/about">
-                    <i class="icon ln-accessibility"></i>About Us
+                    <span>About Us</span>
                 </ion-item>
-                   <ion-item class="sidemenu-item no-border" menu-close href="#/app/myaccount">
-                    <i class="icon ln-user"></i>My Account
+                <ion-item class="sidemenu-item no-border" menu-close href="#/app/contactus">
+                    <span>Contact Us</span>
                 </ion-item>
-                  <ion-item class="sidemenu-item no-border" menu-close href="#/app/mywishlist">
-                    <i class="icon ion-ios-heart-outline"></i>My Wishlist
-                </ion-item>
-                   <ion-item class="sidemenu-item no-border" menu-close href="#/app/contactus">
-                    <i class="icon ln-phone"></i>Contact Us
+                <ion-item class="sidemenu-item no-border" menu-close ng-click="logout()" href="">
+                    <span>Log out</span>
                 </ion-item>
             </ion-list>
         </ion-content>

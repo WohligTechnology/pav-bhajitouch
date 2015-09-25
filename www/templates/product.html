@@ -11,11 +11,12 @@
         <div class="row" ng-repeat="product in products">
             <div class="col" ng-repeat="item in product">
 
-                <div class="product">
+                <div class=" card no-margin product">
+                   <a href="#/app/productdetail" style="text-decoration: none">
                     <div class="image-holder-product">
                         <img class="brand-image" src="img/products/5.png" alt="">
                     </div>
-                    <a href="#/app/productdetail" style="text-decoration: none">
+                    
                         <div class="product-details">
                             <h2>{{item.name}}</h2>
                             <!--                    <h3 class="item-note">{{item.company}}</h3></h2>-->
@@ -31,14 +32,14 @@
                         </div>
                     </a>
                     <div class="row">
-                        <div class="col col-33">
+                        <div class="col col-50">
                             <h3>{{item.price}}</h3>
                         </div>
-                        <div class="col heart col-33">
-                            <i class="icon ion-ios-heart"></i></button>
+                        <div class="col heart col-25">
+                            <a href=""><i class="icon ion-ios-heart"></i></a>
                         </div>
-                        <div class="col cart col-33">
-                            <i class="icon ion-android-cart"></i>
+                        <div class="col cart col-25">
+                            <a href=""><i class="icon ion-android-cart"></i></a>
                         </div>
                     </div>
 

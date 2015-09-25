@@ -79,7 +79,6 @@
           padding: 2px 8px 1px !important;
           font-size: 10px !important;
           line-height: 14px !important;
-          border-radius: 4px !important;
           min-height: 24px !important;
       }
       
@@ -190,7 +189,6 @@
               .btn-subscribe {
                   min-height: 20px;
                   line-height: 29px;
-                  border-radius: 4px;
               }
           }
       }
@@ -212,6 +210,10 @@
               //                  width: 100%;
               //              }
           }
+      }
+      
+      .card {
+          box-shadow: 0 1px 3px rgba(0, 0, 0, .4) !important;
       }
       
       .no-border {
@@ -252,14 +254,42 @@
               font-size: $font-size-list;
               padding-bottom: 10px !important;
               padding-left: 0px !important;
+              padding-top: 12px !important;
           }
           .icon {
               font-size: 20px;
-              padding-left: 5px;
+              padding-left: 15px;
               padding-right: 10px;
+          }
+          span {
+              font-size: 12px;
+              vertical-align: super;
           }
       }
       
+      .border-separator {
+          box-sizing: content-box;
+          border: 1px solid #ddd;
+      }
+      
+      .sidemenu-mainitem {
+          @extend .sidemenu-item;
+          border: 0px !important;
+          margin: 0px 5px !important;
+          span {
+              padding-left: 7px;
+          }
+          .item-content {
+              padding-top: 16px !important;
+          }
+      }
+      .product-item{
+      @extend .sidemenu-item;
+          span{
+          padding-left: 10px;
+              font-size: 13px;
+          }
+      }
       .sidemenu-header {
           padding: 30px 25px 25px 25px !important;
           .col-75 {
@@ -310,9 +340,18 @@
           margin-top: 10px;
       }
       
+      .product-ctgry {
+          .item-divider {
+              color: #7EE1EA;
+              background-color: white;
+              border-bottom: 1px solid $positive;
+              padding-left: 15px;
+          }
+      }
+      
       .product {
-          border: 1px solid #ddd;
-          padding: 5px;
+          //          border: 1px solid #ddd;
+          padding: 5px !important;
           text-decoration: none;
           .image-holder-product {
               @extend .image-holder;
@@ -323,21 +362,27 @@
               margin-top: 10px;
               padding-left: 5px;
               h2 {
-                  font-size: 13px !important;
+                  font-size: 14px !important;
                   margin: 0px;
                   font-weight: 500;
+                  min-height: 25px;
                   //              padding: 0px 0px 0px 5px;
               }
               .star {
-                  font-size: 13px;
+                  .icon {
+                      color: grey;
+                      font-size: 14px;
+                  }
               }
           }
           h3 {
               margin: 0px;
               padding: 0px;
-              padding-top: 3px;
-              text-align: center;
-              font-size: 11px!important;
+              color: darken($positive, 50%);
+              padding-top: 1px;
+              padding-left: 5px;
+              text-align: left;
+              font-size: 13px!important;
               font-weight: 500;
           }
           .row {
@@ -353,12 +398,53 @@
           }
           .heart,
           .cart {
-              color: #A3A1A1;
-              text-align: center;
-              font-size: 15px;
+              .icon {
+                  color: #A3A1A1;
+                  text-align: center;
+                  font-size: 18px;
+              }
           }
           .item {
               border: none !important;
+          }
+      }
+      
+      .newarrivals {
+          @extend .product;
+          .newarrivals-details {
+              @extend .product-details;
+              padding-left: 10px;
+          }
+      }
+      
+      .deals {
+          .slider-pager {
+              height: 5px !important;
+          }
+          .deal-sliderimg {
+              @extend .image-holder;
+              height: 170px;
+              .deal-img {
+                  @extend .brand-image;
+              }
+          }
+          .deal {
+              h4 {
+                  font-size: 12px;
+                  font-weight: 600;
+                  text-align: center;
+                  margin-top: 0px;
+                  margin-bottom: 5px;
+              }
+              @extend .product;
+              .deal-details {
+                  @extend .product-details;
+              }
+              .deal-actiontray {
+                  margin-top: 3px;
+                  border-top: 1px solid #ddd;
+                  padding-top: 5px;
+              }
           }
       }
       
@@ -375,7 +461,7 @@
               border-style: solid;
               border-width: 0px;
               border-bottom-width: 2px;
-              border-color: $calm;
+              border-color: $positive;
           }
       }
       
@@ -391,12 +477,13 @@
           }
           h4 {
               font-size: 15px;
+              margin-bottom: 4px;
+              text-align: center;
           }
       }
       
       .clientele {
           .clnt {
-              border: 1px solid #ddd;
               padding: 10px;
               width: 100%;
               .image-holder-clientele {
@@ -439,7 +526,6 @@
       }
       
       .product-cart {
-          border: 1px solid #ddd;
           padding: 5px;
           width: 100%;
           .image-holder-cart {
@@ -494,7 +580,6 @@
           width: 88%;
           margin: 20px !important;
           font-size: 13px !important;
-          border-radius: 4px !important;
       }
       
       .discount-cart {
@@ -508,7 +593,6 @@
               .btn-cart {
                   min-height: 20px;
                   line-height: 29px;
-                  border-radius: 4px;
                   font-size: 13px;
               }
           }
@@ -516,7 +600,6 @@
       
       .expense-cart {
           width: 100%;
-          border: 1px solid #ddd;
           .item .item-note {
               color: black !important;
           }
@@ -544,6 +627,8 @@
       
       .order {
           position: relative;
+          padding: 5px !important;
+          border: 0px;
           @extend .product-cart;
           .image-holder-order {
               @extend .image-holder-cart;
@@ -610,11 +695,9 @@
           }
           .has-input {
               color: darkgrey;
-              font-size: 14px;
+              //              font-size: 14px;
           }
-          span {
-              padding: 0px;
-          }
+          span {}
           textarea,
           input[type="text"],
           input[type="password"],
@@ -632,21 +715,20 @@
               }
               .login-button {
                   width: 88%;
-                  margin: 20px;
+                  margin: 20px 20px 15px 20px;
                   font-size: 13px !important;
-                  border-radius: 4px;
               }
               .log {
                   margin: 0 20px;
                   line-height: 0;
                   .frgt-password {
                       text-decoration: none;
-                      color: black;
+                      color: $positive;
                       float: right;
                   }
                   .register {
                       text-decoration: none;
-                      color: black;
+                      color: $positive;
                       float: left;
                   }
               }
@@ -654,7 +736,7 @@
           h2 {
               clear: both;
               font-size: 13px;
-              margin: 10px 0px;
+              margin: 10px 0px 20px 0px;
               text-align: center;
           }
           .signup-link {
@@ -662,7 +744,6 @@
                   width: 88%;
                   margin: 5px 20px;
                   font-size: 13px !important;
-                  border-radius: 4px;
               }
           }
       }
@@ -681,11 +762,6 @@
           padding-right: 10px !important;
       }
       
-      //      .bar .button.button-clear .icon:before,
-      //      .bar .button.button-clear.icon:before,
-      //      .bar .button.button-clear.icon-left:before {
-      //          font-size: 15px !important;
-      //      }
       .forgot-password {
           ::-webkit-input-placeholder {
               color: grey;
@@ -714,7 +790,6 @@
           .btn-frgt {
               min-height: 33px;
               line-height: 35px;
-              border-radius: 4px;
           }
       }
       
@@ -789,7 +864,7 @@
               height: 5px !important;
           }
           .detail {
-              border: 1px solid #ddd;
+              padding: 5px;
               width: 100%;
               .name-other {
                   .row {
@@ -843,11 +918,10 @@
                       }
                   }
                   .btn-productdetail {
-                      width: 100%;
+                      width: 99%;
                       margin: 2px;
                       min-height: 40px;
                       font-size: 13px !important;
-                      border-radius: 4px;
                   }
                   .description {
                       padding: 5px;
@@ -861,7 +935,6 @@
       
       .checkout {
           .billing {
-              border: 1px solid #ddd;
               @extend .login;
               ::-webkit-input-placeholder {
                   color: grey;
@@ -904,27 +977,25 @@
               width: 88%;
               margin: 20px;
               font-size: 13px !important;
-              border-radius: 4px;
           }
       }
       
-      .myaccount{
-          .button{
+      .myaccount {
+          .button {
               min-height: 30px;
-    border-radius: 4px;
-    width: 100%;
+              width: 100%;
           }
-          .item{
-           @extend .no-border;
-                  border-bottom-width: 1px !important;
-                  border-color: $positive;
-                  margin: 5px 10px 0 10px;
-                  padding: 0 0 0 10px;
-              .input-label{
-              color: black;
+          .item {
+              @extend .no-border;
+              border-bottom-width: 1px !important;
+              border-color: $positive;
+              margin: 5px 10px 0 10px;
+              padding: 0 0 0 10px;
+              .input-label {
+                  color: black;
               }
-              textarea{
-              margin-right: 48px;
+              textarea {
+                  margin-right: 48px;
               }
           }
       }

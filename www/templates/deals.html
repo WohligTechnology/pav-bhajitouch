@@ -1,129 +1,84 @@
 <ion-view view-title="Deals">
     <ion-content>
-        <ion-slide-box on-slide-changed="slideHasChanged($index)">
-            <ion-slide>
-                <div class="row">
-                    <div class="col"><img ng-src="img/products/5.png" class="full-image">
+        <div class="deals">
+            <ion-slide-box on-slide-changed="slideHasChanged($index)">
+                <ion-slide>
+                    <div class="deal-sliderimg"><img src="img/products/5.png" alt="" class="deal-img"></div>
+                </ion-slide>
+                <ion-slide>
+                    <div class="deal-sliderimg"><img src="img/products/8.jpg" alt="" class="deal-img"></div>
+                </ion-slide>
+                <ion-slide>
+                    <div class="deal-sliderimg"><img src="img/products/9.jpg" alt="" class="deal-img"></div>
+                </ion-slide>
+            </ion-slide-box>
+            <div class="row">
+                <div class="col">
+                    <div class="card no-margin deal">
+                       <div class="row">
+                           <div class="col">
+                               <h4>Buy this</h4>
+                           </div>
+                           <div class="col">
+                               <h4>Get this</h4>
+                           </div>
+                       </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="image-holder-product">
+                                    <img class="brand-image" src="img/products/5.png" alt="">
+                                </div>
+                                <div class="deal-details">
+                                    <h2>iPhone 6[S]</h2>
+                                    <!--                    <h3 class="item-note">{{item.company}}</h3></h2>-->
+                                    <div class="rating">
+                                        <ul>
+                                            <li><i class="icon star ion-ios-star-outline" s></i></li>
+                                            <li><i class="icon star ion-ios-star-outline" s></i></li>
+                                            <li><i class="icon star ion-ios-star-outline" s></i></li>
+                                            <li><i class="icon star ion-ios-star-outline" s></i></li>
+                                            <li><i class="icon star ion-ios-star-outline" s></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="image-holder-product">
+                                    <img class="brand-image" src="img/products/iphone2.jpg" alt="">
+                                </div>
+                                <div class="deal-details">
+                                    <h2>iPhone custom cover</h2>
+                                    <!--                    <h3 class="item-note">{{item.company}}</h3></h2>-->
+                                    <div class="rating">
+                                        <ul>
+                                            <li><i class="icon star ion-ios-star-outline" s></i></li>
+                                            <li><i class="icon star ion-ios-star-outline" s></i></li>
+                                            <li><i class="icon star ion-ios-star-outline" s></i></li>
+                                            <li><i class="icon star ion-ios-star-outline" s></i></li>
+                                            <li><i class="icon star ion-ios-star-outline" s></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row deal-actiontray">
+                            <div class="col col-50">
+                                <h3>Rs. 49,999</h3>
+                            </div>
+                            <div class="col heart col-25">
+                                <i class="icon ion-ios-heart"></i></button>
+                            </div>
+                            <div class="col cart col-25">
+                                <i class="icon ion-android-cart"></i>
+                            </div>
+                        </div>
 
                     </div>
-                    <div class="col"><img ng-src="img/products/8.jpg" class="full-image"></div>
                 </div>
-            </ion-slide>
-            <ion-slide>
-                <img ng-src="img/products/8.jpg" class="full-image">
-            </ion-slide>
-            <ion-slide>
-                <img ng-src="img/products/9.jpg" class="full-image">
-            </ion-slide>
-        </ion-slide-box>
-        <div class="row" >
-            <div class="col">
-                <div class="product">
-                    <div class="row">
-                        <div class="col"><div class="image-holder-product">
-                        <img class="brand-image" src="img/products/5.png" alt="">
-                    </div>
-                    <div class="product-details">
-                    <h2>iPhone 6[S]</h2>
-<!--                    <h3 class="item-note">{{item.company}}</h3></h2>-->
-                    <div class="rating">
-                        <ul>
-                            <li><i class="icon star ion-ios-star-outline"s></i></li>
-                            <li><i class="icon star ion-ios-star-outline"s></i></li>
-                            <li><i class="icon star ion-ios-star-outline"s></i></li>
-                            <li><i class="icon star ion-ios-star-outline"s></i></li>
-                            <li><i class="icon star ion-ios-star-outline"s></i></li>
-                        </ul>
-                    </div>
-                   </div></div>
-                        <div class="col"><div class="image-holder-product">
-                        <img class="brand-image" src="img/products/iphone2.jpg" alt="">
-                    </div>
-                    <div class="product-details">
-                    <h2>iPhone custom cover</h2>
-<!--                    <h3 class="item-note">{{item.company}}</h3></h2>-->
-                    <div class="rating">
-                        <ul>
-                            <li><i class="icon star ion-ios-star-outline"s></i></li>
-                            <li><i class="icon star ion-ios-star-outline"s></i></li>
-                            <li><i class="icon star ion-ios-star-outline"s></i></li>
-                            <li><i class="icon star ion-ios-star-outline"s></i></li>
-                            <li><i class="icon star ion-ios-star-outline"s></i></li>
-                        </ul>
-                    </div>
-                   </div></div>
-                    </div>
-                    
-                        <div class="row">
-                            <div class="col col-50">
-                                <h3>Rs. 49,999</h3>
-                            </div>
-                            <div class="col heart col-25">
-                                <i class="icon ion-ios-heart"></i></button>
-                            </div>
-                            <div class="col cart col-25">
-                            <i class="icon ion-android-cart"></i>
-                            </div>
-                        </div>
-                    
-                </div>
+
             </div>
-              
+
         </div>
-        <div class="row" >
-            <div class="col">
-                <div class="product">
-                    <div class="row">
-                        <div class="col"><div class="image-holder-product">
-                        <img class="brand-image" src="img/products/5.png" alt="">
-                    </div>
-                    <div class="product-details">
-                    <h2>iPhone 6[S]</h2>
-<!--                    <h3 class="item-note">{{item.company}}</h3></h2>-->
-                    <div class="rating">
-                        <ul>
-                            <li><i class="icon star ion-ios-star-outline"s></i></li>
-                            <li><i class="icon star ion-ios-star-outline"s></i></li>
-                            <li><i class="icon star ion-ios-star-outline"s></i></li>
-                            <li><i class="icon star ion-ios-star-outline"s></i></li>
-                            <li><i class="icon star ion-ios-star-outline"s></i></li>
-                        </ul>
-                    </div>
-                   </div></div>
-                        <div class="col"><div class="image-holder-product">
-                        <img class="brand-image" src="img/products/iphone2.jpg" alt="">
-                    </div>
-                    <div class="product-details">
-                    <h2>iPhone custom cover</h2>
-<!--                    <h3 class="item-note">{{item.company}}</h3></h2>-->
-                    <div class="rating">
-                        <ul>
-                            <li><i class="icon star ion-ios-star-outline"s></i></li>
-                            <li><i class="icon star ion-ios-star-outline"s></i></li>
-                            <li><i class="icon star ion-ios-star-outline"s></i></li>
-                            <li><i class="icon star ion-ios-star-outline"s></i></li>
-                            <li><i class="icon star ion-ios-star-outline"s></i></li>
-                        </ul>
-                    </div>
-                   </div></div>
-                    </div>
-                    
-                        <div class="row">
-                            <div class="col col-50">
-                                <h3>Rs. 49,999</h3>
-                            </div>
-                            <div class="col heart col-25">
-                                <i class="icon ion-ios-heart"></i></button>
-                            </div>
-                            <div class="col cart col-25">
-                            <i class="icon ion-android-cart"></i>
-                            </div>
-                        </div>
-                    
-                </div>
-            </div>
-              
-        </div>    
-        
     </ion-content>
 </ion-view>

@@ -111,11 +111,11 @@ angular.module('starter.controllers', [])
 
 .controller('PlaylistCtrl', function ($scope, $stateParams) {})
     .controller('DealsCtrl', function ($scope, $stateParams) {})
-    .controller('ExclusiveCtrl', function ($scope, $stateParams) {})
     .controller('NewArrivalsCtrl', function ($scope, $stateParams) {})
     .controller('MyAccountCtrl', function ($scope, $stateParams) {})
 
 .controller('ContactUsCtrl', function ($scope, $stateParams) {})
+    .controller('ProductCategoriesCtrl', function ($scope, $stateParams) {})
     .controller('CartCtrl', function ($scope, $stateParams, $location, $ionicHistory) {
         $scope.goHome = function () {
             console.log($ionicHistory.viewHistory());
@@ -356,26 +356,6 @@ angular.module('starter.controllers', [])
             "company": "Yahoo",
             "price": "Rs.6,344",
             "rating": 3
-        }, {
-            "name": "K1C 0G0",
-            "company": "Lycos",
-            "price": "Rs.5,658",
-            "rating": 3
-        }, {
-            "name": "P5U 4H2",
-            "company": "Yahoo",
-            "price": "Rs.8,219",
-            "rating": 4
-        }, {
-            "name": "K4A 1H3",
-            "company": "Adobe",
-            "price": "Rs.9,391",
-            "rating": 4
-        }, {
-            "name": "X4Y 6E9",
-            "company": "Sibelius",
-            "price": "Rs.7,831",
-            "rating": 3
         }];
         $scope.products = _.chunk($scope.products, 2);
     })
@@ -488,15 +468,15 @@ angular.module('starter.controllers', [])
         };
         $scope.clientele = [{
             image: 'img/clientele/BipashaBasu.JPG',
-            caption: 'Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada'
+            caption: 'Lorem ipsum dolor sit amet eni'
         }, {
             image: 'img/clientele/KarishmaKapoor.jpg',
-            caption: 'consectetur adipisicing elit. Adipisci necessitatibus alias'
+            caption: 'consectetur adipisicing elit.'
         }, {
             image: 'img/clientele/MSG.jpg',
-            caption: 'assumenda ipsam minus repellendus'
+            caption: 'assumenda ipsam minus '
         }, {
             image: 'img/clientele/NicolasAnelka.jpg',
-            caption: 'sequi aliquam pariatur unde nihil omnis sint!'
+            caption: 'sequi aliquam pariatur unde nihil '
         }];
     });
