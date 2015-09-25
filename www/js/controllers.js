@@ -113,6 +113,7 @@ angular.module('starter.controllers', [])
     .controller('DealsCtrl', function ($scope, $stateParams) {})
     .controller('NewArrivalsCtrl', function ($scope, $stateParams) {})
     .controller('MyAccountCtrl', function ($scope, $stateParams) {})
+    .controller('EditInfoCtrl', function ($scope, $stateParams) {})
 
 .controller('ContactUsCtrl', function ($scope, $stateParams) {})
     .controller('ProductCategoriesCtrl', function ($scope, $stateParams) {})

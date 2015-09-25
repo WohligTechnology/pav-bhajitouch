@@ -196,6 +196,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                 }
             }
         })
+    .state('app.editinfo', {
+            url: '/editinfo',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/editinfo.html',
+                    controller: 'EditInfoCtrl'
+                }
+            }
+        })
 
     .state('app.single', {
         url: '/playlists/:playlistId',

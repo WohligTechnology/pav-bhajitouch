@@ -277,19 +277,41 @@
           border: 0px !important;
           margin: 0px 5px !important;
           span {
+              font-size: 13px;
               padding-left: 7px;
           }
           .item-content {
               padding-top: 16px !important;
           }
       }
-      .product-item{
-      @extend .sidemenu-item;
-          span{
-          padding-left: 10px;
+      
+      .product-item {
+          @extend .sidemenu-item;
+          span {
+              padding-left: 10px;
               font-size: 13px;
           }
       }
+      
+      .myaccount {
+          .account-item {
+              position: relative;
+              margin: 0px 10px !important;
+              @extend .sidemenu-item;
+              span {
+                  padding-left: 10px;
+                  font-size: 13px;
+              }
+          }
+          .icon {
+              position: absolute;
+              right: 3px;
+              font-size: 13px !important;
+              top: 15px;
+              color: $positive;
+          }
+      }
+      
       .sidemenu-header {
           padding: 30px 25px 25px 25px !important;
           .col-75 {
@@ -980,7 +1002,7 @@
           }
       }
       
-      .myaccount {
+      .edit-information {
           .button {
               min-height: 30px;
               width: 100%;
@@ -988,11 +1010,11 @@
           .item {
               @extend .no-border;
               border-bottom-width: 1px !important;
-              border-color: $positive;
+              border-color: #ddd;
               margin: 5px 10px 0 10px;
               padding: 0 0 0 10px;
               .input-label {
-                  color: black;
+                  color: darken($positive,50%);
               }
               textarea {
                   margin-right: 48px;
