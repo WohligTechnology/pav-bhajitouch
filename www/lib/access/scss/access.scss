@@ -908,7 +908,23 @@
           }
       }
       
-      .account-item {
-      padding: 5px;
-          
+      .myaccount{
+          .button{
+              min-height: 30px;
+    border-radius: 4px;
+    width: 100%;
+          }
+          .item{
+           @extend .no-border;
+                  border-bottom-width: 1px !important;
+                  border-color: $positive;
+                  margin: 5px 10px 0 10px;
+                  padding: 0 0 0 10px;
+              .input-label{
+              color: black;
+              }
+              textarea{
+              margin-right: 48px;
+              }
+          }
       }
