@@ -182,7 +182,6 @@
           }
           .item-input-inset {
               padding: 10px;
-              
               .item-input-wrapper {
                   border-radius: 0px;
                   input {
@@ -409,7 +408,6 @@
               padding: 0px;
               color: darken($positive, 50%);
               padding-top: 3px;
-              
               text-align: left;
               font-size: 13px!important;
               font-weight: 500;
@@ -510,8 +508,23 @@
           }
       }
       
-      .cart-button {
-          position: relative !important;
+      .nav-bar-access {
+          .cart-button {
+              position: relative !important;
+              .icon:before {
+                  font-size: 24px !important;
+              }
+          }
+          .search-button {
+              .icon:before {
+                  font-size: 22px !important;
+              }
+          }
+          .menu-back-button{
+          .bar .button.button-icon:before, .bar .button .icon:before, .bar .button.icon:before, .bar .button.icon-left:before, .bar .button.icon-right:before{
+          font-size: 23px !important;
+          }
+          }
       }
       
       .about {
@@ -552,22 +565,23 @@
       }
       
       .custom-badge {
-          background-color: red;
+          background-color: white;
           color: white;
           z-index: 1;
           display: inline-block;
-          padding: 0px 6px;
+          padding: 0 6px;
           min-width: 10px;
           border-radius: 10px;
           vertical-align: baseline;
           text-align: center;
           white-space: nowrap;
           font-weight: bold;
-          font-size: 15px;
+          font-size: 10px;
           line-height: 16px;
           position: absolute;
           top: 0;
           right: 1px;
+          color: black;
       }
       
       .product-cart {
