@@ -80,6 +80,7 @@
           font-size: 10px !important;
           line-height: 14px !important;
           min-height: 24px !important;
+          text-transform: uppercase;
       }
       
       //********  scss star *********
@@ -181,7 +182,9 @@
           }
           .item-input-inset {
               padding: 10px;
+              
               .item-input-wrapper {
+                  border-radius: 0px;
                   input {
                       width: 100%;
                   }
@@ -189,6 +192,8 @@
               .btn-subscribe {
                   min-height: 20px;
                   line-height: 29px;
+                  text-transform: uppercase;
+                  font-size: 13px;
               }
           }
       }
@@ -246,7 +251,7 @@
       
       .sidemenu-item {
           margin-bottom: 1px !important;
-          margin: 0px 25px !important;
+          margin: 0px 0px !important;
           padding-left: 0px;
           .item-content {
               font-size: $font-size-list;
@@ -262,6 +267,7 @@
           span {
               font-size: 12px;
               vertical-align: super;
+              padding-left: 25px;
           }
       }
       
@@ -285,6 +291,7 @@
       
       .product-item {
           @extend .sidemenu-item;
+          margin: 0px 15px!important;
           border-bottom: 1px solid #f1f1f1 !important;
           span {
               padding-left: 10px;
@@ -401,8 +408,8 @@
               margin: 0px;
               padding: 0px;
               color: darken($positive, 50%);
-              padding-top: 1px;
-              padding-left: 5px;
+              padding-top: 3px;
+              
               text-align: left;
               font-size: 13px!important;
               font-weight: 500;
@@ -618,6 +625,7 @@
           width: 88%;
           margin: 20px !important;
           font-size: 13px !important;
+          text-transform: uppercase;
       }
       
       .discount-cart {
@@ -755,6 +763,7 @@
                   width: 88%;
                   margin: 20px 20px 15px 20px;
                   font-size: 13px !important;
+                  text-transform: uppercase;
               }
               .log {
                   margin: 0 20px;
@@ -828,6 +837,7 @@
           .btn-frgt {
               min-height: 33px;
               line-height: 35px;
+              text-transform: uppercase;
           }
       }
       
@@ -957,10 +967,11 @@
                       }
                   }
                   .btn-productdetail {
-                      width: 99%;
-                      margin: 2px;
+                      width: 97%;
+                      margin: 5px;
                       min-height: 40px;
                       font-size: 13px !important;
+                      text-transform: uppercase;
                   }
                   .description {
                       padding: 5px;
@@ -1019,6 +1030,7 @@
               width: 88%;
               margin: 20px;
               font-size: 13px !important;
+              text-transform: uppercase;
           }
       }
       

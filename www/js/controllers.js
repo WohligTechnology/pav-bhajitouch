@@ -47,7 +47,7 @@ angular.module('starter.controllers', [])
         }, 1000);
     };
     $scope.openSignup = function () {
-        $scope.closeLogin();
+//        $scope.closeLogin();
         $scope.signup();
     };
     //    -------------------END- LOGIN MODAL----------------------
@@ -90,7 +90,7 @@ angular.module('starter.controllers', [])
         }, 1000);
     };
     $scope.openFrgt = function () {
-        $scope.closeLogin();
+//        $scope.closeLogin();
         $scope.frgt();
     };
     //    --------------------END- FORGOT PASSWORD
