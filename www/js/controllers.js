@@ -108,8 +108,6 @@ angular.module('starter.controllers', [])
 
     }];
 })
-
-.controller('PlaylistCtrl', function ($scope, $stateParams) {})
     .controller('DealsCtrl', function ($scope, $stateParams) {})
     .controller('NewArrivalsCtrl', function ($scope, $stateParams) {})
     .controller('MyAccountCtrl', function ($scope, $stateParams) {})

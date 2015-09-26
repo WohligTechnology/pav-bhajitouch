@@ -245,10 +245,8 @@
       }
       
       .sidemenu-item {
-          
           margin-bottom: 1px !important;
           margin: 0px 25px !important;
-         
           padding-left: 0px;
           .item-content {
               font-size: $font-size-list;
@@ -299,7 +297,7 @@
               position: relative;
               margin: 0px 10px !important;
               @extend .sidemenu-item;
-               border-bottom: 1px solid #f1f1f1 !important;
+              border-bottom: 1px solid #f1f1f1 !important;
               span {
                   padding-left: 10px;
                   font-size: 13px;
@@ -408,6 +406,10 @@
               text-align: left;
               font-size: 13px!important;
               font-weight: 500;
+              text-align: center;
+          }
+          .price-separator {
+              border-bottom: 1px solid #ddd;
           }
           .row {
               padding: 0px;
@@ -430,6 +432,18 @@
           }
           .item {
               border: none !important;
+          }
+      }
+      
+      .subheader-search {
+          ::-webkit-input-placeholder {
+              color: #ddd;
+          }
+          .item-input-wrapper {
+              background-color: white;
+          }
+          .icon {
+              color: #ddd;
           }
       }
       
@@ -929,6 +943,7 @@
                           margin: 5px;
                           font-size: 16px;
                           font-weight: 500;
+                          color: darken($positive, 50%);
                       }
                   }
                   .tabs-detail {
@@ -952,6 +967,9 @@
                   }
                   .specification {
                       padding: 10px;
+                  }
+                  .icon {
+                      float: left;
                   }
               }
           }
@@ -1005,10 +1023,10 @@
       }
       
       .edit-information {
-          .editinfo-button{
-          width: 88% !important;
-                  margin: 20px 20px 15px 20px;
-                  font-size: 13px !important;
+          .editinfo-button {
+              width: 88% !important;
+              margin: 20px 20px 15px 20px;
+              font-size: 13px !important;
           }
           .item {
               @extend .no-border;
@@ -1017,25 +1035,22 @@
               margin: 5px 10px 0 10px;
               padding: 0 0 0 10px;
               .input-label {
-                  color: darken($positive,50%);
+                  color: darken($positive, 50%);
               }
               textarea {
                   margin-right: 48px;
               }
-              .enable{
-              disabled:false;
+              .enable {
+                  disabled: false;
               }
-              .disable{
-              disabled:false;
+              .disable {
+                  disabled: false;
               }
-              
           }
-          .save{
-          width: 100%;
-              background-color: rgba(173,255,47, .5);
+          .save {
+              width: 100%;
+              background-color: rgba(173, 255, 47, .5);
               padding: 10px 20px 10px 20px;
-              span{
-                  
-                  }
+              span {}
           }
       }
