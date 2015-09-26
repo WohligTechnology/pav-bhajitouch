@@ -113,7 +113,24 @@ angular.module('starter.controllers', [])
     .controller('DealsCtrl', function ($scope, $stateParams) {})
     .controller('NewArrivalsCtrl', function ($scope, $stateParams) {})
     .controller('MyAccountCtrl', function ($scope, $stateParams) {})
-    .controller('EditInfoCtrl', function ($scope, $stateParams) {})
+    .controller('EditInfoCtrl', function ($scope,$ionicScrollDelegate, $stateParams) {
+        $scope.edit_save = "Edit information";
+        $scope.disabled = true;
+        $scope.saved = false;
+        $scope.editSave = function () {
+            if ($scope.edit_save === "Edit information") {
+                $scope.edit_save = "Save";
+                $scope.disabled = false;
+                
+            } else {
+                $scope.edit_save = "Edit information";
+//                SAVE OPERATIONS
+                $scope.disabled=true;
+                $scope.saved = true;
+                $ionicScrollDelegate.scrollTop();
+            }
+        }
+    })
 
 .controller('ContactUsCtrl', function ($scope, $stateParams) {})
     .controller('ProductCategoriesCtrl', function ($scope, $stateParams) {})
@@ -124,17 +141,17 @@ angular.module('starter.controllers', [])
         };
     })
     .controller('CheckoutCtrl', function ($scope, $stateParams) {
-    $scope.different_address=false; 
-    $scope.address_select="Ship to different address";
-    $scope.toggleAddress=function(){
-    if($scope.different_address === false){
-    $scope.different_address = true;
-        $scope.address_select="Ship to same address";
-    }else{
-       $scope.different_address=false; 
-    $scope.address_select="Ship to different address";  
-    }
-    };
+        $scope.different_address = false;
+        $scope.address_select = "Ship to different address";
+        $scope.toggleAddress = function () {
+            if ($scope.different_address === false) {
+                $scope.different_address = true;
+                $scope.address_select = "Ship to same address";
+            } else {
+                $scope.different_address = false;
+                $scope.address_select = "Ship to different address";
+            }
+        };
     })
     .controller('MyOrdersCtrl', function ($scope, $stateParams, $location, $ionicHistory) {
 
@@ -197,10 +214,10 @@ angular.module('starter.controllers', [])
                                             }];
         $scope.brands = _.chunk($scope.brands, 3);
     })
-    .controller('ProductCtrl', function ($scope, $stateParams, $timeout,$rootScope) {
+    .controller('ProductCtrl', function ($scope, $stateParams, $timeout, $rootScope) {
         $scope.addwishlist = false;
-    $rootScope.transparent_header = false;
-    console.log( $rootScope.transparent_header);
+        $rootScope.transparent_header = false;
+        console.log($rootScope.transparent_header);
         $scope.params = $stateParams;
 
         $scope.addWishlist = function () {
@@ -367,16 +384,13 @@ angular.module('starter.controllers', [])
             left: true,
             right: false
         }
-        var i=0;
-        $scope.pageScrolled = function () {     
+        var i = 0;
+        $scope.pageScrolled = function () {
             console.log(++i);
-            if ($ionicScrollDelegate.getScrollPosition().top > 240)
-            {
+            if ($ionicScrollDelegate.getScrollPosition().top > 240) {
                 $rootScope.transparent_header = false;
                 $scope.$apply();
-            }
-            else
-            {
+            } else {
                 $rootScope.transparent_header = true;
                 $scope.$apply();
             }
