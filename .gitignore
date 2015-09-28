@@ -18,6 +18,7 @@ node_modules/
 platforms/
 plugins/
 .brackets.json
+*.zip
 
 www/css/ionic.app.css
 
