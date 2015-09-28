@@ -47,7 +47,7 @@ angular.module('starter.controllers', [])
         }, 1000);
     };
     $scope.openSignup = function () {
-//        $scope.closeLogin();
+        //        $scope.closeLogin();
         $scope.signup();
     };
     //    -------------------END- LOGIN MODAL----------------------
@@ -90,28 +90,28 @@ angular.module('starter.controllers', [])
         }, 1000);
     };
     $scope.openFrgt = function () {
-//        $scope.closeLogin();
+        //        $scope.closeLogin();
         $scope.frgt();
     };
     //    --------------------END- FORGOT PASSWORD
 })
 
 .controller('HomeCtrl', function ($scope) {
-    $scope.slides = [{
-        image: "img/slider/1.jpg",
+        $scope.slides = [{
+            image: "img/slider/1.jpg",
 
     }, {
-        image: "img/slider/2.jpg",
+            image: "img/slider/2.jpg",
 
     }, {
-        image: "img/slider/3.jpg",
+            image: "img/slider/3.jpg",
 
     }];
-})
+    })
     .controller('DealsCtrl', function ($scope, $stateParams) {})
     .controller('NewArrivalsCtrl', function ($scope, $stateParams) {})
     .controller('MyAccountCtrl', function ($scope, $stateParams) {})
-    .controller('EditInfoCtrl', function ($scope,$ionicScrollDelegate, $stateParams) {
+    .controller('EditInfoCtrl', function ($scope, $ionicScrollDelegate, $stateParams) {
         $scope.edit_save = "Edit information";
         $scope.disabled = true;
         $scope.saved = false;
@@ -119,11 +119,11 @@ angular.module('starter.controllers', [])
             if ($scope.edit_save === "Edit information") {
                 $scope.edit_save = "Save";
                 $scope.disabled = false;
-                
+
             } else {
                 $scope.edit_save = "Edit information";
-//                SAVE OPERATIONS
-                $scope.disabled=true;
+                //                SAVE OPERATIONS
+                $scope.disabled = true;
                 $scope.saved = true;
                 $ionicScrollDelegate.scrollTop();
             }
@@ -148,6 +148,15 @@ angular.module('starter.controllers', [])
             } else {
                 $scope.different_address = false;
                 $scope.address_select = "Ship to different address";
+            }
+        };
+        $scope.openbilling = false;
+        
+        $scope.continue = function (ch) {
+            if (ch === 'login') {
+                $scope.login();
+            } else {
+                $scope.openbilling = true;
             }
         };
     })
