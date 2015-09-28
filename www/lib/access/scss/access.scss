@@ -191,6 +191,7 @@ $font-size-list:13px;
         .btn-subscribe {
             min-height: 20px;
             line-height: 29px;
+            margin-left: 5px !important;
             text-transform: uppercase;
             font-size: 13px;
         }
@@ -278,10 +279,13 @@ $font-size-list:13px;
 .sidemenu-mainitem {
     @extend .sidemenu-item;
     border: 0px !important;
-    margin: 0px 5px !important;
+    margin: 0px 0px !important;
     span {
         font-size: 13px;
-        padding-left: 7px;
+        padding-left: 10px;
+    }
+    .icon {
+        padding-left: 20px;
     }
     .item-content {
         padding-top: 16px !important;
@@ -360,7 +364,7 @@ $font-size-list:13px;
     position: absolute;
     top: 50%;
     left: 50%;
-    -webkit-transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     width: auto;
 }
@@ -519,7 +523,7 @@ $font-size-list:13px;
     .search-button {
         padding-left: 8px !important;
         .icon:before {
-            font-size: 22px !important;
+            font-size: 21px !important;
         }
     }
     .menu-back-button {
@@ -649,6 +653,9 @@ $font-size-list:13px;
 }
 
 .discount-cart {
+    ::-webkit-input-placeholder {
+        color: grey;
+    }
     .item-input-inset {
         padding: 10px;
         .item-input-wrapper {
@@ -788,6 +795,7 @@ $font-size-list:13px;
         .log {
             margin: 0 20px;
             line-height: 0;
+            min-height: 5px;
             .frgt-password {
                 text-decoration: none;
                 color: $positive;
@@ -803,7 +811,7 @@ $font-size-list:13px;
     h2 {
         clear: both;
         font-size: 13px;
-        margin: 10px 0px 20px 0px;
+        margin: 10px 0px 25px 0px;
         text-align: center;
     }
     .signup-link {
@@ -1009,6 +1017,7 @@ $font-size-list:13px;
 .checkout {
     .easycheckout {
         .chkbx-head {
+            padding-top: 5px;
             h2 {
                 font-size: 14px;
                 font-weight: 600;

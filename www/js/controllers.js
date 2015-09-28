@@ -154,6 +154,7 @@ angular.module('starter.controllers', [])
         
         $scope.continue = function (ch) {
             if (ch === 'login') {
+                $scope.openbilling = false;
                 $scope.login();
             } else {
                 $scope.openbilling = true;
