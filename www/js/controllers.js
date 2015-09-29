@@ -1,4 +1,4 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['ui.bootstrap'])
 
 .controller('AppCtrl', function ($scope, $ionicModal, $timeout, $location, $ionicPopup, $rootScope) {
     $rootScope.transparent_header = false;
