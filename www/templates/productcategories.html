@@ -1,6 +1,7 @@
 <ion-view view-title="Product categories">
-  <ion-content>
-    <div class="product-ctgry">
+    <ion-content>
+        <div class="product-ctgry">
+            <!--
       <div class="item-divider">Cover & Cases</div>
       <ion-list>
         <ion-item class="product-item no-border" href="#/app/product"><span>iPhone Covers</span>
@@ -63,13 +64,18 @@
         <ion-item class="product-item no-border" href=""><span>Beats</span>
         </ion-item>
       </ion-list>
-    </div>
+    
+-->
 
-    <accordion close-others="oneAtATime">
-      <accordion-group heading="Covers and Cases" class="accordion-header">
-        <ion-item class="no-border">iPhone cover</ion-item>
-      </accordion-group>
-    </accordion>
+            <accordion close-others="oneAtATime">
+                <accordion-group heading="{{menu.title}}" ng-repeat="menu in category" class="accordion-header">
+                    <ion-list>
+                        <ion-item class="product-item no-border" ng-repeat="submenu in menu.submenu" href="#/app/product"><span>{{submenu}}</span>
+                        </ion-item>
+                    </ion-list>
+                </accordion-group>
 
-  </ion-content>
+            </accordion>
+        </div>
+    </ion-content>
 </ion-view>

@@ -374,32 +374,54 @@ $font-size-list:13px;
 }
 
 .product-ctgry {
-    .item-divider {
-        color: #7EE1EA;
-        background-color: white;
-        border-bottom: 1px solid $positive;
-        padding-left: 15px;
+//    .item-divider {
+//        color: #7EE1EA;
+//        background-color: white;
+//        border-bottom: 1px solid $positive;
+//        padding-left: 15px;
+//    }
+    .panel-group .panel + .panel {
+    margin-top: 0px;
+}
+    .accordion-header {
+        .panel-title {
+            background-color: white;
+            border-bottom: 1px solid #7EE1EA;
+            text-decoration: none;
+            padding: 8px 0px 8px 15px;
+            color: $positive;
+        }
+        a:-webkit-any-link {
+            text-decoration: none;
+        }
     }
 }
-
 .product {
     //          border: 1px solid #ddd;
-    padding: 5px !important;
+    border-top: 1px solid #ddd;
+
+    border-bottom: 1px solid #ddd;
+
     text-decoration: none;
+    
+    .row + .row{
+    border-top: 1px solid #ddd;
+    }
+    .col +.col{
+    border-left: 1px solid #ddd;
+    }
     .image-holder-product {
         @extend .image-holder;
-        height: 100px;
-        margin: 0px;
+        height: 90px;
+        margin: 15px 0px 20px 0px;
     }
     .product-details {
-        margin-top: 10px;
-        padding-left: 5px;
+        margin: 0px 15px;
         h2 {
             font-size: 14px !important;
             margin: 0px;
-            font-weight: 500;
-            min-height: 25px;
-            //              padding: 0px 0px 0px 5px;
+            font-weight: 600;
+            min-height: 20px;
         }
         .star {
             .icon {
@@ -407,17 +429,14 @@ $font-size-list:13px;
                 font-size: 14px;
             }
         }
+        h3{
+            margin-top: 5px;
+            margin-bottom: 15px;
+            font-size: 13px;
+            color: #23c9d8;
+        }
     }
-    h3 {
-        margin: 0px;
-        padding: 0px;
-        color: darken($positive, 50%);
-        padding-top: 3px;
-        text-align: left;
-        font-size: 13px!important;
-        font-weight: 500;
-        text-align: center;
-    }
+    
     .price-separator {
         border-bottom: 1px solid #ddd;
     }
@@ -462,6 +481,13 @@ $font-size-list:13px;
     .newarrivals-details {
         @extend .product-details;
         padding-left: 10px;
+        margin-right: 5px;
+    }
+    .image-holder-product{
+        margin:0px 5px 5px 10px !important;
+    }
+    .row{
+    margin-top: 5px;
     }
 }
 
@@ -1061,7 +1087,7 @@ $font-size-list:13px;
             }
             .item-select {
                 margin: 10px 20px 0px 20px;
-    min-height: 55px;
+                min-height: 55px;
                 .input-label {
                     padding: 5px 0px 0px 0px;
                     color: #959595;

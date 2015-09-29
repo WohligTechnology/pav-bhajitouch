@@ -264,38 +264,43 @@ $dark:                            #444 !default;
 .margin-brands {
   margin-top: 10px; }
 
-.product-ctgry .item-divider {
-  color: #7EE1EA;
+.product-ctgry .panel-group .panel + .panel {
+  margin-top: 0px; }
+.product-ctgry .accordion-header .panel-title {
   background-color: white;
-  border-bottom: 1px solid #7ee1ea;
-  padding-left: 15px; }
+  border-bottom: 1px solid #7EE1EA;
+  text-decoration: none;
+  padding: 8px 0px 8px 15px;
+  color: #7ee1ea; }
+.product-ctgry .accordion-header a:-webkit-any-link {
+  text-decoration: none; }
 
 .product, .newarrivals, .deals .deal {
-  padding: 5px !important;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
   text-decoration: none; }
+  .product .row + .row, .newarrivals .row + .row, .deals .deal .row + .row {
+    border-top: 1px solid #ddd; }
+  .product .col + .col, .newarrivals .col + .col, .deals .deal .col + .col {
+    border-left: 1px solid #ddd; }
   .product .image-holder-product, .newarrivals .image-holder-product, .deals .deal .image-holder-product {
-    height: 100px;
-    margin: 0px; }
+    height: 90px;
+    margin: 15px 0px 20px 0px; }
   .product .product-details, .newarrivals .product-details, .deals .deal .product-details, .newarrivals .newarrivals-details, .deals .deal .deal-details {
-    margin-top: 10px;
-    padding-left: 5px; }
+    margin: 0px 15px; }
     .product .product-details h2, .newarrivals .product-details h2, .deals .deal .product-details h2, .newarrivals .newarrivals-details h2, .deals .deal .deal-details h2 {
       font-size: 14px !important;
       margin: 0px;
-      font-weight: 500;
-      min-height: 25px; }
+      font-weight: 600;
+      min-height: 20px; }
     .product .product-details .star .icon, .newarrivals .product-details .star .icon, .deals .deal .product-details .star .icon, .newarrivals .newarrivals-details .star .icon, .deals .deal .deal-details .star .icon {
       color: grey;
       font-size: 14px; }
-  .product h3, .newarrivals h3, .deals .deal h3 {
-    margin: 0px;
-    padding: 0px;
-    color: #0f545a;
-    padding-top: 3px;
-    text-align: left;
-    font-size: 13px !important;
-    font-weight: 500;
-    text-align: center; }
+    .product .product-details h3, .newarrivals .product-details h3, .deals .deal .product-details h3, .newarrivals .newarrivals-details h3, .deals .deal .deal-details h3 {
+      margin-top: 5px;
+      margin-bottom: 15px;
+      font-size: 13px;
+      color: #23c9d8; }
   .product .price-separator, .newarrivals .price-separator, .deals .deal .price-separator {
     border-bottom: 1px solid #ddd; }
   .product .row, .newarrivals .row, .deals .deal .row {
@@ -319,7 +324,12 @@ $dark:                            #444 !default;
   color: #ddd; }
 
 .newarrivals .newarrivals-details {
-  padding-left: 10px; }
+  padding-left: 10px;
+  margin-right: 5px; }
+.newarrivals .image-holder-product {
+  margin: 0px 5px 5px 10px !important; }
+.newarrivals .row {
+  margin-top: 5px; }
 
 .deals .slider-pager {
   height: 5px !important; }

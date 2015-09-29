@@ -131,7 +131,64 @@ angular.module('starter.controllers', ['ui.bootstrap'])
     })
 
 .controller('ContactUsCtrl', function ($scope, $stateParams) {})
-    .controller('ProductCategoriesCtrl', function ($scope, $stateParams) {})
+    .controller('ProductCategoriesCtrl', function ($scope, $stateParams) {
+        $scope.category = [{
+                title: "Cover & Cases",
+                submenu: [
+
+                    "Iphone Covers",
+                    "Samsung Covers",
+                    "Sony Covers",
+                    "Yureka Covers",
+                    "Micromax Covers"
+                                        ]
+                                },
+            {
+                title: "Mobiles",
+                submenu: [
+
+                    "iPhone",
+                    "Samsung",
+                    "Sony",
+                    "Yureka",
+                    "Micromax"
+                                        ]
+                                }, {
+                title: "Headphones",
+                submenu: [
+
+                    "Beats",
+                    "Sony",
+                    "JBL"
+                                        ]
+                                },{
+                title: "Accessories",
+                submenu: [
+
+                    "Tech Accesories",
+                    "Bags",
+                    "Belt"
+                                        ]
+                    },{
+                title: "Watches",
+                submenu: [
+
+                    "Analog",
+                    "Chronograph",
+                    "Digital",
+                    "Watch Cases"
+                                        ]
+                    },{
+                title: "Laptops",
+                submenu: [
+
+                    "Lenevo",
+                    "Dell",
+                    "Samsung",
+                    "Asus" ,"Apple"
+                                        ]
+                    }];
+    })
     .controller('CartCtrl', function ($scope, $stateParams, $location, $ionicHistory) {
         $scope.goHome = function () {
             console.log($ionicHistory.viewHistory());
@@ -151,7 +208,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             }
         };
         $scope.openbilling = false;
-        
+
         $scope.continue = function (ch) {
             if (ch === 'login') {
                 $scope.openbilling = false;
