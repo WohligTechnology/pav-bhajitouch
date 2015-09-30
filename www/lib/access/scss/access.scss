@@ -384,16 +384,21 @@ $font-size-list:13px;
         margin-top: 0px;
     }
     .accordion-header {
-        .panel-title {
-            background-color: white;
+        .panel-heading {
             border-bottom: 1px solid #7EE1EA;
-            text-decoration: none;
-            padding: 8px 0px 8px 15px;
-            color: $positive;
+            .panel-title {
+                background-color: white;
+                text-decoration: none;
+                padding: 8px 0px 8px 15px;
+                color: $positive;
+            }
         }
         a:-webkit-any-link {
             text-decoration: none;
         }
+    }
+    .panel-body {
+        border-top-color: white !important;
     }
 }
 
@@ -489,11 +494,11 @@ $font-size-list:13px;
 }
 
 .deals {
-    .row{
-    padding: 0px;
+    .row {
+        padding: 0px;
     }
-    .col{
-    padding: 0px;
+    .col {
+        padding: 0px;
     }
     .slider-pager {
         height: 5px !important;
@@ -518,6 +523,7 @@ $font-size-list:13px;
             top: 50px;
             left: 50%;
             font-size: 22px !important;
+            color: #ddd;
         }
         h4 {
             font-size: 12px;
@@ -529,13 +535,33 @@ $font-size-list:13px;
         @extend .product;
         .deal-details {
             @extend .product-details;
-            h2{
-            min-height: 28px;
+            h2 {
+                min-height: 28px;
                 text-align: center;
             }
         }
-        h3{
-        margin: 0px;
+        h3 {
+            margin: 0px;
+        }
+        .deal-buy {
+            h3 {
+                margin: 12px 0px;
+                text-align: center;
+                color: #23c9d8;
+                font-size: 14px;
+            }
+            .col {
+                text-align: center;
+                .button {
+                    font-size: 13px;
+                    text-transform: uppercase;
+                    min-height: 30px;
+                    line-height: 31px;
+                    /* padding: 8px; */
+                    margin: 5px auto;
+                    margin-left: 40px;
+                }
+            }
         }
         .deal-actiontray {
             margin-top: 3px;
@@ -643,54 +669,73 @@ $font-size-list:13px;
     color: black;
 }
 
-.product-cart {
-    padding: 5px;
-    width: 100%;
-    .image-holder-cart {
-        height: 100px;
-        width: auto;
-        position: relative;
-        margin-bottom: 6px;
-        .cart-image {
-            @extend .brand-image;
+.cart {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    .row+.row {
+        border-top: 1px solid #ddd;
+    }
+    .row {
+        padding: 0px;
+    }
+    
+    .product-cart {
+        //    padding: 5px;
+        width: 100%;
+        .image-holder-cart {
+            height: 90px;
+            width: auto;
+            position: relative;
+            margin-bottom: 5px;
+            .cart-image {
+                @extend .brand-image;
+            }
         }
-    }
-    .col {
-        padding-left: 10px;
-    }
-    h4 {
-        font-size: 13px;
-        margin: 0;
-        min-height: 20px;
-    }
-    h5 {
-        font-size: 11px;
-        color: #999;
-        margin: 0px;
-    }
-    .product-quantity-cart {
-        display: inline-flex;
-        .button-icon .icon:before,
-        .button-icon.icon:before {
-            font-size: 20px;
+        .button {
+            min-height: 20px;
         }
-        input[type="text"] {
-            width: 20px;
-            text-align: center;
+        .button-clear {
+            max-height: 20px;
         }
-    }
-    .col-10 {
-        .button-icon .icon:before,
-        .button-icon.icon:before {
-            font-size: 25px;
+        .col-40{
+        margin: 0px 10px;
         }
-        .icon {
-            position: absolute;
+        h4 {
+            font-size: 13px;
+            margin: 0;
+            min-height: 20px;
         }
-    }
-    h3 {
-        margin: 0px;
-        font-size: 13px;
+        h5 {
+            font-size: 11px;
+            color: #999;
+            margin: 0px;
+        }
+        h3 {
+            margin: 0px;
+            color: #7EE1EA;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        .product-quantity-cart {
+            display: inline-flex;
+            .button-icon .icon:before,
+            .button-icon.icon:before {
+                font-size: 20px;
+            }
+            input[type="text"] {
+                width: 20px;
+                text-align: center;
+            }
+        }
+        .col-10 {
+            .button-icon .icon:before,
+            .button-icon.icon:before {
+                font-size: 25px;
+            }
+            .icon {
+                position: absolute;
+            }
+        }
     }
 }
 

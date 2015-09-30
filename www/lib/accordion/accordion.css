@@ -203,12 +203,12 @@
     border-bottom: 1px solid #dddddd;
 }
 .panel-default {
-    border-color: #eee;
+/*    border-color: #eee;*/
 }
 .panel-default > .panel-heading {
     color: #333333;
     background-color: #EEE;
-    border-color: #eee;
+/*    border-color: #eee;*/
 }
 .panel-default > .panel-heading + .panel-collapse > .panel-body {
     border-top-color: #dddddd;
