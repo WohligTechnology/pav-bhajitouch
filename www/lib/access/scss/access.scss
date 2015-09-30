@@ -235,18 +235,22 @@ $font-size-list:13px;
 
 .brdr-red {
     border: 1px solid red;
+    color: red;
 }
 
 .brdr-blue {
     border: 1px solid blue;
+    color: blue;
 }
 
 .brdr-green {
     border: 1px solid green;
+    color: green;
 }
 
 .brdr-grey {
     border: 1px solid grey;
+    color: grey;
 }
 
 .sidemenu-item {
@@ -672,13 +676,22 @@ $font-size-list:13px;
 .cart {
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
-    .row+.row {
+    .row-container+.row-container {
         border-top: 1px solid #ddd;
     }
     .row {
         padding: 0px;
     }
-    
+    .row-container {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -moz-box;
+        display: -moz-flex;
+        display: -ms-flexbox;
+        display: flex;
+        padding: 5px;
+        width: 100%;
+    }
     .product-cart {
         //    padding: 5px;
         width: 100%;
@@ -697,8 +710,8 @@ $font-size-list:13px;
         .button-clear {
             max-height: 20px;
         }
-        .col-40{
-        margin: 0px 10px;
+        .col-40 {
+            margin: 0px 10px;
         }
         h4 {
             font-size: 13px;
@@ -796,12 +809,66 @@ $font-size-list:13px;
     position: relative;
     padding: 5px !important;
     border: 0px;
-    @extend .product-cart;
+    padding: 5px;
+    width: 100%;
+    .row-container+.row-container {
+        border-top: 1px solid #ddd !important;
+    }
+    .row-container {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -moz-box;
+        display: -moz-flex;
+        display: -ms-flexbox;
+        display: flex;
+        padding: 5px;
+        width: 100%;
+    }
     .image-holder-order {
-        @extend .image-holder-cart;
+        height: 100px;
+        width: auto;
+        position: relative;
+        margin-bottom: 6px;
         .order-image {
-            @extend .cart-image;
+            @extend .brand-image;
         }
+    }
+    .col {
+        padding-left: 10px;
+    }
+    h4 {
+        font-size: 13px;
+        margin: 0;
+        min-height: 20px;
+    }
+    h5 {
+        font-size: 11px;
+        color: #999;
+        margin: 0px;
+    }
+    .product-quantity-cart {
+        display: inline-flex;
+        .button-icon .icon:before,
+        .button-icon.icon:before {
+            font-size: 20px;
+        }
+        input[type="text"] {
+            width: 20px;
+            text-align: center;
+        }
+    }
+    .col-10 {
+        .button-icon .icon:before,
+        .button-icon.icon:before {
+            font-size: 25px;
+        }
+        .icon {
+            position: absolute;
+        }
+    }
+    h3 {
+        margin: 0px;
+        font-size: 13px;
     }
     .id-order {
         h2 {
