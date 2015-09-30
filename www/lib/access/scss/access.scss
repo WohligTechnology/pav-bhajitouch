@@ -1181,7 +1181,9 @@ $font-size-list:13px;
     .row{
         padding:0px;
     }
-    
+    .checkout-button+.checkout-button{
+    margin-top: 0px !important;
+    }
     .easycheckout {
         .chkbx-head {
             padding-top: 5px;
@@ -1244,7 +1246,6 @@ $font-size-list:13px;
     }
     .order-review {
         width: 100%;
-        border-top: 1px solid #ddd !important;
         .item .item-note {
             color: black !important;
         }

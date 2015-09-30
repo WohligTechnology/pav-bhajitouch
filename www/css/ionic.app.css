@@ -783,6 +783,8 @@ $dark:                            #444 !default;
     border-top: 1px solid #ddd; }
   .checkout .row {
     padding: 0px; }
+  .checkout .checkout-button + .checkout-button {
+    margin-top: 0px !important; }
   .checkout .easycheckout .chkbx-head {
     padding-top: 5px; }
     .checkout .easycheckout .chkbx-head h2 {
@@ -820,8 +822,7 @@ $dark:                            #444 !default;
       font-size: 13px;
       margin-bottom: 5px; }
   .checkout .order-review {
-    width: 100%;
-    border-top: 1px solid #ddd !important; }
+    width: 100%; }
     .checkout .order-review .item .item-note {
       color: black !important; }
     .checkout .order-review h2 {

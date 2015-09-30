@@ -132,6 +132,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
 
 .controller('ContactUsCtrl', function ($scope, $stateParams) {})
     .controller('ProductCategoriesCtrl', function ($scope, $stateParams) {
+      $scope.oneAtATime = true;
         $scope.category = [{
                 title: "Cover & Cases",
                 submenu: [
@@ -553,10 +554,10 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             image: 'img/clientele/KarishmaKapoor.jpg',
             caption: 'consectetur adipisicing elit.'
         }, {
-            image: 'img/clientele/MSG.jpg',
+            image: 'img/clientele/PoojaBhatt.jpeg',
             caption: 'assumenda ipsam minus '
         }, {
-            image: 'img/clientele/NicolasAnelka.jpg',
+            image: 'img/clientele/YusufPathan.JPG',
             caption: 'sequi aliquam pariatur unde nihil '
         }];
     });
