@@ -4,7 +4,8 @@
             <accordion close-others="oneAtATime">
                 <accordion-group heading="{{menu.title}}" ng-repeat="menu in category" class="accordion-header">
                     <ion-list>
-                        <ion-item class="product-item no-border" ng-repeat="submenu in menu.submenu" href="#/app/product"><span>{{submenu}}</span>
+                        <ion-item class="product-item no-border" ng-repeat="submenu in menu.submenu" href="#/app/product">
+                        <span>{{submenu}}</span>
                         </ion-item>
                     </ion-list>
                 </accordion-group>

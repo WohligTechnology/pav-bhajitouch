@@ -210,10 +210,10 @@ $dark:                            #444 !default;
     padding-top: 16px !important; }
 
 .product-item {
-  margin: 0px 15px !important;
+  margin: 0px !important;
   border-bottom: 1px solid #f1f1f1 !important; }
   .product-item .item-content {
-    padding: 6px 0px !important; }
+    padding: 8px 8px !important; }
   .product-item span {
     padding-left: 10px;
     font-size: 13px;
@@ -221,10 +221,10 @@ $dark:                            #444 !default;
 
 .myaccount .account-item {
   position: relative;
-  margin: 0px 10px !important;
+  margin: 0px !important;
   border-bottom: 1px solid #f1f1f1 !important; }
   .myaccount .account-item span {
-    padding-left: 10px;
+    padding-left: 15px;
     font-size: 13px; }
 .myaccount .icon {
   position: absolute;
@@ -334,12 +334,12 @@ $dark:                            #444 !default;
   color: #ddd; }
 
 .newarrivals .newarrivals-details {
-  padding-left: 10px;
-  margin-right: 5px; }
+  padding-left: 0px;
+  margin-left: 5px; }
 .newarrivals .image-holder-product {
-  margin: 0px 5px 5px 10px !important; }
+  margin: 0px !important; }
 .newarrivals .row {
-  margin-top: 5px; }
+  margin: 5px; }
 
 .deals .row {
   padding: 0px; }
@@ -414,14 +414,16 @@ $dark:                            #444 !default;
   font-size: 23px !important; }
 
 .about {
-  padding: 10px; }
+  padding: 10px 20px; }
   .about p {
     font-size: 14px;
-    line-height: 140%; }
+    line-height: 140%;
+    text-align: justify; }
   .about h4 {
     font-size: 15px;
     margin-bottom: 4px;
-    text-align: center; }
+    text-align: center;
+    font-weight: 600; }
 
 .clientele {
   border-top: 1px solid #ddd;
@@ -486,7 +488,7 @@ $dark:                            #444 !default;
     .cart .product-cart .button, .mywishlist .product-cart .button, .mywishlist .wishlist .button {
       min-height: 20px; }
     .cart .product-cart .button-clear, .mywishlist .product-cart .button-clear, .mywishlist .wishlist .button-clear {
-      max-height: 20px; }
+      padding: 0px; }
     .cart .product-cart .col-40, .mywishlist .product-cart .col-40, .mywishlist .wishlist .col-40 {
       margin: 0px 10px; }
     .cart .product-cart h4, .mywishlist .product-cart h4, .mywishlist .wishlist h4 {
@@ -507,8 +509,13 @@ $dark:                            #444 !default;
       .cart .product-cart .product-quantity-cart .button-icon .icon:before, .mywishlist .product-cart .product-quantity-cart .button-icon .icon:before, .mywishlist .wishlist .product-quantity-cart .button-icon .icon:before, .cart .product-cart .product-quantity-cart .button-icon.icon:before, .mywishlist .product-cart .product-quantity-cart .button-icon.icon:before, .mywishlist .wishlist .product-quantity-cart .button-icon.icon:before {
         font-size: 20px; }
       .cart .product-cart .product-quantity-cart input[type="text"], .mywishlist .product-cart .product-quantity-cart input[type="text"], .mywishlist .wishlist .product-quantity-cart input[type="text"] {
-        width: 20px;
-        text-align: center; }
+        width: 30px;
+        text-align: center;
+        height: 40px;
+        line-height: 20px; }
+    .cart .product-cart .button, .mywishlist .product-cart .button, .mywishlist .wishlist .button {
+      line-height: 14px !important;
+      min-height: 16px !important; }
     .cart .product-cart .col-10 .button-icon .icon:before, .mywishlist .product-cart .col-10 .button-icon .icon:before, .mywishlist .wishlist .col-10 .button-icon .icon:before, .cart .product-cart .col-10 .button-icon.icon:before, .mywishlist .product-cart .col-10 .button-icon.icon:before, .mywishlist .wishlist .col-10 .button-icon.icon:before {
       font-size: 25px; }
     .cart .product-cart .col-10 .icon, .mywishlist .product-cart .col-10 .icon, .mywishlist .wishlist .col-10 .icon {
@@ -670,7 +677,7 @@ $dark:                            #444 !default;
   margin: 20px 20px 10px 20px !important; }
 .forgot-password input[type="email"] {
   padding-right: 5px; }
-.forgot-password .col-75 label {
+.forgot-password .col label {
   padding-left: 10px;
   padding-right: 10px; }
 .forgot-password .item {
@@ -679,8 +686,9 @@ $dark:                            #444 !default;
   margin: 0px 20px;
   padding: 0px 0 0px 16px; }
 .forgot-password .btn-frgt {
-  min-height: 33px;
-  line-height: 35px;
+  width: 88%;
+  margin: 10px 20px 15px 20px;
+  font-size: 13px !important;
   text-transform: uppercase; }
 
 .contactus {
@@ -785,6 +793,8 @@ $dark:                            #444 !default;
     padding: 0px; }
   .checkout .checkout-button + .checkout-button {
     margin-top: 0px !important; }
+  .checkout textarea {
+    resize: none; }
   .checkout .easycheckout .chkbx-head {
     padding-top: 5px; }
     .checkout .easycheckout .chkbx-head h2 {
@@ -846,7 +856,7 @@ $dark:                            #444 !default;
   margin: 5px 10px 0 10px;
   padding: 0 0 0 10px; }
   .edit-information .item .input-label {
-    color: #0f545a; }
+    color: black; }
   .edit-information .item textarea {
     margin-right: 48px; }
   .edit-information .item .enable {

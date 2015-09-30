@@ -298,9 +298,9 @@ $font-size-list:13px;
 
 .product-item {
     @extend .sidemenu-item;
-    margin: 0px 15px!important;
-    .item-content{
-    padding: 6px 0px!important;
+    margin: 0px!important;
+    .item-content {
+        padding: 8px 8px!important;
     }
     border-bottom: 1px solid #f1f1f1 !important;
     span {
@@ -313,11 +313,11 @@ $font-size-list:13px;
 .myaccount {
     .account-item {
         position: relative;
-        margin: 0px 10px !important;
+        margin: 0px !important;
         @extend .sidemenu-item;
         border-bottom: 1px solid #f1f1f1 !important;
         span {
-            padding-left: 10px;
+            padding-left: 15px;
             font-size: 13px;
         }
     }
@@ -490,14 +490,14 @@ $font-size-list:13px;
     @extend .product;
     .newarrivals-details {
         @extend .product-details;
-        padding-left: 10px;
-        margin-right: 5px;
+        padding-left: 0px;
+        margin-left: 5px;
     }
     .image-holder-product {
-        margin: 0px 5px 5px 10px !important;
+        margin: 0px !important;
     }
     .row {
-        margin-top: 5px;
+        margin: 5px;
     }
 }
 
@@ -619,23 +619,25 @@ $font-size-list:13px;
 }
 
 .about {
-    padding: 10px;
+    padding: 10px 20px;
     p {
         font-size: 14px;
         line-height: 140%;
+        text-align: justify;
     }
     h4 {
         font-size: 15px;
         margin-bottom: 4px;
         text-align: center;
+        font-weight: 600;
     }
 }
 
 .clientele {
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
-    .row+.row{
-    border-top: 1px solid #ddd;
+    .row+.row {
+        border-top: 1px solid #ddd;
     }
     .clnt {
         width: 100%;
@@ -714,7 +716,8 @@ $font-size-list:13px;
             min-height: 20px;
         }
         .button-clear {
-            max-height: 20px;
+//            max-height: 20px;
+            padding: 0px;
         }
         .col-40 {
             margin: 0px 10px;
@@ -742,9 +745,17 @@ $font-size-list:13px;
                 font-size: 20px;
             }
             input[type="text"] {
-                width: 20px;
+                width: 30px;
                 text-align: center;
+                height: 40px;
+                line-height: 20px;
+                
             }
+            
+        }
+        .button{
+        line-height: 14px !important;
+    min-height: 16px !important;
         }
         .col-10 {
             .button-icon .icon:before,
@@ -814,7 +825,6 @@ $font-size-list:13px;
 .myorders {
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
-    
     .row-container +.row-container {
         border-top: 1px solid #ddd;
     }
@@ -834,7 +844,6 @@ $font-size-list:13px;
         border: 0px;
         padding: 5px;
         width: 100%;
-        
         .image-holder-order {
             height: 100px;
             width: auto;
@@ -897,21 +906,21 @@ $font-size-list:13px;
     }
 }
 
-.mywishlist{
+.mywishlist {
     @extend .cart;
-.wishlist {
-    @extend .product-cart;
-    .image-holder-wishlist {
-        @extend .image-holder-cart;
-        .wishlist-image {
-            @extend .cart-image;
+    .wishlist {
+        @extend .product-cart;
+        .image-holder-wishlist {
+            @extend .image-holder-cart;
+            .wishlist-image {
+                @extend .cart-image;
+            }
+        }
+        h5 {
+            font-size: 13px;
+            color: #23c9d8;
         }
     }
-    h5 {
-        font-size: 13px;
-        color: #23c9d8;
-    }
-}
 }
 
 .login {
@@ -1001,7 +1010,7 @@ $font-size-list:13px;
     input[type="email"] {
         padding-right: 5px;
     }
-    .col-75 {
+    .col {
         label {
             padding-left: 10px;
             padding-right: 10px;
@@ -1015,20 +1024,21 @@ $font-size-list:13px;
         padding: 0px 0 0px 16px;
     }
     .btn-frgt {
-        min-height: 33px;
-        line-height: 35px;
+        width: 88%;
+        margin: 10px 20px 15px 20px;
+        font-size: 13px !important;
         text-transform: uppercase;
     }
 }
 
 .contactus {
-        border-top: 1px solid #ddd;
-        border-bottom: 1px solid #ddd;
-    .row{
-    padding: 0px;
-    }
-    .row+.row{
     border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    .row {
+        padding: 0px;
+    }
+    .row+.row {
+        border-top: 1px solid #ddd;
     }
     .contactus-addr {
         h2 {
@@ -1173,16 +1183,19 @@ $font-size-list:13px;
 }
 
 .checkout {
-     border-top: 1px solid #ddd;
-     border-bottom: 1px solid #ddd;
-    .row+.row{
     border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    .row+.row {
+        border-top: 1px solid #ddd;
     }
-    .row{
-        padding:0px;
+    .row {
+        padding: 0px;
     }
-    .checkout-button+.checkout-button{
-    margin-top: 0px !important;
+    .checkout-button+.checkout-button {
+        margin-top: 0px !important;
+    }
+    textarea {
+        resize: none;
     }
     .easycheckout {
         .chkbx-head {
@@ -1277,7 +1290,7 @@ $font-size-list:13px;
         margin: 5px 10px 0 10px;
         padding: 0 0 0 10px;
         .input-label {
-            color: darken($positive, 50%);
+            color: black;
         }
         textarea {
             margin-right: 48px;
