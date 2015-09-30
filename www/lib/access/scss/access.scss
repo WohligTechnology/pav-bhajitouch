@@ -374,15 +374,15 @@ $font-size-list:13px;
 }
 
 .product-ctgry {
-//    .item-divider {
-//        color: #7EE1EA;
-//        background-color: white;
-//        border-bottom: 1px solid $positive;
-//        padding-left: 15px;
-//    }
+    //    .item-divider {
+    //        color: #7EE1EA;
+    //        background-color: white;
+    //        border-bottom: 1px solid $positive;
+    //        padding-left: 15px;
+    //    }
     .panel-group .panel + .panel {
-    margin-top: 0px;
-}
+        margin-top: 0px;
+    }
     .accordion-header {
         .panel-title {
             background-color: white;
@@ -396,19 +396,17 @@ $font-size-list:13px;
         }
     }
 }
+
 .product {
     //          border: 1px solid #ddd;
     border-top: 1px solid #ddd;
-
     border-bottom: 1px solid #ddd;
-
     text-decoration: none;
-    
-    .row + .row{
-    border-top: 1px solid #ddd;
+    .row + .row {
+        border-top: 1px solid #ddd;
     }
-    .col +.col{
-    border-left: 1px solid #ddd;
+    .col +.col {
+        border-left: 1px solid #ddd;
     }
     .image-holder-product {
         @extend .image-holder;
@@ -429,14 +427,13 @@ $font-size-list:13px;
                 font-size: 14px;
             }
         }
-        h3{
+        h3 {
             margin-top: 5px;
             margin-bottom: 15px;
             font-size: 13px;
             color: #23c9d8;
         }
     }
-    
     .price-separator {
         border-bottom: 1px solid #ddd;
     }
@@ -483,17 +480,24 @@ $font-size-list:13px;
         padding-left: 10px;
         margin-right: 5px;
     }
-    .image-holder-product{
-        margin:0px 5px 5px 10px !important;
+    .image-holder-product {
+        margin: 0px 5px 5px 10px !important;
     }
-    .row{
-    margin-top: 5px;
+    .row {
+        margin-top: 5px;
     }
 }
 
 .deals {
+    .row{
+    padding: 0px;
+    }
+    .col{
+    padding: 0px;
+    }
     .slider-pager {
         height: 5px !important;
+        bottom: 16px;
     }
     .deal-sliderimg {
         @extend .image-holder;
@@ -503,6 +507,18 @@ $font-size-list:13px;
         }
     }
     .deal {
+        .col+.col {
+            border-left: 0px;
+        }
+        .row {
+            position: relative;
+        }
+        .icon {
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            font-size: 22px !important;
+        }
         h4 {
             font-size: 12px;
             font-weight: 600;
@@ -513,6 +529,13 @@ $font-size-list:13px;
         @extend .product;
         .deal-details {
             @extend .product-details;
+            h2{
+            min-height: 28px;
+                text-align: center;
+            }
+        }
+        h3{
+        margin: 0px;
         }
         .deal-actiontray {
             margin-top: 3px;

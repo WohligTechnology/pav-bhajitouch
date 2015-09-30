@@ -331,16 +331,35 @@ $dark:                            #444 !default;
 .newarrivals .row {
   margin-top: 5px; }
 
+.deals .row {
+  padding: 0px; }
+.deals .col {
+  padding: 0px; }
 .deals .slider-pager {
-  height: 5px !important; }
+  height: 5px !important;
+  bottom: 16px; }
 .deals .deal-sliderimg {
   height: 170px; }
+.deals .deal .col + .col {
+  border-left: 0px; }
+.deals .deal .row {
+  position: relative; }
+.deals .deal .icon {
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  font-size: 22px !important; }
 .deals .deal h4 {
   font-size: 12px;
   font-weight: 600;
   text-align: center;
   margin-top: 0px;
   margin-bottom: 5px; }
+.deals .deal .deal-details h2 {
+  min-height: 28px;
+  text-align: center; }
+.deals .deal h3 {
+  margin: 0px; }
 .deals .deal .deal-actiontray {
   margin-top: 3px;
   border-top: 1px solid #ddd;
