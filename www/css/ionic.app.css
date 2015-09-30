@@ -212,9 +212,12 @@ $dark:                            #444 !default;
 .product-item {
   margin: 0px 15px !important;
   border-bottom: 1px solid #f1f1f1 !important; }
+  .product-item .item-content {
+    padding: 6px 0px !important; }
   .product-item span {
     padding-left: 10px;
-    font-size: 13px; }
+    font-size: 13px;
+    vertical-align: middle; }
 
 .myaccount .account-item {
   position: relative;
@@ -246,7 +249,7 @@ $dark:                            #444 !default;
     border-radius: 50%;
     width: 45px;
     height: 50px; }
-  .sidemenu-header .col-25 .cart {
+  .sidemenu-header .col-25 .cart, .sidemenu-header .col-25 .mywishlist {
     font-size: 25px; }
 
 .image-holder, .product .image-holder-product, .newarrivals .image-holder-product, .deals .deal .image-holder-product, .deals .deal-sliderimg, .clientele .clnt .image-holder-clientele, .product-detail .slider-slide .image-holder-productimg {
@@ -255,7 +258,7 @@ $dark:                            #444 !default;
   margin-bottom: 16px;
   position: relative; }
 
-.brand-image, .deals .deal-sliderimg .deal-img, .cart .product-cart .image-holder-cart .cart-image, .cart .wishlist .image-holder-cart .cart-image, .wishlist .cart .product-cart .image-holder-wishlist .cart-image, .cart .wishlist .image-holder-wishlist .cart-image, .wishlist .image-holder-wishlist .cart .product-cart .image-holder-cart .wishlist-image, .wishlist .cart .product-cart .image-holder-wishlist .wishlist-image, .cart .wishlist .image-holder-wishlist .wishlist-image, .order .image-holder-order .order-image, .product-detail .slider-slide .image-holder-productimg .product-img {
+.brand-image, .deals .deal-sliderimg .deal-img, .cart .product-cart .image-holder-cart .cart-image, .mywishlist .product-cart .image-holder-cart .cart-image, .mywishlist .wishlist .image-holder-cart .cart-image, .mywishlist .wishlist .image-holder-wishlist .cart-image, .mywishlist .wishlist .image-holder-wishlist .wishlist-image, .myorders .order .image-holder-order .order-image, .product-detail .slider-slide .image-holder-productimg .product-img {
   max-height: 100%;
   max-width: 100%;
   position: absolute;
@@ -316,7 +319,7 @@ $dark:                            #444 !default;
     padding: 0px; }
   .product .rating ul li, .newarrivals .rating ul li, .deals .deal .rating ul li {
     display: inline-block; }
-  .product .heart .icon, .newarrivals .heart .icon, .deals .deal .heart .icon, .product .cart .icon, .newarrivals .cart .icon, .deals .deal .cart .icon {
+  .product .heart .icon, .newarrivals .heart .icon, .deals .deal .heart .icon, .product .cart .icon, .newarrivals .cart .icon, .deals .deal .cart .icon, .product .mywishlist .icon, .newarrivals .mywishlist .icon, .deals .deal .mywishlist .icon {
     color: #A3A1A1;
     text-align: center;
     font-size: 18px; }
@@ -380,9 +383,7 @@ $dark:                            #444 !default;
     text-transform: uppercase;
     min-height: 30px;
     line-height: 31px;
-    /* padding: 8px; */
-    margin: 5px auto;
-    margin-left: 40px; }
+    margin: 5px auto; }
 .deals .deal .deal-actiontray {
   margin-top: 3px;
   border-top: 1px solid #ddd;
@@ -422,15 +423,19 @@ $dark:                            #444 !default;
     margin-bottom: 4px;
     text-align: center; }
 
-.clientele .clnt {
-  padding: 10px;
-  width: 100%; }
-  .clientele .clnt .image-holder-clientele {
-    height: 200px !important; }
-  .clientele .clnt h4 {
-    text-align: center;
-    font-size: 14px;
-    margin: 0px; }
+.clientele {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd; }
+  .clientele .row + .row {
+    border-top: 1px solid #ddd; }
+  .clientele .clnt {
+    width: 100%; }
+    .clientele .clnt .image-holder-clientele {
+      height: 200px !important; }
+    .clientele .clnt h4 {
+      text-align: center;
+      font-size: 14px;
+      margin: 0px; }
 
 .nav-button .bar .button.button-icon.icon:before, .nav-button .bar .button.button-icon:before {
   font-size: 25px;
@@ -455,14 +460,14 @@ $dark:                            #444 !default;
   right: 1px;
   color: black; }
 
-.cart {
+.cart, .mywishlist {
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd; }
-  .cart .row-container + .row-container {
+  .cart .row-container + .row-container, .mywishlist .row-container + .row-container {
     border-top: 1px solid #ddd; }
-  .cart .row {
+  .cart .row, .mywishlist .row {
     padding: 0px; }
-  .cart .row-container {
+  .cart .row-container, .mywishlist .row-container {
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
@@ -471,42 +476,42 @@ $dark:                            #444 !default;
     display: flex;
     padding: 5px;
     width: 100%; }
-  .cart .product-cart, .cart .wishlist {
+  .cart .product-cart, .mywishlist .product-cart, .mywishlist .wishlist {
     width: 100%; }
-    .cart .product-cart .image-holder-cart, .cart .wishlist .image-holder-cart, .wishlist .cart .product-cart .image-holder-wishlist, .cart .wishlist .image-holder-wishlist {
+    .cart .product-cart .image-holder-cart, .mywishlist .product-cart .image-holder-cart, .mywishlist .wishlist .image-holder-cart, .mywishlist .wishlist .image-holder-wishlist {
       height: 90px;
       width: auto;
       position: relative;
       margin-bottom: 5px; }
-    .cart .product-cart .button, .cart .wishlist .button {
+    .cart .product-cart .button, .mywishlist .product-cart .button, .mywishlist .wishlist .button {
       min-height: 20px; }
-    .cart .product-cart .button-clear, .cart .wishlist .button-clear {
+    .cart .product-cart .button-clear, .mywishlist .product-cart .button-clear, .mywishlist .wishlist .button-clear {
       max-height: 20px; }
-    .cart .product-cart .col-40, .cart .wishlist .col-40 {
+    .cart .product-cart .col-40, .mywishlist .product-cart .col-40, .mywishlist .wishlist .col-40 {
       margin: 0px 10px; }
-    .cart .product-cart h4, .cart .wishlist h4 {
+    .cart .product-cart h4, .mywishlist .product-cart h4, .mywishlist .wishlist h4 {
       font-size: 13px;
       margin: 0;
       min-height: 20px; }
-    .cart .product-cart h5, .cart .wishlist h5 {
+    .cart .product-cart h5, .mywishlist .product-cart h5, .mywishlist .wishlist h5 {
       font-size: 11px;
       color: #999;
       margin: 0px; }
-    .cart .product-cart h3, .cart .wishlist h3 {
+    .cart .product-cart h3, .mywishlist .product-cart h3, .mywishlist .wishlist h3 {
       margin: 0px;
       color: #7EE1EA;
       font-size: 14px;
       margin-top: 5px; }
-    .cart .product-cart .product-quantity-cart, .cart .wishlist .product-quantity-cart {
+    .cart .product-cart .product-quantity-cart, .mywishlist .product-cart .product-quantity-cart, .mywishlist .wishlist .product-quantity-cart {
       display: inline-flex; }
-      .cart .product-cart .product-quantity-cart .button-icon .icon:before, .cart .wishlist .product-quantity-cart .button-icon .icon:before, .cart .product-cart .product-quantity-cart .button-icon.icon:before, .cart .wishlist .product-quantity-cart .button-icon.icon:before {
+      .cart .product-cart .product-quantity-cart .button-icon .icon:before, .mywishlist .product-cart .product-quantity-cart .button-icon .icon:before, .mywishlist .wishlist .product-quantity-cart .button-icon .icon:before, .cart .product-cart .product-quantity-cart .button-icon.icon:before, .mywishlist .product-cart .product-quantity-cart .button-icon.icon:before, .mywishlist .wishlist .product-quantity-cart .button-icon.icon:before {
         font-size: 20px; }
-      .cart .product-cart .product-quantity-cart input[type="text"], .cart .wishlist .product-quantity-cart input[type="text"] {
+      .cart .product-cart .product-quantity-cart input[type="text"], .mywishlist .product-cart .product-quantity-cart input[type="text"], .mywishlist .wishlist .product-quantity-cart input[type="text"] {
         width: 20px;
         text-align: center; }
-    .cart .product-cart .col-10 .button-icon .icon:before, .cart .wishlist .col-10 .button-icon .icon:before, .cart .product-cart .col-10 .button-icon.icon:before, .cart .wishlist .col-10 .button-icon.icon:before {
+    .cart .product-cart .col-10 .button-icon .icon:before, .mywishlist .product-cart .col-10 .button-icon .icon:before, .mywishlist .wishlist .col-10 .button-icon .icon:before, .cart .product-cart .col-10 .button-icon.icon:before, .mywishlist .product-cart .col-10 .button-icon.icon:before, .mywishlist .wishlist .col-10 .button-icon.icon:before {
       font-size: 25px; }
-    .cart .product-cart .col-10 .icon, .cart .wishlist .col-10 .icon {
+    .cart .product-cart .col-10 .icon, .mywishlist .product-cart .col-10 .icon, .mywishlist .wishlist .col-10 .icon {
       position: absolute; }
 
 .btn-checkout {
@@ -549,15 +554,12 @@ $dark:                            #444 !default;
   flex: 0 0 60%;
   max-width: 60%; }
 
-.order {
-  position: relative;
-  padding: 5px !important;
-  border: 0px;
-  padding: 5px;
-  width: 100%; }
-  .order .row-container + .row-container {
-    border-top: 1px solid #ddd !important; }
-  .order .row-container {
+.myorders {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd; }
+  .myorders .row-container + .row-container {
+    border-top: 1px solid #ddd; }
+  .myorders .row-container {
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
@@ -566,66 +568,58 @@ $dark:                            #444 !default;
     display: flex;
     padding: 5px;
     width: 100%; }
-  .order .image-holder-order {
-    height: 100px;
-    width: auto;
+  .myorders .order {
     position: relative;
-    margin-bottom: 6px; }
-  .order .col {
-    padding-left: 10px; }
-  .order h4 {
-    font-size: 13px;
-    margin: 0;
-    min-height: 20px; }
-  .order h5 {
-    font-size: 11px;
-    color: #999;
-    margin: 0px; }
-  .order .product-quantity-cart {
-    display: inline-flex; }
-    .order .product-quantity-cart .button-icon .icon:before, .order .product-quantity-cart .button-icon.icon:before {
-      font-size: 20px; }
-    .order .product-quantity-cart input[type="text"] {
-      width: 20px;
-      text-align: center; }
-  .order .col-10 .button-icon .icon:before, .order .col-10 .button-icon.icon:before {
-    font-size: 25px; }
-  .order .col-10 .icon {
-    position: absolute; }
-  .order h3 {
-    margin: 0px;
-    font-size: 13px; }
-  .order .id-order h2 {
-    padding-left: 5px !important;
-    font-size: 11px;
-    margin: 0px; }
-    .order .id-order h2 span {
-      float: right; }
-  .order h4 {
-    min-height: 20px; }
-  .order .payment {
-    padding: 1px 6px;
-    font-size: 10px; }
-  .order .total-ship h3 {
-    font-size: 11px;
-    float: right;
-    clear: left;
-    margin: 0px;
-    position: absolute;
-    right: 5px;
-    bottom: 5px; }
-  .order .total-ship h2 {
-    font-size: 13px;
-    float: right;
-    clear: left;
-    margin: 0px;
-    position: absolute;
-    left: 85px;
-    bottom: 5px; }
+    padding: 5px !important;
+    border: 0px;
+    padding: 5px;
+    width: 100%; }
+    .myorders .order .image-holder-order {
+      height: 100px;
+      width: auto;
+      position: relative;
+      margin-bottom: 6px; }
+    .myorders .order .col {
+      padding-left: 10px; }
+    .myorders .order h4 {
+      font-size: 13px;
+      margin: 0;
+      min-height: 20px; }
+    .myorders .order h5 {
+      font-size: 11px;
+      color: #999;
+      margin: 0px; }
+    .myorders .order .id-order h2 {
+      padding-left: 5px !important;
+      font-size: 11px;
+      margin: 0px; }
+      .myorders .order .id-order h2 span {
+        float: right; }
+    .myorders .order h4 {
+      min-height: 20px; }
+    .myorders .order .payment {
+      padding: 1px 6px;
+      font-size: 10px; }
+    .myorders .order .total-ship h3 {
+      font-size: 11px;
+      float: right;
+      clear: left;
+      margin: 0px;
+      position: absolute;
+      right: 5px;
+      bottom: 5px; }
+    .myorders .order .total-ship h2 {
+      font-size: 13px;
+      float: right;
+      clear: left;
+      margin: 0px;
+      position: absolute;
+      left: 85px;
+      bottom: 5px; }
 
-.wishlist h5 {
+.mywishlist .wishlist h5 {
   font-size: 13px;
-  color: black; }
+  color: #23c9d8; }
 
 .login ::-webkit-input-placeholder, .signup ::-webkit-input-placeholder, .contactus .get-in-touch ::-webkit-input-placeholder, .checkout .billing ::-webkit-input-placeholder, .checkout .shipping ::-webkit-input-placeholder {
   color: grey; }
@@ -689,8 +683,13 @@ $dark:                            #444 !default;
   line-height: 35px;
   text-transform: uppercase; }
 
-.contactus .contactus-addr {
-  border: 1px solid #ddd; }
+.contactus {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd; }
+  .contactus .row {
+    padding: 0px; }
+  .contactus .row + .row {
+    border-top: 1px solid #ddd; }
   .contactus .contactus-addr h2 {
     font-size: 14px;
     font-weight: 600;
@@ -701,8 +700,6 @@ $dark:                            #444 !default;
     font-size: 13px; }
   .contactus .contactus-addr .google-maps {
     margin: 10px; }
-.contactus .get-in-touch {
-  border: 1px solid #ddd; }
   .contactus .get-in-touch ::-webkit-input-placeholder {
     color: grey; }
   .contactus .get-in-touch h2 {
@@ -779,57 +776,64 @@ $dark:                            #444 !default;
   .product-detail .detail .name-other .icon {
     float: left; }
 
-.checkout .easycheckout .chkbx-head {
-  padding-top: 5px; }
-  .checkout .easycheckout .chkbx-head h2 {
-    font-size: 14px;
-    font-weight: 600;
-    margin: 0;
-    text-align: center; }
-  .checkout .easycheckout .chkbx-head p {
-    margin: 0;
-    text-align: center;
-    font-size: 13px;
+.checkout {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd; }
+  .checkout .row + .row {
+    border-top: 1px solid #ddd; }
+  .checkout .row {
+    padding: 0px; }
+  .checkout .easycheckout .chkbx-head {
     padding-top: 5px; }
-.checkout .easycheckout .chkbx {
-  font-size: 13px; }
-.checkout .easycheckout .chkbx-button {
-  text-transform: uppercase;
-  font-size: 13px !important;
-  width: 88%;
-  margin: 10px 15px; }
-.checkout .billing ::-webkit-input-placeholder, .checkout .shipping ::-webkit-input-placeholder {
-  color: grey; }
-.checkout .billing h2, .checkout .shipping h2 {
-  font-size: 14px;
-  font-weight: 600;
-  text-align: center;
-  margin: 10px 0px; }
-.checkout .billing .checkout-form .checkout-button, .checkout .shipping .checkout-form .checkout-button {
-  margin: 10px 20px 10px 20px; }
-.checkout .billing .checkout-form .item-select, .checkout .shipping .checkout-form .item-select {
-  margin: 10px 20px 0px 20px;
-  min-height: 55px; }
-  .checkout .billing .checkout-form .item-select .input-label, .checkout .shipping .checkout-form .item-select .input-label {
-    padding: 5px 0px 0px 0px;
-    color: #959595;
-    font-size: 13px;
-    margin-bottom: 5px; }
-.checkout .order-review {
-  width: 100%;
-  border: 1px solid #ddd; }
-  .checkout .order-review .item .item-note {
-    color: black !important; }
-  .checkout .order-review h2 {
+    .checkout .easycheckout .chkbx-head h2 {
+      font-size: 14px;
+      font-weight: 600;
+      margin: 0;
+      text-align: center; }
+    .checkout .easycheckout .chkbx-head p {
+      margin: 0;
+      text-align: center;
+      font-size: 13px;
+      padding-top: 5px; }
+  .checkout .easycheckout .chkbx {
+    font-size: 13px; }
+  .checkout .easycheckout .chkbx-button {
+    text-transform: uppercase;
+    font-size: 13px !important;
+    width: 88%;
+    margin: 10px 15px; }
+  .checkout .billing ::-webkit-input-placeholder, .checkout .shipping ::-webkit-input-placeholder {
+    color: grey; }
+  .checkout .billing h2, .checkout .shipping h2 {
     font-size: 14px;
     font-weight: 600;
     text-align: center;
     margin: 10px 0px; }
-.checkout .order-button {
-  width: 88%;
-  margin: 20px;
-  font-size: 13px !important;
-  text-transform: uppercase; }
+  .checkout .billing .checkout-form .checkout-button, .checkout .shipping .checkout-form .checkout-button {
+    margin: 10px 20px 10px 20px; }
+  .checkout .billing .checkout-form .item-select, .checkout .shipping .checkout-form .item-select {
+    margin: 10px 20px 0px 20px;
+    min-height: 55px; }
+    .checkout .billing .checkout-form .item-select .input-label, .checkout .shipping .checkout-form .item-select .input-label {
+      padding: 5px 0px 0px 0px;
+      color: #959595;
+      font-size: 13px;
+      margin-bottom: 5px; }
+  .checkout .order-review {
+    width: 100%;
+    border-top: 1px solid #ddd !important; }
+    .checkout .order-review .item .item-note {
+      color: black !important; }
+    .checkout .order-review h2 {
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+      margin: 10px 0px; }
+  .checkout .order-button {
+    width: 88%;
+    margin: 20px;
+    font-size: 13px !important;
+    text-transform: uppercase; }
 
 .edit-information .editinfo-button {
   width: 88% !important;

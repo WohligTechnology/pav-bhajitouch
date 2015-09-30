@@ -299,10 +299,14 @@ $font-size-list:13px;
 .product-item {
     @extend .sidemenu-item;
     margin: 0px 15px!important;
+    .item-content{
+    padding: 6px 0px!important;
+    }
     border-bottom: 1px solid #f1f1f1 !important;
     span {
         padding-left: 10px;
         font-size: 13px;
+        vertical-align: middle;
     }
 }
 
@@ -561,9 +565,7 @@ $font-size-list:13px;
                     text-transform: uppercase;
                     min-height: 30px;
                     line-height: 31px;
-                    /* padding: 8px; */
                     margin: 5px auto;
-                    margin-left: 40px;
                 }
             }
         }
@@ -630,8 +632,12 @@ $font-size-list:13px;
 }
 
 .clientele {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    .row+.row{
+    border-top: 1px solid #ddd;
+    }
     .clnt {
-        padding: 10px;
         width: 100%;
         .image-holder-clientele {
             @extend .image-holder;
@@ -676,7 +682,7 @@ $font-size-list:13px;
 .cart {
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
-    .row-container+.row-container {
+    .row-container +.row-container {
         border-top: 1px solid #ddd;
     }
     .row {
@@ -805,14 +811,12 @@ $font-size-list:13px;
     max-width: 60%;
 }
 
-.order {
-    position: relative;
-    padding: 5px !important;
-    border: 0px;
-    padding: 5px;
-    width: 100%;
-    .row-container+.row-container {
-        border-top: 1px solid #ddd !important;
+.myorders {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    
+    .row-container +.row-container {
+        border-top: 1px solid #ddd;
     }
     .row-container {
         display: -webkit-box;
@@ -824,91 +828,77 @@ $font-size-list:13px;
         padding: 5px;
         width: 100%;
     }
-    .image-holder-order {
-        height: 100px;
-        width: auto;
+    .order {
         position: relative;
-        margin-bottom: 6px;
-        .order-image {
-            @extend .brand-image;
-        }
-    }
-    .col {
-        padding-left: 10px;
-    }
-    h4 {
-        font-size: 13px;
-        margin: 0;
-        min-height: 20px;
-    }
-    h5 {
-        font-size: 11px;
-        color: #999;
-        margin: 0px;
-    }
-    .product-quantity-cart {
-        display: inline-flex;
-        .button-icon .icon:before,
-        .button-icon.icon:before {
-            font-size: 20px;
-        }
-        input[type="text"] {
-            width: 20px;
-            text-align: center;
-        }
-    }
-    .col-10 {
-        .button-icon .icon:before,
-        .button-icon.icon:before {
-            font-size: 25px;
-        }
-        .icon {
-            position: absolute;
-        }
-    }
-    h3 {
-        margin: 0px;
-        font-size: 13px;
-    }
-    .id-order {
-        h2 {
-            padding-left: 5px !important;
-            font-size: 11px;
-            margin: 0px;
-            span {
-                float: right;
+        padding: 5px !important;
+        border: 0px;
+        padding: 5px;
+        width: 100%;
+        
+        .image-holder-order {
+            height: 100px;
+            width: auto;
+            position: relative;
+            margin-bottom: 6px;
+            .order-image {
+                @extend .brand-image;
             }
         }
-    }
-    h4 {
-        min-height: 20px;
-    }
-    .payment {
-        padding: 1px 6px;
-        font-size: 10px;
-    }
-    .total-ship {
-        h3 {
-            font-size: 11px;
-            float: right;
-            clear: left;
-            margin: 0px;
-            position: absolute;
-            right: 5px;
-            bottom: 5px;
+        .col {
+            padding-left: 10px;
         }
-        h2 {
+        h4 {
             font-size: 13px;
-            float: right;
-            clear: left;
+            margin: 0;
+            min-height: 20px;
+        }
+        h5 {
+            font-size: 11px;
+            color: #999;
             margin: 0px;
-            position: absolute;
-            left: 85px;
-            bottom: 5px;
+        }
+        .id-order {
+            h2 {
+                padding-left: 5px !important;
+                font-size: 11px;
+                margin: 0px;
+                span {
+                    float: right;
+                }
+            }
+        }
+        h4 {
+            min-height: 20px;
+        }
+        .payment {
+            padding: 1px 6px;
+            font-size: 10px;
+        }
+        .total-ship {
+            h3 {
+                font-size: 11px;
+                float: right;
+                clear: left;
+                margin: 0px;
+                position: absolute;
+                right: 5px;
+                bottom: 5px;
+            }
+            h2 {
+                font-size: 13px;
+                float: right;
+                clear: left;
+                margin: 0px;
+                position: absolute;
+                left: 85px;
+                bottom: 5px;
+            }
         }
     }
 }
 
+.mywishlist{
+    @extend .cart;
 .wishlist {
     @extend .product-cart;
     .image-holder-wishlist {
@@ -919,8 +909,9 @@ $font-size-list:13px;
     }
     h5 {
         font-size: 13px;
-        color: black;
+        color: #23c9d8;
     }
+}
 }
 
 .login {
@@ -1031,8 +1022,15 @@ $font-size-list:13px;
 }
 
 .contactus {
+        border-top: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+    .row{
+    padding: 0px;
+    }
+    .row+.row{
+    border-top: 1px solid #ddd;
+    }
     .contactus-addr {
-        border: 1px solid #ddd;
         h2 {
             font-size: 14px;
             font-weight: 600;
@@ -1048,7 +1046,6 @@ $font-size-list:13px;
         }
     }
     .get-in-touch {
-        border: 1px solid #ddd;
         @extend .login;
         ::-webkit-input-placeholder {
             color: grey;
@@ -1176,6 +1173,15 @@ $font-size-list:13px;
 }
 
 .checkout {
+     border-top: 1px solid #ddd;
+     border-bottom: 1px solid #ddd;
+    .row+.row{
+    border-top: 1px solid #ddd;
+    }
+    .row{
+        padding:0px;
+    }
+    
     .easycheckout {
         .chkbx-head {
             padding-top: 5px;
@@ -1238,7 +1244,7 @@ $font-size-list:13px;
     }
     .order-review {
         width: 100%;
-        border: 1px solid #ddd;
+        border-top: 1px solid #ddd !important;
         .item .item-note {
             color: black !important;
         }
