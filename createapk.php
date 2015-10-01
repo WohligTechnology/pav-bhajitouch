@@ -1,5 +1,7 @@
 <?php
 echo shell_exec("git pull");
+echo shell_exec("ionic serve");
+echo shell_exec("q");
 echo "################################";
 echo "################################";
 echo "################################";
