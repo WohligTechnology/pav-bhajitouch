@@ -3,7 +3,7 @@ $light: #ffffff !default;
 $stable: #f8f8f8 !default;
 $positive: #7ee1ea !default;
 $calm: #7EE1EA !default;
-$balanced: #33CD5F !default;
+$balanced: #d34836   !default;
 $energized: #ffc900 !default;
 $assertive: #ef473a !default;
 $royal: #3b5998 !default;
@@ -686,11 +686,13 @@ $font-size-list:13px;
         .image-holder-clientele {
             @extend .image-holder;
             height: 200px !important;
+            margin: 0px;
         }
         h4 {
             text-align: center;
             font-size: 14px;
             margin: 0px;
+            padding: 8px 0px 15px 0;
         }
     }
 }
@@ -1145,6 +1147,8 @@ $font-size-list:13px;
             }
             .description {
                 padding: 5px;
+                padding-top: 10px;
+                padding-bottom: 10px;
             }
             .specification {
                 padding: 10px;
@@ -1267,7 +1271,8 @@ $font-size-list:13px;
             color: black;
         }
         textarea {
-            margin-right: 48px;
+            resize: none;
+            width: 100%;
         }
         .enable {
             disabled: false;
