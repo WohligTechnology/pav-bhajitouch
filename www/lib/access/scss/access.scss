@@ -514,6 +514,12 @@ $font-size-list:13px;
         width: 100%;
         padding: 0px 5px;
     }
+    .btn-filter{
+    width: 88%;
+            margin: 20px 20px 15px 20px;
+            font-size: 13px !important;
+            text-transform: uppercase;
+    }
 }
 
 .subheader-search {
@@ -1048,6 +1054,9 @@ $font-size-list:13px;
             .contact-button {
                 @extend .login-button;
             }
+        }
+        textarea{
+        resize: none;
         }
     }
 }
