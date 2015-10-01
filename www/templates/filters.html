@@ -1,0 +1,68 @@
+<ion-modal-view>
+    <ion-header-bar align-title="center">
+        <h1 class="title">Filters</h1>
+        <div class="buttons">
+            <button class="button modal-close button-clear button-icon " ng-click="closeFilter()"><i class="icon ion-ios-close-empty"></i></button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <div class="filters">
+            <accordion close-others="oneAtATime">
+                <accordion-group heading="Brands" class="accordion-header">
+                    <ul class="list">
+
+                        <li class="item item-checkbox">
+                            <label class="checkbox">
+                                <input type="checkbox">
+                            </label>
+                            APPLE
+                        </li>
+                        <li class="item item-checkbox">
+                            <label class="checkbox">
+                                <input type="checkbox">
+                            </label>
+                            IPHONE
+                        </li>
+                        <li class="item item-checkbox">
+                            <label class="checkbox">
+                                <input type="checkbox">
+                            </label>
+                            NOKIA
+                        </li>
+
+                        <li class="item item-checkbox">
+                            <label class="checkbox">
+                                <input type="checkbox">
+                            </label>
+                            SAMSUNG
+                        </li>
+                        <li class="item item-checkbox">
+                            <label class="checkbox">
+                                <input type="checkbox">
+                            </label>
+                            MI
+                        </li>
+                        <li class="item item-checkbox">
+                            <label class="checkbox">
+                                <input type="checkbox">
+                            </label>
+                            MICROMAX
+                        </li>
+                    </ul>
+                </accordion-group>
+                <accordion-group heading="price" class="accordion-header">
+                    <div class="row">
+                        <div class="col">
+                                    <input type="text" placeholder="Rs. 0">
+                        </div>
+                        <div class="separator"><h2>-</h2></div>
+                        <div class="col">
+                                    <input type="text" placeholder="Rs. 60000">
+                            </div>
+                        </div>
+                    </div>
+                </accordion-group>
+            </accordion>
+        </div>
+    </ion-content>
+</ion-modal-view>

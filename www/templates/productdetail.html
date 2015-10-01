@@ -1,9 +1,9 @@
 <ion-view view-title="Product Detail">
-        <div class="bar bar-subheader bar-positive" ng-hide="transparent_header">
-            <h1 class="title">iPhone 6[S] 128GB silver</h1>
-        </div>
+    <div class="bar bar-subheader bar-positive" ng-hide="transparent_header">
+        <h1 class="title">iPhone 6[S] 128GB silver</h1>
+    </div>
 
-<!--    <ion-content ng-class="{'no-header':transparent_header}" on-scroll="pageScrolled()">-->
+    <!--    <ion-content ng-class="{'no-header':transparent_header}" on-scroll="pageScrolled()">-->
     <ion-content ng-class="has-header" on-scroll="pageScrolled()">
 
         <div class="product-detail">
@@ -19,19 +19,19 @@
                 </ion-slide>
             </ion-slide-box>
             <div class="row">
-                
-                    <div class="col">
-<div class="no-margin detail">
+
+                <div class="col">
+                    <div class="no-margin detail">
                         <div class="name-other">
                             <h2>iPhone 6[S] 128GB silver</h2>
                             <div class="row">
                                 <div class="col user-rating">
                                     <ul>
-                                        <li><i class="icon star ion-ios-star-outline" s></i></li>
-                                        <li><i class="icon star ion-ios-star-outline" s></i></li>
-                                        <li><i class="icon star ion-ios-star-outline" s></i></li>
-                                        <li><i class="icon star ion-ios-star-outline" s></i></li>
-                                        <li><i class="icon star ion-ios-star-outline" s></i></li>
+                                        <li><i class="icon star ion-ios-star clr-orange"></i></li>
+                                        <li><i class="icon star ion-ios-star clr-orange"></i></li>
+                                        <li><i class="icon star ion-ios-star clr-orange"></i></li>
+                                        <li><i class="icon star ion-ios-star clr-orange"></i></li>
+                                        <li><i class="icon star ion-ios-star clr-grey"></i></li>
                                     </ul>
                                 </div>
                                 <div class="col">
@@ -41,8 +41,10 @@
                             <div class="price">
                                 <span>Price : Rs. 60000</span>
                             </div>
-                            <button class="button btn-productdetail icon-left  button-positive"><i class="icon ln-cart"></i>Add to cart</button>
-                            <button class="button btn-productdetail icon-left ion-ios-heart button-positive">Add to wishlist</button>
+                            <div class="product-buttons padding-vertical">
+                                <button class="button btn-productdetail icon-left  button-positive"><i class="icon ln-cart"></i>Add to cart</button>
+                                <button class="button btn-productdetail icon-left ion-ios-heart button-positive">Add to wishlist</button>
+                            </div>
                             <div class="tabs-detail">
                                 <div class="row">
                                     <div class="col" ng-class="{'active-tab':tab.left}">
@@ -70,18 +72,18 @@
                             </div>
                             <div class="specification" ng-show="tab.right">
                                 <p><b>CAMERA</b></p>
-                                <p>Rear Camera	<span class="item-note">Yes, 8 MP</span></p>
-                                <p>Front Facing Camera	<span class="item-note">Yes, 1.2 MP</span></p>
-                                <p>Video Recording	<span class="item-note">Yes, 1920 x 1080</span></p>
-                                <p>HD Recording	HD, <span class="item-note">Full HD</span></p>
+                                <p>Rear Camera <span class="item-note">Yes, 8 MP</span></p>
+                                <p>Front Facing Camera <span class="item-note">Yes, 1.2 MP</span></p>
+                                <p>Video Recording <span class="item-note">Yes, 1920 x 1080</span></p>
+                                <p>HD Recording HD, <span class="item-note">Full HD</span></p>
                                 <br>
                                 <p><b>PLATFORM</b></p>
-                                <p>OS	<span class="item-note">iOS v9</span></p>
-                                <p>Processor	<span class="item-note">A8 Chip with 64-bit Architecture</span></p>
+                                <p>OS <span class="item-note">iOS v9</span></p>
+                                <p>Processor <span class="item-note">A8 Chip with 64-bit Architecture</span></p>
                                 <br>
                                 <p><b>DISPLAY</b></p>
-<p>Size	<span class="item-note">4.7 inch</span></p>
-<p>Resolution	<span class="item-note">1334 x 750 Pixels</span></p>
+                                <p>Size <span class="item-note">4.7 inch</span></p>
+                                <p>Resolution <span class="item-note">1334 x 750 Pixels</span></p>
                             </div>
                         </div>
                     </div>

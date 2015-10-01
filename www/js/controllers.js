@@ -94,6 +94,29 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         $scope.frgt();
     };
     //    --------------------END- FORGOT PASSWORD
+    //   ---------------------FILTERS
+    $ionicModal.fromTemplateUrl('templates/filters.html', {
+        scope: $scope
+    }).then(function (modal) {
+        $scope.modalFilter = modal;
+    });
+    $scope.closeFilter = function () {
+        $scope.modalFilter.hide();
+    };
+    $scope.filter = function () {
+        $scope.modalFilter.show();
+    };
+    $scope.doFilter = function () {
+        console.log('Doing Signup', $scope.loginData);
+        $timeout(function () {
+            $scope.closeLogin();
+        }, 1000);
+    };
+    $scope.openFilter = function () {
+        //        $scope.closeLogin();
+        $scope.filter();
+    };
+    //    --------------------END- FILTERS
 })
 
 .controller('HomeCtrl', function ($scope) {
