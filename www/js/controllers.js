@@ -560,7 +560,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             right: false
         }
         $scope.clickTab = function (side) {
-            $ionicScrollDelegate.scrollTop();
+            $ionicScrollDelegate.scrollTop(true);
             if (side === "left") {
                 $scope.tab.left = true;
                 $scope.tab.right = false;
