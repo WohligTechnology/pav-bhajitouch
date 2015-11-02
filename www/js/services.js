@@ -2,6 +2,8 @@ var adminbase = "http://wohlig.co.in/accessbackend/";
 var adminbase = "http://localhost/accessback/";
 var adminurl = adminbase + "index.php/json/";
 var adminhauth = adminbase + "index.php/hauth/";
+var adminimage = adminbase + "uploads/";
+
 angular.module('starter.services', [])
 
 .factory('MyServices', function($http) {
@@ -49,6 +51,43 @@ angular.module('starter.services', [])
                     search: data,
                     area: []
                 }
+            }).success(callback);
+        },
+        //dhaval start
+        getbrand: function(pageno, callback) {
+            return $http.get(adminurl + 'getbrand?maxrow=12&pageno=' + pageno, {}, {
+                withCredentials: true
+            }).success(callback);
+        },
+        getproductbybrand: function (id, pageno, callback) {
+            return $http({
+                url: adminurl + 'json/getproductbybrand',
+                method: "POST",
+                withCredentials: true,
+                data: {
+                    "brandid": id,
+                    "pageno": pageno
+                }
+            }).success(callback);
+        },
+        getproductbycategory: function (pageno, parent, category, callback) {
+            console.log(category);
+            return $http.get(adminurl + 'json/getproductbycategory?parent='+parent+'&subcategory='+category+'&pageno='+pageno, {}, {
+                withCredentials: true
+            }).success(callback);
+            
+        },
+        getallproduct: function (pageno, callback) {
+            return $http.get(adminurl + 'json/getallproducts?pageno=' + pageno, {}, {
+                withCredentials: true
+            }).success(callback);
+        },
+        //dhaval end
+        forgotPassword: function(forgot, callback) {
+            return $http({
+                url: adminurl + 'forgotpassword',
+                method: "POST",
+                data: forgot
             }).success(callback);
         },
         setNotify: function(data) {

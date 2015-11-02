@@ -5,6 +5,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
     $rootScope.transparent_header = false;
     $scope.userSignup = {};
     $scope.loginData = {};
+    $scope.forgot = {};
     $scope.searchbar = false;
     allfunction.msg = function(msg, title) {
         var myPopup = $ionicPopup.show({
@@ -52,13 +53,14 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         $scope.modal = modal;
     });
     $scope.closeLogin = function() {
+        $scope.loginData = {};
         $scope.modal.hide();
     };
     $scope.login = function() {
         $scope.modal.show();
         $scope.closeSignup();
     };
-    
+
     $scope.doLogin = function() {
         $scope.allvalidation = [{
             field: $scope.loginData.email,
@@ -70,19 +72,18 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         var check = formvalidation($scope.allvalidation);
         if (check) {
             console.log($scope.loginData);
-            // allfunction.loading();
+            allfunction.loading();
             MyServices.login($scope.loginData, function(data) {
                 console.log(data);
-                //     if (data != "false") {
-                //         console.log(data);
-                //         $ionicLoading.hide();
-                //         MyServices.setUser(data);
-                //         $location.path("/app/home");
-                //     } else {
-                //         console.log(data);
-                //         $ionicLoading.hide();
-                //         allfunction.msg("Email & Password Did Not Match", 'Error!');
-                //     }
+                if (data != "false") {
+                    $ionicLoading.hide();
+                    MyServices.setUser(data);
+                    $scope.closeLogin();
+                    $location.path("/app/home");
+                } else {
+                    $ionicLoading.hide();
+                    allfunction.msg("Email & Password Did Not Match", 'Error!');
+                }
             });
         } else {
             allfunction.msg("Fill all mandatory fields", "Error !");
@@ -163,15 +164,33 @@ angular.module('starter.controllers', ['ui.bootstrap'])
     $scope.frgt = function() {
         $scope.modalFrgt.show();
     };
-    $scope.doFrgt = function() {
-        console.log('Doing Signup', $scope.loginData);
-        $timeout(function() {
-            $scope.closeLogin();
-        }, 1000);
+    $scope.doFrgt = function(emailforgot) {
+        $scope.forgot = emailforgot;
+        $scope.allvalidation = [{
+            field: $scope.forgot.email,
+            validation: ""
+        }];
+        var check = formvalidation($scope.allvalidation);
+        if (check) {
+            allfunction.loading();
+            MyServices.forgotPassword($scope.forgot, function(data) {
+                console.log(data);
+                if (data != "Not A Valid Email.") {
+                    $ionicLoading.hide();
+                    $scope.closeFrgt();
+                    $location.path("/app/home");
+                } else {
+                    $ionicLoading.hide();
+                    allfunction.msg("Email Id Not Found", 'Error!');
+                }
+            });
+        } else {
+            allfunction.msg("Fill all mandatory fields", "Error !");
+        }
     };
     $scope.openFrgt = function() {
-        //        $scope.closeLogin();
         $scope.frgt();
+        $scope.closeLogin();
     };
     //    --------------------END- FORGOT PASSWORD
     //   ---------------------FILTERS
@@ -198,6 +217,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
     };
     //    --------------------END- FILTERS
 })
+
 
 .controller('HomeCtrl', function($scope) {
         $scope.slides = [{
@@ -382,7 +402,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         }];
         $scope.brands = _.chunk($scope.brands, 3);
     })
-    .controller('ProductCtrl', function($scope, $stateParams, $timeout, $rootScope) {
+    .controller('ProductCtrl', function($scope, $stateParams, $timeout, $rootScope, MyServices) {
         $scope.addwishlist = false;
         $rootScope.transparent_header = false;
         console.log($rootScope.transparent_header);
@@ -392,158 +412,42 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             $scope.addwishlist = true;
             console.log($scope.addwishlist);
         };
-        $scope.products = [{
-            "name": "N4L 4S0",
-            "company": "Apple Systems",
-            "price": "Rs.5,807",
-            "rating": 4
-        }, {
-            "name": "Q8M 7V6",
-            "company": "Chami",
-            "price": "Rs.6,439",
-            "rating": 4
-        }, {
-            "name": "D1G 6X1",
-            "company": "Lycos",
-            "price": "Rs.9,173",
-            "rating": 2
-        }, {
-            "name": "J7D 4A9",
-            "company": "Lycos",
-            "price": "Rs.7,359",
-            "rating": 5
-        }, {
-            "name": "I4V 5E3",
-            "company": "Borland",
-            "price": "Rs.8,508",
-            "rating": 3
-        }, {
-            "name": "E5B 7H1",
-            "company": "Macromedia",
-            "price": "Rs.7,069",
-            "rating": 4
-        }, {
-            "name": "G2Z 7I0",
-            "company": "Microsoft",
-            "price": "Rs.9,877",
-            "rating": 1
-        }, {
-            "name": "T3Y 5M4",
-            "company": "Lavasoft",
-            "price": "Rs.7,375",
-            "rating": 4
-        }, {
-            "name": "P5M 4E3",
-            "company": "Cakewalk",
-            "price": "Rs.5,237",
-            "rating": 2
-        }, {
-            "name": "E9B 1Y5",
-            "company": "Sibelius",
-            "price": "Rs.5,388",
-            "rating": 2
-        }, {
-            "name": "O1W 7H3",
-            "company": "Altavista",
-            "price": "Rs.6,285",
-            "rating": 2
-        }, {
-            "name": "V4V 3M6",
-            "company": "Borland",
-            "price": "Rs.9,667",
-            "rating": 3
-        }, {
-            "name": "C5C 1P0",
-            "company": "Macromedia",
-            "price": "Rs.5,325",
-            "rating": 1
-        }, {
-            "name": "T2D 9W7",
-            "company": "Google",
-            "price": "Rs.5,695",
-            "rating": 2
-        }, {
-            "name": "C5B 2E6",
-            "company": "Macromedia",
-            "price": "Rs.7,935",
-            "rating": 1
-        }, {
-            "name": "G9Z 5X7",
-            "company": "Microsoft",
-            "price": "Rs.6,260",
-            "rating": 5
-        }, {
-            "name": "R9N 6F4",
-            "company": "Lavasoft",
-            "price": "Rs.9,963",
-            "rating": 1
-        }, {
-            "name": "I8K 1Y9",
-            "company": "Chami",
-            "price": "Rs.5,001",
-            "rating": 5
-        }, {
-            "name": "M6C 1G2",
-            "company": "Cakewalk",
-            "price": "Rs.6,820",
-            "rating": 4
-        }, {
-            "name": "B9G 8O9",
-            "company": "Borland",
-            "price": "Rs.8,185",
-            "rating": 4
-        }, {
-            "name": "F9Y 8Q9",
-            "company": "Sibelius",
-            "price": "Rs.5,129",
-            "rating": 3
-        }, {
-            "name": "W0W 7Y7",
-            "company": "Finale",
-            "price": "Rs.6,774",
-            "rating": 1
-        }, {
-            "name": "V9S 9B1",
-            "company": "Sibelius",
-            "price": "Rs.5,627",
-            "rating": 3
-        }, {
-            "name": "K1R 8P1",
-            "company": "Sibelius",
-            "price": "Rs.8,179",
-            "rating": 5
-        }, {
-            "name": "I1X 6M0",
-            "company": "Finale",
-            "price": "Rs.5,607",
-            "rating": 4
-        }, {
-            "name": "K5W 0Z6",
-            "company": "Sibelius",
-            "price": "Rs.9,854",
-            "rating": 4
-        }, {
-            "name": "D7U 7E0",
-            "company": "Microsoft",
-            "price": "Rs.5,699",
-            "rating": 3
-        }, {
-            "name": "S6U 6C1",
-            "company": "Apple Systems",
-            "price": "Rs.9,765",
-            "rating": 3
-        }, {
-            "name": "S6N 0Y9",
-            "company": "Sibelius",
-            "price": "Rs.9,990",
-            "rating": 5
-        }, {
-            "name": "B2I 6L6",
-            "company": "Yahoo",
-            "price": "Rs.6,344",
-            "rating": 3
-        }];
-        $scope.products = _.chunk($scope.products, 2);
+
+        $scope.pageno = 0;
+        $scope.keepscrolling = true;
+        $scope.brandid = $stateParams.brand;
+        $scope.parent = $stateParams.parent;
+        $scope.category = $stateParams.category;
+        $scope.products = [];
+
+        var getproductbybrandcallback = function(data, status) {
+            _.each(data.queryresult, function(n) {
+                if (n.isfavid) {
+                    n.fav = "fav";
+                }
+                $scope.products.push(n);
+            });
+            $scope.products = _.chunk($scope.products, 2);
+            console.log($scope.products);
+
+            if ($scope.products == "") {
+                $scope.dataload = "No data found";
+            }
+        }
+
+        $scope.addMoreItems = function() {
+            ++$scope.pageno;
+            if ($scope.brandid != 0) {
+                MyServices.getproductbybrand($scope.brandid, $scope.pageno, getproductbybrandcallback);
+            } else if ($scope.parent != 0 || $scope.category != 0) {
+                MyServices.getproductbycategory($scope.pageno, $scope.parent, $scope.category, getproductbybrandcallback);
+            } else {
+                MyServices.getallproduct($scope.pageno, getproductbybrandcallback);
+            }
+        }
+        $scope.addMoreItems();
+
+
     })
     .controller('ProductDetailCtrl', function($scope, $stateParams, $rootScope, $ionicScrollDelegate) {
         $rootScope.transparent_header = true;
@@ -576,90 +480,71 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         };
 
     })
-    .controller('BrandsCtrl', function($scope, $stateParams, $rootScope) {
-        $rootScope.nosearch = true;
-        $scope.brands = [{
-            image: "img/brands/acmemade.jpeg"
-        }, {
-            image: "img/brands/Adidas.png"
 
-        }, {
-            image: "img/brands/adonit.png"
+//dhaval start
+.controller('BrandsCtrl', function($scope, $stateParams, $rootScope, MyServices, $location, $ionicLoading) {
+    $rootScope.nosearch = true;
+    allfunction.loading();
+    var lastpage = 1;
+    $scope.pageno = 0;
+    $scope.keepscrolling = true;
+    $scope.brandimages = [];
 
-        }, {
-            image: "img/brands/apple.png"
-
-        }, {
-            image: "img/brands/autodrive.png"
-
-        }, {
-            image: "img/brands/autodrive.png"
-
-        }, {
-            image: "img/brands/beats.png"
-
-        }, {
-            image: "img/brands/dell.png"
-
-        }, {
-            image: "img/brands/gstarraw.png"
-
-        }, {
-            image: "img/brands/dolcegabbana.jpg"
-
-        }, {
-            image: "img/brands/gas.jpg"
-        }, {
-            image: "img/brands/hp.png"
-
-        }, {
-            image: "img/brands/jackjones.png"
-
-        }, {
-            image: "img/brands/levis.png"
-
-        }, {
-            image: "img/brands/logo.png"
-
-        }, {
-            image: "img/brands/motorola.png"
-
-        }, {
-            image: "img/brands/sony.png"
-
-        }, {
-            image: "img/brands/tommy.jpg"
-        }];
-        $scope.brands = _.chunk($scope.brands, 3);
-    })
-    .controller('AboutCtrl', function($scope, $ionicScrollDelegate, $stateParams) {
-        $scope.activate = true;
-        $scope.tab = {
-            left: true,
-            right: false
-        }
-        $scope.clickTab = function(side) {
-            $ionicScrollDelegate.scrollTop(true);
-            if (side === "left") {
-                $scope.tab.left = true;
-                $scope.tab.right = false;
-            } else {
-                $scope.tab.right = true;
-                $scope.tab.left = false;
-                console.log("here");
+    $scope.addMoreItems = function() {
+        console.log("load more brands");
+        ++$scope.pageno;
+        MyServices.getbrand($scope.pageno, function(data, status) {
+            console.log(data);
+            if (data.queryresult.length == 0) {
+                $scope.keepscrolling = false;
             }
-        };
-        $scope.clientele = [{
-            image: 'img/clientele/BipashaBasu.JPG',
-            caption: 'Lorem ipsum dolor sit amet eni'
-        }, {
-            image: 'img/clientele/KarishmaKapoor.jpg',
-            caption: 'consectetur adipisicing elit.'
-        }, {
-            image: 'img/clientele/PoojaBhatt.jpeg',
-            caption: 'assumenda ipsam minus '
-        }, {
-            image: 'img/clientele/YusufPathan.JPG',
-            caption: 'sequi aliquam pariatur unde nihil '
-        }];
-    });
+            _.each(data.queryresult, function(n) {
+                $scope.brandimages.push(n);
+            });
+            $scope.brands = _.chunk($scope.brandimages, 3);
+            lastpage = data.lastpage;
+            $ionicLoading.hide();
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+            // $scope.$broadcast('scroll.refreshComplete');
+        });
+    }
+    $scope.addMoreItems();
+
+    $scope.getproductbybrand = function(id) {
+        $location.url("app/product/" + 0 + "/" + 0 + "/" + id);
+    }
+})
+
+//dhaval end
+
+.controller('AboutCtrl', function($scope, $ionicScrollDelegate, $stateParams) {
+    $scope.activate = true;
+    $scope.tab = {
+        left: true,
+        right: false
+    }
+    $scope.clickTab = function(side) {
+        $ionicScrollDelegate.scrollTop(true);
+        if (side === "left") {
+            $scope.tab.left = true;
+            $scope.tab.right = false;
+        } else {
+            $scope.tab.right = true;
+            $scope.tab.left = false;
+            console.log("here");
+        }
+    };
+    $scope.clientele = [{
+        image: 'img/clientele/BipashaBasu.JPG',
+        caption: 'Lorem ipsum dolor sit amet eni'
+    }, {
+        image: 'img/clientele/KarishmaKapoor.jpg',
+        caption: 'consectetur adipisicing elit.'
+    }, {
+        image: 'img/clientele/PoojaBhatt.jpeg',
+        caption: 'assumenda ipsam minus '
+    }, {
+        image: 'img/clientele/YusufPathan.JPG',
+        caption: 'sequi aliquam pariatur unde nihil '
+    }];
+});
