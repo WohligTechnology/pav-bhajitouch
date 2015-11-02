@@ -8,7 +8,7 @@ var formvalidation = function(allvalidation) {
     var isvalid2 = true;
     for (var i = 0; i < allvalidation.length; i++) {
         if (allvalidation[i].field == "" || !allvalidation[i].field || allvalidation[i].field == "Please select" || allvalidation[i].field == "Please Select") {
-            allvalidation[i].validation = "ng-dirty";
+            allvalidation[i].validation = "ng-invalid ng-dirty";
             isvalid2 = false;
         }
     }
@@ -62,7 +62,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
             }
         })
         .state('app.product', {
-            url: '/product',
+            url: '/product/:parent/:category/:brand',
             views: {
                 'menuContent': {
                     templateUrl: 'templates/product.html',
@@ -200,4 +200,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         });
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/home');
+})
+
+.filter('serverimage', function() {
+    return function(image) {
+        if (image && image != null) {
+            return adminimage + image;
+        } else {
+            return undefined;
+        }
+    };
 });
