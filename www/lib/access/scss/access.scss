@@ -1279,6 +1279,11 @@ $font-size-list:13px;
         .input-label {
             color: black;
         }
+        input{
+           ::-webkit-input-placeholder {
+        color: #ddd;
+    }
+        }
         textarea {
             resize: none;
             width: 100%;
