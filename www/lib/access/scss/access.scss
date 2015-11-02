@@ -3,7 +3,7 @@ $light: #ffffff !default;
 $stable: #f8f8f8 !default;
 $positive: #7ee1ea !default;
 $calm: #7EE1EA !default;
-$balanced: #d34836   !default;
+$balanced: #d34836 !default;
 $energized: #ffc900 !default;
 $assertive: #ef473a !default;
 $royal: #3b5998 !default;
@@ -514,11 +514,11 @@ $font-size-list:13px;
         width: 100%;
         padding: 0px 5px;
     }
-    .btn-filter{
-    width: 88%;
-            margin: 20px 20px 15px 20px;
-            font-size: 13px !important;
-            text-transform: uppercase;
+    .btn-filter {
+        width: 88%;
+        margin: 20px 20px 15px 20px;
+        font-size: 13px !important;
+        text-transform: uppercase;
     }
 }
 
@@ -1055,8 +1055,8 @@ $font-size-list:13px;
                 @extend .login-button;
             }
         }
-        textarea{
-        resize: none;
+        textarea {
+            resize: none;
         }
     }
 }
@@ -1296,4 +1296,9 @@ $font-size-list:13px;
         padding: 10px 20px 10px 20px;
         span {}
     }
+}
+
+.ng-invalid.ng-dirty {
+    /*   border-bottom: 1px solid red !important;*/
+    border-bottom: 2px solid red !important;
 }

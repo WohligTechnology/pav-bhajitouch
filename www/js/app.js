@@ -4,10 +4,20 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers'])
+var formvalidation = function(allvalidation) {
+    var isvalid2 = true;
+    for (var i = 0; i < allvalidation.length; i++) {
+        if (allvalidation[i].field == "" || !allvalidation[i].field || allvalidation[i].field == "Please select" || allvalidation[i].field == "Please Select") {
+            allvalidation[i].validation = "ng-dirty";
+            isvalid2 = false;
+        }
+    }
+    return isvalid2;
+}
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
-.run(function ($ionicPlatform, $rootScope) {
-    $ionicPlatform.ready(function () {
+.run(function($ionicPlatform, $rootScope) {
+    $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
         $rootScope.transparent_header = false;
@@ -23,7 +33,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     });
 })
 
-.config(function ($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
 
         .state('app', {
@@ -33,7 +43,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         controller: 'AppCtrl'
     })
 
-        .state('app.home', {
+    .state('app.home', {
             url: '/home',
             views: {
                 'menuContent': {
@@ -179,7 +189,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                 }
             }
         })
-    .state('app.editinfo', {
+        .state('app.editinfo', {
             url: '/editinfo',
             views: {
                 'menuContent': {

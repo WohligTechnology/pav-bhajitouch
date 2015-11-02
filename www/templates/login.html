@@ -7,16 +7,15 @@
     </ion-header-bar>
     <ion-content>
         <div class="login">
-
             <form ng-submit="doLogin()">
                 <div class="list login-form">
                     <label class="item item-input item-floating-label">
-                        <span class="input-label">Username</span>
-                        <input type="text" placeholder="Username">
+                        <span class="input-label">Email</span>
+                        <input type="email" placeholder="Email" ng-model="loginData.email" ng-class="allvalidation[0].validation">
                     </label>
                     <label class="item item-input item-floating-label">
                         <span class="input-label">Password</span>
-                        <input type="password" placeholder="Password">
+                        <input type="password" placeholder="Password" ng-model="loginData.password" ng-class="allvalidation[1].validation">
                     </label>
                     <button class="button button-positive login-button" type="submit">Log in</button>
                     <div class="log">

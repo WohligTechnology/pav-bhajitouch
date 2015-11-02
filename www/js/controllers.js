@@ -1,52 +1,94 @@
+var allfunction = {};
 angular.module('starter.controllers', ['ui.bootstrap'])
 
-.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $location, $ionicPopup, $rootScope) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $location, $ionicPopup, $rootScope, MyServices, $ionicLoading) {
     $rootScope.transparent_header = false;
-
+    $scope.userSignup = {};
+    $scope.loginData = {};
     $scope.searchbar = false;
-    $scope.search = function () {
+    allfunction.msg = function(msg, title) {
+        var myPopup = $ionicPopup.show({
+            template: '<p class="text-center">' + msg + '!</p>',
+            title: title,
+            scope: $scope,
+        });
+        $timeout(function() {
+            myPopup.close(); //close the popup after 3 seconds for some reason
+        }, 2500);
+    };
+    allfunction.loading = function() {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-positive"></ion-spinner>'
+        });
+        $timeout(function() {
+            $ionicLoading.hide();
+        }, 5000);
+    };
+    $scope.search = function() {
         $scope.searchbar = $scope.searchbar === true ? false : true;
     };
     $scope.user = {
         cart: 1
     };
-    $scope.cartCheck = function () {
+    $scope.cartCheck = function() {
         if ($scope.user.cart === 0)
             $scope.showAlert();
         else
             $location.path('/app/cart');
     };
-    $scope.showAlert = function () {
+    $scope.showAlert = function() {
         var alertPopup = $ionicPopup.alert({
             title: 'Cart',
             template: 'There is nothing here. Keep shopping!'
         });
-        alertPopup.then(function (res) {
+        alertPopup.then(function(res) {
             console.log('Thank you for not eating my delicious ice cream cone');
         });
     };
-
-    $scope.loginData = {};
     //    -------------------LOGIN MODAL---------------------
     $ionicModal.fromTemplateUrl('templates/login.html', {
         scope: $scope
-    }).then(function (modal) {
+    }).then(function(modal) {
         $scope.modal = modal;
     });
-    $scope.closeLogin = function () {
+    $scope.closeLogin = function() {
         $scope.modal.hide();
     };
-    $scope.login = function () {
+    $scope.login = function() {
         $scope.modal.show();
         $scope.closeSignup();
     };
-    $scope.doLogin = function () {
-        console.log('Doing login', $scope.loginData);
-        $timeout(function () {
-            $scope.closeLogin();
-        }, 1000);
+    
+    $scope.doLogin = function() {
+        $scope.allvalidation = [{
+            field: $scope.loginData.email,
+            validation: ""
+        }, {
+            field: $scope.loginData.password,
+            validation: ""
+        }];
+        var check = formvalidation($scope.allvalidation);
+        if (check) {
+            console.log($scope.loginData);
+            // allfunction.loading();
+            MyServices.login($scope.loginData, function(data) {
+                console.log(data);
+                //     if (data != "false") {
+                //         console.log(data);
+                //         $ionicLoading.hide();
+                //         MyServices.setUser(data);
+                //         $location.path("/app/home");
+                //     } else {
+                //         console.log(data);
+                //         $ionicLoading.hide();
+                //         allfunction.msg("Email & Password Did Not Match", 'Error!');
+                //     }
+            });
+        } else {
+            allfunction.msg("Fill all mandatory fields", "Error !");
+        }
     };
-    $scope.openSignup = function () {
+    $scope.openSignup = function() {
         //        $scope.closeLogin();
         $scope.signup();
     };
@@ -55,41 +97,79 @@ angular.module('starter.controllers', ['ui.bootstrap'])
     //    --------------------SIGNUP MODAL-------------------------
     $ionicModal.fromTemplateUrl('templates/signup.html', {
         scope: $scope
-    }).then(function (modal) {
+    }).then(function(modal) {
         $scope.modalSignup = modal;
     });
-    $scope.closeSignup = function () {
+    $scope.closeSignup = function() {
+        $scope.userSignup = {};
         $scope.modalSignup.hide();
     };
-    $scope.signup = function () {
+    $scope.signup = function() {
         $scope.modalSignup.show();
+        $scope.closeLogin();
     };
-    $scope.doSignup = function () {
-        console.log('Doing Signup', $scope.loginData);
-        $timeout(function () {
-            $scope.closeLogin();
-        }, 1000);
+    $scope.doSignup = function() {
+        $scope.allvalidation = [{
+            field: $scope.userSignup.firstname,
+            validation: ""
+        }, {
+            field: $scope.userSignup.lastname,
+            validation: ""
+        }, {
+            field: $scope.userSignup.email,
+            validation: ""
+        }, {
+            field: $scope.userSignup.password,
+            validation: ""
+        }, {
+            field: $scope.userSignup.confirmpassword,
+            validation: ""
+        }];
+        var check = formvalidation($scope.allvalidation);
+        if (check) {
+            if ($scope.userSignup.password === $scope.userSignup.confirmpassword) {
+                console.log($scope.userSignup);
+                allfunction.loading();
+                MyServices.registerUser($scope.userSignup, function(data) {
+                    if (data != "false") {
+                        console.log(data);
+                        $ionicLoading.hide();
+                        MyServices.setUser(data);
+                        $scope.closeSignup();
+                        $location.path("/app/home");
+                    } else {
+                        console.log(data);
+                        $ionicLoading.hide();
+                        allfunction.msg("This Email Id is already registered with us or Error In Registration", 'Error!');
+                    }
+                });
+            } else {
+                allfunction.msg('Password did not match, Please re-enter password', 'Password Mis-match');
+            }
+        } else {
+            allfunction.msg("Fill all mandatory fields", "Error !");
+        }
     };
     //    -----------------END- SIGNUP MODAL-------------------------
     //   ---------------------FORGOT PASSWORD
     $ionicModal.fromTemplateUrl('templates/forgotpassword.html', {
         scope: $scope
-    }).then(function (modal) {
+    }).then(function(modal) {
         $scope.modalFrgt = modal;
     });
-    $scope.closeFrgt = function () {
+    $scope.closeFrgt = function() {
         $scope.modalFrgt.hide();
     };
-    $scope.frgt = function () {
+    $scope.frgt = function() {
         $scope.modalFrgt.show();
     };
-    $scope.doFrgt = function () {
+    $scope.doFrgt = function() {
         console.log('Doing Signup', $scope.loginData);
-        $timeout(function () {
+        $timeout(function() {
             $scope.closeLogin();
         }, 1000);
     };
-    $scope.openFrgt = function () {
+    $scope.openFrgt = function() {
         //        $scope.closeLogin();
         $scope.frgt();
     };
@@ -97,48 +177,48 @@ angular.module('starter.controllers', ['ui.bootstrap'])
     //   ---------------------FILTERS
     $ionicModal.fromTemplateUrl('templates/filters.html', {
         scope: $scope
-    }).then(function (modal) {
+    }).then(function(modal) {
         $scope.modalFilter = modal;
     });
-    $scope.closeFilter = function () {
+    $scope.closeFilter = function() {
         $scope.modalFilter.hide();
     };
-    $scope.filter = function () {
+    $scope.filter = function() {
         $scope.modalFilter.show();
     };
-    $scope.doFilter = function () {
+    $scope.doFilter = function() {
         console.log('Doing Signup', $scope.loginData);
-        $timeout(function () {
+        $timeout(function() {
             $scope.closeLogin();
         }, 1000);
     };
-    $scope.openFilter = function () {
+    $scope.openFilter = function() {
         //        $scope.closeLogin();
         $scope.filter();
     };
     //    --------------------END- FILTERS
 })
 
-.controller('HomeCtrl', function ($scope) {
+.controller('HomeCtrl', function($scope) {
         $scope.slides = [{
             image: "img/slider/1.jpg",
 
-    }, {
+        }, {
             image: "img/slider/2.jpg",
 
-    }, {
+        }, {
             image: "img/slider/3.jpg",
 
-    }];
+        }];
     })
-    .controller('DealsCtrl', function ($scope, $stateParams) {})
-    .controller('NewArrivalsCtrl', function ($scope, $stateParams) {})
-    .controller('MyAccountCtrl', function ($scope, $stateParams) {})
-    .controller('EditInfoCtrl', function ($scope, $ionicScrollDelegate, $stateParams) {
+    .controller('DealsCtrl', function($scope, $stateParams) {})
+    .controller('NewArrivalsCtrl', function($scope, $stateParams) {})
+    .controller('MyAccountCtrl', function($scope, $stateParams) {})
+    .controller('EditInfoCtrl', function($scope, $ionicScrollDelegate, $stateParams) {
         $scope.edit_save = "Edit information";
         $scope.disabled = true;
         $scope.saved = false;
-        $scope.editSave = function () {
+        $scope.editSave = function() {
             if ($scope.edit_save === "Edit information") {
                 $scope.edit_save = "Save";
                 $scope.disabled = false;
@@ -153,76 +233,75 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         }
     })
 
-.controller('ContactUsCtrl', function ($scope, $stateParams) {})
-    .controller('ProductCategoriesCtrl', function ($scope, $stateParams) {
-      $scope.oneAtATime = true;
+.controller('ContactUsCtrl', function($scope, $stateParams) {})
+    .controller('ProductCategoriesCtrl', function($scope, $stateParams) {
+        $scope.oneAtATime = true;
         $scope.category = [{
-                title: "Cover & Cases",
-                submenu: [
+            title: "Cover & Cases",
+            submenu: [
 
-                    "Iphone Covers",
-                    "Samsung Covers",
-                    "Sony Covers",
-                    "Yureka Covers",
-                    "Micromax Covers"
-                                        ]
-                                },
-            {
-                title: "Mobiles",
-                submenu: [
+                "Iphone Covers",
+                "Samsung Covers",
+                "Sony Covers",
+                "Yureka Covers",
+                "Micromax Covers"
+            ]
+        }, {
+            title: "Mobiles",
+            submenu: [
 
-                    "iPhone",
-                    "Samsung",
-                    "Sony",
-                    "Yureka",
-                    "Micromax"
-                                        ]
-                                }, {
-                title: "Headphones",
-                submenu: [
+                "iPhone",
+                "Samsung",
+                "Sony",
+                "Yureka",
+                "Micromax"
+            ]
+        }, {
+            title: "Headphones",
+            submenu: [
 
-                    "Beats",
-                    "Sony",
-                    "JBL"
-                                        ]
-                                },{
-                title: "Accessories",
-                submenu: [
+                "Beats",
+                "Sony",
+                "JBL"
+            ]
+        }, {
+            title: "Accessories",
+            submenu: [
 
-                    "Tech Accesories",
-                    "Bags",
-                    "Belt"
-                                        ]
-                    },{
-                title: "Watches",
-                submenu: [
+                "Tech Accesories",
+                "Bags",
+                "Belt"
+            ]
+        }, {
+            title: "Watches",
+            submenu: [
 
-                    "Analog",
-                    "Chronograph",
-                    "Digital",
-                    "Watch Cases"
-                                        ]
-                    },{
-                title: "Laptops",
-                submenu: [
+                "Analog",
+                "Chronograph",
+                "Digital",
+                "Watch Cases"
+            ]
+        }, {
+            title: "Laptops",
+            submenu: [
 
-                    "Lenevo",
-                    "Dell",
-                    "Samsung",
-                    "Asus" ,"Apple"
-                                        ]
-                    }];
+                "Lenevo",
+                "Dell",
+                "Samsung",
+                "Asus", "Apple"
+            ]
+        }];
     })
-    .controller('CartCtrl', function ($scope, $stateParams, $location, $ionicHistory) {
-        $scope.goHome = function () {
+    .controller('CartCtrl', function($scope, $stateParams, $location, $ionicHistory) {
+        $scope.goHome = function() {
             console.log($ionicHistory.viewHistory());
             $location.path('app/home');
         };
     })
-    .controller('CheckoutCtrl', function ($scope, $stateParams) {
+    .controller('CheckoutCtrl', function($scope, $stateParams) {
         $scope.different_address = false;
         $scope.address_select = "Ship to different address";
-        $scope.toggleAddress = function () {
+        $scope.toggleAddress = function() {
             if ($scope.different_address === false) {
                 $scope.different_address = true;
                 $scope.address_select = "Ship to same address";
@@ -233,7 +312,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         };
         $scope.openbilling = false;
 
-        $scope.continue = function (ch) {
+        $scope.continue = function(ch) {
             if (ch === 'login') {
                 $scope.openbilling = false;
                 $scope.login();
@@ -242,74 +321,74 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             }
         };
     })
-    .controller('MyOrdersCtrl', function ($scope, $stateParams, $location, $ionicHistory) {
+    .controller('MyOrdersCtrl', function($scope, $stateParams, $location, $ionicHistory) {
 
     })
-    .controller('MyWishlistCtrl', function ($scope, $stateParams, $location, $ionicHistory) {
+    .controller('MyWishlistCtrl', function($scope, $stateParams, $location, $ionicHistory) {
 
     })
-    .controller('DistributionCtrl', function ($scope, $stateParams) {
+    .controller('DistributionCtrl', function($scope, $stateParams) {
         $scope.brands = [{
             image: "img/brands/acmemade.jpeg"
-                                    }, {
+        }, {
             image: "img/brands/Adidas.png"
 
-                                    }, {
+        }, {
             image: "img/brands/adonit.png"
 
-                                    }, {
+        }, {
             image: "img/brands/apple.png"
 
-                                    }, {
+        }, {
             image: "img/brands/autodrive.png"
 
-                                    }, {
+        }, {
             image: "img/brands/autodrive.png"
 
-                                    }, {
+        }, {
             image: "img/brands/beats.png"
 
-                                    }, {
+        }, {
             image: "img/brands/dell.png"
 
-                                    }, {
+        }, {
             image: "img/brands/gstarraw.png"
 
-                                    }, {
+        }, {
             image: "img/brands/dolcegabbana.jpg"
 
-                                    }, {
+        }, {
             image: "img/brands/gas.jpg"
-                                    }, {
+        }, {
             image: "img/brands/hp.png"
 
-                                    }, {
+        }, {
             image: "img/brands/jackjones.png"
 
-                                    }, {
+        }, {
             image: "img/brands/levis.png"
 
-                                    }, {
+        }, {
             image: "img/brands/logo.png"
 
-                                    }, {
+        }, {
             image: "img/brands/motorola.png"
 
-                                    }, {
+        }, {
             image: "img/brands/sony.png"
 
-                                    }, {
+        }, {
             image: "img/brands/tommy.jpg"
-                                            }];
+        }];
         $scope.brands = _.chunk($scope.brands, 3);
     })
-    .controller('ProductCtrl', function ($scope, $stateParams, $timeout, $rootScope) {
+    .controller('ProductCtrl', function($scope, $stateParams, $timeout, $rootScope) {
         $scope.addwishlist = false;
         $rootScope.transparent_header = false;
         console.log($rootScope.transparent_header);
         $scope.params = $stateParams;
 
-        $scope.addWishlist = function () {
+        $scope.addWishlist = function() {
             $scope.addwishlist = true;
             console.log($scope.addwishlist);
         };
@@ -466,7 +545,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         }];
         $scope.products = _.chunk($scope.products, 2);
     })
-    .controller('ProductDetailCtrl', function ($scope, $stateParams, $rootScope, $ionicScrollDelegate) {
+    .controller('ProductDetailCtrl', function($scope, $stateParams, $rootScope, $ionicScrollDelegate) {
         $rootScope.transparent_header = true;
         $scope.activate = true;
         $scope.tab = {
@@ -474,7 +553,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             right: false
         }
         var i = 0;
-        $scope.pageScrolled = function () {
+        $scope.pageScrolled = function() {
             console.log(++i);
             if ($ionicScrollDelegate.getScrollPosition().top > 240) {
                 $rootScope.transparent_header = false;
@@ -484,7 +563,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
                 $scope.$apply();
             }
         };
-        $scope.clickTab = function (side) {
+        $scope.clickTab = function(side) {
 
             if (side === "left") {
                 $scope.tab.left = true;
@@ -497,69 +576,69 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         };
 
     })
-    .controller('BrandsCtrl', function ($scope, $stateParams, $rootScope) {
+    .controller('BrandsCtrl', function($scope, $stateParams, $rootScope) {
         $rootScope.nosearch = true;
         $scope.brands = [{
             image: "img/brands/acmemade.jpeg"
-                                    }, {
+        }, {
             image: "img/brands/Adidas.png"
 
-                                    }, {
+        }, {
             image: "img/brands/adonit.png"
 
-                                    }, {
+        }, {
             image: "img/brands/apple.png"
 
-                                    }, {
+        }, {
             image: "img/brands/autodrive.png"
 
-                                    }, {
+        }, {
             image: "img/brands/autodrive.png"
 
-                                    }, {
+        }, {
             image: "img/brands/beats.png"
 
-                                    }, {
+        }, {
             image: "img/brands/dell.png"
 
-                                    }, {
+        }, {
             image: "img/brands/gstarraw.png"
 
-                                    }, {
+        }, {
             image: "img/brands/dolcegabbana.jpg"
 
-                                    }, {
+        }, {
             image: "img/brands/gas.jpg"
-                                    }, {
+        }, {
             image: "img/brands/hp.png"
 
-                                    }, {
+        }, {
             image: "img/brands/jackjones.png"
 
-                                    }, {
+        }, {
             image: "img/brands/levis.png"
 
-                                    }, {
+        }, {
             image: "img/brands/logo.png"
 
-                                    }, {
+        }, {
             image: "img/brands/motorola.png"
 
-                                    }, {
+        }, {
             image: "img/brands/sony.png"
 
-                                    }, {
+        }, {
             image: "img/brands/tommy.jpg"
-                                            }];
+        }];
         $scope.brands = _.chunk($scope.brands, 3);
     })
-    .controller('AboutCtrl', function ($scope, $ionicScrollDelegate, $stateParams) {
+    .controller('AboutCtrl', function($scope, $ionicScrollDelegate, $stateParams) {
         $scope.activate = true;
         $scope.tab = {
             left: true,
             right: false
         }
-        $scope.clickTab = function (side) {
+        $scope.clickTab = function(side) {
             $ionicScrollDelegate.scrollTop(true);
             if (side === "left") {
                 $scope.tab.left = true;
