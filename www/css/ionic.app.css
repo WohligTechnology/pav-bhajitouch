@@ -864,6 +864,10 @@ $dark:                            #444 !default;
   background-color: rgba(173, 255, 47, 0.5);
   padding: 10px 20px 10px 20px; }
 
+.ng-invalid.ng-dirty {
+  /*   border-bottom: 1px solid red !important;*/
+  border-bottom: 2px solid red !important; }
+
 /*!
   Ionicons, v2.0.1
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
