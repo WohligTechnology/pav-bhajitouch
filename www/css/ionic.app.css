@@ -852,6 +852,8 @@ $dark:                            #444 !default;
   padding: 0 0 0 10px; }
   .edit-information .item .input-label {
     color: black; }
+  .edit-information .item input ::-webkit-input-placeholder {
+    color: #ddd; }
   .edit-information .item textarea {
     resize: none;
     width: 100%; }
@@ -867,6 +869,12 @@ $dark:                            #444 !default;
 .ng-invalid.ng-dirty {
   /*   border-bottom: 1px solid red !important;*/
   border-bottom: 2px solid red !important; }
+
+.black::-webkit-input-placeholder {
+  color: #888 !important; }
+
+.black::-moz-placeholder {
+  color: #888 !important; }
 
 /*!
   Ionicons, v2.0.1

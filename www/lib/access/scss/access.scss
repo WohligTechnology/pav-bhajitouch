@@ -1279,10 +1279,10 @@ $font-size-list:13px;
         .input-label {
             color: black;
         }
-        input{
-           ::-webkit-input-placeholder {
-        color: #ddd;
-    }
+        input {
+            ::-webkit-input-placeholder {
+                color: #ddd;
+            }
         }
         textarea {
             resize: none;
@@ -1306,4 +1306,12 @@ $font-size-list:13px;
 .ng-invalid.ng-dirty {
     /*   border-bottom: 1px solid red !important;*/
     border-bottom: 2px solid red !important;
+}
+
+.black::-webkit-input-placeholder {
+    color: #888 !important;
+}
+
+.black::-moz-placeholder {
+    color: #888 !important;
 }
