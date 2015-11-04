@@ -1,4 +1,5 @@
 var allfunction = {};
+var myfunction = '';
 angular.module('starter.controllers', ['ui.bootstrap'])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, $location, $ionicPopup, $rootScope, MyServices, $ionicLoading) {
@@ -7,6 +8,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
     $scope.loginData = {};
     $scope.forgot = {};
     $scope.searchbar = false;
+
     allfunction.msg = function(msg, title) {
         var myPopup = $ionicPopup.show({
             template: '<p class="text-center">' + msg + '!</p>',
@@ -25,14 +27,28 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             $ionicLoading.hide();
         }, 5000);
     };
-    $scope.search = function() {
-        $scope.searchbar = $scope.searchbar === true ? false : true;
-    };
+
     $scope.user = {
         cart: 1
     };
+    myfunction = function() {
+        MyServices.gettotalcart(function(data) {
+            console.log("totalcart = " + data);
+            $scope.user.cart = data;
+        });
+        MyServices.totalcart(function(data) {
+            console.log("totalamount = " + data);
+            $scope.amount = data;
+        });
+    }
+    myfunction();
+
+    $scope.search = function() {
+        $scope.searchbar = $scope.searchbar === true ? false : true;
+    };
     $scope.cartCheck = function() {
-        if ($scope.user.cart === 0)
+        console.log($scope.user.cart);
+        if ($scope.user.cart == 0)
             $scope.showAlert();
         else
             $location.path('/app/cart');
@@ -76,10 +92,15 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             MyServices.login($scope.loginData, function(data) {
                 console.log(data);
                 if (data != "false") {
-                    $ionicLoading.hide();
-                    MyServices.setuser(data);
-                    $scope.closeLogin();
-                    $location.path("/app/home");
+                    MyServices.authenticate(function(data) {
+                            console.log(data);
+                            if (data != 'false') {
+                                $ionicLoading.hide();
+                                MyServices.setuser(data);
+                                $scope.closeLogin();
+                            }
+                        })
+                        // $location.path("/app/home");
                 } else {
                     $ionicLoading.hide();
                     allfunction.msg("Email & Password Did Not Match", 'Error!');
@@ -440,13 +461,157 @@ angular.module('starter.controllers', ['ui.bootstrap'])
 
 })
 
-.controller('CartCtrl', function($scope, $stateParams, $location, $ionicHistory) {
-        $scope.goHome = function() {
-            console.log($ionicHistory.viewHistory());
-            $location.path('app/home');
-        };
-    })
-    .controller('CheckoutCtrl', function($scope, $stateParams) {
+.controller('CartCtrl', function($scope, $stateParams, $location, $ionicHistory, MyServices) {
+    $scope.goHome = function() {
+        console.log($ionicHistory.viewHistory());
+        $location.path('app/home');
+    };
+
+    $scope.gettotalcartfunction = function() {
+        MyServices.totalcart(function(data) {
+            $scope.totalcart = data;
+        });
+    }
+
+    $scope.gettotalcartfunction();
+
+    //check coupons
+    $scope.discountamount = 0;
+
+    function calcdiscountamount() {
+        var data = MyServices.getcoupondetails();
+        var subtotal = parseFloat($scope.totalcart);
+        console.log(data);
+        if (data.coupontype == '1') {
+            if (data.discountpercent != '0') {
+                console.log("ABC");
+                $scope.ispercent = parseFloat(data.discountpercent);
+                $scope.discountamount = (subtotal * $scope.ispercent / 100);
+            } else {
+                $scope.isamount = parseFloat(data.discountamount);
+                console.log("ABCD");
+                $scope.discountamount = $scope.isamount;
+            }
+        }
+        if (data.coupontype == '2') {
+            console.log($scope.cart);
+
+            var totallength = 0;
+            _.each($scope.cart, function(cart) {
+                totallength += parseInt(cart.qty);
+            });
+            var xproducts = parseInt(data.xproducts);
+            var yproducts = parseInt(data.yproducts);
+            var itter = Math.floor(totallength / xproducts) * yproducts;
+            console.log("ITTER " + itter);
+            var newcart = _.sortBy($scope.cart, function(cart) {
+                cart.price = parseFloat(cart.price);
+                cart.qty2 = parseInt(cart.qty);
+                return parseFloat(cart.price);
+            });
+            //newcart=_.each(newcart, function(cart){  cart.price=parseFloat(cart.price);cart.qty=parseFloat(cart.qty); });
+            console.log(newcart);
+            $scope.discountamount = 0;
+            for (var i = 0; i < itter; i++) {
+                if (newcart[i].qty2 != 0) {
+                    newcart[i].qty2--;
+                    $scope.discountamount += newcart[i].price;
+                }
+
+            }
+        }
+        if (data.coupontype == '4') {
+            console.log("FREE DELIVERY APPLIED");
+            $scope.isfreedelivery = "Free Delivery";
+            $scope.discountamount = 0;
+        }
+        $.jStorage.set("discountamount", $scope.discountamount);
+    };
+
+    $scope.tocheckout = function() {
+        $.jStorage.set("discountamount", $scope.discountamount);
+        $location.url("/checkout");
+    }
+
+    var coupondetails = {};
+    $scope.ispercent = 0;
+    $scope.isamount = 0;
+    $scope.isfreedelivery = 0;
+    $scope.discountamount = 0;
+    var couponsuccess = function(data, status) {
+        if (data == 'false') {
+            $scope.validcouponcode = 0;
+        } else {
+            console.log("Show it");
+            $scope.validcouponcode = 1;
+
+            MyServices.setcoupondetails(data);
+            calcdiscountamount();
+
+        }
+    }
+
+    $scope.checkcoupon = function(couponcode) {
+        console.log(couponcode);
+        MyServices.getdiscountcoupon(couponcode).success(couponsuccess);
+    };
+
+    //discrount coupons
+
+    // add and subtract from cart
+    var cartt = function(data, status) {
+        console.log(data);
+        $scope.gettotalcartfunction();
+        $scope.getcartfunction();
+        myfunction();
+    };
+
+    $scope.changeqty = function(mycart, option) {
+        if (option == '+') {
+            ++mycart.qty;
+        } else {
+            if (mycart.qty > 1)
+                --mycart.qty;
+        }
+        var selectedproduct = {};
+        selectedproduct.product = mycart.id;
+        selectedproduct.productname = mycart.options.realname;
+        selectedproduct.price = mycart.price;
+        selectedproduct.quantity = mycart.qty;
+        MyServices.addtocart(selectedproduct, cartt);
+    };
+
+    //add and subtract from cart
+
+    $scope.getcartfunction = function() {
+        MyServices.getcart(function(data) {
+            console.log(data);
+            $scope.cart = data;
+            if (data == '') {
+                $scope.nodatafound = true;
+                $scope.nodata = "No Data found.";
+            } else {
+                $scope.nodatafound = false;
+            }
+        });
+    }
+
+    $scope.getcartfunction();
+
+    //delete cart
+    $scope.deletecart = function(cart) {
+        console.log(cart);
+        MyServices.deletecart(cart.id, function(data) {
+            console.log(data);
+            $scope.getcartfunction();
+            $scope.gettotalcartfunction();
+            myfunction();
+        });
+    }
+
+})
+
+.controller('CheckoutCtrl', function($scope, $stateParams) {
         $scope.different_address = false;
         $scope.address_select = "Ship to different address";
         $scope.toggleAddress = function() {
@@ -530,10 +695,11 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         }];
         $scope.brands = _.chunk($scope.brands, 3);
     })
-    .controller('ProductCtrl', function($scope, $stateParams, $timeout, $rootScope, MyServices) {
+    .controller('ProductCtrl', function($scope, $stateParams, $timeout, $rootScope, MyServices, $ionicLoading) {
         $scope.addwishlist = false;
         $rootScope.transparent_header = false;
         $scope.params = $stateParams;
+        allfunction.loading();
 
         $scope.addWishlist = function() {
             $scope.addwishlist = true;
@@ -547,11 +713,10 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         $scope.parent = $stateParams.parent;
         $scope.category = $stateParams.category;
         $scope.productsarr = [];
-        var lastpage = 1;
 
         var getproductbybrandcallback = function(data, status) {
             console.log(data);
-            if (data == 0) {
+            if (data.queryresult.length == 0) {
                 $scope.keepscrolling = false;
             }
             _.each(data.queryresult, function(n) {
@@ -564,27 +729,25 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             $scope.products = _.chunk($scope.productsarr, 2);
             console.log($scope.products);
 
-            if ($scope.productsarr.length == 0) {
+            if (data.queryresult.length == 0 && $scope.productsarr.length == 0) {
                 $scope.shownodata = true;
             }
-            lastpage = data.lastpage;
+            $ionicLoading.hide();
         }
 
         $scope.addMoreItems = function() {
-            if (lastpage != $scope.pageno) {
-                ++$scope.pageno;
-                if ($stateParams.brand != 0) {
-                    MyServices.getproductbybrand($stateParams.brand, $scope.pageno, getproductbybrandcallback);
-                } else if ($scope.parent != 0 || $scope.category != 0) {
-                    MyServices.getproductbycategory($scope.pageno, $scope.parent, $scope.category, getproductbybrandcallback);
-                } else {
-                    MyServices.getallproduct($scope.pageno, getproductbybrandcallback);
-                }
+            ++$scope.pageno;
+            if ($stateParams.brand != 0) {
+                MyServices.getproductbybrand($stateParams.brand, $scope.pageno, getproductbybrandcallback);
+            } else if ($scope.parent != 0 || $scope.category != 0) {
+                MyServices.getproductbycategory($scope.pageno, $scope.parent, $scope.category, getproductbybrandcallback);
             } else {
-                $scope.keepscrolling = false;
+                MyServices.getallproduct($scope.pageno, getproductbybrandcallback);
             }
         }
+
         $scope.addMoreItems();
+
     })
 
 .controller('ProductDetailCtrl', function($scope, $stateParams, $rootScope, $ionicScrollDelegate, MyServices, $ionicLoading, $ionicSlideBoxDelegate, $ionicPopup, $timeout) {
@@ -612,7 +775,6 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         } else {
             $scope.tab.right = true;
             $scope.tab.left = false;
-            console.log("here");
         }
     };
 
@@ -687,7 +849,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             $timeout(function() {
                 xyz.close();
             }, 3000);
-            // myfunction();
+            myfunction();
         });
     }
 

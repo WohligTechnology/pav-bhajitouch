@@ -23,7 +23,7 @@
             </ion-nav-buttons>
             <ion-nav-buttons side="right" ng-hide="nosearch">
                 <button class="button cart-button button-icon button-clear" ng-click="cartCheck()"><i class="cart-icon icon ln-cart">
-                    <span class="custom-badge">{{user.cart}}</span>
+                    <span class="custom-badge" ng-if="user.cart != 0">{{user.cart}}</span>
                     </i>
                 </button>
                 <a href="#/app/searchresult" class="button search-button button-icon button-clear " ng-click="search()">

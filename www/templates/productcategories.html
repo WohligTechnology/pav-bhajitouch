@@ -1,8 +1,8 @@
 <ion-view view-title="Product categories">
     <ion-content>
         <div class="product-ctgry">
-            <div class="category" ng-repeat="menu in category" ng-click="getproductbycategory(menu.parent,menu.category);">
-                <ion-item class="item item-divider">{{menu.title}}</ion-item>
+            <div class="category" ng-repeat="menu in category">
+                <ion-item class="item item-divider" ng-click="getproductbycategory(menu.parent,menu.category);">{{menu.title}}</ion-item>
                 <ion-item class="product-item no-border" ng-repeat="submenu in menu.submenu" ng-click="getproductbycategory(submenu.parent,submenu.category);">
                     <span>{{submenu.name}}</span>
                 </ion-item>

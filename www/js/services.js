@@ -9,6 +9,8 @@ angular.module('starter.services', [])
 
 .factory('MyServices', function($http) {
 
+    var coupondetails = $.jStorage.get("coupon");
+
     return {
         makeactive: function(menuname) {
             for (var i = 0; i < navigation.length; i++) {
@@ -33,6 +35,9 @@ angular.module('starter.services', [])
                 method: "POST",
                 data: login
             }).success(callback);
+        },
+        authenticate: function(callback) {
+            return $http.get(adminurl + 'authenticate').success(callback);
         },
         findVillage: function(data, callback) {
             $http({
@@ -106,6 +111,41 @@ angular.module('starter.services', [])
         },
         addtocart: function(product, callback) {
             return $http.get(adminurl + 'addtocart?product=' + product.product + '&productname=' + product.productname + '&price=' + product.price + '&quantity=' + product.quantity, {}, {
+                withCredentials: true
+            }).success(callback);
+        },
+        gettotalcart: function(callback) {
+            return $http.post(adminurl + 'totalitemcart', {}, {
+                withCredentials: true
+            }).success(callback);
+        },
+        totalcart: function(callback) {
+            return $http.post(adminurl + 'totalcart', {}, {
+                withCredentials: true
+            }).success(callback);
+        },
+        getcoupondetails: function () {
+            return coupondetails;
+        },
+        setcoupondetails: function (coupon) {
+            $.jStorage.set("coupon", coupon);
+            coupondetails = coupon;
+        },
+        getdiscountcoupon: function (couponcode) {
+            return $http.post(adminurl + 'getdiscountcoupon?couponcode=' + couponcode, {}, {
+                withCredentials: true
+            });
+        },
+        getcart: function (callback) {
+            return $http({
+                url: adminurl + "showcart",
+                method: "POST",
+                withCredentials: true,
+                data: {}
+            }).success(callback);
+        },
+        deletecart: function (id, callback) {
+            return $http.get(adminurl + 'deletecart?id=' + id, {}, {
                 withCredentials: true
             }).success(callback);
         },

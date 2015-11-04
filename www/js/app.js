@@ -33,7 +33,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $httpProvider) {
+    $httpProvider.defaults.withCredentials = true;
+    $ionicConfigProvider.views.maxCache(0);
     $stateProvider
 
         .state('app', {
