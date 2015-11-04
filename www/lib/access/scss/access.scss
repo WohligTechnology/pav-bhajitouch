@@ -407,6 +407,15 @@ $font-size-list:13px;
             text-decoration: none;
         }
     }
+    .category {
+            
+            .item-divider {
+                background-color: white;
+                color: $positive;
+                border-bottom: 1px solid #7EE1EA;
+                margin-bottom: 0;
+            }
+    }
     .panel-body {
         border-top-color: white !important;
     }

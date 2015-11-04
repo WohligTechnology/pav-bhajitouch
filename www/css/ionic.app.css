@@ -288,6 +288,11 @@ $dark:                            #444 !default;
     color: #7ee1ea; }
 .product-ctgry .accordion-header a:-webkit-any-link {
   text-decoration: none; }
+.product-ctgry .category .item-divider {
+  background-color: white;
+  color: #7ee1ea;
+  border-bottom: 1px solid #7EE1EA;
+  margin-bottom: 0; }
 .product-ctgry .panel-body {
   border-top-color: white !important; }
 

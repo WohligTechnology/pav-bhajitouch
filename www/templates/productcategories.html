@@ -1,15 +1,12 @@
 <ion-view view-title="Product categories">
     <ion-content>
         <div class="product-ctgry">
-            <accordion close-others="oneAtATime">
-                <accordion-group heading="{{menu.title}}" ng-repeat="menu in category" class="accordion-header">
-                    <ion-list>
-                        <ion-item class="product-item no-border" ng-repeat="submenu in menu.submenu" href="#/app/product">
-                        <span>{{submenu}}</span>
-                        </ion-item>
-                    </ion-list>
-                </accordion-group>
-            </accordion>
+            <div class="category" ng-repeat="menu in category">
+                <ion-item class="item item-divider">{{menu.title}}</ion-item>
+                <ion-item class="product-item no-border" ng-repeat="submenu in menu.submenu" href="#/app/product">
+                    <span>{{submenu.name}}</span>
+                </ion-item>
+            </div>
         </div>
     </ion-content>
 </ion-view>
