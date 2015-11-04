@@ -1,67 +1,67 @@
 var allfunction = {};
 angular.module('starter.controllers', ['ui.bootstrap'])
 
-.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $location, $ionicPopup, $rootScope, MyServices, $ionicLoading) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $location, $ionicPopup, $rootScope, MyServices, $ionicLoading) {
     $rootScope.transparent_header = false;
     $scope.userSignup = {};
     $scope.loginData = {};
     $scope.forgot = {};
     $scope.searchbar = false;
-    allfunction.msg = function (msg, title) {
+    allfunction.msg = function(msg, title) {
         var myPopup = $ionicPopup.show({
             template: '<p class="text-center">' + msg + '!</p>',
             title: title,
             scope: $scope,
         });
-        $timeout(function () {
+        $timeout(function() {
             myPopup.close(); //close the popup after 3 seconds for some reason
         }, 2500);
     };
-    allfunction.loading = function () {
+    allfunction.loading = function() {
         $ionicLoading.show({
             template: '<ion-spinner class="spinner-positive"></ion-spinner>'
         });
-        $timeout(function () {
+        $timeout(function() {
             $ionicLoading.hide();
         }, 5000);
     };
-    $scope.search = function () {
+    $scope.search = function() {
         $scope.searchbar = $scope.searchbar === true ? false : true;
     };
     $scope.user = {
         cart: 1
     };
-    $scope.cartCheck = function () {
+    $scope.cartCheck = function() {
         if ($scope.user.cart === 0)
             $scope.showAlert();
         else
             $location.path('/app/cart');
     };
-    $scope.showAlert = function () {
+    $scope.showAlert = function() {
         var alertPopup = $ionicPopup.alert({
             title: 'Cart',
             template: 'There is nothing here. Keep shopping!'
         });
-        alertPopup.then(function (res) {
+        alertPopup.then(function(res) {
             console.log('Thank you for not eating my delicious ice cream cone');
         });
     };
     //    -------------------LOGIN MODAL---------------------
     $ionicModal.fromTemplateUrl('templates/login.html', {
         scope: $scope
-    }).then(function (modal) {
+    }).then(function(modal) {
         $scope.modal = modal;
     });
-    $scope.closeLogin = function () {
+    $scope.closeLogin = function() {
         $scope.loginData = {};
         $scope.modal.hide();
     };
-    $scope.login = function () {
+    $scope.login = function() {
         $scope.modal.show();
         $scope.closeSignup();
     };
 
-    $scope.doLogin = function () {
+    $scope.doLogin = function() {
         $scope.allvalidation = [{
             field: $scope.loginData.email,
             validation: ""
@@ -73,7 +73,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         if (check) {
             console.log($scope.loginData);
             allfunction.loading();
-            MyServices.login($scope.loginData, function (data) {
+            MyServices.login($scope.loginData, function(data) {
                 console.log(data);
                 if (data != "false") {
                     $ionicLoading.hide();
@@ -89,7 +89,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             allfunction.msg("Fill all mandatory fields", "Error !");
         }
     };
-    $scope.openSignup = function () {
+    $scope.openSignup = function() {
         //        $scope.closeLogin();
         $scope.signup();
     };
@@ -98,18 +98,18 @@ angular.module('starter.controllers', ['ui.bootstrap'])
     //    --------------------SIGNUP MODAL-------------------------
     $ionicModal.fromTemplateUrl('templates/signup.html', {
         scope: $scope
-    }).then(function (modal) {
+    }).then(function(modal) {
         $scope.modalSignup = modal;
     });
-    $scope.closeSignup = function () {
+    $scope.closeSignup = function() {
         $scope.userSignup = {};
         $scope.modalSignup.hide();
     };
-    $scope.signup = function () {
+    $scope.signup = function() {
         $scope.modalSignup.show();
         $scope.closeLogin();
     };
-    $scope.doSignup = function () {
+    $scope.doSignup = function() {
         $scope.allvalidation = [{
             field: $scope.userSignup.firstname,
             validation: ""
@@ -131,7 +131,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             if ($scope.userSignup.password === $scope.userSignup.confirmpassword) {
                 console.log($scope.userSignup);
                 allfunction.loading();
-                MyServices.registerUser($scope.userSignup, function (data) {
+                MyServices.registerUser($scope.userSignup, function(data) {
                     if (data != "false") {
                         console.log(data);
                         $ionicLoading.hide();
@@ -155,16 +155,16 @@ angular.module('starter.controllers', ['ui.bootstrap'])
     //   ---------------------FORGOT PASSWORD
     $ionicModal.fromTemplateUrl('templates/forgotpassword.html', {
         scope: $scope
-    }).then(function (modal) {
+    }).then(function(modal) {
         $scope.modalFrgt = modal;
     });
-    $scope.closeFrgt = function () {
+    $scope.closeFrgt = function() {
         $scope.modalFrgt.hide();
     };
-    $scope.frgt = function () {
+    $scope.frgt = function() {
         $scope.modalFrgt.show();
     };
-    $scope.doFrgt = function (emailforgot) {
+    $scope.doFrgt = function(emailforgot) {
         $scope.forgot = emailforgot;
         $scope.allvalidation = [{
             field: $scope.forgot.email,
@@ -173,7 +173,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         var check = formvalidation($scope.allvalidation);
         if (check) {
             allfunction.loading();
-            MyServices.forgotPassword($scope.forgot, function (data) {
+            MyServices.forgotPassword($scope.forgot, function(data) {
                 console.log(data);
                 if (data != "Not A Valid Email.") {
                     $ionicLoading.hide();
@@ -188,7 +188,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             allfunction.msg("Fill all mandatory fields", "Error !");
         }
     };
-    $scope.openFrgt = function () {
+    $scope.openFrgt = function() {
         $scope.frgt();
         $scope.closeLogin();
     };
@@ -196,22 +196,22 @@ angular.module('starter.controllers', ['ui.bootstrap'])
     //   ---------------------FILTERS
     $ionicModal.fromTemplateUrl('templates/filters.html', {
         scope: $scope
-    }).then(function (modal) {
+    }).then(function(modal) {
         $scope.modalFilter = modal;
     });
-    $scope.closeFilter = function () {
+    $scope.closeFilter = function() {
         $scope.modalFilter.hide();
     };
-    $scope.filter = function () {
+    $scope.filter = function() {
         $scope.modalFilter.show();
     };
-    $scope.doFilter = function () {
+    $scope.doFilter = function() {
         console.log('Doing Signup', $scope.loginData);
-        $timeout(function () {
+        $timeout(function() {
             $scope.closeLogin();
         }, 1000);
     };
-    $scope.openFilter = function () {
+    $scope.openFilter = function() {
         //        $scope.closeLogin();
         $scope.filter();
     };
@@ -219,7 +219,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
 })
 
 
-.controller('HomeCtrl', function ($scope) {
+.controller('HomeCtrl', function($scope) {
         $scope.slides = [{
             image: "img/slider/1.jpg",
 
@@ -231,9 +231,9 @@ angular.module('starter.controllers', ['ui.bootstrap'])
 
         }];
     })
-    .controller('DealsCtrl', function ($scope, $stateParams) {})
+    .controller('DealsCtrl', function($scope, $stateParams) {})
 
-.controller('NewArrivalsCtrl', function ($scope, $stateParams, MyServices, $ionicLoading) {
+.controller('NewArrivalsCtrl', function($scope, $stateParams, MyServices, $ionicLoading) {
 
     allfunction.loading();
     $scope.pageno = 0;
@@ -241,13 +241,13 @@ angular.module('starter.controllers', ['ui.bootstrap'])
     $scope.shownodata = false;
     $scope.keepscrolling = true;
 
-    $scope.addMoreItems = function () {
+    $scope.addMoreItems = function() {
         ++$scope.pageno;
-        MyServices.getexclusiveandnewarrival($scope.pageno, 2, function (data, status) {
+        MyServices.getexclusiveandnewarrival($scope.pageno, 2, function(data, status) {
             if (data.queryresult.length == 0) {
                 $scope.keepscrolling = false;
             }
-            _.each(data.queryresult, function (n) {
+            _.each(data.queryresult, function(n) {
                 if (n.isfavid) {
                     n.fav = "fav";
                 }
@@ -263,12 +263,12 @@ angular.module('starter.controllers', ['ui.bootstrap'])
     $scope.addMoreItems();
 })
 
-.controller('MyAccountCtrl', function ($scope, $stateParams) {})
-    .controller('EditInfoCtrl', function ($scope, $ionicScrollDelegate, $stateParams) {
+.controller('MyAccountCtrl', function($scope, $stateParams) {})
+    .controller('EditInfoCtrl', function($scope, $ionicScrollDelegate, $stateParams) {
         $scope.edit_save = "Edit information";
         $scope.disabled = true;
         $scope.saved = false;
-        $scope.editSave = function () {
+        $scope.editSave = function() {
             if ($scope.edit_save === "Edit information") {
                 $scope.edit_save = "Save";
                 $scope.disabled = false;
@@ -283,187 +283,173 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         }
     })
 
-.controller('ContactUsCtrl', function ($scope, $stateParams) {})
-    .controller('ProductCategoriesCtrl', function ($scope, $stateParams) {
-        $scope.oneAtATime = true;
-        $scope.category = [{
-            title: "Cover & Cases",
-            parent: 0,
-            category: 0,
-            submenu: [
-                {
-                    name: "Iphone Covers",
-                    parent: 0,
-                    category: 0
-                },
-                {
-                    name: "Samsung Covers",
-                    parent: 0,
-                    category: 0
-                },
-                {
-                    name: "Sony Covers",
-                    parent: 0,
-                    category: 0
-                },
-                {
-                    name: "Yureka Covers",
-                    parent: 0,
-                    category: 0
-                },
-                {
-                    name: "Micromax Covers",
-                    parent: 0,
-                    category: 0
-                }
-            ]
-        }, {
-            title: "Mobiles",
-            parent: 0,
-            category: 0,
-            submenu: [
+.controller('ContactUsCtrl', function($scope, $stateParams) {})
 
-                {
-                    name: "iPhone",
-                    parent: 0,
-                    category: 0
-                },
-                {
-                    name: "Samsung",
-                    parent: 0,
-                    category: 0
-                },
-                {
-                    name: "Sony",
-                    parent: 0,
-                    category: 0
-                },
-                {
-                    name: "Yureka",
-                    parent: 0,
-                    category: 0
-                },
-                {
-                    name: "Micromax",
-                    parent: 0,
-                    category: 0
-                }
-            ]
-        }, {
-            title: "Headphones",
+.controller('ProductCategoriesCtrl', function($scope, $stateParams, $location) {
+    $scope.oneAtATime = true;
+    $scope.category = [{
+        title: "Cover & Cases",
+        parent: 3,
+        category: 0,
+        submenu: [{
+            name: "Iphone Covers",
             parent: 0,
-            category: 0,
-            submenu: [
-
-                {
-                    name: "Beats",
-                    parent: 0,
-                    category: 0
-                },
-                {
-                    name: "Sony",
-                    parent: 0,
-                    category: 0
-                },
-                {
-                    name: "JBL",
-                    parent: 0,
-                    category: 0
-                }
-            ]
+            category: 2
         }, {
-            title: "Accessories",
+            name: "Samsung Covers",
             parent: 0,
-            category: 0,
-            submenu: [
-
-                {
-                    name: "Tech Accesories",
-                    parent: 0,
-                    category: 0
-                },
-                {
-                    name: "Bags",
-                    parent: 0,
-                    category: 0
-                },
-                {
-                    name: "Belt",
-                    parent: 0,
-                    category: 0
-                }
-            ]
+            category: 3
         }, {
-            title: "Watches",
+            name: "Sony Covers",
             parent: 0,
-            category: 0,
-            submenu: [
-
-                {
-                    name: "Analog",
-                    parent: 0,
-                    category: 0
-                },
-                {
-                    name: "Chronograph",
-                    parent: 0,
-                    category: 0
-                },
-                {
-                    name: "Digital",
-                    parent: 0,
-                    category: 0
-                },
-                {
-                    name: "Watch Cases",
-                    parent: 0,
-                    category: 0
-                }
-            ]
+            category: 4
         }, {
-            title: "Laptops",
+            name: "Yureka Covers",
             parent: 0,
-            category: 0,
-            submenu: [
+            category: 5
+        }, {
+            name: "Micromax Covers",
+            parent: 0,
+            category: 6
+        }]
+    }, {
+        title: "Mobiles",
+        parent: 7,
+        category: 0,
+        submenu: [
 
-                {
-                    name: "Lenevo",
-                    parent: 0,
-                    category: 0
-                },
-                {
-                    name: "Dell",
-                    parent: 0,
-                    category: 0
-                },
-                {
-                    name: "Samsung",
-                    parent: 0,
-                    category: 0
-                },
-                {
-                    name: "Asus",
-                    parent: 0,
-                    category: 0
-                },
-                {
-                    name: "Apple",
-                    parent: 0,
-                    category: 0
-                }
-            ]
-        }];
-    })
-    .controller('CartCtrl', function ($scope, $stateParams, $location, $ionicHistory) {
-        $scope.goHome = function () {
+            {
+                name: "iPhone",
+                parent: 0,
+                category: 8
+            }, {
+                name: "Samsung",
+                parent: 0,
+                category: 9
+            }, {
+                name: "Sony",
+                parent: 0,
+                category: 11
+            }, {
+                name: "Yureka",
+                parent: 0,
+                category: 10
+            }, {
+                name: "Micromax",
+                parent: 0,
+                category: 12
+            }
+        ]
+    }, {
+        title: "Headphones",
+        parent: 13,
+        category: 0,
+        submenu: [
+
+            {
+                name: "Beats",
+                parent: 0,
+                category: 14
+            }, {
+                name: "Sony",
+                parent: 0,
+                category: 15
+            }, {
+                name: "JBL",
+                parent: 0,
+                category: 16
+            }
+        ]
+    }, {
+        title: "Accessories",
+        parent: 17,
+        category: 0,
+        submenu: [
+
+            {
+                name: "Tech Accesories",
+                parent: 0,
+                category: 18
+            }, {
+                name: "Bags",
+                parent: 0,
+                category: 19
+            }, {
+                name: "Belt",
+                parent: 0,
+                category: 20
+            }
+        ]
+    }, {
+        title: "Watches",
+        parent: 21,
+        category: 0,
+        submenu: [
+
+            {
+                name: "Analog",
+                parent: 0,
+                category: 22
+            }, {
+                name: "Chronograph",
+                parent: 0,
+                category: 23
+            }, {
+                name: "Digital",
+                parent: 0,
+                category: 24
+            }, {
+                name: "Watch Cases",
+                parent: 0,
+                category: 25
+            }
+        ]
+    }, {
+        title: "Laptops",
+        parent: 26,
+        category: 0,
+        submenu: [
+
+            {
+                name: "Lenevo",
+                parent: 0,
+                category: 27
+            }, {
+                name: "Dell",
+                parent: 0,
+                category: 28
+            }, {
+                name: "Samsung",
+                parent: 0,
+                category: 29
+            }, {
+                name: "Asus",
+                parent: 0,
+                category: 30
+            }, {
+                name: "Apple",
+                parent: 0,
+                category: 31
+            }
+        ]
+    }];
+
+    $scope.getproductbycategory = function(parent, category) {
+        $location.url("/app/product/" + parent + "/" + category + "/0");
+    }
+
+})
+
+.controller('CartCtrl', function($scope, $stateParams, $location, $ionicHistory) {
+        $scope.goHome = function() {
             console.log($ionicHistory.viewHistory());
             $location.path('app/home');
         };
     })
-    .controller('CheckoutCtrl', function ($scope, $stateParams) {
+    .controller('CheckoutCtrl', function($scope, $stateParams) {
         $scope.different_address = false;
         $scope.address_select = "Ship to different address";
-        $scope.toggleAddress = function () {
+        $scope.toggleAddress = function() {
             if ($scope.different_address === false) {
                 $scope.different_address = true;
                 $scope.address_select = "Ship to same address";
@@ -474,7 +460,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         };
         $scope.openbilling = false;
 
-        $scope.continue = function (ch) {
+        $scope.continue = function(ch) {
             if (ch === 'login') {
                 $scope.openbilling = false;
                 $scope.login();
@@ -483,13 +469,13 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             }
         };
     })
-    .controller('MyOrdersCtrl', function ($scope, $stateParams, $location, $ionicHistory) {
+    .controller('MyOrdersCtrl', function($scope, $stateParams, $location, $ionicHistory) {
 
     })
-    .controller('MyWishlistCtrl', function ($scope, $stateParams, $location, $ionicHistory) {
+    .controller('MyWishlistCtrl', function($scope, $stateParams, $location, $ionicHistory) {
 
     })
-    .controller('DistributionCtrl', function ($scope, $stateParams) {
+    .controller('DistributionCtrl', function($scope, $stateParams) {
         $scope.brands = [{
             image: "img/brands/acmemade.jpeg"
         }, {
@@ -544,12 +530,12 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         }];
         $scope.brands = _.chunk($scope.brands, 3);
     })
-    .controller('ProductCtrl', function ($scope, $stateParams, $timeout, $rootScope, MyServices) {
+    .controller('ProductCtrl', function($scope, $stateParams, $timeout, $rootScope, MyServices) {
         $scope.addwishlist = false;
         $rootScope.transparent_header = false;
         $scope.params = $stateParams;
 
-        $scope.addWishlist = function () {
+        $scope.addWishlist = function() {
             $scope.addwishlist = true;
             console.log($scope.addwishlist);
         };
@@ -563,12 +549,12 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         $scope.productsarr = [];
         var lastpage = 1;
 
-        var getproductbybrandcallback = function (data, status) {
+        var getproductbybrandcallback = function(data, status) {
             console.log(data);
             if (data == 0) {
                 $scope.keepscrolling = false;
             }
-            _.each(data.queryresult, function (n) {
+            _.each(data.queryresult, function(n) {
                 if (n.isfavid) {
                     n.fav = "fav";
                 }
@@ -584,7 +570,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             lastpage = data.lastpage;
         }
 
-        $scope.addMoreItems = function () {
+        $scope.addMoreItems = function() {
             if (lastpage != $scope.pageno) {
                 ++$scope.pageno;
                 if ($stateParams.brand != 0) {
@@ -601,7 +587,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         $scope.addMoreItems();
     })
 
-.controller('ProductDetailCtrl', function ($scope, $stateParams, $rootScope, $ionicScrollDelegate, MyServices, $ionicLoading, $ionicSlideBoxDelegate, $ionicPopup, $timeout) {
+.controller('ProductDetailCtrl', function($scope, $stateParams, $rootScope, $ionicScrollDelegate, MyServices, $ionicLoading, $ionicSlideBoxDelegate, $ionicPopup, $timeout) {
     $rootScope.transparent_header = true;
     $scope.activate = true;
     $scope.tab = {
@@ -609,7 +595,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         right: false
     }
     var i = 0;
-    $scope.pageScrolled = function () {
+    $scope.pageScrolled = function() {
         if ($ionicScrollDelegate.getScrollPosition().top > 240) {
             $rootScope.transparent_header = false;
             $scope.$apply();
@@ -618,7 +604,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             $scope.$apply();
         }
     };
-    $scope.clickTab = function (side) {
+    $scope.clickTab = function(side) {
 
         if (side === "left") {
             $scope.tab.left = true;
@@ -630,7 +616,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         }
     };
 
-    MyServices.getproductdetails($stateParams.id, function (data, status, $filter) {
+    MyServices.getproductdetails($stateParams.id, function(data, status, $filter) {
         console.log(data);
         $scope.product = data;
         if ($scope.product.product.user) {
@@ -645,34 +631,34 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         // $scope.product.product.quantity = 1;
     });
 
-    var addtowishlistcallback = function (data, status) {
+    var addtowishlistcallback = function(data, status) {
         console.log(data);
         if (data == "true") {
             $scope.product.product.fav = "fav";
             var xyz = $ionicPopup.show({
                 title: 'Your product has been added to wishlist'
             });
-            $timeout(function () {
+            $timeout(function() {
                 xyz.close();
             }, 3000)
         } else if (data == "0") {
             var xyz = $ionicPopup.show({
                 title: 'Already added to wishlist !!'
             });
-            $timeout(function () {
+            $timeout(function() {
                 xyz.close();
             }, 3000)
         } else {
             var xyz = $ionicPopup.show({
                 title: 'Oops something went wrong !!'
             });
-            $timeout(function () {
+            $timeout(function() {
                 xyz.close();
             }, 3000)
         }
     }
 
-    $scope.addtowishlist = function (productid) {
+    $scope.addtowishlist = function(productid) {
         console.log(productid);
         if (MyServices.getuser()) {
             MyServices.addtowishlist(productid, addtowishlistcallback);
@@ -680,25 +666,25 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             var xyz = $ionicPopup.show({
                 title: 'Login for wishlist'
             });
-            $timeout(function () {
+            $timeout(function() {
                 xyz.close();
             }, 3000)
         }
     }
 
-    $scope.addtocart = function (product) {
+    $scope.addtocart = function(product) {
         console.log(product);
         var selectedproduct = {};
         selectedproduct.product = product.id;
         selectedproduct.productname = product.name;
         selectedproduct.price = product.price;
         selectedproduct.quantity = product.quantity;
-        MyServices.addtocart(selectedproduct, function (data) {
+        MyServices.addtocart(selectedproduct, function(data) {
             console.log(data);
             var xyz = $ionicPopup.show({
                 title: 'Added to cart'
             });
-            $timeout(function () {
+            $timeout(function() {
                 xyz.close();
             }, 3000);
             // myfunction();
@@ -708,7 +694,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
 })
 
 //dhaval start
-.controller('BrandsCtrl', function ($scope, $stateParams, $rootScope, MyServices, $location, $ionicLoading) {
+.controller('BrandsCtrl', function($scope, $stateParams, $rootScope, MyServices, $location, $ionicLoading) {
     $rootScope.nosearch = true;
     allfunction.loading();
     var lastpage = 1;
@@ -717,15 +703,15 @@ angular.module('starter.controllers', ['ui.bootstrap'])
     $scope.shownodata = false;
     $scope.brandimages = [];
 
-    $scope.addMoreItems = function () {
+    $scope.addMoreItems = function() {
         console.log("load more brands");
         ++$scope.pageno;
-        MyServices.getbrand($scope.pageno, function (data, status) {
+        MyServices.getbrand($scope.pageno, function(data, status) {
             console.log(data);
             if (data.queryresult.length == 0) {
                 $scope.keepscrolling = false;
             }
-            _.each(data.queryresult, function (n) {
+            _.each(data.queryresult, function(n) {
                 $scope.brandimages.push(n);
             });
             if ($scope.brandimages.length == 0) {
@@ -740,20 +726,20 @@ angular.module('starter.controllers', ['ui.bootstrap'])
     }
     $scope.addMoreItems();
 
-    $scope.getproductbybrand = function (id) {
+    $scope.getproductbybrand = function(id) {
         $location.url("app/product/" + 0 + "/" + 0 + "/" + id);
     }
 })
 
 //dhaval end
 
-.controller('AboutCtrl', function ($scope, $ionicScrollDelegate, $stateParams) {
+.controller('AboutCtrl', function($scope, $ionicScrollDelegate, $stateParams) {
     $scope.activate = true;
     $scope.tab = {
         left: true,
         right: false
     }
-    $scope.clickTab = function (side) {
+    $scope.clickTab = function(side) {
         $ionicScrollDelegate.scrollTop(true);
         if (side === "left") {
             $scope.tab.left = true;

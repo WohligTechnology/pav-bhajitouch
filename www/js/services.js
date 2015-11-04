@@ -73,7 +73,7 @@ angular.module('starter.services', [])
         },
         getproductbycategory: function(pageno, parent, category, callback) {
             console.log(category);
-            return $http.get(adminurl + 'getproductbycategory?parent=' + category + '&subcategory=' + parent + '&pageno=' + pageno, {}, {
+            return $http.get(adminurl + 'getproductbycategory?parent=' + category + '&category=' + parent + '&pageno=' + pageno, {}, {
                 withCredentials: true
             }).success(callback);
 
