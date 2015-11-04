@@ -81,7 +81,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         })
 
     .state('app.productdetail', {
-            url: '/productdetail',
+            url: '/productdetail/:id',
             views: {
                 'menuContent': {
                     templateUrl: 'templates/productdetail.html',
@@ -210,4 +210,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
             return undefined;
         }
     };
-});
+})
+
+.filter('numberWithCommas', function() {
+    return function(x) {
+        if (x)
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        else
+            return "";
+    };
+})

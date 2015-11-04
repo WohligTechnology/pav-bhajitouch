@@ -60,7 +60,7 @@ angular.module('starter.services', [])
                 withCredentials: true
             }).success(callback);
         },
-        getproductbybrand: function (id, pageno, callback) {
+        getproductbybrand: function(id, pageno, callback) {
             return $http({
                 url: adminurl + 'getproductbybrand',
                 method: "POST",
@@ -71,15 +71,41 @@ angular.module('starter.services', [])
                 }
             }).success(callback);
         },
-        getproductbycategory: function (pageno, parent, category, callback) {
+        getproductbycategory: function(pageno, parent, category, callback) {
             console.log(category);
-            return $http.get(adminurl + 'getproductbycategory?parent='+parent+'&subcategory='+category+'&pageno='+pageno, {}, {
+            return $http.get(adminurl + 'getproductbycategory?parent=' + category + '&subcategory=' + parent + '&pageno=' + pageno, {}, {
                 withCredentials: true
             }).success(callback);
-            
+
         },
-        getallproduct: function (pageno, callback) {
+        getallproduct: function(pageno, callback) {
             return $http.get(adminurl + 'getallproducts?pageno=' + pageno, {}, {
+                withCredentials: true
+            }).success(callback);
+        },
+        getexclusiveandnewarrival: function(pageno, id, callback) {
+            return $http.get(adminurl + 'getexclusiveandnewarrival?id=' + id + '&pageno=' + pageno, {}, {
+                withCredentials: true
+            }).success(callback);
+        },
+        getproductdetails: function(id, callback) {
+            return $http.get(adminurl + 'getproductdetails?id=' + id, {}, {
+                withCredentials: true
+            }).success(callback);
+        },
+        addtowishlist: function(productid, callback) {
+            return $http({
+                url: adminurl + "addtowishlist",
+                method: "POST",
+                withCredentials: true,
+                data: {
+                    "user": $.jStorage.get("user").id,
+                    "product": productid
+                }
+            }).success(callback);
+        },
+        addtocart: function(product, callback) {
+            return $http.get(adminurl + 'addtocart?product=' + product.product + '&productname=' + product.productname + '&price=' + product.price + '&quantity=' + product.quantity, {}, {
                 withCredentials: true
             }).success(callback);
         },
@@ -97,10 +123,10 @@ angular.module('starter.services', [])
         getNotify: function() {
             return $.jStorage.get("notify");
         },
-        setUser: function(data) {
+        setuser: function(data) {
             $.jStorage.set("user", data);
         },
-        getUser: function() {
+        getuser: function() {
             return $.jStorage.get("user");
         }
     };

@@ -1,53 +1,32 @@
 <ion-view view-title="New Arrivals">
     <ion-content>
-       <div class="newarrivals">
-        <div class="row">
-            <div class="col">
-                
-                   <a href="#/app/productdetail" style="text-decoration: none">
-                    <div class="row">
-                        <div class="col-33 image-holder-product">
-                            <img class="brand-image" src="img/products/dell1.jpg" alt="">
-                        </div>
-                        <div class="col newarrivals-details">
-                            <h2>DELL Inspiron 3537 (i5 4th generation,6GB RAM,1TB hard disk)</h2>
-                            <!--                    <h3 class="item-note">{{item.company}}</h3></h2>-->
-<!--
-                            <div class="rating">
-                                <ul>
-                                    <li><i class="icon star ion-ios-star-outline" s></i></li>
-                                    <li><i class="icon star ion-ios-star-outline" s></i></li>
-                                    <li><i class="icon star ion-ios-star-outline" s></i></li>
-                                    <li><i class="icon star ion-ios-star-outline" s></i></li>
-                                    <li><i class="icon star ion-ios-star-outline" s></i></li>
-                                </ul>
+        <div class="newarrivals">
+            <div class="row" ng-repeat="product in products">
+                <div class="col">
+                    <a href="#/app/productdetail/{{product.id}}" style="text-decoration: none">
+                        <div class="row">
+                            <div class="col-33 image-holder-product" ng-if="product.image1">
+                                <img class="brand-image" ng-src="{{product.image1 | serverimage}}" alt="">
                             </div>
--->
-                       <h3>Rs. 49,999</h3>
+                            <div class="col-33 image-holder-product" ng-if="product.image2">
+                                <img class="brand-image" ng-src="{{product.image2 | serverimage}}" alt="">
+                            </div>
+                            <div class="col-33 image-holder-product" ng-if="!product.image1 && !product.image2">
+                                <img class="brand-image" src="img/icon.png" alt="">
+                            </div>
+                            <div class="col newarrivals-details">
+                                <h2>{{product.name}}</h2>
+                                <h3>Rs. {{product.price | numberWithCommas}}</h3>
+                            </div>
                         </div>
-
-                    </div>
                     </a>
-<!--
-                    <div class="row">
-                        <div class="col col-50">
-                           <div class="price-separator"></div>
--->
-                            
-<!--
-                        </div>
-                        <div class="col heart col-25">
-                            <i class="icon ion-ios-heart"></i></button>
-                        </div>
-                        <div class="col cart col-25">
-                            <i class="icon ion-android-cart"></i>
-                        </div>
-                    </div>
--->
-
                 </div>
             </div>
-
+        </div>
+        <ion-infinite-scroll on-infinite="addMoreItems()" distance="25%" style="height:0px" ng-if="keepscrolling">
+        </ion-infinite-scroll>
+        <div class="center" ng-show="shownodata">
+            <p>No Data Found</p>
         </div>
     </ion-content>
 </ion-view>

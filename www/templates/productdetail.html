@@ -1,29 +1,23 @@
 <ion-view view-title="Product Detail">
     <div class="bar bar-subheader bar-positive" ng-hide="transparent_header">
-        <h1 class="title">iPhone 6[S] 128GB silver</h1>
+        <h1 class="title">{{product.product.name}}</h1>
     </div>
-
     <!--    <ion-content ng-class="{'no-header':transparent_header}" on-scroll="pageScrolled()">-->
     <ion-content ng-class="has-header" on-scroll="pageScrolled()">
-
         <div class="product-detail">
             <ion-slide-box on-slide-changed="slideHasChanged($index)">
-                <ion-slide>
-                    <div class="image-holder-productimg"><img src="img/products/iphone2.jpg" class="product-img" alt=""></div>
-                </ion-slide>
-                <ion-slide>
-                    <div class="image-holder-productimg"><img src="img/products/iphone6.jpg" class="product-img" alt=""></div>
-                </ion-slide>
-                <ion-slide>
-                    <div class="image-holder-productimg"><img src="img/products/iphone6ho.jpg" class="product-img" alt=""></div>
+                <ion-slide ng-repeat="images in product.productimage">
+                    <div class="image-holder-productimg">
+                        <img ng-src="{{images.image | serverimage}}" class="product-img" alt="" ng-if="images.image">
+                        <img src="img/icon.png" class="product-img" alt="" ng-if="!images.image">
+                    </div>
                 </ion-slide>
             </ion-slide-box>
             <div class="row">
-
                 <div class="col">
                     <div class="no-margin detail">
                         <div class="name-other">
-                            <h2>iPhone 6[S] 128GB silver</h2>
+                            <h2>{{product.product.name}}</h2>
                             <div class="row">
                                 <div class="col user-rating">
                                     <ul>
@@ -35,15 +29,17 @@
                                     </ul>
                                 </div>
                                 <div class="col">
-                                    <h3>Availability : <span>In Stock</span></h3>
+                                    <h3>Availability : <span>{{availability}}</span></h3>
                                 </div>
                             </div>
                             <div class="price">
-                                <span>Price : Rs. 60000</span>
+                                <span>Price : Rs. {{product.product.price | numberWithCommas}}</span>
                             </div>
                             <div class="product-buttons padding-vertical">
-                                <button class="button btn-productdetail icon-left  button-positive"><i class="icon ln-cart"></i>Add to cart</button>
-                                <button class="button btn-productdetail icon-left ion-ios-heart button-positive">Add to wishlist</button>
+                                <button class="button btn-productdetail icon-left button-positive" ng-click="addtocart(product.product)">
+                                    <i class="icon ln-cart"></i>Add to cart
+                                </button>
+                                <button class="button btn-productdetail icon-left ion-ios-heart button-positive" ng-click="addtowishlist(product.product.id);">Add to wishlist</button>
                             </div>
                             <div class="tabs-detail">
                                 <div class="row">
@@ -58,21 +54,11 @@
                                 </div>
                             </div>
                             <div class="description" ng-show="tab.left">
-
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum sit reprehenderit iusto harum minima. Assumenda, accusamus, perspiciatis inventore tempora qui pariatur quisquam? Deleniti, placeat ea nostrum officiis obcaecati temporibus quod. Ullam, in, adipisci autem at fugit ab tempore enim ratione nesciunt alias corporis vitae quo quod nostrum itaque vero iure?</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore, id blanditiis deserunt in molestiae excepturi incidunt molestias dolor sunt dolore obcaecati non repellat mollitia error placeat est exercitationem sit voluptates iure autem saepe voluptas harum unde perferendis modi provident labore voluptatum. Repudiandae, aspernatur sit harum quod vero quos sequi voluptas!</p>
-
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis, aperiam, enim odit placeat minus ab vero molestiae ad fugit maiores eaque saepe debitis assumenda ut ipsam eius sit repellendus dolore.</p>
-                                <ul>
-                                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae, in magni illo dolore dicta vero.</li>
-                                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti, minus, aspernatur voluptatem doloribus labore modi.</li>
-                                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora, exercitationem quia id accusamus beatae sunt? Dolorum mollitia sint debitis delectus.</li>
-                                </ul>
-
+                                <p ng-bind-html="product.product.description"></p>
                             </div>
                             <div class="specification" ng-show="tab.right">
-                                <p>CAMERA</p>
-                                <p>Rear Camera <span class="item-note">Yes, 8 MP</span></p>
+                                <p>{{product.product.keyfeatures}}</p>
+                                <!-- <p>Rear Camera <span class="item-note">Yes, 8 MP</span></p>
                                 <p>Front Facing Camera <span class="item-note">Yes, 1.2 MP</span></p>
                                 <p>Video Recording <span class="item-note">Yes, 1920 x 1080</span></p>
                                 <p>HD Recording HD, <span class="item-note">Full HD</span></p>
@@ -83,7 +69,7 @@
                                 <br>
                                 <p>DISPLAY</p>
                                 <p>Size <span class="item-note">4.7 inch</span></p>
-                                <p>Resolution <span class="item-note">1334 x 750 Pixels</span></p>
+                                <p>Resolution <span class="item-note">1334 x 750 Pixels</span></p> -->
                             </div>
                         </div>
                     </div>

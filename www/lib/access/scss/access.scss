@@ -1315,3 +1315,15 @@ $font-size-list:13px;
 .black::-moz-placeholder {
     color: #888 !important;
 }
+
+.center {
+    position: relative;
+    min-height: 350px;
+    p {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 18px;
+    }
+}
