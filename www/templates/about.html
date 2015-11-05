@@ -24,11 +24,11 @@
 Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula. Ut molestie a, ultricies porta urna. Vestibulum commodo volutpat a, convallis ac, laoreet enim</p>
         </div>
         <div class="clientele" ng-show="tab.right">
-            <div class="row" ng-repeat="clnt in clientele">
+            <div class="row" ng-repeat="celebs in celebimages">
                 <div class="col">
                 <div class="clnt" >
-                    <div class="image-holder-clientele"><img src="{{clnt.image}}" class="brand-image"></div>
-                    <h4>{{clnt.caption}}</h4>
+                    <div class="image-holder-clientele"><img src="{{celebs.image | serverimage}}" class="brand-image"></div>
+                    <h4>{{celebs.title}}</h4>
                 </div>
             </div>
             </div>

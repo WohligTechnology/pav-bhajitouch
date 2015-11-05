@@ -39,24 +39,9 @@ angular.module('starter.services', [])
         authenticate: function(callback) {
             return $http.get(adminurl + 'authenticate').success(callback);
         },
-        findVillage: function(data, callback) {
-            $http({
-                url: adminurl + 'village/find',
-                method: 'POST',
-                data: {
-                    search: data,
-                    village: []
-                }
-            }).success(callback);
-        },
-        findArea: function(data, callback) {
-            $http({
-                url: adminurl + 'area/find',
-                method: 'POST',
-                data: {
-                    search: data,
-                    area: []
-                }
+        logout: function(callback) {
+            return $http.post(adminurl + 'logout', {
+                withCredentials: true
             }).success(callback);
         },
         //dhaval start
@@ -66,14 +51,8 @@ angular.module('starter.services', [])
             }).success(callback);
         },
         getproductbybrand: function(id, pageno, callback) {
-            return $http({
-                url: adminurl + 'getproductbybrand',
-                method: "POST",
-                withCredentials: true,
-                data: {
-                    "brandid": id,
-                    "pageno": pageno
-                }
+            return $http.get(adminurl + 'getproductbybrand?maxrow=10&pageno=' + pageno + '&brandid=' + id, {}, {
+                withCredentials: true
             }).success(callback);
         },
         getproductbycategory: function(pageno, parent, category, callback) {
@@ -124,19 +103,19 @@ angular.module('starter.services', [])
                 withCredentials: true
             }).success(callback);
         },
-        getcoupondetails: function () {
+        getcoupondetails: function() {
             return coupondetails;
         },
-        setcoupondetails: function (coupon) {
+        setcoupondetails: function(coupon) {
             $.jStorage.set("coupon", coupon);
             coupondetails = coupon;
         },
-        getdiscountcoupon: function (couponcode) {
+        getdiscountcoupon: function(couponcode) {
             return $http.post(adminurl + 'getdiscountcoupon?couponcode=' + couponcode, {}, {
                 withCredentials: true
             });
         },
-        getcart: function (callback) {
+        getcart: function(callback) {
             return $http({
                 url: adminurl + "showcart",
                 method: "POST",
@@ -144,8 +123,46 @@ angular.module('starter.services', [])
                 data: {}
             }).success(callback);
         },
-        deletecart: function (id, callback) {
+        deletecart: function(id, callback) {
             return $http.get(adminurl + 'deletecart?id=' + id, {}, {
+                withCredentials: true
+            }).success(callback);
+        },
+        getwishlistproduct: function(callback) {
+            return $http({
+                url: adminurl + "getwishlistproduct",
+                method: "POST",
+                withCredentials: true,
+                data: {
+                    "user": $.jStorage.get("user").id
+                }
+            }).success(callback);
+        },
+        removefromwishlist: function(productid, callback) {
+            return $http({
+                url: adminurl + "removefromwishlist",
+                method: "POST",
+                withCredentials: true,
+                data: {
+                    "user": $.jStorage.get("user").id,
+                    "product": productid
+                }
+            }).success(callback);
+        },
+        getaboutus: function(callback) {
+            return $http({
+                url: adminurl + 'getaboutus',
+                method: "POST"
+            }).success(callback);
+        },
+        getofferdetails: function(callback) {
+            return $http({
+                url: adminurl + 'getofferdetails',
+                method: "POST"
+            }).success(callback);
+        },
+        search: function(search, callback) {
+            return $http.get(adminurl + 'searchbyname?search=' + search, {}, {
                 withCredentials: true
             }).success(callback);
         },

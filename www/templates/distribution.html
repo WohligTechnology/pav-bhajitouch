@@ -1,13 +1,16 @@
 <ion-view view-title="Distributors">
     <ion-content>
         <div class="margin-brands">
-            <div class="row" ng-repeat="brand in brands">
+            <div class="row" ng-repeat="brand in distributer">
                 <div class="col" ng-repeat="brnd in brand">
-                    <div class="image-holder">
-                        <img class="brand-image" src="{{brnd.image}}" alt="">
+                    <div class="image-holder" ng-click="getproductbybrand(brnd.id);">
+                        <img class="brand-image" src="{{brnd.logo | serverimage}}" alt="">
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="center" ng-show="shownodata">
+            <p>No Data Found</p>
         </div>
     </ion-content>
 </ion-view>
