@@ -406,147 +406,35 @@ angular.module('starter.controllers', ['ui.bootstrap'])
     $scope.oneAtATime = true;
     $scope.category = [{
         title: "Cover & Cases",
-        parent: 3,
+        parent: 1,
         category: 0,
         submenu: [{
-            name: "Iphone Covers",
-            parent: 0,
-            category: 2
-        }, {
-            name: "Samsung Covers",
-            parent: 0,
-            category: 3
-        }, {
-            name: "Sony Covers",
-            parent: 0,
-            category: 4
-        }, {
-            name: "Yureka Covers",
-            parent: 0,
-            category: 5
-        }, {
-            name: "Micromax Covers",
-            parent: 0,
-            category: 6
+            name: "Apple",
+            parent: 2,
+            category: 0
         }]
     }, {
-        title: "Mobiles",
-        parent: 7,
+        title: "Earphones & Headphones",
+        parent: 3,
         category: 0,
         submenu: [
 
             {
-                name: "iPhone",
-                parent: 0,
-                category: 8
-            }, {
-                name: "Samsung",
-                parent: 0,
-                category: 9
-            }, {
-                name: "Sony",
-                parent: 0,
-                category: 11
-            }, {
-                name: "Yureka",
-                parent: 0,
-                category: 10
-            }, {
-                name: "Micromax",
-                parent: 0,
-                category: 12
+                name: "Wireless Headphones",
+                parent: 4,
+                category: 0
             }
         ]
     }, {
-        title: "Headphones",
-        parent: 13,
+        title: "Speakers & Docks",
+        parent: 5,
         category: 0,
         submenu: [
 
             {
-                name: "Beats",
-                parent: 0,
-                category: 14
-            }, {
-                name: "Sony",
-                parent: 0,
-                category: 15
-            }, {
-                name: "JBL",
-                parent: 0,
-                category: 16
-            }
-        ]
-    }, {
-        title: "Accessories",
-        parent: 17,
-        category: 0,
-        submenu: [
-
-            {
-                name: "Tech Accesories",
-                parent: 0,
-                category: 18
-            }, {
-                name: "Bags",
-                parent: 0,
-                category: 19
-            }, {
-                name: "Belt",
-                parent: 0,
-                category: 20
-            }
-        ]
-    }, {
-        title: "Watches",
-        parent: 21,
-        category: 0,
-        submenu: [
-
-            {
-                name: "Analog",
-                parent: 0,
-                category: 22
-            }, {
-                name: "Chronograph",
-                parent: 0,
-                category: 23
-            }, {
-                name: "Digital",
-                parent: 0,
-                category: 24
-            }, {
-                name: "Watch Cases",
-                parent: 0,
-                category: 25
-            }
-        ]
-    }, {
-        title: "Laptops",
-        parent: 26,
-        category: 0,
-        submenu: [
-
-            {
-                name: "Lenevo",
-                parent: 0,
-                category: 27
-            }, {
-                name: "Dell",
-                parent: 0,
-                category: 28
-            }, {
-                name: "Samsung",
-                parent: 0,
-                category: 29
-            }, {
-                name: "Asus",
-                parent: 0,
-                category: 30
-            }, {
-                name: "Apple",
-                parent: 0,
-                category: 31
+                name: "Bluetooth",
+                parent: 6,
+                category: 0
             }
         ]
     }];

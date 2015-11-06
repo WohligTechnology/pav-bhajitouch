@@ -1,9 +1,10 @@
-var adminbase = "http://wohlig.co.in/accessbackend/";
+//var adminbase = "http://wohlig.co.in/accessbackend/";
 var adminbase = "http://localhost/accessback/";
 var adminurl = adminbase + "index.php/json/";
 var adminhauth = adminbase + "index.php/hauth/";
 var adminimage = adminbase + "uploads/";
 var adminimage = "http://wohlig.co.in/accessbackend/uploads/";
+//var adminimage = "http://localhost/accessback/uploads/";
 
 angular.module('starter.services', [])
 
@@ -57,7 +58,7 @@ angular.module('starter.services', [])
         },
         getproductbycategory: function(pageno, parent, category, callback) {
             console.log(category);
-            return $http.get(adminurl + 'getproductbycategory?parent=' + category + '&category=' + parent + '&pageno=' + pageno, {}, {
+            return $http.get(adminurl + 'getproductbycategory?parent=' + parent + '&category=' + category + '&pageno=' + pageno, {}, {
                 withCredentials: true
             }).success(callback);
 
