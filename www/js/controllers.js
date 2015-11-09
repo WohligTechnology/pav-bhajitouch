@@ -99,6 +99,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
                 $ionicLoading.hide();
                 MyServices.setuser(data);
                 $scope.closeLogin();
+                $location.url("/home");
             }
         })
     }
@@ -320,7 +321,14 @@ angular.module('starter.controllers', ['ui.bootstrap'])
 
     MyServices.getofferdetails(function(data, status) {
         console.log(data.offer[0]);
+        $scope.currentoffer=data.offer[0];
+        $scope.currentofferprod=$scope.currentoffer.offerproducts;
+        for(var i=0;i<data.offer[0].length;i++){
+        }
+        
         $scope.deals = data.offer[0];
+//         $scope.offerproducts = data.offerproducts;
+//            console.log($scope.offerproducts);
 
         $scope.slideoffer = [];
         _.each(data.offer[0], function(n) {
@@ -381,26 +389,113 @@ angular.module('starter.controllers', ['ui.bootstrap'])
 })
 
 .controller('MyAccountCtrl', function($scope, $stateParams) {})
-    .controller('EditInfoCtrl', function($scope, $ionicScrollDelegate, $stateParams) {
+    .controller('EditInfoCtrl', function($scope, $ionicScrollDelegate, $stateParams,MyServices,$ionicLoading) {
+    $scope.userdetails={};
+        $scope.userdetails=$.jStorage.get("user");
+    console.log($scope.userdetails);
         $scope.edit_save = "Edit information";
         $scope.disabled = true;
         $scope.saved = false;
-        $scope.editSave = function() {
-            if ($scope.edit_save === "Edit information") {
-                $scope.edit_save = "Save";
-                $scope.disabled = false;
-
-            } else {
-                $scope.edit_save = "Edit information";
-                //                SAVE OPERATIONS
-                $scope.disabled = true;
-                $scope.saved = true;
-                $ionicScrollDelegate.scrollTop();
-            }
+        $scope.editSave = function(userdetails) {
+           
+              $scope.allvalidation = [{
+            field: $scope.userdetails.firstname,
+            validation: ""
+        }, {
+            field: $scope.userdetails.lastname,
+            validation: ""
+        },{
+            field: $scope.userdetails.billingaddress,
+            validation: ""
+        }, {
+            field: $scope.userdetails.billingcity,
+            validation: ""
+        }, {
+            field: $scope.userdetails.billingstate,
+            validation: ""
+        }, {
+            field: $scope.userdetails.billingcountry,
+            validation: ""
+        }, {
+            field: $scope.userdetails.billingpincode,
+            validation: ""
+        }, {
+            field: $scope.userdetails.email,
+            validation: ""
+        }, {
+            field: $scope.userdetails.phone,
+            validation: ""
+        }];
+        var check = formvalidation($scope.allvalidation);
+            console.log(check);
+        if (check) {
+            console.log($scope.userdetails);
+            allfunction.loading();
+            MyServices.updateuser($scope.userdetails, function(data) {
+                console.log(data);
+                if (data != "") {
+                    $ionicLoading.hide();
+                    allfunction.msg("Successfully Edited", 'Thankyou!');
+                } else {
+                    $ionicLoading.hide();
+                    allfunction.msg("Sorry Try Again", 'Sorry!');
+                }
+            });
+        } else {
+            allfunction.msg("Fill all mandatory fields", "Error !");
+        }
+//            if ($scope.edit_save === "Edit information") {
+//                $scope.edit_save = "Save";
+//                $scope.disabled = false;
+//
+//            } else {
+//                $scope.edit_save = "Edit information";
+//                //                SAVE OPERATIONS
+//                $scope.disabled = true;
+//                $scope.saved = true;
+//                $ionicScrollDelegate.scrollTop();
+//            }
         }
     })
 
-.controller('ContactUsCtrl', function($scope, $stateParams) {})
+.controller('ContactUsCtrl', function($scope, $stateParams,MyServices,$ionicLoading) {
+    $scope.contactus={};
+$scope.usercontact = function() {
+        $scope.allvalidation = [{
+            field: $scope.contactus.name,
+            validation: ""
+        }, {
+            field: $scope.contactus.email,
+            validation: ""
+        }, {
+            field: $scope.contactus.comment,
+            validation: ""
+        }];
+        var check = formvalidation($scope.allvalidation);
+            console.log(check);
+            console.log($scope.contactus);
+        if (check) {
+            console.log($scope.contactus);
+            allfunction.loading();
+            MyServices.usercontact($scope.contactus, function(data) {
+                console.log(data);
+                if (data != "") {
+                    $ionicLoading.hide();
+                    $scope.contactus={};
+                    allfunction.msg("Successfully Edited", 'Thankyou!');
+
+                } else {
+                    $ionicLoading.hide();
+                    allfunction.msg("Sorry Try Again", 'Sorry!');
+                }
+            });
+        } else {
+            allfunction.msg("Fill all mandatory fields", "Error !");
+        }
+
+    }
+
+})
 
 .controller('ProductCategoriesCtrl', function($scope, $stateParams, $location) {
     $scope.oneAtATime = true;
@@ -450,7 +545,12 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         console.log($ionicHistory.viewHistory());
         $location.path('app/home');
     };
-
+    
+    
+    $scope.gotocheckout=function(totalcart){
+     $location.url('app/checkout/'+totalcart);
+    }
+    
     $scope.gettotalcartfunction = function() {
         MyServices.totalcart(function(data) {
             $scope.totalcart = data;
@@ -595,7 +695,12 @@ angular.module('starter.controllers', ['ui.bootstrap'])
 
 })
 
-.controller('CheckoutCtrl', function($scope, $stateParams) {
+.controller('CheckoutCtrl', function($scope, $stateParams,MyServices,$ionicLoading,$location) {
+        $scope.chklogin=$.jStorage.get("user");
+        $scope.showlogreg=false;
+        if($scope.chklogin==null){
+        $scope.showlogreg=true;
+        }
         $scope.different_address = false;
         $scope.address_select = "Ship to different address";
         $scope.toggleAddress = function() {
@@ -608,7 +713,9 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             }
         };
         $scope.openbilling = false;
-
+        $scope.totalcart=$stateParams.totalcart;
+    console.log("totalcart");
+    console.log($scope.totalcart);
         $scope.continue = function(ch) {
             if (ch === 'login') {
                 $scope.openbilling = false;
@@ -617,8 +724,86 @@ angular.module('starter.controllers', ['ui.bootstrap'])
                 $scope.openbilling = true;
             }
         };
+    
+    
+    
+    // form integrate pooja
+    $scope.checkout={};
+    $scope.userid=$.jStorage.get("user").id;
+    if($scope.userid !=""){
+    $scope.checkout.userid=$.jStorage.get("user").id;
+    }
+    else{
+    $scope.checkout.userid=0;
+    }
+    MyServices.getcart(function(data) {
+            $scope.cart = data;
+            $scope.checkout.cart = $scope.cart;
+            $scope.checkout.finalamount = $scope.totalcart;
+        console.log($scope.cart);
+        });
+    $scope.paymentOption=function(){
+            
+              $scope.allvalidation = [{
+            field: $scope.checkout.firstname,
+            validation: ""
+        }, {
+            field: $scope.checkout.lastname,
+            validation: ""
+        },{
+            field: $scope.checkout.billingaddress,
+            validation: ""
+        }, {
+            field: $scope.checkout.billingcity,
+            validation: ""
+        }, {
+            field: $scope.checkout.billingstate,
+            validation: ""
+        }, {
+            field: $scope.checkout.billingcountry,
+            validation: ""
+        }, {
+            field: $scope.checkout.billingpincode,
+            validation: ""
+        }, {
+            field: $scope.checkout.email,
+            validation: ""
+        }];
+        var check = formvalidation($scope.allvalidation);
+            console.log(check);
+        if (check) {
+            console.log($scope.checkout);
+            allfunction.loading();
+            MyServices.placeorder($scope.checkout, function(data) {
+                console.log(data);
+                if (data == 1) {
+                    $ionicLoading.hide();
+                    allfunction.msg("Your Order has been placed", 'Thankyou!');
+                    $location.url("/app/home/");
+                } else {
+                    $ionicLoading.hide();
+                    allfunction.msg("Sorry Try Again", 'Sorry!');
+                }
+            });
+        } else {
+            allfunction.msg("Fill all mandatory fields", "Error !");
+        }
+    }
     })
-    .controller('MyOrdersCtrl', function($scope, $stateParams, $location, $ionicHistory) {
+    .controller('MyOrdersCtrl', function($scope, $stateParams, $location, $ionicHistory,MyServices, $ionicLoading) {
+    MyServices.orderhistory(function(data) {
+                console.log(data);
+        
+        $scope.orderhistory=data;
+        _.each($scope.orderhistory,function(n){
+            n.timestamp=new Date();
+        });
+        
+                if (data == "") {
+                } else {
+                   
+                }
+            });
 
     })
 

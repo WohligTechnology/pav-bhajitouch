@@ -81,6 +81,6 @@
                 <span class="item-note">Rs. {{totalcart - discountamount | numberWithCommas}}</span></h3></div>
             </div>
         </div>
-        <a class="button  button-positive btn-checkout login-button" href="#/app/checkout">Proceed to checkout</a>
+        <a class="button  button-positive btn-checkout login-button" ng-click="gotocheckout(totalcart);">Proceed to checkout</a>
     </ion-content>
 </ion-view>

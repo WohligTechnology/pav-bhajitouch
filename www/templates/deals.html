@@ -2,96 +2,50 @@
     <ion-content>
         <div class="deals">
             <ion-slide-box on-slide-changed="slideHasChanged($index)">
-                <ion-slide>
-                    <div class="deal-sliderimg"><img src="img/products/5.png" alt="" class="deal-img"></div>
-                </ion-slide>
-                <ion-slide>
-                    <div class="deal-sliderimg"><img src="img/products/8.jpg" alt="" class="deal-img"></div>
-                </ion-slide>
-                <ion-slide>
-                    <div class="deal-sliderimg"><img src="img/products/9.jpg" alt="" class="deal-img"></div>
+                <ion-slide ng-repeat="offerimage in currentoffer">
+                    <div class="deal-sliderimg"><img ng-src="{{offerimage.image | serverimage}}" alt="" class="deal-img">
+                    </div>
+
                 </ion-slide>
             </ion-slide-box>
-            <div class="row">
+            <div class="row" ng-repeat="offer in currentoffer">
                 <div class="col">
                     <div class="deal">
-<!--
-                       <div class="row">
-                           <div class="col">
-                               <h4>Buy this</h4>
-                           </div>
-                           <div class="col">
-                               <h4>Get this</h4>
-                           </div>
-                       </div>
--->
                         <div class="row">
                             <div class="col">
                                 <div class="image-holder-product">
-                                    <img class="brand-image" src="img/products/5.png" alt="">
+                                     <img class="brand-image" ng-if="offer.offerproducts[0].image1" ng-src="{{offer.offerproducts[0].image1 | serverimage}}" alt="">
+                                    <img class="brand-image" ng-if="!offer.offerproducts[0].image1" ng-src="{{offer.offerproducts[0].image2 | serverimage}}" alt="">
+                                    <img class="brand-image" ng-if="offer.offerproducts[0].image1 && offer.offerproducts[0].image2" ng-src="{{offer.offerproducts[0].image1 | serverimage}}" alt="">
                                 </div>
                                 <div class="deal-details">
-                                    <h2>iPhone 6[S]</h2>
-                                    <!--                    <h3 class="item-note">{{item.company}}</h3></h2>-->
-<!--
-                                    <div class="rating">
-                                        <ul>
-                                            <li><i class="icon star ion-ios-star-outline" s></i></li>
-                                            <li><i class="icon star ion-ios-star-outline" s></i></li>
-                                            <li><i class="icon star ion-ios-star-outline" s></i></li>
-                                            <li><i class="icon star ion-ios-star-outline" s></i></li>
-                                            <li><i class="icon star ion-ios-star-outline" s></i></li>
-                                        </ul>
-                                    </div>
--->
+                                    <h2>{{offer.offerproducts[0].name}}</h2>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="image-holder-product">
-                                    <img class="brand-image" src="img/products/iphone2.jpg" alt="">
+                                    <img class="brand-image" ng-if="offer.offerproducts[1].image1" ng-src="{{offer.offerproducts[1].image1 | serverimage}}" alt="">
+                                    <img class="brand-image" ng-if="!offer.offerproducts[1].image1" ng-src="{{offer.offerproducts[1].image2 | serverimage}}" alt="">
+                                    <img class="brand-image" ng-if="offer.offerproducts[1].image1 && offer.offerproducts[1].image2" ng-src="{{offer.offerproducts[1].image1 | serverimage}}" alt="">
                                 </div>
                                 <div class="deal-details">
-                                    <h2>iPhone custom cover</h2>
-                                    <!--                    <h3 class="item-note">{{item.company}}</h3></h2>-->
-<!--
-                                    <div class="rating">
-                                        <ul>
-                                            <li><i class="icon star ion-ios-star-outline" s></i></li>
-                                            <li><i class="icon star ion-ios-star-outline" s></i></li>
-                                            <li><i class="icon star ion-ios-star-outline" s></i></li>
-                                            <li><i class="icon star ion-ios-star-outline" s></i></li>
-                                            <li><i class="icon star ion-ios-star-outline" s></i></li>
-                                        </ul>
-                                    </div>
--->
-                               
+                                    <h2>{{offer.offerproducts[1].name}}</h2>
                                 </div>
                             </div>
                             <i class="icon ion-android-add"></i>
                         </div>
-                        
-<!--
 
-                        <div class="row deal-actiontray">
-                            <div class="col col-50">
--->
-                               <div class="price-separator"></div>
-                                <div class="row deal-buy">
-                                    <div class="col"><h3>Rs. 49,999</h3></div>
-                                    <div class="col"><button class="button button-calm btn-subscribe">
-                        Buy now
-                    </button></div>
-                                </div>
-<!--
+                        <div class="price-separator"></div>
+                        <div class="row deal-buy">
+                            <div class="col">
+                                <h3>{{offer.price}}</h3>
                             </div>
-                            <div class="col heart col-25">
-                                <i class="icon ion-ios-heart"></i></button>
-                            </div>
-                            <div class="col cart col-25">
-                                <i class="icon ion-android-cart"></i>
+                            <div class="col">
+                                <button class="button button-calm btn-subscribe">
+                                    Buy now
+                                </button>
                             </div>
                         </div>
--->
 
                     </div>
                 </div>

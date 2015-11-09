@@ -7,6 +7,7 @@
 var formvalidation = function(allvalidation) {
     var isvalid2 = true;
     for (var i = 0; i < allvalidation.length; i++) {
+        console.log(allvalidation);
         if (allvalidation[i].field == "" || !allvalidation[i].field || allvalidation[i].field == "Please select" || allvalidation[i].field == "Please Select") {
             allvalidation[i].validation = "ng-invalid ng-dirty";
             isvalid2 = false;
@@ -156,7 +157,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
             }
         })
         .state('app.checkout', {
-            url: '/checkout',
+            url: '/checkout/:totalcart',
             views: {
                 'menuContent': {
                     templateUrl: 'templates/checkout.html',

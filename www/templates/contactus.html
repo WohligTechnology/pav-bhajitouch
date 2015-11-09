@@ -18,22 +18,22 @@
                     <div class="get-in-touch">
                         <h2>Get in touch</h2>
                         <div class="list contact-form">
-                            <form ng-submit="doLogin()">
+                            <form ng-submit="usercontact()">
                                 <label class="item item-input item-floating-label">
                                     <span class="input-label">Name</span>
-                                    <input type="text" placeholder="Name*" required>
+                                    <input type="text" placeholder="Name*" ng-model="contactus.name" ng-class="allvalidation[0].validation" required>
                                 </label>
                                 <label class="item item-input item-floating-label">
                                     <span class="input-label">Email</span>
-                                    <input type="email" placeholder="Email*" required>
+                                    <input type="email" placeholder="Email*" ng-model="contactus.email" ng-class="allvalidation[1].validation" required>
                                 </label>
                                 <label class="item item-input item-floating-label">
                                     <span class="input-label">Telephone</span>
-                                    <input type="tel" placeholder="Telephone">
+                                    <input type="tel" placeholder="Telephone" ng-model="contactus.phone">
                                 </label>
                                 <label class="item item-input item-floating-label">
                                     <span class="input-label">Query</span>
-                                    <textarea name="" id="" rows="4" placeholder="Query*"></textarea>
+                                    <textarea name="" id="" rows="4" placeholder="Query*" ng-model="contactus.comment" ng-class="allvalidation[2].validation"></textarea>
                                 </label>
                                 <button class="button button-positive contact-button" type="submit">
                                     Done

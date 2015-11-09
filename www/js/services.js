@@ -40,10 +40,65 @@ angular.module('starter.services', [])
         authenticate: function(callback) {
             return $http.get(adminurl + 'authenticate').success(callback);
         },
+        orderhistory: function(callback) {
+            return $http.get(adminurl + 'orderhistory').success(callback);
+        },
         logout: function(callback) {
             return $http.post(adminurl + 'logout', {
                 withCredentials: true
             }).success(callback);
+        },
+        updateuser: function(userdetails, callback) {
+            return $http({
+                url: adminurl + 'updateuser',
+                method: "POST",
+                data: {
+						'id': $.jStorage.get("user").id,
+						'firstname': userdetails.firstname,
+						'lastname': userdetails.lastname,
+						'email': userdetails.email,
+						'phone': userdetails.phone,
+						'billingaddress': userdetails.billingaddress,
+						'billingcity': userdetails.billingcity,
+						'billingpincode': userdetails.billingpincode,
+						'billingcountry': userdetails.billingcountry,
+						'billingstate': userdetails.billingstate
+					}
+            }).success(callback);
+        },
+        placeorder: function(checkout, callback) {
+            return $http({
+                url: adminurl + 'placeorder',
+                method: "POST",
+                data: {
+						'firstname': checkout.firstname,
+						'lastname': checkout.lastname,
+						'billingaddress': checkout.billingaddress,
+						'billingcity': checkout.billingcity,
+						'billingstate': checkout.billingstate,
+						'billingcountry': checkout.billingcountry,
+						'billingpincode': checkout.billingpincode,
+						'email': checkout.email,
+						'company': checkout.company,
+						'billingcontact': checkout.billingcontact,
+						'shippingname': checkout.shippingname,
+						'shippingpincode': checkout.shippingpincode,
+						'shippingaddress': checkout.shippingaddress,
+						'shippingcity': checkout.shippingcity,
+						'shippingstate': checkout.shippingstate,
+						'shippingcountry': checkout.shippingcountry,
+						'shippingcontact': checkout.shippingcontact,
+						'cart': checkout.cart,
+						'finalamount': checkout.finalamount,
+						'user': checkout.userid,
+					}
+            }).success(callback);
+        },
+        usercontact: function(usercontact, callback) {
+            return $http.get(adminurl + 'usercontact?name=' + usercontact.name + '&phone=' + usercontact.phone + '&email=' + usercontact.email + '&comment='+usercontact.comment, {}, {
+                withCredentials: true
+            }).success(callback);
+
         },
         //dhaval start
         getbrand: function(pageno, callback) {
