@@ -2,7 +2,7 @@ var allfunction = {};
 var myfunction = '';
 angular.module('starter.controllers', ['ui.bootstrap'])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $location, $ionicPopup, $rootScope, MyServices, $ionicLoading, $interval) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $location, $ionicPopup, $rootScope, MyServices, $ionicLoading, $interval,$window, $templateCache) {
     $rootScope.transparent_header = false;
     $scope.userSignup = {};
     $scope.loginData = {};
@@ -13,7 +13,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
     if (MyServices.getuser()) {
         $scope.showlogin = false;
     }
-
+   
     allfunction.msg = function(msg, title) {
         var myPopup = $ionicPopup.show({
             template: '<p class="text-center">' + msg + '!</p>',
@@ -99,6 +99,8 @@ angular.module('starter.controllers', ['ui.bootstrap'])
                 $ionicLoading.hide();
                 MyServices.setuser(data);
                 $scope.closeLogin();
+                $window.location.reload();
+//                 $templateCache.removeAll();
                 $location.url("/home");
             }
         })
@@ -291,6 +293,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
 
 
 .controller('HomeCtrl', function($scope) {
+//    $templateCache.removeAll();
     $scope.slides = [{
         image: "img/slider/1.jpg",
 
@@ -729,12 +732,15 @@ $scope.usercontact = function() {
     
     // form integrate pooja
     $scope.checkout={};
+    if($.jStorage.get("user") != null){
     $scope.userid=$.jStorage.get("user").id;
     if($scope.userid !=""){
     $scope.checkout.userid=$.jStorage.get("user").id;
     }
     else{
+        console.log("not");
     $scope.checkout.userid=0;
+    }
     }
     MyServices.getcart(function(data) {
             $scope.cart = data;
