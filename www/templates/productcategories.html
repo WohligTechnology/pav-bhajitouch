@@ -9,11 +9,24 @@
             </div>
         </div> -->
         <div class="cat-d">
-          <img src="img/bkp.jpg" class="full-image">
+            <img src="img/bkp.jpg" class="full-image">
         </div>
         <div class="text-center">
-        <p class="m-p">BROWSE BY CATEGORY</p>
+            <p class="m-p">BROWSE BY CATEGORY</p>
             <hr class="hr">
         </div>
+        <div class="cat-c">
+            <div class="row pad0" ng-repeat="cato in cats">
+                <div class="col-33" ng-repeat="cat in cato">
+                    <div class="cat-i">
+                        <figure class="text-center">
+                            <img ng-src="{{cat.image}}" class="w40">
+                            <figcaption class="f-z">{{cat.name}}</figcaption>
+                        </figure>
+                    </div>
+                </div>
+
+            </div>
+
     </ion-content>
 </ion-view>

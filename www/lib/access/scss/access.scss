@@ -1342,9 +1342,28 @@ $font-size-list:13px;
     border-color: #ABABAB;
     margin: 0 auto;
 }
+.f-z{
+        font-size: 12px;
+    line-height: 130%;
+   
+}
 .m-p{
     margin: 0;
     padding-top: 10px;
         padding-bottom: 5px;
+
+}
+.pad0{
+  padding: 0 !important; 
+}
+.cat-c{
+//        border-top: 1px solid #C3C3C3;
+    margin-top: 10px;
+}
+.w40{
+        width: 40px;
+}
+.cat-i {
+    padding: 20px 0px;
 
 }
