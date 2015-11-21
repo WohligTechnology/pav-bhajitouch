@@ -16,11 +16,12 @@
             <hr class="hr">
         </div>
         <div class="cat-c">
-            <div class="row pad0" ng-repeat="cato in cats" ui-sref="app.category">
-                <div class="col-33" ng-repeat="cat in cato">
+            <div class="row pad0" ng-repeat="cato in cats">
+                <div class="col-33" ng-repeat="cat in cato" ui-sref="app.category({id:cat.id})">
                     <div class="cat-i">
                         <figure class="text-center">
-                            <img ng-src="{{cat.image}}" class="w40">
+                            <img ng-src="{{cat.image}}" class="w40" ng-if="cat.image1">
+                            <img src="img/icon.png" class="w40" ng-if="!cat.image1">
                             <figcaption class="f-z">{{cat.name}}</figcaption>
                         </figure>
                     </div>

@@ -1,22 +1,12 @@
 <ion-view view-title="Category">
     <ion-content>
         <div class="cat-l">
-
             <div class="list">
-
                 <div class="item item-divider">
                     Cases & Protection
                 </div>
-
-                <a class="item" href="#">
- Apple
-  </a>
-
-                <a class="item" href="#">
- Nokia
-  </a>
+                <a class="item" href="#/app/product/{{parent}}/0/0" ng-repeat="subcategory in subcategories">{{subcategory.name}}</a>
             </div>
         </div>
-
     </ion-content>
 </ion-view>

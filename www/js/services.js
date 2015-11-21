@@ -53,17 +53,17 @@ angular.module('starter.services', [])
                 url: adminurl + 'updateuser',
                 method: "POST",
                 data: {
-						'id': $.jStorage.get("user").id,
-						'firstname': userdetails.firstname,
-						'lastname': userdetails.lastname,
-						'email': userdetails.email,
-						'phone': userdetails.phone,
-						'billingaddress': userdetails.billingaddress,
-						'billingcity': userdetails.billingcity,
-						'billingpincode': userdetails.billingpincode,
-						'billingcountry': userdetails.billingcountry,
-						'billingstate': userdetails.billingstate
-					}
+                    'id': $.jStorage.get("user").id,
+                    'firstname': userdetails.firstname,
+                    'lastname': userdetails.lastname,
+                    'email': userdetails.email,
+                    'phone': userdetails.phone,
+                    'billingaddress': userdetails.billingaddress,
+                    'billingcity': userdetails.billingcity,
+                    'billingpincode': userdetails.billingpincode,
+                    'billingcountry': userdetails.billingcountry,
+                    'billingstate': userdetails.billingstate
+                }
             }).success(callback);
         },
         placeorder: function(checkout, callback) {
@@ -71,31 +71,31 @@ angular.module('starter.services', [])
                 url: adminurl + 'placeorder',
                 method: "POST",
                 data: {
-						'firstname': checkout.firstname,
-						'lastname': checkout.lastname,
-						'billingaddress': checkout.billingaddress,
-						'billingcity': checkout.billingcity,
-						'billingstate': checkout.billingstate,
-						'billingcountry': checkout.billingcountry,
-						'billingpincode': checkout.billingpincode,
-						'email': checkout.email,
-						'company': checkout.company,
-						'billingcontact': checkout.billingcontact,
-						'shippingname': checkout.shippingname,
-						'shippingpincode': checkout.shippingpincode,
-						'shippingaddress': checkout.shippingaddress,
-						'shippingcity': checkout.shippingcity,
-						'shippingstate': checkout.shippingstate,
-						'shippingcountry': checkout.shippingcountry,
-						'shippingcontact': checkout.shippingcontact,
-						'cart': checkout.cart,
-						'finalamount': checkout.finalamount,
-						'user': checkout.userid,
-					}
+                    'firstname': checkout.firstname,
+                    'lastname': checkout.lastname,
+                    'billingaddress': checkout.billingaddress,
+                    'billingcity': checkout.billingcity,
+                    'billingstate': checkout.billingstate,
+                    'billingcountry': checkout.billingcountry,
+                    'billingpincode': checkout.billingpincode,
+                    'email': checkout.email,
+                    'company': checkout.company,
+                    'billingcontact': checkout.billingcontact,
+                    'shippingname': checkout.shippingname,
+                    'shippingpincode': checkout.shippingpincode,
+                    'shippingaddress': checkout.shippingaddress,
+                    'shippingcity': checkout.shippingcity,
+                    'shippingstate': checkout.shippingstate,
+                    'shippingcountry': checkout.shippingcountry,
+                    'shippingcontact': checkout.shippingcontact,
+                    'cart': checkout.cart,
+                    'finalamount': checkout.finalamount,
+                    'user': checkout.userid,
+                }
             }).success(callback);
         },
         usercontact: function(usercontact, callback) {
-            return $http.get(adminurl + 'usercontact?name=' + usercontact.name + '&phone=' + usercontact.phone + '&email=' + usercontact.email + '&comment='+usercontact.comment, {}, {
+            return $http.get(adminurl + 'usercontact?name=' + usercontact.name + '&phone=' + usercontact.phone + '&email=' + usercontact.email + '&comment=' + usercontact.comment, {}, {
                 withCredentials: true
             }).success(callback);
 
@@ -219,6 +219,16 @@ angular.module('starter.services', [])
         },
         search: function(search, callback) {
             return $http.get(adminurl + 'searchbyname?search=' + search, {}, {
+                withCredentials: true
+            }).success(callback);
+        },
+        getallcategories: function(callback) {
+            return $http.get(adminurl + 'getallcategory', {}, {
+                withCredentials: true
+            }).success(callback);
+        },
+        getsinglecategory: function(id, callback) {
+            return $http.get(adminurl + 'getsinglecategory?categoryid=' + id, {}, {
                 withCredentials: true
             }).success(callback);
         },
