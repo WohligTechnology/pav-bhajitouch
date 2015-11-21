@@ -837,6 +837,10 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         });
 
     })
+    .controller('CategoryCtrl', function ($scope, $stateParams, $location, $ionicHistory, MyServices, $ionicLoading) {
+
+
+    })
 
 .controller('MyWishlistCtrl', function ($scope, $stateParams, $location, $ionicHistory, MyServices, $ionicLoading) {
 

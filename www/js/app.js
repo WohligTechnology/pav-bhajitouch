@@ -72,7 +72,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
                     controller: 'ProductCtrl'
                 }
             }
-        })
+        })        
+
         .state('app.productcategories', {
             url: '/productcategories',
             views: {
@@ -108,6 +109,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
                 'menuContent': {
                     templateUrl: 'templates/deals.html',
                     controller: 'DealsCtrl'
+                }
+            }
+        })
+        .state('app.category', {
+            url: '/category',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/category.html',
+                    controller: 'CategoryCtrl'
                 }
             }
         })

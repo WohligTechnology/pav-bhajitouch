@@ -16,13 +16,19 @@ $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
 @font-face {
-  font-family: 'PT sans';
-  src: url("../fonts/PTBold.ttf");
+  font-family: 'lato';
+  src: url("../fonts/Lato-Bold.ttf");
   font-weight: 700; }
 
 @font-face {
-  font-family: 'PT sans';
-  src: url(../fonts/PTRegular.ttf); }
+  font-family: 'lato';
+  src: url(../fonts/Lato-Regular.ttf);
+  font-weight: 400; }
+
+@font-face {
+  font-family: 'lato';
+  src: url(../fonts/Lato-Light.ttf);
+  font-weight: 300; }
 
 .title {
   font-weight: 300 !important; }
@@ -84,10 +90,11 @@ $dark:                            #444 !default;
         text-transform: capitalize;
         color: #ffffff; }
         .home-pro .hm-pro .layer .pro-price figcaption {
-          font-size: 16px; }
+          font-size: 16px;
+          font-weight: 300; }
         .home-pro .hm-pro .layer .pro-price p {
           color: #01DEFF;
-          font-weight: 700; }
+          font-weight: 400; }
       .home-pro .hm-pro .layer .btn-shop {
         float: right;
         padding-right: 12px;
@@ -118,7 +125,7 @@ $dark:                            #444 !default;
   font-weight: 600 !important; }
 
 .subscribe p {
-  font-size: 11px !important;
+  font-size: 13px !important;
   font-weight: 300 !important;
   line-height: 100%;
   padding-left: 10px;
@@ -137,7 +144,8 @@ $dark:                            #444 !default;
     line-height: 29px;
     margin-left: 5px !important;
     text-transform: uppercase;
-    font-size: 13px; }
+    font-size: 12px;
+    font-weight: 300; }
 
 .no-header .scroll-content {
   top: 0px !important; }
@@ -754,16 +762,19 @@ $dark:                            #444 !default;
     padding: 0px; }
   .contactus .row + .row {
     border-top: 1px solid #ddd; }
-  .contactus .contactus-addr h2 {
-    font-size: 14px;
-    font-weight: 600;
-    text-align: center;
-    margin: 10px 0px; }
-  .contactus .contactus-addr p {
-    margin: 10px;
-    font-size: 13px; }
-  .contactus .contactus-addr .google-maps {
-    margin: 10px; }
+  .contactus .contactus-addr {
+    padding-bottom: 11px; }
+    .contactus .contactus-addr h2 {
+      font-size: 16px;
+      font-weight: 400;
+      text-align: center;
+      margin: 10px 0px; }
+    .contactus .contactus-addr p {
+      margin: 10px;
+      font-size: 13px;
+      line-height: 130%; }
+    .contactus .contactus-addr .google-maps {
+      margin: 10px; }
   .contactus .get-in-touch ::-webkit-input-placeholder {
     color: grey; }
   .contactus .get-in-touch h2 {
@@ -981,6 +992,27 @@ $dark:                            #444 !default;
 
 .cat-i {
   padding: 20px 0px; }
+
+.bar .title {
+  font-size: 16px !important;
+  font-weight: 100 !important;
+  font-family: 'lato'; }
+
+.cat-l .item-divider {
+  color: #8E8E8E;
+  font-weight: 300;
+  text-align: center; }
+
+.cat-l .item {
+  padding: 8px 16px 8px 16px;
+  border-width: 1px;
+  border-style: solid;
+  font-size: 14px; }
+
+.cont {
+  font-size: 15px;
+  padding-left: 10px;
+  font-weight: 400; }
 
 /*!
   Ionicons, v2.0.1
@@ -4305,7 +4337,7 @@ body,
   color: #303030;
   word-wrap: break-word;
   font-size: 14px;
-  font-family: "PT sans", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
+  font-family: "lato", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
   line-height: 20px;
   text-rendering: optimizeLegibility;
   -webkit-backface-visibility: hidden;
@@ -4543,7 +4575,7 @@ h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
   color: #303030;
   font-weight: 300;
-  font-family: "PT sans", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
+  font-family: "lato", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
   line-height: 1.2; }
   h1 small, h2 small, h3 small, h4 small, h5 small, h6 small,
   .h1 small, .h2 small, .h3 small, .h4 small, .h5 small, .h6 small {
@@ -6029,7 +6061,7 @@ ion-tabs.tabs-color-active-dark .tab-item {
   white-space: nowrap;
   font-weight: 400;
   font-size: 14px;
-  font-family: "PT sans", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
+  font-family: "lato", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
   opacity: 0.7; }
   .tab-item:hover {
     cursor: pointer; }
@@ -7821,7 +7853,7 @@ input,
 button,
 select,
 textarea {
-  font-family: "PT sans", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif; }
+  font-family: "lato", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif; }
 
 .item-input {
   display: -webkit-box;
