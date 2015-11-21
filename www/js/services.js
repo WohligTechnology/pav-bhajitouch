@@ -1,5 +1,5 @@
-//var adminbase = "http://wohlig.co.in/accessbackend/";
-var adminbase = "http://localhost/accessback/";
+var adminbase = "http://wohlig.co.in/accessbackend/";
+// var adminbase = "http://localhost/accessback/";
 var adminurl = adminbase + "index.php/json/";
 var adminhauth = adminbase + "index.php/hauth/";
 var adminimage = adminbase + "uploads/";
