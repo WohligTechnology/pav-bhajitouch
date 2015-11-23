@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.wohlig.access" version="0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>Access App</name>
+  <name>Access</name>
   <description>&#xD;&#xD;&#xD;
-        An Ionic Framework and Cordova project.&#xD;&#xD;&#xD;
+        Access App.&#xD;&#xD;&#xD;
     </description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">&#xD;&#xD;&#xD;
-      Ionic Framework Team&#xD;&#xD;&#xD;
+  <author email="retail@accessinfoworld.com" href="">&#xD;&#xD;&#xD;
+      Access &#xD;&#xD;&#xD;
     </author>
   <content src="index.html"/>
   <access origin="*"/>

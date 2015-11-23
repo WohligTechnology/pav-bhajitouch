@@ -522,7 +522,8 @@ $dark:                            #444 !default;
     text-align: center;
     font-size: 14px;
     margin: 0px;
-    padding: 8px 0px 15px 0; }
+    padding: 8px 0px 15px 0;
+    font-weight: 700; }
 
 .nav-button .bar .button.button-icon.icon:before,
 .nav-button .bar .button.button-icon:before {
@@ -1006,6 +1007,15 @@ $dark:                            #444 !default;
   font-size: 15px;
   padding-left: 10px;
   font-weight: 400; }
+
+.slider-pager .slider-pager-page {
+  color: #7EE1EA !important; }
+
+.pad15 {
+  padding: 15px 0px 15px 0px; }
+
+.b4 {
+  border-radius: 4px; }
 
 /*!
   Ionicons, v2.0.1
