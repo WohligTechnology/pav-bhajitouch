@@ -225,6 +225,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     };
 })
 
+.filter('localimage', function() {
+    return function(image) {
+        if (image && image != null) {
+            return "img/pcategory/" + image;
+        } else {
+            return undefined;
+        }
+    };
+})
+
 .filter('numberWithCommas', function() {
     return function(x) {
         if (x)
