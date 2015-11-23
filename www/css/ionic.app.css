@@ -480,11 +480,6 @@ $dark:                            #444 !default;
     padding: 0px !important; }
   .tabs-about .col, .product-detail .detail .name-other .tabs-detail .col {
     text-align: center; }
-  .tabs-about .active-tab, .product-detail .detail .name-other .tabs-detail .active-tab {
-    border-style: solid;
-    border-width: 0px;
-    border-bottom-width: 2px;
-    border-color: #7ee1ea; }
 
 .nav-bar-access .cart-button {
   position: relative !important; }
@@ -515,21 +510,19 @@ $dark:                            #444 !default;
     text-align: center;
     font-weight: 600; }
 
-.clientele {
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd; }
-  .clientele .row + .row {
-    border-top: 1px solid #ddd; }
-  .clientele .clnt {
-    width: 100%; }
-    .clientele .clnt .image-holder-clientele {
-      height: 200px !important;
-      margin: 0px; }
-    .clientele .clnt h4 {
-      text-align: center;
-      font-size: 14px;
-      margin: 0px;
-      padding: 8px 0px 15px 0; }
+.clientele .row + .row {
+  border-top: 1px solid #ddd; }
+
+.clientele .clnt {
+  width: 100%; }
+  .clientele .clnt .image-holder-clientele {
+    height: 200px !important;
+    margin: 0px; }
+  .clientele .clnt h4 {
+    text-align: center;
+    font-size: 14px;
+    margin: 0px;
+    padding: 8px 0px 15px 0; }
 
 .nav-button .bar .button.button-icon.icon:before,
 .nav-button .bar .button.button-icon:before {

@@ -1150,6 +1150,27 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         $scope.celebimages = data.queryresult;
         $ionicLoading.hide();
     });
+    
+            //    tab change
+
+        $scope.tab = 'new';
+        $scope.classa = 'active';
+        $scope.classb = '';
+
+        $scope.tabchange = function (tab, a) {
+            //        console.log(tab);
+            $scope.tab = tab;
+            if (a == 1) {
+                $ionicScrollDelegate.scrollTop();
+                $scope.classa = "active";
+                $scope.classb = '';
+            } else {
+                $ionicScrollDelegate.scrollTop();
+                $scope.classa = '';
+
+                $scope.classb = "active";
+            }
+        };
 
 })
 

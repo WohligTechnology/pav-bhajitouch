@@ -611,12 +611,12 @@ $font-size-list:13px;
     .col {
         text-align: center;
     }
-    .active-tab {
-        border-style: solid;
-        border-width: 0px;
-        border-bottom-width: 2px;
-        border-color: $positive;
-    }
+//    .active-tab {
+//        border-style: solid;
+//        border-width: 0px;
+//        border-bottom-width: 2px;
+//        border-color: $positive;
+//    }
 }
 .nav-bar-access {
     .cart-button {
@@ -656,8 +656,8 @@ $font-size-list:13px;
     }
 }
 .clientele {
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
+//    border-top: 1px solid #ddd;
+//    border-bottom: 1px solid #ddd;
     .row+.row {
         border-top: 1px solid #ddd;
     }
