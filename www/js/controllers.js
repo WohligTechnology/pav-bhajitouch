@@ -292,7 +292,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
 })
 
 
-.controller('HomeCtrl', function($scope) {
+.controller('HomeCtrl', function($scope, MyServices, $ionicLoading, $location) {
     //    $templateCache.removeAll();
     $scope.slides = [{
         image: "img/slider/1.jpg",
@@ -304,12 +304,27 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         image: "img/slider/3.jpg",
 
     }];
+
+    MyServices.getHomeProducts(function(data) {
+        if (data) {
+            $scope.homeProducts = data;
+            console.log(data);
+        }
+    })
+
+    $scope.goToProduct = function(id) {
+        console.log(id);
+        $location.url("/app/productdetail/" + id);
+    }
+
 })
 
-.controller('DealsCtrl', function($scope, $stateParams, MyServices, $ionicLoading) {
+.controller('DealsCtrl', function($scope, $stateParams, MyServices, $ionicLoading, $ionicSlideBoxDelegate) {
 
     allfunction.loading();
     $scope.dealsimg = [];
+    $scope.offers = [];
+    $scope.slider = [];
 
     $scope.sliderclick = function(id) {
         MyServices.getofferproducts(id.id, function(data) {
@@ -323,39 +338,15 @@ angular.module('starter.controllers', ['ui.bootstrap'])
     }
 
     MyServices.getofferdetails(function(data, status) {
-        console.log(data.offer[0]);
-        $scope.currentoffer = data.offer[0];
-        $scope.currentofferprod = $scope.currentoffer.offerproducts;
-        for (var i = 0; i < data.offer[0].length; i++) {}
-
-        $scope.deals = data.offer[0];
-        //         $scope.offerproducts = data.offerproducts;
-        //            console.log($scope.offerproducts);
-
-        $scope.slideoffer = [];
-        _.each(data.offer[0], function(n) {
-            _.each(n.offerproducts, function(m) {
-                if (m.image1) {
-                    $scope.slideoffer.push({
-                        "id": n.id,
-                        "img": m.image1
-                    });
-                }
-            });
-
-        });
-        console.log($scope.slideoffer);
-
-        $scope.pastdeals = data.pastoffer;
-        $scope.pastdealproducts = data.pastofferproducts;
-        $scope.upcomingoffer = data.upcomingoffer;
-        $scope.upcomingofferproducts = data.upcomingofferproducts;
-        console.log($scope.dealslide);
-        _.each($scope.dealslide, function(n) {
-            $scope.dealsimg.push(n.image);
-        })
+        console.log(data);
+        if (data && data.offer && data.offer.length > 0) {
+            $scope.offers = data.offer[0];
+            _.each(data.offer[0], function(n) {
+                $scope.slider.push(n.image);
+            })
+        }
         $ionicLoading.hide();
-
+        $ionicSlideBoxDelegate.update();
     });
 
 })
@@ -435,8 +426,9 @@ angular.module('starter.controllers', ['ui.bootstrap'])
                 allfunction.loading();
                 MyServices.updateuser($scope.userdetails, function(data) {
                     console.log(data);
-                    if (data != "") {
+                    if (data != "false") {
                         $ionicLoading.hide();
+                        // MyServices.setuser(data);
                         allfunction.msg("Successfully Edited", 'Thankyou!');
                     } else {
                         $ionicLoading.hide();
@@ -1150,27 +1142,27 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         $scope.celebimages = data.queryresult;
         $ionicLoading.hide();
     });
-    
-            //    tab change
 
-        $scope.tab = 'new';
-        $scope.classa = 'active';
-        $scope.classb = '';
+    //    tab change
 
-        $scope.tabchange = function (tab, a) {
-            //        console.log(tab);
-            $scope.tab = tab;
-            if (a == 1) {
-                $ionicScrollDelegate.scrollTop();
-                $scope.classa = "active";
-                $scope.classb = '';
-            } else {
-                $ionicScrollDelegate.scrollTop();
-                $scope.classa = '';
+    $scope.tab = 'new';
+    $scope.classa = 'active';
+    $scope.classb = '';
 
-                $scope.classb = "active";
-            }
-        };
+    $scope.tabchange = function(tab, a) {
+        //        console.log(tab);
+        $scope.tab = tab;
+        if (a == 1) {
+            $ionicScrollDelegate.scrollTop();
+            $scope.classa = "active";
+            $scope.classb = '';
+        } else {
+            $ionicScrollDelegate.scrollTop();
+            $scope.classa = '';
+
+            $scope.classb = "active";
+        }
+    };
 
 })
 

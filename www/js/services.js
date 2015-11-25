@@ -232,6 +232,11 @@ angular.module('starter.services', [])
                 withCredentials: true
             }).success(callback);
         },
+        getHomeProducts: function(callback) {
+            return $http.get(adminurl + 'getHomeProducts', {}, {
+                withCredentials: true
+            }).success(callback);
+        },
         //dhaval end
         forgotPassword: function(forgot, callback) {
             return $http({

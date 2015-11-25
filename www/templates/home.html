@@ -2,49 +2,46 @@
     <ion-header-bar>
         <h1 class="title">Forgot Password?</h1>
         <div class="buttons">
-            <button class="button modal-close button-clear button-icon " ng-click="closeFrgt()"><i class="icon ion-ios-close-empty"></i>                    </button>
+            <button class="button modal-close button-clear button-icon " ng-click="closeFrgt()"><i class="icon ion-ios-close-empty"></i> </button>
         </div>
     </ion-header-bar>
     <!--<ion-view view-title="Home" hide-nav-bar="searchbar">-->
     <ion-content>
-
-        <ion-slide-box on-slide-changed="slideHasChanged($index)" auto-play="true">
+        <ion-slide-box on-slide-changed="slideHasChanged($index)" auto-play="true" does-continue="true">
             <ion-slide ng-repeat="slide in slides">
                 <img ng-src="{{slide.image}}" class="full-image">
             </ion-slide>
         </ion-slide-box>
         <div class="home-pro">
-            <div class="hm-pro">
+            <div class="hm-pro" ng-if="homeProducts.length>=1">
                 <figure>
-                    <img src="img/product/1.jpg" class="full-image">
+                    <img src="favicon.ico" class="full-image" ng-if="homeProducts[0].images.length>0">
+                    <img ng-src="{{homeProducts[0].images[0][0].image | serverimage}}" class="full-image" ng-if="homeProducts[0].images.length>0">
                     <div class="layer">
                         <div class="pro-txt">
                             <div class="pro-price">
-                                <figcaption class="pro-name">Product name</figcaption>
-                                <p>Price</p>
+                                <figcaption class="pro-name">{{homeProducts[0].name}}</figcaption>
+                                <p>{{homeProducts[0].price}}</p>
                             </div>
                             <div class="btn-shop">
-                                <button class="button button-small button-positive">
+                                <button class="button button-small button-positive" ng-click="goToProduct(homeProducts[0].id);">
                                     Shop Now
                                 </button>
                             </div>
                         </div>
                     </div>
                 </figure>
-
-
             </div>
             <div class="row padzero">
-                <div class="col col-50 padzero">
+                <div class="col col-50 padzero" ng-if="homeProducts.length>=2">
                     <div class="hm-pro box-img text-center">
                         <figure>
-                            <img src="img/product/2.jpg" class="full-image">
+                            <img ng-src="{{homeProducts[1].images[0][0].image | serverimage}}" class="full-image" ng-if="homeProducts[1].images.length>0">
                             <div class="layer pro-pr text-center">
                                 <div class="btns-shop">
-                                    <h4>Product Name</h4>
-                                    <p>Price</p>
-
-                                    <button class="button button-small button-positive">
+                                    <h4>{{homeProducts[1].name}}</h4>
+                                    <p>{{homeProducts[1].price}}</p>
+                                    <button class="button button-small button-positive" ng-click="goToProduct(homeProducts[1].id);">
                                         Shop Now
                                     </button>
                                 </div>
@@ -52,16 +49,15 @@
                         </figure>
                     </div>
                 </div>
-                <div class="col col-50 padzero">
+                <div class="col col-50 padzero" ng-if="homeProducts.length>=3">
                     <div class="hm-pro box-img text-center">
                         <figure>
-                            <img src="img/product/3.jpg" class="full-image">
+                            <img ng-src="{{homeProducts[2].images[0][0].image | serverimage}}" class="full-image" ng-if="homeProducts[2].images.length>0">
                             <div class="layer pro-pr text-center">
                                 <div class="btns-shop">
-                                    <h4>Product Name</h4>
-                                    <p>Price</p>
-
-                                    <button class="button button-small button-positive">
+                                    <h4>{{homeProducts[2].name}}</h4>
+                                    <p>{{homeProducts[2].price}}</p>
+                                    <button class="button button-small button-positive" ng-click="goToProduct(homeProducts[2].id);">
                                         Shop Now
                                     </button>
                                 </div>
@@ -70,26 +66,24 @@
                     </div>
                 </div>
             </div>
-
-            <div class="hm-pro">
+            <div class="hm-pro" ng-if="homeProducts.length>=4">
                 <figure>
-                    <img src="img/product/4.jpg" class="full-image">
+                    <!-- <img src="img/product/1.jpg" class="full-image"> -->
+                    <img ng-src="{{homeProducts[3].images[0][0].image | serverimage}}" class="full-image" ng-if="homeProducts[3].images.length>0">
                     <div class="layer">
                         <div class="pro-txt">
                             <div class="pro-price">
-                                <figcaption class="pro-name">Product name</figcaption>
-                                <p>Price</p>
+                                <figcaption class="pro-name">{{homeProducts[3].name}}</figcaption>
+                                <p>{{homeProducts[3].price}}</p>
                             </div>
                             <div class="btn-shop">
-                                <button class="button button-small button-positive">
+                                <button class="button button-small button-positive" ng-click="goToProduct(homeProducts[3].id);">
                                     Shop Now
                                 </button>
                             </div>
                         </div>
                     </div>
                 </figure>
-
-
             </div>
             <div class="subscribe item item-text-wrap">
                 <h3 align="center">SIGN UP TO RECEIVE OUR UPDATES</h3>
@@ -104,7 +98,5 @@
                 </div>
             </div>
         </div>
-
-
     </ion-content>
 </ion-view>

@@ -1,43 +1,28 @@
 <ion-view view-title="Deals">
     <ion-content>
-        
-        
-<!--
         <div class="deals">
-            <ion-slide-box on-slide-changed="slideHasChanged($index)">
-                <ion-slide ng-repeat="offerimage in currentoffer">
-                    <div class="deal-sliderimg"><img ng-src="{{offerimage.image | serverimage}}" alt="" class="deal-img">
+            <ion-slide-box on-slide-changed="slideHasChanged($index)" auto-play="true" does-continue="true">
+                <ion-slide ng-repeat="offerimage in slider">
+                    <div class="deal-sliderimg"><img ng-src="{{offerimage | serverimage}}" alt="" class="deal-img">
                     </div>
-
                 </ion-slide>
             </ion-slide-box>
-            <div class="row" ng-repeat="offer in currentoffer">
+            <div class="row" ng-repeat="offer in offers">
                 <div class="col">
                     <div class="deal">
                         <div class="row">
-                            <div class="col">
+                            <div class="col" ng-repeat="products in offer.offerproducts">
                                 <div class="image-holder-product">
-                                     <img class="brand-image" ng-if="offer.offerproducts[0].image1" ng-src="{{offer.offerproducts[0].image1 | serverimage}}" alt="">
-                                    <img class="brand-image" ng-if="!offer.offerproducts[0].image1" ng-src="{{offer.offerproducts[0].image2 | serverimage}}" alt="">
-                                    <img class="brand-image" ng-if="offer.offerproducts[0].image1 && offer.offerproducts[0].image2" ng-src="{{offer.offerproducts[0].image1 | serverimage}}" alt="">
+                                    <img class="brand-image" ng-if="products.image1" ng-src="{{products.image1 | serverimage}}" alt="">
+                                    <img class="brand-image" ng-if="!products.image1 && products.image2" ng-src="{{products.image2 | serverimage}}" alt="">
+                                    <img class="brand-image" ng-if="!products.image1 && !products.image2" src="img/icon.png" alt="">
                                 </div>
                                 <div class="deal-details">
-                                    <h2>{{offer.offerproducts[0].name}}</h2>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="image-holder-product">
-                                    <img class="brand-image" ng-if="offer.offerproducts[1].image1" ng-src="{{offer.offerproducts[1].image1 | serverimage}}" alt="">
-                                    <img class="brand-image" ng-if="!offer.offerproducts[1].image1" ng-src="{{offer.offerproducts[1].image2 | serverimage}}" alt="">
-                                    <img class="brand-image" ng-if="offer.offerproducts[1].image1 && offer.offerproducts[1].image2" ng-src="{{offer.offerproducts[1].image1 | serverimage}}" alt="">
-                                </div>
-                                <div class="deal-details">
-                                    <h2>{{offer.offerproducts[1].name}}</h2>
+                                    <h2>{{products.name}}</h2>
                                 </div>
                             </div>
                             <i class="icon ion-android-add"></i>
                         </div>
-
                         <div class="price-separator"></div>
                         <div class="row deal-buy">
                             <div class="col">
@@ -49,15 +34,11 @@
                                 </button>
                             </div>
                         </div>
-
                     </div>
                 </div>
-
             </div>
-
         </div>
--->
-               <div class="center" >
+        <div class="center" ng-show="offers.lenght==0">
             <p>No Data Found</p>
         </div>
     </ion-content>

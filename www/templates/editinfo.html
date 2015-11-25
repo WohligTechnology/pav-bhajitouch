@@ -277,13 +277,13 @@
                         </select>
                     </label>
                     <label class="item item-input">
-                        <input type="text" placeholder="Zip code" class="black" ng-model="userdetails.billingpincode" ng-class="allvalidation[6].validation">
+                        <input type="tel" placeholder="Zip code" class="black" ng-model="userdetails.billingpincode" ng-class="allvalidation[6].validation" maxlength="6">
                     </label>
                     <label class="item item-input">
                         <input type="email" placeholder="Email" class="black" ng-model="userdetails.email" ng-class="allvalidation[7].validation">
                     </label>
                     <label class="item item-input">
-                        <input type="tel"  placeholder="Phone No." class="black" ng-model="userdetails.phone" ng-class="allvalidation[8].validation">
+                        <input type="tel"  placeholder="Phone No." class="black" ng-model="userdetails.phone" ng-class="allvalidation[8].validation" maxlength="10">
                     </label>
                     <button class="button button-positive editinfo-button" type="submit" ng-click="editSave(userdetails)">Edit Information
                     </button>
