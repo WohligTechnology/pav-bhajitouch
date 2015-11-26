@@ -5,7 +5,7 @@
     <!--    <ion-content ng-class="{'no-header':transparent_header}" on-scroll="pageScrolled()">-->
     <ion-content ng-class="has-header" on-scroll="pageScrolled()">
         <div class="product-detail">
-            <ion-slide-box on-slide-changed="slideHasChanged($index)">
+            <ion-slide-box on-slide-changed="slideHasChanged($index)" auto-play="true" does-continue="true">
                 <ion-slide ng-repeat="images in product.productimage">
                     <div class="image-holder-productimg">
                         <img ng-src="{{images.image | serverimage}}" class="product-img" alt="" ng-if="images.image">
