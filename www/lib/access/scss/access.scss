@@ -67,6 +67,9 @@ $font-size-list:13px;
         height: auto;
     }
 }
+.price {
+    padding-bottom: 10px;
+}
 .padzero {
     padding: 0 !important;
 }
@@ -418,6 +421,7 @@ $font-size-list:13px;
             margin: 0px;
             font-weight: 300;
             min-height: 20px;
+
         }
         .star {
             .icon {
@@ -433,7 +437,7 @@ $font-size-list:13px;
         }
     }
     .price-separator {
-        border-bottom: 1px solid #ddd;
+        border-bottom: 0px solid #ddd;
     }
     .row {
         padding: 0px;
@@ -528,6 +532,7 @@ $font-size-list:13px;
     }
 }
 .deals {
+
     .row {
         padding: 0px;
     }
@@ -551,6 +556,7 @@ $font-size-list:13px;
         }
         .row {
             position: relative;
+                padding: 8px 0px;
         }
         .icon {
             position: absolute;
@@ -1068,6 +1074,7 @@ $font-size-list:13px;
                 min-height: 32px;
                 text-align: center;
                 margin: 0px;
+                    padding-bottom: 25px;
             }
             .user-rating {
                 ul {
@@ -1344,4 +1351,9 @@ $font-size-list:13px;
 }
 .b4{
         border-radius: 4px;
+}
+.product, .newarrivals, .deals .deal {
+    border-top: 0px solid #ddd !important;
+    border-bottom: 1px solid #ddd;
+    text-decoration: none;
 }

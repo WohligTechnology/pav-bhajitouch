@@ -72,17 +72,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
                     controller: 'ProductCtrl'
                 }
             }
-        })        
-
-        .state('app.productcategories', {
-            url: '/productcategories',
-            views: {
-                'menuContent': {
-                    templateUrl: 'templates/productcategories.html',
-                    controller: 'ProductCategoriesCtrl'
-                }
-            }
         })
+
+    .state('app.productcategories', {
+        url: '/productcategories',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/productcategories.html',
+                controller: 'ProductCategoriesCtrl'
+            }
+        }
+    })
 
     .state('app.productdetail', {
             url: '/productdetail/:id',
@@ -98,7 +98,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
             views: {
                 'menuContent': {
                     templateUrl: 'templates/searchresult.html',
-                    controller:'SearchresultCtrl'
+                    controller: 'SearchresultCtrl'
                 }
             }
         })
@@ -228,9 +228,45 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 .filter('localimage', function() {
     return function(image) {
         if (image && image != null) {
-            return "img/pcategory/" + image;
+            switch (image) {
+                case "Earphones & Headphones":
+                    {
+                        return "img/pcategory/3.png";
+                        break;
+                    }
+                case "Speakers & Docks":
+                    {
+                        return "img/pcategory/5.png";
+                        break;
+                    }
+                case "Gadgets":
+                    {
+                        return "img/pcategory/6.png";
+                        break;
+                    }
+                case "Bags & Sleeves":
+                    {
+                        return "img/pcategory/2.png";
+                        break;
+                    }
+                case "Accessories":
+                    {
+                        return "img/pcategory/4.png";
+                        break;
+                    }
+                case "Cases & Protection":
+                    {
+                        return "img/pcategory/1.png";
+                        break;
+                    }
+                default:
+                    {
+                        return "img/noimage.png";
+                        break;
+                    }
+            }
         } else {
-            return undefined;
+            return "img/noimage.png";
         }
     };
 })
