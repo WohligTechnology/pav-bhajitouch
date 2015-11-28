@@ -7,9 +7,9 @@
     </ion-header-bar>
     <!--<ion-view view-title="Home" hide-nav-bar="searchbar">-->
     <ion-content>
-        <ion-slide-box on-slide-changed="slideHasChanged($index)" auto-play="true" does-continue="true">
+        <ion-slide-box on-slide-changed="slideHasChanged($index)">
             <ion-slide ng-repeat="slide in slides">
-                <img ng-src="{{slide.image}}" class="full-image">
+                <img ng-src="{{slide.image | serverimage}}" class="full-image" ng-click="goToProduct(slide.id);">
             </ion-slide>
         </ion-slide-box>
         <div class="home-pro">

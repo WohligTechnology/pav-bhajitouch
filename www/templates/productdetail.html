@@ -5,7 +5,7 @@
     <!--    <ion-content ng-class="{'no-header':transparent_header}" on-scroll="pageScrolled()">-->
     <ion-content ng-class="has-header" on-scroll="pageScrolled()">
         <div class="product-detail">
-            <ion-slide-box on-slide-changed="slideHasChanged($index)" auto-play="true" does-continue="true">
+            <ion-slide-box on-slide-changed="slideHasChanged($index)">
                 <ion-slide ng-repeat="images in product.productimage">
                     <div class="image-holder-productimg">
                         <img ng-src="{{images.image | serverimage}}" class="product-img" alt="" ng-if="images.image">
@@ -57,25 +57,30 @@
                                 <p ng-bind-html="product.product.description"></p>
                             </div>
                             <div class="specification" ng-show="tab.right">
-                                <!--                                <p>{{product.product.keyfeatures}}</p>-->
                                 <p ng-if="product.product.modelnumber">Model Number <span class="item-note">{{product.product.modelnumber}}</span></p>
-                                <p ng-if="product.product.modelname">Model Name <span class="item-note">{{product.product.modelname}}</span></p>
-                                <p ng-if="product.product.eanorupc">EAN/UPC<span class="item-note">{{product.product.eanorupc}}</span></p>
-                                <p ng-if="product.product.type">Type<span class="item-note">{{product.product.type}}</span></p>
-                                <p ng-if="product.product.compatibledevice">Compatible Device<span class="item-note">{{product.product.compatibledevice}}</span></p>
+                                <p ng-if="product.product.brandcolor">Color<span class="item-note">{{product.product.brandcolor}}</span></p>
                                 <p ng-if="product.product.compatiblewith">Compatible With<span class="item-note">{{product.product.compatiblewith}}</span></p>
+                                <p ng-if="product.product.type">Type<span class="item-note">{{product.product.type}}</span></p>
+                                <p ng-if="product.product.microphone">Microphone<span class="item-note">{{product.product.microphone}}</span></p>
+                                <p ng-if="product.product.dimesnion">Dimensions<span class="item-note">{{product.product.dimesnion}}</span></p>
+                                <p ng-if="product.product.weight">Weight<span class="item-note">{{product.product.weight}}</span></p>
                                 <p ng-if="product.product.material">Material<span class="item-note">{{product.product.material}}</span></p>
-                                <p ng-if="product.product.color">Color<span class="item-note">{{product.product.color}}</span></p>
+                                <p ng-if="product.product.finish">Finish<span class="item-note">{{product.product.finish}}</span></p>
+                                <p ng-if="product.product.clength">Cable Length<span class="item-note">{{product.product.clength}}</span></p>
+                                <p ng-if="product.product.capacity">Capacity<span class="item-note">{{product.product.capacity}}</span></p>
+                                <p ng-if="product.product.voltage && product.product.voltage!='0'">Voltage<span class="item-note">{{product.product.voltage}} Amp</span></p>
+                                <p ng-if="product.product.compatibledevice">Compatible Device<span class="item-note">{{product.product.compatibledevice}}</span></p>
+                                <p ng-if="product.product.warrantyservicetype">Warranty<span class="item-note">{{product.product.warrantyservicetype}}</span></p>
+                                <p ng-if="product.product.warrantysummary">Warranty Summary<span class="item-note">{{product.product.warrantysummary}}</span></p>
+                                <p ng-if="product.product.salespackage">What's Included<span class="item-note">{{product.product.salespackage}}</span></p>
+                                <p ng-if="product.product.eanorupc">EAN/UPC<span class="item-note">{{product.product.eanorupc}}</span></p>
+                                <!-- <p ng-if="product.product.modelname">Model Name <span class="item-note">{{product.product.modelname}}</span></p>
                                 <p ng-if="product.product.width">Width<span class="item-note">{{product.product.width}}</span></p>
                                 <p ng-if="product.product.height">Height<span class="item-note">{{product.product.height}}</span></p>
                                 <p ng-if="product.product.depth">Depth<span class="item-note">{{product.product.depth}}</span></p>
                                 <p ng-if="product.product.keyfeatures">Key Features<span class="item-note">{{product.product.keyfeatures}}</span></p>
-                                <p ng-if="product.product.finish">Finish<span class="item-note">{{product.product.finish}}</span></p>
-                                <p ng-if="product.product.weight">Weight<span class="item-note">{{product.product.weight}}</span></p>
-                                <p ng-if="product.product.warrantyservicetype">Warranty<span class="item-note">{{product.product.warrantyservicetype}}</span></p>
-                                <p ng-if="product.product.warrantysummary">Warranty Summary<span class="item-note">{{product.product.warrantysummary}}</span></p>
                                 <p ng-if="product.product.size">Size<span class="item-note">{{product.product.size}}</span></p>
-                                <p ng-if="product.product.modelname">Type Name<span class="item-note">{{product.product.modelname}}</span></p>
+                                <p ng-if="product.product.modelname">Type Name<span class="item-note">{{product.product.modelname}}</span></p> -->
                             </div>
                         </div>
                     </div>

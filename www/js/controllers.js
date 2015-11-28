@@ -267,50 +267,48 @@ angular.module('starter.controllers', ['ui.bootstrap'])
     };
     //    --------------------END- FORGOT PASSWORD
     //   ---------------------FILTERS
-    $ionicModal.fromTemplateUrl('templates/filters.html', {
-        scope: $scope
-    }).then(function(modal) {
-        $scope.modalFilter = modal;
-    });
-    $scope.closeFilter = function() {
-        $scope.modalFilter.hide();
-    };
-    $scope.filter = function() {
-        $scope.modalFilter.show();
-    };
+    // $ionicModal.fromTemplateUrl('templates/filters.html', {
+    //     scope: $scope
+    // }).then(function(modal) {
+    //     $scope.modalFilter = modal;
+    // });
+    // $scope.closeFilter = function() {
+    //     $scope.modalFilter.hide();
+    // };
+    // $scope.filter = function() {
+    //     $scope.modalFilter.show();
+    // };
     $scope.doFilter = function() {
         console.log('Doing Signup', $scope.loginData);
         $timeout(function() {
             $scope.closeLogin();
         }, 1000);
     };
-    $scope.openFilter = function() {
-        //        $scope.closeLogin();
-        $scope.filter();
-    };
+    // $scope.openFilter = function() {
+    //     //        $scope.closeLogin();
+    //     $scope.filter();
+    // };
     //    --------------------END- FILTERS
 })
 
 
-.controller('HomeCtrl', function($scope, MyServices, $ionicLoading, $location) {
+.controller('HomeCtrl', function($scope, MyServices, $ionicLoading, $location, $ionicSlideBoxDelegate) {
     //    $templateCache.removeAll();
-    $scope.slides = [{
-        image: "img/slider/1.jpg",
 
-    }, {
-        image: "img/slider/2.jpg",
-
-    }, {
-        image: "img/slider/3.jpg",
-
-    }];
+    MyServices.getHomeSlider(function(data) {
+        if (data) {
+            $scope.slides = data;
+            console.log(data);
+            $ionicSlideBoxDelegate.update();
+        }
+    });
 
     MyServices.getHomeProducts(function(data) {
         if (data) {
             $scope.homeProducts = data;
             console.log(data);
         }
-    })
+    });
 
     $scope.goToProduct = function(id) {
         console.log(id);
@@ -912,7 +910,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
 
 })
 
-.controller('ProductCtrl', function($scope, $stateParams, $timeout, $rootScope, MyServices, $ionicLoading) {
+.controller('ProductCtrl', function($scope, $stateParams, $timeout, $rootScope, MyServices, $ionicLoading, $ionicModal, $ionicScrollDelegate) {
     $scope.addwishlist = false;
     $rootScope.transparent_header = false;
     $scope.params = $stateParams;
@@ -923,6 +921,18 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         console.log($scope.addwishlist);
     };
 
+    $ionicModal.fromTemplateUrl('templates/filters.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.modalFilter = modal;
+    });
+    $scope.closeFilter = function() {
+        $scope.modalFilter.hide();
+    };
+    $scope.openFilter = function() {
+        $scope.modalFilter.show();
+    };
+
     $scope.pageno = 0;
     $scope.keepscrolling = true;
     $scope.shownodata = false;
@@ -931,39 +941,232 @@ angular.module('starter.controllers', ['ui.bootstrap'])
     $scope.category = $stateParams.category;
     $scope.productsarr = [];
 
+    $scope.filters = {};
+    $scope.filters.category = "";
+    $scope.filters.color = "";
+    $scope.filters.type = "";
+    $scope.filters.material = "";
+    $scope.filters.finish = "";
+    $scope.filters.compatibledevice = "";
+    $scope.filters.compatiblewith = "";
+    $scope.filters.brand = "";
+    $scope.filters.pricemin = "";
+    $scope.filters.pricemax = "";
+    $scope.filters.microphone = "";
+    $scope.filters.size = "";
+    $scope.filters.clength = "";
+    $scope.filters.voltage = "";
+    $scope.filters.capacity = "";
+
     var getproductbybrandcallback = function(data, status) {
         console.log(data);
-        if (data.queryresult.length == 0) {
+
+        if (data.data.queryresult.length == 0) {
             $scope.keepscrolling = false;
-        }
-        _.each(data.queryresult, function(n) {
-            if (n.isfavid) {
-                n.fav = "fav";
+        } else {
+            _.each(data.data.queryresult, function(n) {
+                if (n.isfavid) {
+                    n.fav = "fav";
+                }
+                $scope.productsarr.push(n);
+            });
+
+            $scope.products = _.chunk($scope.productsarr, 2);
+            $scope.products = _.uniq($scope.products);
+            // console.log($scope.products);
+            // console.log("keepscrolling = " + $scope.keepscrolling);
+
+            if (data.filter) {
+                if ($scope.filters.category == "" && data.filter.category) {
+                    $scope.showfilter.category = data.filter.category;
+                }
+                if ($scope.filters.color == "" && data.filter.color) {
+                    $scope.showfilter.color = data.filter.color;
+                }
+                if ($scope.filters.type == "" && data.filter.type) {
+                    $scope.showfilter.type = data.filter.type;
+                }
+                if ($scope.filters.material == "" && data.filter.material) {
+                    $scope.showfilter.material = data.filter.material;
+                }
+                if ($scope.filters.finish == "" && data.filter.finish) {
+                    $scope.showfilter.finish = data.filter.finish;
+                }
+                if ($scope.filters.compatibledevice == "" && data.filter.compatibledevice) {
+                    var arr = [];
+                    _.each(data.filter.compatibledevice, function(n) {
+                        n.compatibledevice = n.compatibledevice.split(",");
+                        _.each(n.compatibledevice, function(m) {
+                            arr.push({
+                                "compatibledevice": m
+                            });
+                        })
+                    })
+                    $scope.showfilter.compatibledevice = arr;
+                }
+                if ($scope.filters.compatiblewith == "" && data.filter.compatiblewith) {
+                    _.each(data.filter.compatiblewith, function(n) {
+                        n.compatiblewith = n.compatiblewith.split(",");
+                        _.each(n.compatiblewith, function(m) {
+                            arr.push({
+                                "compatiblewith": m
+                            });
+                        })
+                    })
+                    $scope.showfilter.compatiblewith = arr;
+                }
+                if ($scope.filters.brand == "" && data.filter.brand) {
+                    $scope.showfilter.brand = data.filter.brand;
+                }
+                if ($scope.filters.microphone == "" && data.filter.microphone) {
+                    $scope.showfilter.microphone = data.filter.microphone;
+                }
+                if ($scope.filters.size == "" && data.filter.size) {
+                    $scope.showfilter.size = data.filter.size;
+                }
+                if ($scope.filters.clength == "" && data.filter.clength) {
+                    $scope.showfilter.clength = data.filter.clength;
+                }
+                if ($scope.filters.voltage == "" && data.filter.voltage) {
+                    $scope.showfilter.voltage = data.filter.voltage;
+                }
+                if ($scope.filters.capacity == "" && data.filter.capacity) {
+                    $scope.showfilter.capacity = data.filter.capacity;
+                }
+                if (data.filter.price && data.filter.price.min) {
+                    $scope.filters.pricemin = data.filter.price.min;
+                }
+                if (data.filter.price && data.filter.price.max) {
+                    $scope.filters.pricemax = data.filter.price.max;
+                }
+                console.log($scope.showfilter);
             }
-            $scope.productsarr.push(n);
-        });
 
-        $scope.products = _.chunk(_.uniq($scope.productsarr), 2);
-        console.log($scope.products);
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+        }
 
-        if (data.queryresult.length == 0 && $scope.productsarr.length == 0) {
+        if (data.data.queryresult.length == 0 && $scope.productsarr.length == 0) {
             $scope.shownodata = true;
         }
         $ionicLoading.hide();
     }
 
     $scope.addMoreItems = function() {
+        console.log("addmore = " + $scope.pageno);
         ++$scope.pageno;
         if ($stateParams.brand != 0) {
-            MyServices.getproductbybrand($stateParams.brand, $scope.pageno, getproductbybrandcallback);
-        } else if ($scope.parent != 0 || $scope.category != 0) {
-            MyServices.getproductbycategory($scope.pageno, $scope.parent, $scope.category, getproductbybrandcallback);
+            MyServices.getproductbybrand($scope.pageno, $stateParams.brand, $scope.filters, getproductbybrandcallback);
+        } else if ($stateParams.parent != 0) {
+            MyServices.getproductbycategory($scope.pageno, $stateParams.parent, $scope.filters, getproductbybrandcallback);
         } else {
             MyServices.getallproduct($scope.pageno, getproductbybrandcallback);
         }
     }
 
-    $scope.addMoreItems();
+    // $scope.addMoreItems();
+
+    $scope.getFilterResults = function() {
+        $ionicScrollDelegate.scrollTop();
+        $scope.pageno = 1;
+        $scope.productsarr = [];
+        $scope.closeFilter();
+        MyServices.getproductbycategory(1, $scope.parent, $scope.filters, getproductbybrandcallback);
+    }
+
+    $scope.alignFilter = function(str) {
+        $scope.filters[str] = "";
+        var objsend = $scope.showfilter[str];
+        var objfil = $scope.filters[str];
+        console.log(objsend);
+        _.each(objsend, function(n) {
+            if (n.status) {
+                objfil += n[str] + ",";
+            }
+        });
+        objfil = objfil.substr(0, objfil.length - 1);
+        $scope.filters[str] = objfil;
+        console.log($scope.filters[str]);
+        // $scope.getFilterResults();
+    }
+
+    $scope.alignFilterId = function(str) {
+        $scope.filters[str] = "";
+        var objsend = $scope.showfilter[str];
+        var objfil = $scope.filters[str];
+        console.log(objsend);
+        _.each(objsend, function(n) {
+            if (n.status) {
+                objfil += n.id + ",";
+            }
+        });
+        objfil = objfil.substr(0, objfil.length - 1);
+        $scope.filters[str] = objfil;
+        console.log(objfil);
+        // $scope.getFilterResults();
+    }
+
+    $scope.clearFilters = function() {
+        MyServices.getFilters($stateParams.parent, $stateParams.brand, function(data) {
+            if (data) {
+                $scope.showfilter = data;
+                console.log(data);
+                if (data.compatibledevice && data.compatibledevice.length > 0) {
+                    var arr = [];
+                    _.each(data.compatibledevice, function(n) {
+                        n.compatibledevice = n.compatibledevice.split(",");
+                        _.each(n.compatibledevice, function(m) {
+                            arr.push({
+                                "compatibledevice": m
+                            });
+                        })
+                    })
+                    data.compatibledevice = arr;
+                }
+                if (data.compatiblewith && data.compatiblewith.length > 0) {
+                    var arr = [];
+                    _.each(data.compatiblewith, function(n) {
+                        n.compatiblewith = n.compatiblewith.split(",");
+                        _.each(n.compatiblewith, function(m) {
+                            arr.push({
+                                "compatiblewith": m
+                            });
+                        })
+                    })
+                    data.compatiblewith = arr;
+                }
+                $scope.filters.pricemin = data.price.min;
+                $scope.filters.pricemax = data.price.max;
+                $scope.pageno = 1;
+                $scope.products = [];
+                $scope.filters = {};
+                $scope.filters.category = "";
+                $scope.filters.color = "";
+                $scope.filters.type = "";
+                $scope.filters.material = "";
+                $scope.filters.finish = "";
+                $scope.filters.compatibledevice = "";
+                $scope.filters.compatiblewith = "";
+                $scope.filters.brand = "";
+                $scope.filters.pricemin = "";
+                $scope.filters.pricemax = "";
+                $scope.filters.microphone = "";
+                $scope.filters.size = "";
+                $scope.filters.clength = "";
+                $scope.filters.voltage = "";
+                $scope.filters.capacity = "";
+
+                if ($stateParams.brand != 0) {
+                    MyServices.getproductbybrand(1, $stateParams.brand, $scope.filters, getproductbybrandcallback);
+                } else if ($stateParams.parent != 0) {
+                    MyServices.getproductbycategory(1, $scope.parent, $scope.filters, getproductbybrandcallback);
+                } else {
+                    MyServices.getallproduct(1, getproductbybrandcallback);
+                }
+            }
+        });
+    }
+
+    $scope.clearFilters();
 
 })
 

@@ -106,17 +106,18 @@ angular.module('starter.services', [])
                 withCredentials: true
             }).success(callback);
         },
-        getproductbybrand: function(id, pageno, callback) {
-            return $http.get(adminurl + 'getproductbybrand?maxrow=10&pageno=' + pageno + '&brandid=' + id, {}, {
+        getproductbybrand: function(pageno, brand, filters, callback) {
+            console.log("getproductbybrand");
+            return $http.get(adminurl + 'getproductbycategory?category=' + filters.category + '&pageno=' + pageno + '&color=' + filters.color + '&type=' + filters.type + '&material=' + filters.material + '&finish=' + filters.finish + '&compatibledevice=' + filters.compatibledevice + '&compatiblewith=' + filters.compatiblewith + '&brand=' + brand + '&pricemin=' + filters.pricemin + '&pricemax=' + filters.pricemax + '&microphone=' + filters.microphone + '&size=' + filters.size + '&lenght=' + filters.clength + '&voltage=' + filters.voltage + '&capacity=' + filters.capacity, {}, {
                 withCredentials: true
             }).success(callback);
         },
-        getproductbycategory: function(pageno, parent, category, callback) {
-            console.log(category);
-            return $http.get(adminurl + 'getproductbycategory?parent=' + parent + '&category=' + category + '&pageno=' + pageno, {}, {
+        getproductbycategory: function(pageno, category, filters, callback) {
+            console.log("getproductbycategory");
+            console.log(filters);
+            return $http.get(adminurl + 'getproductbycategory?category=' + category + '&pageno=' + pageno + '&color=' + filters.color + '&type=' + filters.type + '&material=' + filters.material + '&finish=' + filters.finish + '&compatibledevice=' + filters.compatibledevice + '&compatiblewith=' + filters.compatiblewith + '&brand=' + filters.brand + '&pricemin=' + filters.pricemin + '&pricemax=' + filters.pricemax + '&microphone=' + filters.microphone + '&size=' + filters.size + '&lenght=' + filters.clength + '&voltage=' + filters.voltage + '&capacity=' + filters.capacity, {}, {
                 withCredentials: true
             }).success(callback);
-
         },
         getallproduct: function(pageno, callback) {
             return $http.get(adminurl + 'getallproducts?pageno=' + pageno, {}, {
@@ -234,6 +235,16 @@ angular.module('starter.services', [])
         },
         getHomeProducts: function(callback) {
             return $http.get(adminurl + 'getHomeProducts', {}, {
+                withCredentials: true
+            }).success(callback);
+        },
+        getHomeSlider: function(callback) {
+            return $http.get(adminurl + 'getHomeSlider', {}, {
+                withCredentials: true
+            }).success(callback);
+        },
+        getFilters: function(category, brand, callback) {
+            return $http.post(adminurl + 'getFilters?category=' + category + "&brand=" + brand, {}, {
                 withCredentials: true
             }).success(callback);
         },

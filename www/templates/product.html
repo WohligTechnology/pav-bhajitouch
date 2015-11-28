@@ -14,7 +14,6 @@
                     <a href="#/app/productdetail/{{item.id}}" style="text-decoration: none">
                         <div class="image-holder-product">
                             <img class="brand-image" src="{{item.image1 | serverimage}}" alt="" ng-if="item.image1">
-                           
                             <img class="brand-image" src="img/icon.png" alt="" ng-if="!item.image1 && !item.image2">
                         </div>
                         <div class="product-details">
@@ -25,13 +24,13 @@
                 </div>
             </div>
         </div>
-        <ion-infinite-scroll on-infinite="addMoreItems()" distance="25%" style="height:0px" ng-if="keepscrolling">
+        <ion-infinite-scroll immediate-check="true" on-infinite="addMoreItems()" style="height:0px" ng-if="keepscrolling">
         </ion-infinite-scroll>
         <div class="center" ng-show="shownodata">
             <p>No Data Found</p>
         </div>
     </ion-content>
     <ion-footer-bar align-title="left" class="bar bar-light" style="border-top:1px solid #7ee1ea;">
-        <button class="button button-clear button-positive filter-button" ng-click="filter()">Filters</button>
+        <button class="button button-clear button-positive filter-button" ng-click="openFilter()">Filters</button>
     </ion-footer-bar>
 </ion-view>
