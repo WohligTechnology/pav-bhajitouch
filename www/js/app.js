@@ -220,7 +220,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         if (image && image != null) {
             return adminimage + image;
         } else {
-            return undefined;
+            return "img/noimage.png";
         }
     };
 })

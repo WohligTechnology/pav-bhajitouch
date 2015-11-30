@@ -15,7 +15,7 @@
         <div class="home-pro">
             <div class="hm-pro" ng-if="homeProducts.length>=1">
                 <figure>
-                    <img src="favicon.ico" class="full-image" ng-if="homeProducts[0].images.length>0">
+                    <!-- <img src="favicon.ico" class="full-image" ng-if="homeProducts[0].images.length>0"> -->
                     <img ng-src="{{homeProducts[0].images[0][0].image | serverimage}}" class="full-image" ng-if="homeProducts[0].images.length>0">
                     <div class="layer">
                         <div class="pro-txt">
