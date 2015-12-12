@@ -6,9 +6,9 @@
     <ion-content ng-class="has-header" on-scroll="pageScrolled()">
         <div class="product-detail">
             <ion-slide-box on-slide-changed="slideHasChanged($index)">
-                <ion-slide ng-repeat="images in product.productimage">
+                <ion-slide ng-repeat="images in productdetail">
                     <div class="image-holder-productimg">
-                        <img ng-src="{{images.image | serverimage}}" class="product-img" alt="" ng-if="images.image">
+                        <img ng-src="{{images.image}}" class="product-img" alt="" ng-if="images.image">
                         <img src="img/icon.png" class="product-img" alt="" ng-if="!images.image">
                     </div>
                 </ion-slide>
@@ -19,7 +19,7 @@
                         <div class="name-other">
                             <h2>{{product.product.name}}</h2>
                             <div class="row">
-                                <div class="col user-rating">
+                                <!-- <div class="col user-rating">
                                     <ul>
                                         <li><i class="icon star ion-ios-star clr-orange"></i></li>
                                         <li><i class="icon star ion-ios-star clr-orange"></i></li>
@@ -27,13 +27,17 @@
                                         <li><i class="icon star ion-ios-star clr-orange"></i></li>
                                         <li><i class="icon star ion-ios-star clr-grey"></i></li>
                                     </ul>
-                                </div>
+                                </div> -->
                                 <div class="col">
                                     <h3>Availability : <span>{{availability}}</span></h3>
                                 </div>
                             </div>
                             <div class="price">
-                                <span>Price : Rs. {{product.product.price | numberWithCommas}}</span>
+                                <span>Price : 
+                                <span ng-show="showSalePrice">Rs. {{product.product.firstsaleprice | numberWithCommas}}</span>
+                                <span class="cross" ng-show="showSalePrice">Rs. {{product.product.price | numberWithCommas}}</span>
+                                <span ng-hide="showSalePrice">Rs. {{product.product.price | numberWithCommas}}</span>
+                                </span>
                             </div>
                             <div class="product-buttons padding-vertical">
                                 <button class="button btn-productdetail icon-left button-positive" ng-click="addtocart(product.product)">
@@ -70,7 +74,7 @@
                                 <p ng-if="product.product.capacity">Capacity<span class="item-note">{{product.product.capacity}}</span></p>
                                 <p ng-if="product.product.voltage && product.product.voltage!='0'">Voltage<span class="item-note">{{product.product.voltage}} Amp</span></p>
                                 <p ng-if="product.product.compatibledevice">Compatible Device<span class="item-note">{{product.product.compatibledevice}}</span></p>
-                                <p ng-if="product.product.warrantyservicetype">Warranty<span class="item-note">{{product.product.warrantyservicetype}}</span></p>
+                                <p ng-if="product.product.domesticwarranty">Warranty<span class="item-note">{{product.product.domesticwarranty}}</span></p>
                                 <p ng-if="product.product.warrantysummary">Warranty Summary<span class="item-note">{{product.product.warrantysummary}}</span></p>
                                 <p ng-if="product.product.salespackage">What's Included<span class="item-note">{{product.product.salespackage}}</span></p>
                                 <p ng-if="product.product.eanorupc">EAN/UPC<span class="item-note">{{product.product.eanorupc}}</span></p>

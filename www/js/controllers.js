@@ -303,10 +303,44 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         }
     });
 
+    $scope.homeProducts = [];
     MyServices.getHomeProducts(function(data) {
         if (data) {
-            $scope.homeProducts = data;
             console.log(data);
+            _.each(data, function(n) {
+                if (n.firstsaleprice) {
+                    if (n.specialpricefrom == "0000-00-00" && n.specialpriceto == "0000-00-00") {
+                        n.showSalePrice = true;
+                        console.log("in if");
+                    } else if (n.specialpricefrom != "0000-00-00" && n.specialpriceto != "0000-00-00") {
+                        var birth = new Date(n.specialpricefrom);
+                        var death = new Date(n.specialpriceto);
+                        var curr = new Date();
+                        var diff = curr.getTime() - birth.getTime();
+                        var diff2 = curr.getTime() - death.getTime();
+                        var start = Math.floor(diff / (1000 * 60 * 60 * 24));
+                        var end = Math.floor(diff2 / (1000 * 60 * 60 * 24));
+                        if (start >= 0 && end <= 0) {
+                            n.showSalePrice = true;
+                        }
+                        console.log("in 1 else if");
+                    } else if (n.specialpricefrom != "0000-00-00") {
+                        var birth = new Date(n.specialpricefrom);
+                        var curr = new Date();
+                        var diff = curr.getTime() - birth.getTime();
+                        var start = Math.floor(diff / (1000 * 60 * 60 * 24));
+                        if (start >= 0) {
+                            n.showSalePrice = true;
+                        }
+                        console.log("in 2 else if");
+                    } else if (n.specialpricefrom == "0000-00-00") {
+                        n.showSalePrice = true;
+                        console.log("in 3 else if");
+                    }
+                    console.log("Show Sale Price = " + n.showSalePrice);
+                }
+                $scope.homeProducts.push(n);
+            });
         }
     });
 
@@ -773,7 +807,6 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             console.log($scope.cart);
         });
         $scope.paymentOption = function() {
-
             $scope.allvalidation = [{
                 field: $scope.checkout.firstname,
                 validation: ""
@@ -804,17 +837,17 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             if (check) {
                 console.log($scope.checkout);
                 allfunction.loading();
-                MyServices.placeorder($scope.checkout, function(data) {
-                    console.log(data);
-                    if (data == 1) {
-                        $ionicLoading.hide();
-                        allfunction.msg("Your Order has been placed", 'Thankyou!');
-                        $location.url("/app/home/");
-                    } else {
-                        $ionicLoading.hide();
-                        allfunction.msg("Sorry Try Again", 'Sorry!');
-                    }
-                });
+                // MyServices.placeorder($scope.checkout, function(data) {
+                //     console.log(data);
+                //     if (data == 1) {
+                //         $ionicLoading.hide();
+                //         allfunction.msg("Your Order has been placed", 'Thankyou!');
+                //         $location.url("/app/home/");
+                //     } else {
+                //         $ionicLoading.hide();
+                //         allfunction.msg("Sorry Try Again", 'Sorry!');
+                //     }
+                // });
             } else {
                 allfunction.msg("Fill all mandatory fields", "Error !");
             }
@@ -892,17 +925,34 @@ angular.module('starter.controllers', ['ui.bootstrap'])
 
     allfunction.loading();
 
+    $scope.pageno = 0;
+    $scope.keepscrolling = true;
     $scope.shownodata = false;
+    $scope.brandimages = [];
 
-    MyServices.getbrand(1, function(data, status) {
-        if (data.queryresult.length == 0) {
-            $scope.shownodata = true;
-        }
-        $scope.distributer = data.queryresult;
-        $scope.distributer = _.chunk($scope.distributer, 3);
-        console.log($scope.distributer);
-        $ionicLoading.hide();
-    });
+    $scope.addMoreItems = function() {
+        console.log("load more brands");
+        ++$scope.pageno;
+        MyServices.getbrand($scope.pageno, function(data, status) {
+            console.log(data);
+            if (data.queryresult.length == 0) {
+                $scope.keepscrolling = false;
+            }
+            _.each(data.queryresult, function(n) {
+                if (n.isdistributer == '1')
+                    $scope.brandimages.push(n);
+            });
+            if ($scope.brandimages.length == 0) {
+                $scope.shownodata = true;
+            }
+            $scope.brands = _.chunk($scope.brandimages, 3);
+            lastpage = data.lastpage;
+            $ionicLoading.hide();
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+            // $scope.$broadcast('scroll.refreshComplete');
+        });
+    }
+    $scope.addMoreItems();
 
     $scope.getproductbybrand = function(id) {
         $location.url("app/product/" + 0 + "/" + 0 + "/" + id);
@@ -940,7 +990,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
     $scope.parent = $stateParams.parent;
     $scope.category = $stateParams.category;
     $scope.productsarr = [];
-
+    $scope.showfilter = [];
     $scope.filters = {};
     $scope.filters.category = "";
     $scope.filters.color = "";
@@ -968,11 +1018,42 @@ angular.module('starter.controllers', ['ui.bootstrap'])
                 if (n.isfavid) {
                     n.fav = "fav";
                 }
+                if (n.firstsaleprice) {
+                    if (n.specialpricefrom == "0000-00-00" && n.specialpriceto == "0000-00-00") {
+                        n.showSalePrice = true;
+                        console.log("in if");
+                    } else if (n.specialpricefrom != "0000-00-00" && n.specialpriceto != "0000-00-00") {
+                        var birth = new Date(n.specialpricefrom);
+                        var death = new Date(n.specialpriceto);
+                        var curr = new Date();
+                        var diff = curr.getTime() - birth.getTime();
+                        var diff2 = curr.getTime() - death.getTime();
+                        var start = Math.floor(diff / (1000 * 60 * 60 * 24));
+                        var end = Math.floor(diff2 / (1000 * 60 * 60 * 24));
+                        if (start >= 0 && end <= 0) {
+                            n.showSalePrice = true;
+                        }
+                        console.log("in 1 else if");
+                    } else if (n.specialpricefrom != "0000-00-00") {
+                        var birth = new Date(n.specialpricefrom);
+                        var curr = new Date();
+                        var diff = curr.getTime() - birth.getTime();
+                        var start = Math.floor(diff / (1000 * 60 * 60 * 24));
+                        if (start >= 0) {
+                            n.showSalePrice = true;
+                        }
+                        console.log("in 2 else if");
+                    } else if (n.specialpricefrom == "0000-00-00") {
+                        n.showSalePrice = true;
+                        console.log("in 3 else if");
+                    }
+                    console.log("Show Sale Price = " + n.showSalePrice);
+                }
                 $scope.productsarr.push(n);
             });
 
+            $scope.productsarr = _.uniq($scope.productsarr, 'id');
             $scope.products = _.chunk($scope.productsarr, 2);
-            $scope.products = _.uniq($scope.products);
             // console.log($scope.products);
             // console.log("keepscrolling = " + $scope.keepscrolling);
 
@@ -1041,7 +1122,6 @@ angular.module('starter.controllers', ['ui.bootstrap'])
                 }
                 console.log($scope.showfilter);
             }
-
             $scope.$broadcast('scroll.infiniteScrollComplete');
         }
 
@@ -1070,7 +1150,14 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         $scope.pageno = 1;
         $scope.productsarr = [];
         $scope.closeFilter();
-        MyServices.getproductbycategory(1, $scope.parent, $scope.filters, getproductbybrandcallback);
+        $ionicLoading.show();
+        if ($stateParams.brand != 0) {
+            MyServices.getproductbybrand(1, $stateParams.brand, $scope.filters, getproductbybrandcallback);
+        } else if ($stateParams.parent != 0) {
+            MyServices.getproductbycategory(1, $stateParams.parent, $scope.filters, getproductbybrandcallback);
+        } else {
+            MyServices.getallproduct(1, getproductbybrandcallback);
+        }
     }
 
     $scope.alignFilter = function(str) {
@@ -1170,10 +1257,11 @@ angular.module('starter.controllers', ['ui.bootstrap'])
 
 })
 
-.controller('ProductDetailCtrl', function($scope, $stateParams, $rootScope, $ionicScrollDelegate, MyServices, $ionicLoading, $ionicSlideBoxDelegate, $ionicPopup, $timeout) {
+.controller('ProductDetailCtrl', function($scope, $stateParams, $rootScope, $ionicScrollDelegate, MyServices, $ionicLoading, $ionicSlideBoxDelegate, $ionicPopup, $timeout, $filter) {
     $rootScope.transparent_header = true;
     allfunction.loading();
     $scope.activate = true;
+    $scope.showSalePrice = false;
     $scope.tab = {
         left: true,
         right: false
@@ -1209,6 +1297,57 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         } else {
             $scope.availability = "Out of Stock";
         }
+
+        $scope.productdetail = [];
+        $scope.product.productimage = _.sortByOrder($scope.product.productimage, ['order'], ['asc']);
+        _.each($scope.product.productimage, function(n) {
+            $scope.productdetail.push({
+                image: "http://wohlig.co.in/accessbackend/uploads/" + n.image,
+                check: 1
+            });
+        });
+        if (data.product.videourl != '') {
+            $scope.productdetail.push({
+                image: "http://img.youtube.com/vi/" + data.product.videourl + "/maxresdefault.jpg",
+                url: data.product.videourl,
+                check: 0
+            });
+        }
+
+        if ($scope.product.product.firstsaleprice) {
+            if ($scope.product.product.specialpricefrom == "0000-00-00" && $scope.product.product.specialpriceto == "0000-00-00") {
+                $scope.showSalePrice = true;
+                console.log("in if");
+            } else if ($scope.product.product.specialpricefrom != "0000-00-00" && $scope.product.product.specialpriceto != "0000-00-00") {
+                var birth = new Date($scope.product.product.specialpricefrom);
+                var death = new Date($scope.product.product.specialpriceto);
+                var curr = new Date();
+                var diff = curr.getTime() - birth.getTime();
+                var diff2 = curr.getTime() - death.getTime();
+                var start = Math.floor(diff / (1000 * 60 * 60 * 24));
+                var end = Math.floor(diff2 / (1000 * 60 * 60 * 24));
+                if (start >= 0 && end <= 0) {
+                    $scope.showSalePrice = true;
+                }
+                console.log("in 1 else if");
+            } else if ($scope.product.product.specialpricefrom != "0000-00-00") {
+                var birth = new Date($scope.product.product.specialpricefrom);
+                var curr = new Date();
+                var diff = curr.getTime() - birth.getTime();
+                var start = Math.floor(diff / (1000 * 60 * 60 * 24));
+                if (start >= 0) {
+                    $scope.showSalePrice = true;
+                }
+                console.log("in 2 else if");
+            } else if ($scope.product.product.specialpricefrom == "0000-00-00") {
+                $scope.showSalePrice = true;
+                console.log("in 3 else if");
+            }
+            console.log("Show Sale Price = " + $scope.showSalePrice);
+        } else {
+            $scope.showSalePrice = false;
+        }
+
         $ionicSlideBoxDelegate.update();
         $ionicLoading.hide();
         // $scope.product.product.quantity = 1;
