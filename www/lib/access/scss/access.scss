@@ -69,7 +69,7 @@ $font-size-list:13px;
 }
 .price {
     padding-bottom: 10px !important;
-        padding-top: 20px !important;
+    padding-top: 20px !important;
 }
 .padzero {
     padding: 0 !important;
@@ -97,6 +97,9 @@ span.cross {
     border: 1px solid #CECECE;
     background-repeat: no-repeat;
     margin: 0 auto;
+}
+.sc-l {
+  
 }
 //********  scss star *********
 .home-pro {
@@ -481,9 +484,8 @@ span.cross {
 .filter-button {
     width: 100%;
 }
-.dd{
-    
-      ::-webkit-input-placeholder {
+.dd {
+    ::-webkit-input-placeholder {
         color: #000;
     }
 }
@@ -1382,9 +1384,9 @@ span.cross {
         display: flex;
     }
 }
-.marc{
+.marc {
     text-align: center;
-    img{
+    img {
         margin: 0 auto;
         width: 65px;
     }

@@ -1,19 +1,20 @@
-  
-<ion-modal-view >
-        <ion-header-bar align-title="center">
+<ion-modal-view>
+    <ion-header-bar align-title="center">
         <h1 class="title">Product name</h1>
         <div class="buttons">
             <button class="button modal-close button-clear button-icon" ng-click="closeModal()"><i class="icon ion-ios-close-empty"></i></button>
         </div>
     </ion-header-bar>
     <ion-content>
-          <ion-slide-box on-slide-changed="slideHasChanged($index)">
-                <ion-slide  zooming="true" ng-repeat="images in productdetail">
-                    <div class="image-holder-productimg">
-                        <img  ng-src="{{images.image}}" class="product-img" alt="" ng-if="images.image">
-                        <img src="img/icon.png" class="product-img" alt="" ng-if="!images.image">
-                    </div>
+        <div class="product-detail">
+            <ion-slide-box on-slide-changed="slideHasChanged($index)">
+                <ion-slide ng-repeat="images in productdetail">
+                    <ion-scroll zooming="true">
+                        <img ng-src="{{images.image}}" class=" full-image" alt="" ng-if="images.image">
+                        <img src="img/icon.png" class="" alt="" ng-if="!images.image">
+                    </ion-scroll>
                 </ion-slide>
             </ion-slide-box>
+        </div>
     </ion-content>
-  </ion-modal-view>
+</ion-modal-view>
