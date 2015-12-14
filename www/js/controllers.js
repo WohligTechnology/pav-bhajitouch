@@ -1257,7 +1257,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
 
 })
 
-.controller('ProductDetailCtrl', function($scope, $stateParams, $rootScope, $ionicScrollDelegate, MyServices, $ionicLoading, $ionicSlideBoxDelegate, $ionicPopup, $timeout, $filter) {
+.controller('ProductDetailCtrl', function($scope, $stateParams, $rootScope, $ionicScrollDelegate, MyServices, $ionicLoading, $ionicSlideBoxDelegate, $ionicPopup, $timeout, $filter, $ionicModal) {
     $rootScope.transparent_header = true;
     allfunction.loading();
     $scope.activate = true;
@@ -1416,7 +1416,18 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             $ionicLoading.hide();
         });
     }
-
+$ionicModal.fromTemplateUrl('templates/product-modal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+  $scope.openModal = function() {
+    $scope.modal.show();
+  };
+  $scope.closeModal = function() {
+    $scope.modal.hide();
+  };
 })
 
 //dhaval start

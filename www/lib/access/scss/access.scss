@@ -68,7 +68,8 @@ $font-size-list:13px;
     }
 }
 .price {
-    padding-bottom: 10px;
+    padding-bottom: 10px !important;
+        padding-top: 20px !important;
 }
 .padzero {
     padding: 0 !important;
@@ -76,12 +77,26 @@ $font-size-list:13px;
 .marzero {
     margin: 0;
 }
+span.cross {
+    font-size: 13px !important;
+    text-decoration: line-through;
+    color: #C5C5C5 !important;
+}
 .button-small {
     padding: 2px 8px 1px !important;
     font-size: 10px !important;
     line-height: 14px !important;
     min-height: 24px !important;
     text-transform: uppercase;
+}
+.image-hold {
+    height: 50px;
+    width: 50px;
+    background-size: contain;
+    text-align: center;
+    border: 1px solid #CECECE;
+    background-repeat: no-repeat;
+    margin: 0 auto;
 }
 //********  scss star *********
 .home-pro {
@@ -131,10 +146,10 @@ $font-size-list:13px;
                 }
             }
             .btn-shop {
-                   float: right;
-    padding-right: 12px;
-    padding-top: 0px;
-    padding-bottom: 13px;
+                float: right;
+                padding-right: 12px;
+                padding-top: 0px;
+                padding-bottom: 13px;
             }
         }
     }
@@ -422,7 +437,6 @@ $font-size-list:13px;
             margin: 0px;
             font-weight: 300;
             min-height: 20px;
-
         }
         .star {
             .icon {
@@ -433,8 +447,9 @@ $font-size-list:13px;
         h3 {
             margin-top: 5px;
             margin-bottom: 15px;
-            font-size: 12px;
+            font-size: 13px;
             color: #23c9d8;
+            font-weight: 400;
         }
     }
     .price-separator {
@@ -465,6 +480,12 @@ $font-size-list:13px;
 }
 .filter-button {
     width: 100%;
+}
+.dd{
+    
+      ::-webkit-input-placeholder {
+        color: #000;
+    }
 }
 .filters {
     .panel-group .panel + .panel {
@@ -533,7 +554,6 @@ $font-size-list:13px;
     }
 }
 .deals {
-
     .row {
         padding: 0px;
     }
@@ -557,7 +577,7 @@ $font-size-list:13px;
         }
         .row {
             position: relative;
-                padding: 8px 0px;
+            padding: 8px 0px;
         }
         .icon {
             position: absolute;
@@ -625,7 +645,6 @@ $font-size-list:13px;
         border-color: $positive;
     }
 }
-
 .nav-bar-access {
     .cart-button {
         position: relative !important;
@@ -664,8 +683,8 @@ $font-size-list:13px;
     }
 }
 .clientele {
-//    border-top: 1px solid #ddd;
-//    border-bottom: 1px solid #ddd;
+    //    border-top: 1px solid #ddd;
+    //    border-bottom: 1px solid #ddd;
     .row+.row {
         border-top: 1px solid #ddd;
     }
@@ -680,7 +699,7 @@ $font-size-list:13px;
             text-align: center;
             font-size: 14px;
             margin: 0px;
-               padding: 8px 0px 15px 0;
+            padding: 8px 0px 15px 0;
             font-weight: 700;
         }
     }
@@ -1011,7 +1030,7 @@ $font-size-list:13px;
     .get-in-touch {
         @extend .login;
         ::-webkit-input-placeholder {
-            color: grey;
+            color: black;
         }
         h2 {
             font-size: 14px;
@@ -1038,6 +1057,7 @@ $font-size-list:13px;
     .bar.bar-positive .title {
         color: $positive;
         display: none;
+        font-weight: 600;
     }
     .bar-positive .button.button-clear {
         color: $positive !important;
@@ -1075,7 +1095,7 @@ $font-size-list:13px;
                 min-height: 32px;
                 text-align: center;
                 margin: 0px;
-                    padding-bottom: 25px;
+                padding-bottom: 25px;
             }
             .user-rating {
                 ul {
@@ -1319,7 +1339,7 @@ $font-size-list:13px;
 .bar {
     .title {
         font-size: 16px !important;
-        font-weight: 100 !important;
+        font-weight: 400 !important;
         font-family: 'lato';
     }
 }
@@ -1336,25 +1356,36 @@ $font-size-list:13px;
         font-size: 14px;
     }
 }
-.cont{
-    
-        font-size: 15px;
+.cont {
+    font-size: 15px;
     padding-left: 10px;
     font-weight: 400;
 }
 .slider-pager .slider-pager-page {
-
     color: $calm !important;
-
 }
-.pad15{
-        padding: 15px 0px 15px 0px;
+.pad15 {
+    padding: 15px 0px 15px 0px;
 }
-.b4{
-        border-radius: 4px;
+.b4 {
+    border-radius: 4px;
 }
-.product, .newarrivals, .deals .deal {
+.product,
+.newarrivals,
+.deals .deal {
     border-top: 0px solid #ddd !important;
     border-bottom: 1px solid #ddd;
     text-decoration: none;
+}
+.panel-heading {
+    a {
+        display: flex;
+    }
+}
+.marc{
+    text-align: center;
+    img{
+        margin: 0 auto;
+        width: 65px;
+    }
 }
