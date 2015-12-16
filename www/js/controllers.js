@@ -1257,7 +1257,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
 
 })
 
-.controller('ProductDetailCtrl', function($scope, $stateParams, $rootScope, $ionicScrollDelegate, MyServices, $ionicLoading, $ionicSlideBoxDelegate, $ionicPopup, $timeout, $filter, $ionicModal) {
+.controller('ProductDetailCtrl', function($scope, $stateParams, $rootScope, $ionicScrollDelegate, MyServices, $ionicLoading, $ionicSlideBoxDelegate, $ionicPopup, $timeout, $filter, $ionicModal, $state) {
     $rootScope.transparent_header = true;
     allfunction.loading();
     $scope.activate = true;
@@ -1286,72 +1286,87 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         }
     };
 
-    MyServices.getproductdetails($stateParams.id, function(data, status, $filter) {
-        console.log(data);
-        $scope.product = data;
-        if ($scope.product.product.user) {
-            $scope.product.product.fav = "fav";
-        }
-        if (data.product.quantity >= 1) {
-            $scope.availability = "In Stock";
-        } else {
-            $scope.availability = "Out of Stock";
-        }
-
-        $scope.productdetail = [];
-        $scope.product.productimage = _.sortByOrder($scope.product.productimage, ['order'], ['asc']);
-        _.each($scope.product.productimage, function(n) {
-            $scope.productdetail.push({
-                image: "http://wohlig.co.in/accessbackend/uploads/" + n.image,
-                check: 1
-            });
-        });
-        if (data.product.videourl != '') {
-            $scope.productdetail.push({
-                image: "http://img.youtube.com/vi/" + data.product.videourl + "/maxresdefault.jpg",
-                url: data.product.videourl,
-                check: 0
-            });
-        }
-
-        if ($scope.product.product.firstsaleprice) {
-            if ($scope.product.product.specialpricefrom == "0000-00-00" && $scope.product.product.specialpriceto == "0000-00-00") {
-                $scope.showSalePrice = true;
-                console.log("in if");
-            } else if ($scope.product.product.specialpricefrom != "0000-00-00" && $scope.product.product.specialpriceto != "0000-00-00") {
-                var birth = new Date($scope.product.product.specialpricefrom);
-                var death = new Date($scope.product.product.specialpriceto);
-                var curr = new Date();
-                var diff = curr.getTime() - birth.getTime();
-                var diff2 = curr.getTime() - death.getTime();
-                var start = Math.floor(diff / (1000 * 60 * 60 * 24));
-                var end = Math.floor(diff2 / (1000 * 60 * 60 * 24));
-                if (start >= 0 && end <= 0) {
-                    $scope.showSalePrice = true;
-                }
-                console.log("in 1 else if");
-            } else if ($scope.product.product.specialpricefrom != "0000-00-00") {
-                var birth = new Date($scope.product.product.specialpricefrom);
-                var curr = new Date();
-                var diff = curr.getTime() - birth.getTime();
-                var start = Math.floor(diff / (1000 * 60 * 60 * 24));
-                if (start >= 0) {
-                    $scope.showSalePrice = true;
-                }
-                console.log("in 2 else if");
-            } else if ($scope.product.product.specialpricefrom == "0000-00-00") {
-                $scope.showSalePrice = true;
-                console.log("in 3 else if");
+    $scope.getPoductDetail = function(id) {
+        MyServices.getproductdetails(id, function(data, status, $filter) {
+            console.log(data);
+            $scope.product = data;
+            if ($scope.product.product.user) {
+                $scope.product.product.fav = "fav";
             }
-            console.log("Show Sale Price = " + $scope.showSalePrice);
-        } else {
-            $scope.showSalePrice = false;
-        }
+            if (data.product.quantity >= 1) {
+                $scope.availability = "In Stock";
+            } else {
+                $scope.availability = "Out of Stock";
+            }
 
-        $ionicSlideBoxDelegate.update();
-        $ionicLoading.hide();
-        // $scope.product.product.quantity = 1;
-    });
+            $scope.productdetail = [];
+            $scope.product.productimage = _.sortByOrder($scope.product.productimage, ['order'], ['asc']);
+            _.each($scope.product.productimage, function(n) {
+                $scope.productdetail.push({
+                    image: "http://wohlig.co.in/accessbackend/uploads/" + n.image,
+                    check: 1
+                });
+            });
+            if (data.product.videourl != '') {
+                $scope.productdetail.push({
+                    image: "http://img.youtube.com/vi/" + data.product.videourl + "/maxresdefault.jpg",
+                    url: data.product.videourl,
+                    check: 0
+                });
+            }
+
+            if ($scope.product.product.firstsaleprice) {
+                if ($scope.product.product.specialpricefrom == "0000-00-00" && $scope.product.product.specialpriceto == "0000-00-00") {
+                    $scope.showSalePrice = true;
+                    console.log("in if");
+                } else if ($scope.product.product.specialpricefrom != "0000-00-00" && $scope.product.product.specialpriceto != "0000-00-00") {
+                    var birth = new Date($scope.product.product.specialpricefrom);
+                    var death = new Date($scope.product.product.specialpriceto);
+                    var curr = new Date();
+                    var diff = curr.getTime() - birth.getTime();
+                    var diff2 = curr.getTime() - death.getTime();
+                    var start = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    var end = Math.floor(diff2 / (1000 * 60 * 60 * 24));
+                    if (start >= 0 && end <= 0) {
+                        $scope.showSalePrice = true;
+                    }
+                    console.log("in 1 else if");
+                } else if ($scope.product.product.specialpricefrom != "0000-00-00") {
+                    var birth = new Date($scope.product.product.specialpricefrom);
+                    var curr = new Date();
+                    var diff = curr.getTime() - birth.getTime();
+                    var start = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    if (start >= 0) {
+                        $scope.showSalePrice = true;
+                    }
+                    console.log("in 2 else if");
+                } else if ($scope.product.product.specialpricefrom == "0000-00-00") {
+                    $scope.showSalePrice = true;
+                    console.log("in 3 else if");
+                }
+                console.log("Show Sale Price = " + $scope.showSalePrice);
+            } else {
+                $scope.showSalePrice = false;
+            }
+
+            if ($scope.product.samecolor && $scope.product.samecolor.length > 0) {
+                var same = [];
+                _.each($scope.product.samecolor, function(n) {
+                    if ($scope.product.product.id != n.id) {
+                        same.push(n);
+                    }
+                })
+                $scope.product.samecolor = _.chunk(same, 4);
+            }
+
+            // console.log($scope.product);
+            $ionicSlideBoxDelegate.update();
+            $ionicLoading.hide();
+            // $scope.product.product.quantity = 1;
+        });
+    }
+
+    $scope.getPoductDetail($stateParams.id);
 
     var addtowishlistcallback = function(data, status) {
         console.log(data);
@@ -1416,18 +1431,39 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             $ionicLoading.hide();
         });
     }
-$ionicModal.fromTemplateUrl('templates/product-modal.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
-  $scope.openModal = function() {
-    $scope.modal.show();
-  };
-  $scope.closeModal = function() {
-    $scope.modal.hide();
-  };
+
+    $ionicModal.fromTemplateUrl('templates/product-modal.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function(modal) {
+        $scope.modal = modal;
+    });
+
+    $scope.openModal = function(image) {
+        if (image.indexOf('youtube') == -1) {
+            $scope.showImage = true;
+            $scope.zoomImage = {};
+            $scope.zoomImage.image = image;
+            $scope.zoomImage.name = $scope.product.product.name;
+            console.log($scope.zoomImage);
+        } else {
+            $scope.showImage = false;
+            console.log($scope.product.product.videourl);
+            $scope.zoomImage = {};
+            $scope.zoomImage.name = $scope.product.product.name;
+            $scope.zoomImage.image = $scope.product.product.videourl;
+        }
+        $scope.modal.show();
+    };
+
+    $scope.closeModal = function() {
+        $scope.zoomImage = {};
+        $scope.modal.hide();
+    };
+
+    $scope.goToSameColorProduct = function(product) {
+        $scope.getPoductDetail(product.id);
+    }
 })
 
 //dhaval start

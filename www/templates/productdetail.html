@@ -8,34 +8,29 @@
             <ion-slide-box on-slide-changed="slideHasChanged($index)">
                 <ion-slide ng-repeat="images in productdetail">
                     <div class="image-holder-productimg">
-                        <img ng-click="openModal()" ng-src="{{images.image}}" class="product-img" alt="" ng-if="images.image">
+                        <img ng-click="openModal(images.image);" ng-src="{{images.image}}" class="product-img" alt="" ng-if="images.image">
                         <img src="img/icon.png" class="product-img" alt="" ng-if="!images.image">
                     </div>
                 </ion-slide>
             </ion-slide-box>
-                              <div class="row price">
-                                <div class="col-25">
-                                    <div class="image-hold" ng-style="{'background-image':'url(img/products/iphone.jpg)'}">
-
-                                    </div>
-                                </div>
-                                <div class="col-25">
-                                    <div class="image-hold" ng-style="{'background-image':'url(img/products/iphone.jpg)'}">
-
-                                    </div>
-                                </div>
-                                <div class="col-25">
-                                    <div class="image-hold" ng-style="{'background-image':'url(img/products/iphone.jpg)'}">
-
-                                    </div>
-                                </div>
-                                <div class="col-25">
-                                    <div class="image-hold" ng-style="{'background-image':'url(img/products/iphone.jpg)'}">
-
-                                    </div>
-                                </div>
-
-                            </div>
+            <div class="row price" ng-repeat="same in product.samecolor">
+                <div class="col-25" ng-repeat="products in same">
+                    <div class="image-hold" ng-style="{'background-image':'url({{products.samecolorimages[0][0].image | serverimage}})'}" ng-click="goToSameColorProduct(products);">
+                    </div>
+                </div>
+                <!-- <div class="col-25">
+                    <div class="image-hold" ng-style="{'background-image':'url(img/products/iphone.jpg)'}">
+                    </div>
+                </div>
+                <div class="col-25">
+                    <div class="image-hold" ng-style="{'background-image':'url(img/products/iphone.jpg)'}">
+                    </div>
+                </div>
+                <div class="col-25">
+                    <div class="image-hold" ng-style="{'background-image':'url(img/products/iphone.jpg)'}">
+                    </div>
+                </div> -->
+            </div>
             <div class="row">
                 <div class="col">
                     <div class="no-margin detail">
@@ -62,7 +57,6 @@
                                 <span ng-hide="showSalePrice">Rs. {{product.product.price | numberWithCommas}}</span>
                                 </span>
                             </div>
-          
                             <div class="product-buttons padding-vertical">
                                 <button class="button btn-productdetail icon-left button-positive" ng-click="addtocart(product.product)">
                                     <i class="icon ln-cart"></i>Add to cart
