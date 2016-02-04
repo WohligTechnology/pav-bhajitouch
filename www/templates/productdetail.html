@@ -37,21 +37,15 @@
                         <div class="name-other">
                             <h2>{{product.product.name}}</h2>
                             <div class="row">
-                                <!-- <div class="col user-rating">
-                                    <ul>
-                                        <li><i class="icon star ion-ios-star clr-orange"></i></li>
-                                        <li><i class="icon star ion-ios-star clr-orange"></i></li>
-                                        <li><i class="icon star ion-ios-star clr-orange"></i></li>
-                                        <li><i class="icon star ion-ios-star clr-orange"></i></li>
-                                        <li><i class="icon star ion-ios-star clr-grey"></i></li>
-                                    </ul>
-                                </div> -->
+                                <div class="col user-rating" ng-show="showSalePrice">
+                                    <h3 style="text-align: left">Discount : <span>{{product.product.discountinper}}%</span></h3>
+                                </div>
                                 <div class="col">
                                     <h3>Availability : <span>{{availability}}</span></h3>
                                 </div>
                             </div>
                             <div class="price">
-                                <span>Price : 
+                                <span>Price :
                                 <span ng-show="showSalePrice">Rs. {{product.product.firstsaleprice | numberWithCommas}}</span>
                                 <span class="cross" ng-show="showSalePrice">Rs. {{product.product.price | numberWithCommas}}</span>
                                 <span ng-hide="showSalePrice">Rs. {{product.product.price | numberWithCommas}}</span>

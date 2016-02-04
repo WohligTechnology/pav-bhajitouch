@@ -1021,7 +1021,6 @@ angular.module('starter.controllers', ['ui.bootstrap'])
                 if (n.firstsaleprice) {
                     if (n.specialpricefrom == "0000-00-00" && n.specialpriceto == "0000-00-00") {
                         n.showSalePrice = true;
-                        console.log("in if");
                     } else if (n.specialpricefrom != "0000-00-00" && n.specialpriceto != "0000-00-00") {
                         var birth = new Date(n.specialpricefrom);
                         var death = new Date(n.specialpriceto);
@@ -1033,7 +1032,6 @@ angular.module('starter.controllers', ['ui.bootstrap'])
                         if (start >= 0 && end <= 0) {
                             n.showSalePrice = true;
                         }
-                        console.log("in 1 else if");
                     } else if (n.specialpricefrom != "0000-00-00") {
                         var birth = new Date(n.specialpricefrom);
                         var curr = new Date();
@@ -1042,12 +1040,12 @@ angular.module('starter.controllers', ['ui.bootstrap'])
                         if (start >= 0) {
                             n.showSalePrice = true;
                         }
-                        console.log("in 2 else if");
                     } else if (n.specialpricefrom == "0000-00-00") {
                         n.showSalePrice = true;
-                        console.log("in 3 else if");
                     }
-                    console.log("Show Sale Price = " + n.showSalePrice);
+                    if (n.showSalePrice == true) {
+                        n.discountinper = Math.floor((1 - (parseFloat(n.firstsaleprice) / parseFloat(n.price)))*100);
+                    }
                 }
                 $scope.productsarr.push(n);
             });
@@ -1303,7 +1301,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             $scope.product.productimage = _.sortByOrder($scope.product.productimage, ['order'], ['asc']);
             _.each($scope.product.productimage, function(n) {
                 $scope.productdetail.push({
-                    image: "http://wohlig.co.in/accessbackend/uploads/" + n.image,
+                    image: adminimage + n.image,
                     check: 1
                 });
             });
@@ -1318,7 +1316,6 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             if ($scope.product.product.firstsaleprice) {
                 if ($scope.product.product.specialpricefrom == "0000-00-00" && $scope.product.product.specialpriceto == "0000-00-00") {
                     $scope.showSalePrice = true;
-                    console.log("in if");
                 } else if ($scope.product.product.specialpricefrom != "0000-00-00" && $scope.product.product.specialpriceto != "0000-00-00") {
                     var birth = new Date($scope.product.product.specialpricefrom);
                     var death = new Date($scope.product.product.specialpriceto);
@@ -1330,7 +1327,6 @@ angular.module('starter.controllers', ['ui.bootstrap'])
                     if (start >= 0 && end <= 0) {
                         $scope.showSalePrice = true;
                     }
-                    console.log("in 1 else if");
                 } else if ($scope.product.product.specialpricefrom != "0000-00-00") {
                     var birth = new Date($scope.product.product.specialpricefrom);
                     var curr = new Date();
@@ -1339,12 +1335,13 @@ angular.module('starter.controllers', ['ui.bootstrap'])
                     if (start >= 0) {
                         $scope.showSalePrice = true;
                     }
-                    console.log("in 2 else if");
                 } else if ($scope.product.product.specialpricefrom == "0000-00-00") {
                     $scope.showSalePrice = true;
-                    console.log("in 3 else if");
                 }
-                console.log("Show Sale Price = " + $scope.showSalePrice);
+                if ($scope.showSalePrice == true) {
+                    // $scope.product.product.discountinper = Math.round(parseFloat($scope.product.product.firstsaleprice) / parseFloat($scope.product.product.price) * 100);
+                    $scope.product.product.discountinper = Math.floor((1 - (parseFloat($scope.product.product.firstsaleprice) / parseFloat($scope.product.product.price)))*100);
+                }
             } else {
                 $scope.showSalePrice = false;
             }

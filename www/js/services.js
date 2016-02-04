@@ -1,9 +1,9 @@
-var adminbase = "http://wohlig.co.in/accessbackend/";
+var adminbase = "http://accessworld.in/admin/";
 // var adminbase = "http://localhost/accessback/";
 var adminurl = adminbase + "index.php/json/";
 var adminhauth = adminbase + "index.php/hauth/";
 var adminimage = adminbase + "uploads/";
-var adminimage = "http://wohlig.co.in/accessbackend/uploads/";
+var adminimage = "http://accessworld.in/admin/uploads/";
 //var adminimage = "http://localhost/accessback/uploads/";
 
 angular.module('starter.services', [])
