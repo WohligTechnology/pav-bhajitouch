@@ -429,7 +429,15 @@ $dark:                            #444 !default;
 
 .newarrivals .newarrivals-details {
   padding-left: 0;
-  margin-left: 5px; }
+  margin-left: 10px; }
+  .newarrivals .newarrivals-details h3 {
+    margin-top: 5px;
+    margin-bottom: 0;
+    font-size: 13px;
+    color: #23c9d8;
+    font-weight: 400;
+    display: block;
+    margin-right: 5px; }
 
 .newarrivals .image-holder-product {
   margin: 0 !important; }
@@ -1078,6 +1086,32 @@ $dark:                            #444 !default;
 
 .posr {
   position: relative; }
+
+.discperdeal {
+  border: 1px solid #7EE1EA;
+  border-radius: 100%;
+  width: 35px;
+  height: 35px;
+  background-color: #7EE1EA;
+  color: #fff !important;
+  text-align: center;
+  line-height: 32px;
+  margin-left: 10px; }
+
+.stock {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2); }
+  .stock p {
+    color: #fff;
+    font-size: 15px;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%; }
 
 /*!
   Ionicons, v2.0.1

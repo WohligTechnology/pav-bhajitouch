@@ -1,6 +1,6 @@
 var allfunction = {};
 var myfunction = '';
-angular.module('starter.controllers', ['ui.bootstrap'])
+angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider'])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, $location, $ionicPopup, $rootScope, MyServices, $ionicLoading, $interval, $window, $templateCache) {
     $rootScope.transparent_header = false;
@@ -30,7 +30,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         });
         $timeout(function() {
             $ionicLoading.hide();
-        }, 5000);
+        }, 15000);
     };
 
     $scope.logout = function() {
@@ -401,11 +401,42 @@ angular.module('starter.controllers', ['ui.bootstrap'])
                 if (n.isfavid) {
                     n.fav = "fav";
                 }
+                if (n.firstsaleprice) {
+                    if (n.specialpricefrom == "0000-00-00" && n.specialpriceto == "0000-00-00") {
+                        n.showSalePrice = true;
+                    } else if (n.specialpricefrom != "0000-00-00" && n.specialpriceto != "0000-00-00") {
+                        var birth = new Date(n.specialpricefrom);
+                        var death = new Date(n.specialpriceto);
+                        var curr = new Date();
+                        var diff = curr.getTime() - birth.getTime();
+                        var diff2 = curr.getTime() - death.getTime();
+                        var start = Math.floor(diff / (1000 * 60 * 60 * 24));
+                        var end = Math.floor(diff2 / (1000 * 60 * 60 * 24));
+                        if (start >= 0 && end <= 0) {
+                            n.showSalePrice = true;
+                        }
+                    } else if (n.specialpricefrom != "0000-00-00") {
+                        var birth = new Date(n.specialpricefrom);
+                        var curr = new Date();
+                        var diff = curr.getTime() - birth.getTime();
+                        var start = Math.floor(diff / (1000 * 60 * 60 * 24));
+                        if (start >= 0) {
+                            n.showSalePrice = true;
+                        }
+                    } else if (n.specialpricefrom == "0000-00-00") {
+                        n.showSalePrice = true;
+                    }
+                    if (n.showSalePrice == true) {
+                        n.discountinper = Math.floor((1 - (parseFloat(n.firstsaleprice) / parseFloat(n.price))) * 100);
+                    }
+                }
                 $scope.products.push(n);
             });
             console.log($scope.products);
             if ($scope.products.length == 0) {
                 $scope.shownodata = true;
+            } else {
+                $scope.shownodata = false;
             }
             $ionicLoading.hide();
         });
@@ -602,7 +633,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
 
 })
 
-.controller('CartCtrl', function($scope, $stateParams, $location, $ionicHistory, MyServices) {
+.controller('CartCtrl', function($scope, $stateParams, $location, $ionicHistory, MyServices, $ionicLoading) {
     $scope.goHome = function() {
         console.log($ionicHistory.viewHistory());
         $location.path('app/home');
@@ -710,30 +741,58 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         $scope.gettotalcartfunction();
         $scope.getcartfunction();
         myfunction();
+        $ionicLoading.hide();
     };
 
     $scope.changeqty = function(mycart, option) {
         if (option == '+') {
-            ++mycart.qty;
-        } else {
-            if (mycart.qty > 1)
-                --mycart.qty;
+            if (mycart.qty < mycart.maxQuantity) {
+                allfunction.loading();
+                if (option == '+') {
+                    ++mycart.qty;
+                } else {
+                    if (mycart.qty > 1)
+                        --mycart.qty;
+                }
+                var selectedproduct = {};
+                selectedproduct.product = mycart.id;
+                selectedproduct.productname = mycart.options.realname;
+                selectedproduct.price = mycart.price;
+                selectedproduct.quantity = mycart.qty;
+                MyServices.addtocart(selectedproduct, cartt);
+            } else {
+                allfunction.msg("Only " + mycart.maxQuantity + " quantity is available ", "Quantity Exceeds");
+            }
+        } else if (option == '-') {
+            if (mycart.qty > 1) {
+                allfunction.loading();
+                if (option == '+') {
+                    ++mycart.qty;
+                } else {
+                    if (mycart.qty > 1)
+                        --mycart.qty;
+                }
+                var selectedproduct = {};
+                selectedproduct.product = mycart.id;
+                selectedproduct.productname = mycart.options.realname;
+                selectedproduct.price = mycart.price;
+                selectedproduct.quantity = mycart.qty;
+                MyServices.addtocart(selectedproduct, cartt);
+            } else {
+                allfunction.msg("Cannot decrease quantity ", "Error !");
+            }
         }
-        var selectedproduct = {};
-        selectedproduct.product = mycart.id;
-        selectedproduct.productname = mycart.options.realname;
-        selectedproduct.price = mycart.price;
-        selectedproduct.quantity = mycart.qty;
-        MyServices.addtocart(selectedproduct, cartt);
     };
 
     //add and subtract from cart
 
     $scope.getcartfunction = function() {
+        allfunction.loading();
         MyServices.getcart(function(data) {
             console.log(data);
+            $ionicLoading.hide();
             $scope.cart = data;
-            if (data == '') {
+            if (data == '' || data.length == 0) {
                 $scope.nodatafound = true;
                 $scope.nodata = "No Data found.";
             } else {
@@ -746,133 +805,146 @@ angular.module('starter.controllers', ['ui.bootstrap'])
 
     //delete cart
     $scope.deletecart = function(cart) {
+        allfunction.loading();
         console.log(cart);
         MyServices.deletecart(cart.id, function(data) {
             console.log(data);
             $scope.getcartfunction();
             $scope.gettotalcartfunction();
             myfunction();
+            $ionicLoading.hide();
         });
     }
 
 })
 
 .controller('CheckoutCtrl', function($scope, $stateParams, MyServices, $ionicLoading, $location) {
-        $scope.chklogin = $.jStorage.get("user");
+    $scope.chklogin = $.jStorage.get("user");
+    $scope.showlogreg = true;
+    if ($.jStorage.get("user")) {
         $scope.showlogreg = false;
-        if ($scope.chklogin == null) {
-            $scope.showlogreg = true;
+    } else {
+        $scope.showlogreg = true;
+    }
+    $scope.different_address = false;
+    $scope.address_select = "Ship to different address";
+    $scope.toggleAddress = function() {
+        if ($scope.different_address === false) {
+            $scope.different_address = true;
+            $scope.address_select = "Ship to same address";
+        } else {
+            $scope.different_address = false;
+            $scope.address_select = "Ship to different address";
         }
-        $scope.different_address = false;
-        $scope.address_select = "Ship to different address";
-        $scope.toggleAddress = function() {
-            if ($scope.different_address === false) {
-                $scope.different_address = true;
-                $scope.address_select = "Ship to same address";
-            } else {
-                $scope.different_address = false;
-                $scope.address_select = "Ship to different address";
-            }
-        };
-        $scope.openbilling = false;
-        $scope.totalcart = $stateParams.totalcart;
-        console.log("totalcart");
-        console.log($scope.totalcart);
-        $scope.continue = function(ch) {
+    };
+    $scope.openbilling = false;
+    $scope.totalcart = $stateParams.totalcart;
+    console.log("totalcart");
+    console.log($scope.totalcart);
+    $scope.continue = function(ch) {
+        if (!$.jStorage.get("user")) {
             if (ch === 'login') {
                 $scope.openbilling = false;
                 $scope.login();
-            } else {
+            } else if (ch === 'guest') {
                 $scope.openbilling = true;
-            }
-        };
-
-
-
-        // form integrate pooja
-        $scope.checkout = {};
-        if ($.jStorage.get("user") != null) {
-            $scope.userid = $.jStorage.get("user").id;
-            if ($scope.userid != "") {
-                $scope.checkout.userid = $.jStorage.get("user").id;
             } else {
-                console.log("not");
-                $scope.checkout.userid = 0;
+                allfunction.msg("Please select checkout type ", "Please Select")
             }
+        } else {
+            $scope.openbilling = true;
+            $scope.checkout = $.jStorage.get("user");
         }
-        MyServices.getcart(function(data) {
-            $scope.cart = data;
-            $scope.checkout.cart = $scope.cart;
-            $scope.checkout.finalamount = $scope.totalcart;
-            console.log($scope.cart);
-        });
-        $scope.paymentOption = function() {
-            $scope.allvalidation = [{
-                field: $scope.checkout.firstname,
-                validation: ""
-            }, {
-                field: $scope.checkout.lastname,
-                validation: ""
-            }, {
-                field: $scope.checkout.billingaddress,
-                validation: ""
-            }, {
-                field: $scope.checkout.billingcity,
-                validation: ""
-            }, {
-                field: $scope.checkout.billingstate,
-                validation: ""
-            }, {
-                field: $scope.checkout.billingcountry,
-                validation: ""
-            }, {
-                field: $scope.checkout.billingpincode,
-                validation: ""
-            }, {
-                field: $scope.checkout.email,
-                validation: ""
-            }];
-            var check = formvalidation($scope.allvalidation);
-            console.log(check);
-            if (check) {
-                console.log($scope.checkout);
-                allfunction.loading();
-                // MyServices.placeorder($scope.checkout, function(data) {
-                //     console.log(data);
-                //     if (data == 1) {
-                //         $ionicLoading.hide();
-                //         allfunction.msg("Your Order has been placed", 'Thankyou!');
-                //         $location.url("/app/home/");
-                //     } else {
-                //         $ionicLoading.hide();
-                //         allfunction.msg("Sorry Try Again", 'Sorry!');
-                //     }
-                // });
-            } else {
-                allfunction.msg("Fill all mandatory fields", "Error !");
-            }
+    };
+
+
+
+    // form integrate pooja
+    $scope.checkout = {};
+    if ($.jStorage.get("user") != null) {
+        $scope.userid = $.jStorage.get("user").id;
+        if ($scope.userid != "") {
+            $scope.checkout.userid = $.jStorage.get("user").id;
+        } else {
+            console.log("not");
+            $scope.checkout.userid = 0;
         }
-    })
-    .controller('MyOrdersCtrl', function($scope, $stateParams, $location, $ionicHistory, MyServices, $ionicLoading) {
-        MyServices.orderhistory(function(data) {
-            console.log(data);
+    }
+    MyServices.getcart(function(data) {
+        $scope.cart = data;
+        $scope.checkout.cart = $scope.cart;
+        $scope.checkout.finalamount = $scope.totalcart;
+        console.log($scope.cart);
+    });
+    $scope.paymentOption = function() {
+        $scope.allvalidation = [{
+            field: $scope.checkout.firstname,
+            validation: ""
+        }, {
+            field: $scope.checkout.lastname,
+            validation: ""
+        }, {
+            field: $scope.checkout.billingaddress,
+            validation: ""
+        }, {
+            field: $scope.checkout.billingcity,
+            validation: ""
+        }, {
+            field: $scope.checkout.billingstate,
+            validation: ""
+        }, {
+            field: $scope.checkout.billingcountry,
+            validation: ""
+        }, {
+            field: $scope.checkout.billingpincode,
+            validation: ""
+        }, {
+            field: $scope.checkout.email,
+            validation: ""
+        }];
+        var check = formvalidation($scope.allvalidation);
+        console.log(check);
+        if (check) {
+            console.log($scope.checkout);
+            allfunction.loading();
+            // MyServices.placeorder($scope.checkout, function(data) {
+            //     console.log(data);
+            //     if (data == 1) {
+            //         $ionicLoading.hide();
+            //         allfunction.msg("Your Order has been placed", 'Thankyou!');
+            //         $location.url("/app/home/");
+            //     } else {
+            //         $ionicLoading.hide();
+            //         allfunction.msg("Sorry Try Again", 'Sorry!');
+            //     }
+            // });
+        } else {
+            allfunction.msg("Fill all mandatory fields", "Error !");
+        }
+    }
+})
 
-            $scope.orderhistory = data;
-            _.each($scope.orderhistory, function(n) {
-                n.timestamp = new Date();
-            });
+.controller('MyOrdersCtrl', function($scope, $stateParams, $location, $ionicHistory, MyServices, $ionicLoading) {
+    MyServices.orderhistory(function(data) {
+        console.log(data);
 
-            if (data == "") {} else {
-
-            }
+        $scope.orderhistory = data;
+        _.each($scope.orderhistory, function(n) {
+            n.timestamp = new Date();
         });
 
-    })
+        if (data == "") {} else {
+
+        }
+    });
+
+})
 
 .controller('CategoryCtrl', function($scope, $stateParams, $location, $ionicHistory, MyServices, $ionicLoading) {
 
     allfunction.loading();
     $scope.parent = $stateParams.id;
+    $scope.categoryName = $stateParams.name;
     MyServices.getsinglecategory($stateParams.id, function(data) {
         $scope.subcategories = data;
         console.log(data);
@@ -978,6 +1050,9 @@ angular.module('starter.controllers', ['ui.bootstrap'])
     });
     $scope.closeFilter = function() {
         $scope.modalFilter.hide();
+        if (($scope.filters.pricemin != $scope.showfilter.price.min) || ($scope.filters.pricemax != $scope.showfilter.price.max)) {
+            $scope.getFilterResults();
+        }
     };
     $scope.openFilter = function() {
         $scope.modalFilter.show();
@@ -1007,10 +1082,10 @@ angular.module('starter.controllers', ['ui.bootstrap'])
     $scope.filters.clength = "";
     $scope.filters.voltage = "";
     $scope.filters.capacity = "";
-
+    var lastpage = 1;
     var getproductbybrandcallback = function(data, status) {
         console.log(data);
-
+        lastpage = data.data.lastpage;
         if (data.data.queryresult.length == 0) {
             $scope.keepscrolling = false;
         } else {
@@ -1044,7 +1119,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
                         n.showSalePrice = true;
                     }
                     if (n.showSalePrice == true) {
-                        n.discountinper = Math.floor((1 - (parseFloat(n.firstsaleprice) / parseFloat(n.price)))*100);
+                        n.discountinper = Math.floor((1 - (parseFloat(n.firstsaleprice) / parseFloat(n.price))) * 100);
                     }
                 }
                 $scope.productsarr.push(n);
@@ -1052,7 +1127,6 @@ angular.module('starter.controllers', ['ui.bootstrap'])
 
             $scope.productsarr = _.uniq($scope.productsarr, 'id');
             $scope.products = _.chunk($scope.productsarr, 2);
-            // console.log($scope.products);
             // console.log("keepscrolling = " + $scope.keepscrolling);
 
             if (data.filter) {
@@ -1118,26 +1192,35 @@ angular.module('starter.controllers', ['ui.bootstrap'])
                 if (data.filter.price && data.filter.price.max) {
                     $scope.filters.pricemax = data.filter.price.max;
                 }
-                console.log($scope.showfilter);
+                if (!$scope.filters.pricemin)
+                    $scope.filters.pricemin = $scope.showfilter.price.min;
+                if (!$scope.filters.pricemax)
+                    $scope.filters.pricemax = $scope.showfilter.price.max;
             }
             $scope.$broadcast('scroll.infiniteScrollComplete');
         }
 
         if (data.data.queryresult.length == 0 && $scope.productsarr.length == 0) {
             $scope.shownodata = true;
+            $scope.keepscrolling = false;
         }
         $ionicLoading.hide();
     }
 
     $scope.addMoreItems = function() {
         console.log("addmore = " + $scope.pageno);
-        ++$scope.pageno;
-        if ($stateParams.brand != 0) {
-            MyServices.getproductbybrand($scope.pageno, $stateParams.brand, $scope.filters, getproductbybrandcallback);
-        } else if ($stateParams.parent != 0) {
-            MyServices.getproductbycategory($scope.pageno, $stateParams.parent, $scope.filters, getproductbybrandcallback);
+        if (lastpage > $scope.pageno) {
+            ++$scope.pageno;
+            if ($stateParams.brand != 0) {
+                MyServices.getproductbybrand($scope.pageno, $stateParams.brand, $scope.filters, getproductbybrandcallback);
+            } else if ($stateParams.parent != 0) {
+                MyServices.getproductbycategory($scope.pageno, $stateParams.parent, $scope.filters, getproductbybrandcallback);
+            } else {
+                MyServices.getallproduct($scope.pageno, getproductbybrandcallback);
+            }
         } else {
-            MyServices.getallproduct($scope.pageno, getproductbybrandcallback);
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+            $scope.keepscrolling = false;
         }
     }
 
@@ -1147,7 +1230,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         $ionicScrollDelegate.scrollTop();
         $scope.pageno = 1;
         $scope.productsarr = [];
-        $scope.closeFilter();
+        // $scope.closeFilter();
         $ionicLoading.show();
         if ($stateParams.brand != 0) {
             MyServices.getproductbybrand(1, $stateParams.brand, $scope.filters, getproductbybrandcallback);
@@ -1162,7 +1245,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         $scope.filters[str] = "";
         var objsend = $scope.showfilter[str];
         var objfil = $scope.filters[str];
-        console.log(objsend);
+        // console.log(objsend);
         _.each(objsend, function(n) {
             if (n.status) {
                 objfil += n[str] + ",";
@@ -1170,8 +1253,8 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         });
         objfil = objfil.substr(0, objfil.length - 1);
         $scope.filters[str] = objfil;
-        console.log($scope.filters[str]);
-        // $scope.getFilterResults();
+        // console.log($scope.filters[str]);
+        $scope.getFilterResults();
     }
 
     $scope.alignFilterId = function(str) {
@@ -1187,14 +1270,13 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         objfil = objfil.substr(0, objfil.length - 1);
         $scope.filters[str] = objfil;
         console.log(objfil);
-        // $scope.getFilterResults();
+        $scope.getFilterResults();
     }
 
     $scope.clearFilters = function() {
         MyServices.getFilters($stateParams.parent, $stateParams.brand, function(data) {
             if (data) {
                 $scope.showfilter = data;
-                console.log(data);
                 if (data.compatibledevice && data.compatibledevice.length > 0) {
                     var arr = [];
                     _.each(data.compatibledevice, function(n) {
@@ -1255,7 +1337,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
 
 })
 
-.controller('ProductDetailCtrl', function($scope, $stateParams, $rootScope, $ionicScrollDelegate, MyServices, $ionicLoading, $ionicSlideBoxDelegate, $ionicPopup, $timeout, $filter, $ionicModal, $state) {
+.controller('ProductDetailCtrl', function($scope, $stateParams, $rootScope, $ionicScrollDelegate, MyServices, $ionicLoading, $ionicSlideBoxDelegate, $ionicPopup, $timeout, $filter, $ionicModal, $state, $location) {
     $rootScope.transparent_header = true;
     allfunction.loading();
     $scope.activate = true;
@@ -1285,6 +1367,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
     };
 
     $scope.getPoductDetail = function(id) {
+        $ionicLoading.show();
         MyServices.getproductdetails(id, function(data, status, $filter) {
             console.log(data);
             $scope.product = data;
@@ -1340,7 +1423,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
                 }
                 if ($scope.showSalePrice == true) {
                     // $scope.product.product.discountinper = Math.round(parseFloat($scope.product.product.firstsaleprice) / parseFloat($scope.product.product.price) * 100);
-                    $scope.product.product.discountinper = Math.floor((1 - (parseFloat($scope.product.product.firstsaleprice) / parseFloat($scope.product.product.price)))*100);
+                    $scope.product.product.discountinper = Math.floor((1 - (parseFloat($scope.product.product.firstsaleprice) / parseFloat($scope.product.product.price))) * 100);
                 }
             } else {
                 $scope.showSalePrice = false;
@@ -1357,7 +1440,10 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             }
 
             // console.log($scope.product);
-            $ionicSlideBoxDelegate.update();
+            $timeout(function() {
+                $ionicSlideBoxDelegate.slide(0);
+                $ionicSlideBoxDelegate.update();
+            }, 500);
             $ionicLoading.hide();
             // $scope.product.product.quantity = 1;
         });
@@ -1459,7 +1545,8 @@ angular.module('starter.controllers', ['ui.bootstrap'])
     };
 
     $scope.goToSameColorProduct = function(product) {
-        $scope.getPoductDetail(product.id);
+        // $scope.getPoductDetail(product.id);
+        $location.url("/app/productdetail/" + product.id);
     }
 })
 

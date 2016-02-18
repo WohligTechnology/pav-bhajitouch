@@ -204,14 +204,20 @@
                     <div class="order-review no-border">
                         <h2>Order review</h2>
                         <div class="item item-icon-left"><i class="icon ln-cash"></i>
-                            <h3>Sub total <span class="item-note">Rs. {{totalcart | numberWithCommas}}</span></h3>
+                            <h3>Sub total <span class="item-note">Rs. {{totalcart | numberWithCommas}}</span>
+                            </h3>
                         </div>
                         <div class="item item-icon-left">
-                            <h3><i class="icon ln-ticket"></i>Discount amount
-                <span class="item-note">Rs. 0</span></h3></div>
+                            <h3>
+                              <i class="icon ln-ticket"></i>Discount amount
+                              <span class="item-note">Rs. 0</span>
+                            </h3>
+                        </div>
                         <div class="item item-icon-left">
                             <h3><i class="icon ln-cash"></i>Total amount
-                <span class="item-note">Rs. {{totalcart | numberWithCommas}}</span></h3></div>
+                            <span class="item-note">Rs. {{totalcart | numberWithCommas}}</span>
+                          </h3>
+                        </div>
                     </div>
                     <button class="button button-positive order-button" type="submit" ng-click="paymentOption()">
                         Order

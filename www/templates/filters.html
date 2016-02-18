@@ -130,7 +130,7 @@
                     </ul>
                 </accordion-group>
                 <accordion-group heading="Price" class="accordion-header">
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col">
                             <input type="text" placeholder="Rs. 0" ng-model="filters.pricemin">
                         </div>
@@ -139,10 +139,16 @@
                         <div class="col">
                             <input type="text" placeholder="Rs. 60000" ng-model="filters.pricemax">
                         </div>
-                    </div>
+                    </div> -->
+                    <!-- Filters Model : {{filters.pricemin}}-{{filters.pricemax}}   <br>
+                    Showfilter : {{showfilter.price.min}}-{{showfilter.price.max}} -->
+                    <span class="ib">{{showfilter.price.min}}</span>
+                    <slider floor="{{showfilter.price.min}}" ceiling="{{showfilter.price.max}}" ng-model-low="filters.pricemin" ng-model-high="filters.pricemax" ng-if="filters">
+                    </slider>
+                    <span class="ib">{{showfilter.price.max}}</span>
                 </accordion-group>
             </accordion>
-            <button class="button button-positive btn-filter" ng-click="getFilterResults();">Submit</button>
+            <button class="button button-positive btn-filter" ng-click="closeFilter();">Submit</button>
         </div>
     </ion-content>
 </ion-modal-view>

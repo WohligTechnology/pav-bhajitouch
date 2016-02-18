@@ -6,14 +6,15 @@
         </label>
         <button class="button button-clear button-icon ion-ios-close-empty" ng-click="searchfor='';getSearchResults();">
             <!--
-  
+
   copythis in controller goback()
   $window.history.back()
 -->
         </button>
     </div>
     <ion-content class="has-subheader">
-        <div class="product">
+      <div product data="products" controller-name="SearchresultCtrl"></div>
+        <!-- <div class="product">
             <div class="row" ng-repeat="product in products">
                 <div class="col-50 product-col" ng-repeat="item in product">
                     <a href="#/app/productdetail/{{item.id}}" style="text-decoration: none">
@@ -34,6 +35,6 @@
         </div>
         <div class="center" ng-show="shownodata">
             <p>No Data Found</p>
-        </div>
+        </div> -->
     </ion-content>
 </ion-view>

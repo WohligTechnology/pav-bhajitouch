@@ -1,4 +1,4 @@
-<ion-view view-title="New Arrivals">
+<ion-view view-title="Deals">
     <ion-content>
         <div class="newarrivals">
             <div class="row" ng-repeat="product in products">
@@ -16,7 +16,10 @@
                             </div>
                             <div class="col newarrivals-details">
                                 <h2>{{product.name}}</h2>
-                                <h3>Rs. {{product.price | numberWithCommas}}</h3>
+                                <h3 ng-show="product.showSalePrice">Rs. {{product.firstsaleprice | numberWithCommas}}</h3>
+                                <h3 class="cross" ng-show="product.showSalePrice">Rs. {{product.price | numberWithCommas}}</h3>
+                                <h3 ng-hide="product.showSalePrice">Rs. {{product.price | numberWithCommas}}</h3>
+                                <h3 class="discperdeal" ng-show="product.showSalePrice">{{product.discountinper}}%</h3>
                             </div>
                         </div>
                     </a>

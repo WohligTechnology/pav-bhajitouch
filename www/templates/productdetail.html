@@ -1,4 +1,4 @@
-<ion-view view-title="Product Detail">
+<ion-view view-title="">
     <div class="bar bar-subheader bar-positive" ng-hide="transparent_header">
         <h1 class="title">{{product.product.name}}</h1>
     </div>
@@ -52,7 +52,7 @@
                                 </span>
                             </div>
                             <div class="product-buttons padding-vertical">
-                                <button class="button btn-productdetail icon-left button-positive" ng-click="addtocart(product.product)">
+                                <button class="button btn-productdetail icon-left button-positive" ng-click="addtocart(product.product)" ng-if="availability!='Out of Stock'">
                                     <i class="icon ln-cart"></i>Add to cart
                                 </button>
                                 <button class="button btn-productdetail icon-left ion-ios-heart button-positive" ng-click="addtowishlist(product.product.id);">Add to wishlist</button>
@@ -78,7 +78,7 @@
                                 <p ng-if="product.product.compatiblewith">Compatible With<span class="item-note">{{product.product.compatiblewith}}</span></p>
                                 <p ng-if="product.product.type">Type<span class="item-note">{{product.product.type}}</span></p>
                                 <p ng-if="product.product.microphone">Microphone<span class="item-note">{{product.product.microphone}}</span></p>
-                                <p ng-if="product.product.dimesnion">Dimensions<span class="item-note">{{product.product.dimesnion}}</span></p>
+                                <p ng-if="product.product.dimension">Dimensions<span class="item-note">{{product.product.dimension}}</span></p>
                                 <p ng-if="product.product.weight">Weight<span class="item-note">{{product.product.weight}}</span></p>
                                 <p ng-if="product.product.material">Material<span class="item-note">{{product.product.material}}</span></p>
                                 <p ng-if="product.product.finish">Finish<span class="item-note">{{product.product.finish}}</span></p>
@@ -89,7 +89,7 @@
                                 <p ng-if="product.product.domesticwarranty">Warranty<span class="item-note">{{product.product.domesticwarranty}}</span></p>
                                 <p ng-if="product.product.warrantysummary">Warranty Summary<span class="item-note">{{product.product.warrantysummary}}</span></p>
                                 <p ng-if="product.product.salespackage">What's Included<span class="item-note">{{product.product.salespackage}}</span></p>
-                                <p ng-if="product.product.eanorupc">EAN/UPC<span class="item-note">{{product.product.eanorupc}}</span></p>
+                                <!-- <p ng-if="product.product.eanorupc">EAN/UPC<span class="item-note">{{product.product.eanorupc}}</span></p> -->
                                 <!-- <p ng-if="product.product.modelname">Model Name <span class="item-note">{{product.product.modelname}}</span></p>
                                 <p ng-if="product.product.width">Width<span class="item-note">{{product.product.width}}</span></p>
                                 <p ng-if="product.product.height">Height<span class="item-note">{{product.product.height}}</span></p>

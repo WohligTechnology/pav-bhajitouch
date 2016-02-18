@@ -113,7 +113,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
             }
         })
         .state('app.category', {
-            url: '/category/:id',
+            url: '/category/:name/:id',
             views: {
                 'menuContent': {
                     templateUrl: 'templates/category.html',
@@ -280,10 +280,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     };
 })
 
-.directive('onlyDigits', function () {
+.directive('onlyDigits', function() {
     return {
         require: 'ngModel',
-        link: function (scope, element, attr, ngModelCtrl) {
+        link: function(scope, element, attr, ngModelCtrl) {
             function fromUser(text) {
                 if (text) {
                     var transformedInput = text.replace(/[^0-9]/g, '');
@@ -295,7 +295,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
                     return transformedInput;
                 }
                 return undefined;
-            }            
+            }
             ngModelCtrl.$parsers.push(fromUser);
         }
     };
@@ -313,6 +313,26 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
             scope.$watch('code', function(newVal) {
                 if (newVal) {
                     scope.url = $sce.trustAsResourceUrl("http://www.youtube.com/embed/" + newVal);
+                }
+            });
+        }
+    };
+})
+
+.directive('product', function() {
+    return {
+        restrict: 'A',
+        scope: {
+            data: '='
+        },
+        replace: true,
+        templateUrl: 'templates/productsGrid.html',
+        controller: "@",
+        name: "controllerName",
+        link: function(scope, element, attrs) {
+            scope.$watch('data', function(productsArray) {
+                if (productsArray) {
+                    scope.products = productsArray;
                 }
             });
         }

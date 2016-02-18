@@ -1,4 +1,4 @@
-<ion-view view-title="Product categories">
+<ion-view view-title="Product Categories">
     <ion-content>
         <!-- <div class="product-ctgry">
             <div class="category" ng-repeat="menu in category">
@@ -17,10 +17,10 @@
         </div>
         <div class="cat-c">
             <div class="row pad0" ng-repeat="cato in cats">
-                <div class="col-33" ng-repeat="cat in cato" ui-sref="app.category({id:cat.id})">
+                <div class="col-33" ng-repeat="cat in cato" ui-sref="app.category({name:cat.name,id:cat.id})">
                     <div class="cat-i">
                         <figure class="text-center">
-                            <img ng-src="{{cat.name | localimage}}" class="w40">
+                            <img ng-src="{{cat.image1 | serverimage}}" class="w40">
                             <figcaption class="f-z">{{cat.name}}</figcaption>
                         </figure>
                     </div>
