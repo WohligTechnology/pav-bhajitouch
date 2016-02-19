@@ -27,11 +27,11 @@
                         <div class="list checkout-form">
                             <form ng-submit="doLogin()">
                                 <label class="item item-input item-floating-label">
-                                    <span class="input-label">First Name</span>
+                                    <span class="input-label">First Name*</span>
                                     <input type="text" placeholder="First Name*" ng-model="checkout.firstname" ng-class="allvalidation[0].validation" required>
                                 </label>
                                 <label class="item item-input item-floating-label">
-                                    <span class="input-label">Last Name</span>
+                                    <span class="input-label">Last Name*</span>
                                     <input type="text" placeholder="Last Name*" ng-model="checkout.lastname" ng-class="allvalidation[1].validation" required>
                                 </label>
                                 <label class="item item-input item-floating-label">
@@ -39,20 +39,20 @@
                                     <input type="text" placeholder="Company" ng-model="checkout.company">
                                 </label>
                                 <label class="item item-input item-floating-label">
-                                    <span class="input-label">Email</span>
+                                    <span class="input-label">Email*</span>
                                     <input type="email" placeholder="Email*" ng-model="checkout.email" ng-class="allvalidation[2].validation" required>
                                 </label>
                                 <label class="item item-input item-floating-label">
-                                    <span class="input-label">Address</span>
+                                    <span class="input-label">Address*</span>
                                     <textarea name="" id="" rows="2" placeholder="Address*" ng-model="checkout.billingaddress" ng-class="allvalidation[3].validation" required></textarea>
                                 </label>
                                 <label class="item item-input item-floating-label">
-                                    <span class="input-label">City</span>
+                                    <span class="input-label">City*</span>
                                     <input type="text" placeholder="City*" ng-model="checkout.billingcity" ng-class="allvalidation[4].validation" required>
                                 </label>
                                 <label class="item item-input item-select">
                                     <div class="input-label">
-                                        Select State
+                                        Select State*
                                     </div>
                                     <select ng-model="checkout.billingstate" ng-class="allvalidation[5].validation" required>
                                         <option value="">Select State</option>
@@ -94,8 +94,8 @@
                                     </select>
                                 </label>
                                 <label class="item item-input item-floating-label">
-                                    <span class="input-label">Zip/Postal</span>
-                                    <input type="text" placeholder="Zip/Postal*" ng-model="checkout.billingpincode" ng-class="allvalidation[6].validation" required only-digits maxlength="6" ng-trim="false">
+                                    <span class="input-label">Zip/Postal Code*</span>
+                                    <input type="text" placeholder="Zip/Postal Code*" ng-model="checkout.billingpincode" ng-class="allvalidation[6].validation" required only-digits maxlength="6" ng-trim="false">
                                 </label>
                                 <label class="item item-input item-select">
                                     <div class="input-label">
@@ -107,30 +107,30 @@
                                     </select>
                                 </label>
                                 <label class="item item-input item-floating-label">
-                                    <span class="input-label">Telephone*</span>
-                                    <input type="tel" placeholder="Telephone" ng-model="checkout.billingcontact" ng-class="allvalidation[8].validation" only-digits ng-trim="false">
+                                    <span class="input-label">Contact Number*</span>
+                                    <input type="tel" placeholder="Contact Number*" ng-model="checkout.billingcontact" ng-class="allvalidation[8].validation" only-digits ng-trim="false">
                                 </label>
                                 <button class="button button-positive checkout-button" type="submit" ng-click="toggleAddress()" ng-bind="address_select">
                                 </button>
                                 <div class="checkout-form2" ng-show="different_address">
                                     <h2>Shipping information</h2>
                                     <label class="item item-input item-floating-label">
-                                        <span class="input-label">Shipping Name</span>
-                                        <input type="text" placeholder="Shipping Name" ng-model="checkout.shippingname">
+                                        <span class="input-label">Shipping Name*</span>
+                                        <input type="text" placeholder="Shipping Name*" ng-model="checkout.shippingname" ng-class="allvalidation[9].validation">
                                     </label>
                                     <label class="item item-input item-floating-label">
-                                        <span class="input-label">Address</span>
-                                        <textarea name="" id="" rows="2" ng-model="checkout.shippingaddress" placeholder="Address "></textarea>
+                                        <span class="input-label">Address*</span>
+                                        <textarea name="" id="" rows="2" ng-model="checkout.shippingaddress" placeholder="Address* " ng-class="allvalidation[10].validation"></textarea>
                                     </label>
                                     <label class="item item-input item-floating-label">
-                                        <span class="input-label">City</span>
-                                        <input type="text" placeholder="City" ng-model="checkout.shippingcity">
+                                        <span class="input-label">City*</span>
+                                        <input type="text" placeholder="City*" ng-model="checkout.shippingcity" ng-class="allvalidation[11].validation">
                                     </label>
                                     <label class="item item-input item-select">
                                         <div class="input-label">
-                                            Select State
+                                            Select State*
                                         </div>
-                                        <select ng-model="checkout.shippingstate" ng-class="allvalidation[5].validation" required>
+                                        <select ng-model="checkout.shippingstate" ng-class="allvalidation[12].validation" required>
                                             <option value="">Select State</option>
                                             <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
                                             <option value="Andhra Pradesh">Andhra Pradesh</option>
@@ -170,21 +170,21 @@
                                         </select>
                                     </label>
                                     <label class="item item-input item-floating-label">
-                                        <span class="input-label">Zip/Postal</span>
-                                        <input type="text" placeholder="Zip/Postal" ng-model="checkout.shippingpincode">
+                                        <span class="input-label">Zip/Postal COde*</span>
+                                        <input type="text" placeholder="Zip/Postal Code*" ng-model="checkout.shippingpincode" ng-class="allvalidation[13].validation">
                                     </label>
                                     <label class="item item-input item-select">
                                         <div class="input-label">
-                                            Select Country
+                                            Select Country*
                                         </div>
-                                        <select ng-model="checkout.shippingcountry">
+                                        <select ng-model="checkout.shippingcountry" ng-class="allvalidation[14].validation">
                                             <option value="">Select Country</option>
                                             <option value="Afganistan">India</option>
                                         </select>
                                     </label>
                                     <label class="item item-input item-floating-label">
-                                        <span class="input-label">Telephone</span>
-                                        <input type="tel" placeholder="Telephone" ng-model="checkout.shippingcontact">
+                                        <span class="input-label">Contact Number*</span>
+                                        <input type="tel" placeholder="Contact Number*" ng-model="checkout.shippingcontact" ng-class="allvalidation[15].validation">
                                     </label>
                                 </div>
                                 <!--
@@ -224,6 +224,41 @@
                     </button>
                 </div>
             </div>
+        </div>
+        <div class="placeorder" ng-show="paymentinfo">
+            <form action="http://accessworld.in/admin/paymentgateway/ccavRequestHandler.php" method="post" style="padding-top:20px;">
+                <!--                                    <span style="font-weight:600; padding-top:20px">Order Id:</span> {{payment.orderid}}-->
+                <!--               CHECKOUT POST FORM START                    -->
+                <input type="text" hidden name="tid" id="tid" />
+                <input type="text" hidden name="order_id" ng-model="orderid">
+                <input type="text" hidden name="merchant_id" value="76752">
+                <input type="text" hidden name="amount" ng-model="allamount">
+                <input type="text" hidden name="billing_name" ng-model="checkout.firstname">
+                <input type="text" hidden name="currency" value="INR">
+                <input type="text" hidden name="merchant_param1" ng-model="couponhave">
+                <input type="text" hidden name="redirect_url" value="http://accessinfoworld.com/admin/index.php/json/payumoneysuccess">
+                <input type="text" hidden name="cancel_url" value="htt://accessinfoworld.com/#/checkout" />
+                <input type="text" hidden name="language" value="EN" />
+                <!-- <input type="text" name="lastname" ng-model="checkout.lastname"> -->
+                <input type="text" hidden name="billing_address" ng-model="checkout.billingaddress">
+                <input type="text" hidden name="billing_country" ng-model="checkout.billingcountry">
+                <input type="text" hidden name="billing_state" ng-model="checkout.billingstate">
+                <input type="text" hidden name="billing_city" ng-model="checkout.billingcity">
+                <input type="text" hidden name="billing_zip" ng-model="checkout.billingpincode">
+                <input type="text" hidden name="billing_tel" ng-model="checkout.billingcontact">
+                <input type="text" hidden name="billing_email" ng-model="checkout.email">
+                <input type="text" hidden name="delivery_name" ng-model="checkout.shippingname">
+                <input type="text" hidden name="delivery_address" ng-model="checkout.shippingaddress">
+                <input type="text" hidden name="delivery_country" ng-model="checkout.shippingcountry">
+                <input type="text" hidden name="delivery_city" ng-model="checkout.shippingcity">
+                <input type="text" hidden name="delivery_state" ng-model="checkout.shippingstate">
+                <input type="text" hidden name="delivery_zip" ng-model="checkout.shippingpincode">
+                <input type="text" hidden name="delivery_tel" ng-model="checkout.shippingcontact">
+                <input type="text" hidden name="integration_type" value="iframe_normal" />
+                <input type="submit" class="btn-all pull-right" style="text-align:center;" value="Place Order">
+                <!--               CHECKOUT POST FORM START                    -->
+            </form>
+            <!--            <a class="btn-all pull-right" ng-click="placeorder()">Place Order</a>-->
         </div>
     </ion-content>
 </ion-view>

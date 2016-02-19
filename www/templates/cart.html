@@ -1,6 +1,6 @@
 <ion-view view-title="Cart">
     <ion-content>
-        <div ng-hide="nodatafound">
+        <div ng-hide="nodatafound" id="snap">
             <div class="cart">
                 <div class="row-container" ng-repeat="mycart in cart">
                     <div class="col">
@@ -82,7 +82,7 @@
                 <span class="item-note">Rs. {{totalcart - discountamount | numberWithCommas}}</span></h3></div>
                 </div>
             </div>
-            <a class="button  button-positive btn-checkout login-button" ng-click="gotocheckout(totalcart);">Proceed to checkout</a>
+            <a class="button  button-positive btn-checkout login-button" ng-click="tocheckout(totalcart);">Proceed to checkout</a>
         </div>
         <div class="center" ng-show="nodatafound">
             <p>Your Shopping Cart is empty.</p>

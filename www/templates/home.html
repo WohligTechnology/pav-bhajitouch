@@ -98,9 +98,9 @@
                 <!-- <p align="center">Nulla ipsum dolor lacus, suscipit adipiscing. Cum sociis natoque penatibus et ultrices volutpat.</p> -->
                 <div class="item-input-inset">
                     <label class="item-input-wrapper dd">
-                        <input type="Email" placeholder="Email">
+                        <input type="Email" placeholder="Email" ng-model="subscribe.email">
                     </label>
-                    <button class="button button-calm btn-subscribe">
+                    <button class="button button-calm btn-subscribe" ng-click="usersubscribtion(subscribe.email);">
                         Subscribe
                     </button>
                 </div>

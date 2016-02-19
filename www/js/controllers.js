@@ -1,6 +1,6 @@
 var allfunction = {};
 var myfunction = '';
-angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider'])
+angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova'])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, $location, $ionicPopup, $rootScope, MyServices, $ionicLoading, $interval, $window, $templateCache) {
     $rootScope.transparent_header = false;
@@ -101,7 +101,7 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider'])
                 $scope.closeLogin();
                 $window.location.reload();
                 //                 $templateCache.removeAll();
-                $location.url("/home");
+                // $location.url("/home");
             }
         })
     }
@@ -349,6 +349,23 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider'])
         $location.url("/app/productdetail/" + id);
     }
 
+    $scope.usersubscribtion = function(email) {
+        if (email) {
+            MyServices.getsubscribe(email, function(data) {
+                console.log(data);
+                if (data == "true") {
+                    allfunction.msg("Thank you for your subscribtion ", "Thank You");
+                    // $scope.msg = "Thank you for your subscribtion . ";
+                } else {
+                    // $scope.msg = "Already subscribed";
+                    allfunction.msg("You have already subscribed ", "Thank You");
+                }
+            });
+        } else {
+            allfunction.msg("Please provide your email id ", "Error !");
+        }
+    }
+
 })
 
 .controller('DealsCtrl', function($scope, $stateParams, MyServices, $ionicLoading, $ionicSlideBoxDelegate) {
@@ -539,7 +556,7 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider'])
                 if (data != "") {
                     $ionicLoading.hide();
                     $scope.contactus = {};
-                    allfunction.msg("Successfully Edited", 'Thankyou!');
+                    allfunction.msg("Query Sumbitted Successfully ", 'Thankyou!');
 
                 } else {
                     $ionicLoading.hide();
@@ -639,18 +656,28 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider'])
         $location.path('app/home');
     };
 
-
     $scope.gotocheckout = function(totalcart) {
         $location.url('app/checkout/' + totalcart);
     }
 
     $scope.gettotalcartfunction = function() {
         MyServices.totalcart(function(data) {
-            $scope.totalcart = data;
+            if ($scope.userdetail.credits) {
+                $scope.totalcart = data - $scope.userdetail.credits;
+                if ($scope.totalcart <= 0) {
+                    $scope.totalcart = 0
+                }
+            } else {
+                $scope.totalcart = data;
+            }
         });
     }
 
-    $scope.gettotalcartfunction();
+    MyServices.getuserdetails(function(data) {
+        console.log(data);
+        $scope.userdetail = data;
+        $scope.gettotalcartfunction();
+    });
 
     //check coupons
     $scope.discountamount = 0;
@@ -705,9 +732,27 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider'])
         $.jStorage.set("discountamount", $scope.discountamount);
     };
 
-    $scope.tocheckout = function() {
-        $.jStorage.set("discountamount", $scope.discountamount);
-        $location.url("/checkout");
+    $scope.tocheckout = function(totalcarts) {
+        console.log("cart");
+        allfunction.loading();
+        MyServices.checkoutCheck(function(data) {
+            $ionicLoading.hide();
+            if (data.value == true) {
+                $.jStorage.set("discountamount", $scope.discountamount);
+                if ($.jStorage.get('coupon')) {
+                    $.jStorage.set('coupon', _.merge($.jStorage.get('coupon'), {
+                        'totalcart': $scope.totalcart - $scope.discountamount
+                    }));
+                } else {
+                    $.jStorage.set('coupon', {
+                        'totalcart': $scope.totalcart - $scope.discountamount
+                    });
+                }
+                $location.url('app/checkout/' + totalcarts);
+            } else {
+                allfunction.msg("Some product has more than quantity available ", "Error !");
+            }
+        })
     }
 
     var coupondetails = {};
@@ -716,15 +761,15 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider'])
     $scope.isfreedelivery = 0;
     $scope.discountamount = 0;
     var couponsuccess = function(data, status) {
+        console.log(data);
         if (data == 'false') {
             $scope.validcouponcode = 0;
+            allfunction.msg("Coupon code is not valid ", "Invalid Coupon Code");
         } else {
             console.log("Show it");
             $scope.validcouponcode = 1;
-
             MyServices.setcoupondetails(data);
             calcdiscountamount();
-
         }
     }
 
@@ -821,6 +866,8 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider'])
 .controller('CheckoutCtrl', function($scope, $stateParams, MyServices, $ionicLoading, $location) {
     $scope.chklogin = $.jStorage.get("user");
     $scope.showlogreg = true;
+    $scope.paymentinfo = false;
+
     if ($.jStorage.get("user")) {
         $scope.showlogreg = false;
     } else {
@@ -853,71 +900,146 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider'])
             }
         } else {
             $scope.openbilling = true;
-            $scope.checkout = $.jStorage.get("user");
         }
     };
 
-
-
     // form integrate pooja
     $scope.checkout = {};
-    if ($.jStorage.get("user") != null) {
-        $scope.userid = $.jStorage.get("user").id;
-        if ($scope.userid != "") {
-            $scope.checkout.userid = $.jStorage.get("user").id;
-        } else {
-            console.log("not");
-            $scope.checkout.userid = 0;
-        }
+    if ($.jStorage.get("user")) {
+        var userDetails = $.jStorage.get("user");
+        $scope.checkout.userid = userDetails.id;
+        $scope.checkout.firstname = userDetails.firstname;
+        $scope.checkout.lastname = userDetails.lastname;
+        $scope.checkout.email = userDetails.email;
+        $scope.checkout.billingaddress = userDetails.billingaddress;
+        $scope.checkout.billingcity = userDetails.billingcity;
+        $scope.checkout.billingstate = userDetails.billingstate;
+        $scope.checkout.billingpincode = userDetails.billingpincode;
+        $scope.checkout.billingcountry = userDetails.billingcountry;
+        $scope.checkout.billingcontact = userDetails.phone;
     }
-    MyServices.getcart(function(data) {
-        $scope.cart = data;
-        $scope.checkout.cart = $scope.cart;
-        $scope.checkout.finalamount = $scope.totalcart;
-        console.log($scope.cart);
+    // MyServices.getcart(function(data) {
+    //     $scope.cart = data;
+    //     $scope.checkout.cart = $scope.cart;
+    //     $scope.checkout.finalamount = $scope.totalcart;
+    //     console.log($scope.cart);
+    // });
+
+    //order products
+    MyServices.totalcart(function(data) {
+        $scope.totalcart = data;
+        if ($.jStorage.get('coupon').couponcode && $.jStorage.get('coupon').couponcode != null) {
+            $scope.couponhave = $.jStorage.get('coupon').couponcode;
+        } else {
+            $scope.couponhave = 0;
+        }
+        $scope.allamount = $.jStorage.get('coupon').totalcart;
+        if ($.jStorage.get("discountamount")) {
+            $scope.discount = $.jStorage.get("discountamount");
+            // if ($scope.discount>$scope.totalcart) {
+            //   $scope.totalcart = 0;
+            // }
+        }
     });
+
     $scope.paymentOption = function() {
-        $scope.allvalidation = [{
-            field: $scope.checkout.firstname,
-            validation: ""
-        }, {
-            field: $scope.checkout.lastname,
-            validation: ""
-        }, {
-            field: $scope.checkout.billingaddress,
-            validation: ""
-        }, {
-            field: $scope.checkout.billingcity,
-            validation: ""
-        }, {
-            field: $scope.checkout.billingstate,
-            validation: ""
-        }, {
-            field: $scope.checkout.billingcountry,
-            validation: ""
-        }, {
-            field: $scope.checkout.billingpincode,
-            validation: ""
-        }, {
-            field: $scope.checkout.email,
-            validation: ""
-        }];
+        $scope.allvalidation = [];
+        if ($scope.different_address == false) {
+            $scope.allvalidation = [{
+                field: $scope.checkout.firstname,
+                validation: ""
+            }, {
+                field: $scope.checkout.lastname,
+                validation: ""
+            }, {
+                field: $scope.checkout.email,
+                validation: ""
+            }, {
+                field: $scope.checkout.billingaddress,
+                validation: ""
+            }, {
+                field: $scope.checkout.billingcity,
+                validation: ""
+            }, {
+                field: $scope.checkout.billingstate,
+                validation: ""
+            }, {
+                field: $scope.checkout.billingpincode,
+                validation: ""
+            }, {
+                field: $scope.checkout.billingcountry,
+                validation: ""
+            }, {
+                field: $scope.checkout.billingcontact,
+                validation: ""
+            }];
+        } else if ($scope.different_address == true) {
+            $scope.allvalidation = [{
+                field: $scope.checkout.firstname,
+                validation: ""
+            }, {
+                field: $scope.checkout.lastname,
+                validation: ""
+            }, {
+                field: $scope.checkout.email,
+                validation: ""
+            }, {
+                field: $scope.checkout.billingaddress,
+                validation: ""
+            }, {
+                field: $scope.checkout.billingcity,
+                validation: ""
+            }, {
+                field: $scope.checkout.billingstate,
+                validation: ""
+            }, {
+                field: $scope.checkout.billingpincode,
+                validation: ""
+            }, {
+                field: $scope.checkout.billingcountry,
+                validation: ""
+            }, {
+                field: $scope.checkout.billingcontact,
+                validation: ""
+            }, {
+                field: $scope.checkout.shippingname,
+                validation: ""
+            }, {
+                field: $scope.checkout.shippingaddress,
+                validation: ""
+            }, {
+                field: $scope.checkout.shippingcity,
+                validation: ""
+            }, {
+                field: $scope.checkout.shippingstate,
+                validation: ""
+            }, {
+                field: $scope.checkout.shippingpincode,
+                validation: ""
+            }, {
+                field: $scope.checkout.shippingcountry,
+                validation: ""
+            }, {
+                field: $scope.checkout.shippingcontact,
+                validation: ""
+            }];
+        }
         var check = formvalidation($scope.allvalidation);
         console.log(check);
         if (check) {
             console.log($scope.checkout);
             allfunction.loading();
-            // MyServices.placeorder($scope.checkout, function(data) {
-            //     console.log(data);
-            //     if (data == 1) {
-            //         $ionicLoading.hide();
-            //         allfunction.msg("Your Order has been placed", 'Thankyou!');
-            //         $location.url("/app/home/");
-            //     } else {
-            //         $ionicLoading.hide();
-            //         allfunction.msg("Sorry Try Again", 'Sorry!');
-            //     }
-            // });
+            MyServices.placeorder($scope.checkout, function(data) {
+                console.log(data);
+                $ionicLoading.hide();
+                if (data != 'false') {
+                    // allfunction.msg("Your Order has been placed", 'Thankyou!');
+                    $scope.paymentinfo = true;
+                    // $location.url("/app/home/");
+                } else {
+                    allfunction.msg("Sorry Try Again", 'Sorry!');
+                }
+            });
         } else {
             allfunction.msg("Fill all mandatory fields", "Error !");
         }
@@ -1003,10 +1125,8 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider'])
     $scope.brandimages = [];
 
     $scope.addMoreItems = function() {
-        console.log("load more brands");
         ++$scope.pageno;
         MyServices.getbrand($scope.pageno, function(data, status) {
-            console.log(data);
             if (data.queryresult.length == 0) {
                 $scope.keepscrolling = false;
             }

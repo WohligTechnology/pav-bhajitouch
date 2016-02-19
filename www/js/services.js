@@ -245,6 +245,21 @@ angular.module('starter.services', [])
                 withCredentials: true
             }).success(callback);
         },
+        getuserdetails: function(callback) {
+            return $http.get(adminurl + 'getuserdetails', {}, {
+                withCredentials: true
+            }).success(callback);
+        },
+        checkoutCheck: function(callback) {
+            return $http.get(adminurl + 'checkoutCheck', {}, {
+                withCredentials: true
+            }).success(callback);
+        },
+        getsubscribe: function(email, callback) {
+            return $http.get(adminurl + 'getsubscribe?email=' + email, {}, {
+                withCredentials: true
+            }).success(callback);
+        },
         //dhaval end
         forgotPassword: function(forgot, callback) {
             return $http({
