@@ -576,7 +576,7 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
     allfunction.loading();
     MyServices.getallcategories(function(data) {
         console.log(data);
-        $scope.cats = _.chunk(data, 3);
+        $scope.cats = _.chunk(data, 2);
         $ionicLoading.hide();
     });
 
@@ -1203,9 +1203,11 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
     $scope.filters.voltage = "";
     $scope.filters.capacity = "";
     var lastpage = 1;
+    var currentpage = -1;
     var getproductbybrandcallback = function(data, status) {
-        console.log(data);
+        // console.log(data);
         lastpage = data.data.lastpage;
+        currentpage = data.data.pageno;
         if (data.data.queryresult.length == 0) {
             $scope.keepscrolling = false;
         } else {
@@ -1259,51 +1261,58 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
                 if ($scope.filters.type == "" && data.filter.type) {
                     $scope.showfilter.type = data.filter.type;
                 }
-                if ($scope.filters.material == "" && data.filter.material) {
+                if ($scope.filters.material === "" && data.filter.material) {
                     $scope.showfilter.material = data.filter.material;
                 }
-                if ($scope.filters.finish == "" && data.filter.finish) {
+                if ($scope.filters.finish === "" && data.filter.finish) {
                     $scope.showfilter.finish = data.filter.finish;
                 }
-                if ($scope.filters.compatibledevice == "" && data.filter.compatibledevice) {
-                    var arr = [];
-                    _.each(data.filter.compatibledevice, function(n) {
-                        n.compatibledevice = n.compatibledevice.split(",");
-                        _.each(n.compatibledevice, function(m) {
-                            arr.push({
-                                "compatibledevice": m
+                var arr = [];
+                if ($scope.filters.compatibledevice === "" && data.filter.compatibledevice) {
+                    if (data.filter.compatibledevice.length > 1) {
+                        _.each(data.filter.compatibledevice, function(n) {
+                            n.compatibledevice = n.compatibledevice.split(",");
+                            _.each(n.compatibledevice, function(m) {
+                                arr.push({
+                                    "compatibledevice": _.trim(m)
+                                });
                             });
-                        })
-                    })
-                    $scope.showfilter.compatibledevice = arr;
+                        });
+                        arr = _.uniq(arr, 'compatibledevice');
+                        $scope.showfilter.compatibledevice = arr;
+                    }
                 }
-                if ($scope.filters.compatiblewith == "" && data.filter.compatiblewith) {
-                    _.each(data.filter.compatiblewith, function(n) {
-                        n.compatiblewith = n.compatiblewith.split(",");
-                        _.each(n.compatiblewith, function(m) {
-                            arr.push({
-                                "compatiblewith": m
+                var arr2 = [];
+                if ($scope.filters.compatiblewith === "" && data.filter.compatiblewith) {
+                    if (data.filter.compatiblewith.length > 1) {
+                        _.each(data.filter.compatiblewith, function(n) {
+                            n.compatiblewith = n.compatiblewith.split(",");
+                            _.each(n.compatiblewith, function(m) {
+                                arr2.push({
+                                    "compatiblewith": _.trim(m)
+                                });
                             });
-                        })
-                    })
-                    $scope.showfilter.compatiblewith = arr;
+                        });
+                        arr2 = _.uniq(arr2, 'compatiblewith');
+                        $scope.showfilter.compatiblewith = arr2;
+                    }
                 }
-                if ($scope.filters.brand == "" && data.filter.brand) {
+                if ($scope.filters.brand === "" && data.filter.brand) {
                     $scope.showfilter.brand = data.filter.brand;
                 }
-                if ($scope.filters.microphone == "" && data.filter.microphone) {
+                if ($scope.filters.microphone === "" && data.filter.microphone) {
                     $scope.showfilter.microphone = data.filter.microphone;
                 }
-                if ($scope.filters.size == "" && data.filter.size) {
+                if ($scope.filters.size === "" && data.filter.size) {
                     $scope.showfilter.size = data.filter.size;
                 }
-                if ($scope.filters.clength == "" && data.filter.clength) {
+                if ($scope.filters.clength === "" && data.filter.clength) {
                     $scope.showfilter.clength = data.filter.clength;
                 }
-                if ($scope.filters.voltage == "" && data.filter.voltage) {
+                if ($scope.filters.voltage === "" && data.filter.voltage) {
                     $scope.showfilter.voltage = data.filter.voltage;
                 }
-                if ($scope.filters.capacity == "" && data.filter.capacity) {
+                if ($scope.filters.capacity === "" && data.filter.capacity) {
                     $scope.showfilter.capacity = data.filter.capacity;
                 }
                 if (data.filter.price && data.filter.price.min) {
@@ -1312,10 +1321,7 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
                 if (data.filter.price && data.filter.price.max) {
                     $scope.filters.pricemax = data.filter.price.max;
                 }
-                if (!$scope.filters.pricemin)
-                    $scope.filters.pricemin = $scope.showfilter.price.min;
-                if (!$scope.filters.pricemax)
-                    $scope.filters.pricemax = $scope.showfilter.price.max;
+                // console.log($scope.showfilter);
             }
             $scope.$broadcast('scroll.infiniteScrollComplete');
         }
@@ -1324,11 +1330,12 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
             $scope.shownodata = true;
             $scope.keepscrolling = false;
         }
+        console.log($scope.filters);
         $ionicLoading.hide();
     }
 
     $scope.addMoreItems = function() {
-        console.log("addmore = " + $scope.pageno);
+        console.log($scope.filters);
         if (lastpage > $scope.pageno) {
             ++$scope.pageno;
             if ($stateParams.brand != 0) {
@@ -1347,6 +1354,7 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
     // $scope.addMoreItems();
 
     $scope.getFilterResults = function() {
+        console.log("in getFilterResults");
         $ionicScrollDelegate.scrollTop();
         $scope.pageno = 1;
         $scope.productsarr = [];
@@ -1394,6 +1402,7 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
     }
 
     $scope.clearFilters = function() {
+        console.log("in clearFilters");
         MyServices.getFilters($stateParams.parent, $stateParams.brand, function(data) {
             if (data) {
                 $scope.showfilter = data;
@@ -1766,7 +1775,7 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
     $scope.shownodata = false;
 
     $scope.getSearchResults = function() {
-        if ($scope.searchfor != "") {
+        if ($scope.searchfor != "" && $scope.searchfor.length >= 3) {
             allfunction.loading();
             MyServices.search($scope.searchfor, function(data) {
                 console.log(data);

@@ -112,7 +112,7 @@ angular.module('starter.services', [])
             }).success(callback);
         },
         getproductbycategory: function(pageno, category, filters, callback) {
-            return $http.get(adminurl + 'getproductbycategory?category=' + category + '&pageno=' + pageno + '&color=' + filters.color + '&type=' + filters.type + '&material=' + filters.material + '&finish=' + filters.finish + '&compatibledevice=' + filters.compatibledevice + '&compatiblewith=' + filters.compatiblewith + '&brand=' + filters.brand + '&pricemin=' + filters.pricemin + '&pricemax=' + filters.pricemax + '&microphone=' + filters.microphone + '&size=' + filters.size + '&lenght=' + filters.clength + '&voltage=' + filters.voltage + '&capacity=' + filters.capacity, {}, {
+            return $http.get(adminurl + 'getproductbycategory?category=' + category + '&pageno=' + pageno + '&color=' + filters.color + '&type=' + filters.type + '&material=' + filters.material + '&finish=' + filters.finish + '&compatibledevice=' + filters.compatibledevice + '&compatiblewith=' + filters.compatiblewith + '&brand=' + filters.brand + '&pricemin=' + filters.pricemin + '&pricemax=' + filters.pricemax + '&microphone=' + filters.microphone + '&size=' + filters.size + '&lenght=' + filters.clength + '&voltage=' + filters.voltage + '&capacity=' + filters.capacity + '&maxrow=18', {}, {
                 withCredentials: true
             }).success(callback);
         },

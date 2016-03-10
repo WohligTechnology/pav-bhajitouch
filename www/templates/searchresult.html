@@ -13,11 +13,12 @@
         </button>
     </div>
     <ion-content class="has-subheader">
-      <div product data="products" controller-name="SearchresultCtrl"></div>
-        <!-- <div class="product">
+        <div product data="products" controller-name="SearchresultCtrl"></div>
+        <div class="product">
             <div class="row" ng-repeat="product in products">
                 <div class="col-50 product-col" ng-repeat="item in product">
-                    <a href="#/app/productdetail/{{item.id}}" style="text-decoration: none">
+                    <product data="item"></product>
+                    <!-- <a href="#/app/productdetail/{{item.id}}" style="text-decoration: none">
                         <div class="image-holder-product">
                             <img class="brand-image" src="{{item.image | serverimage}}" alt="" ng-if="item.image">
                             <img class="brand-image" src="img/icon.png" alt="" ng-if="!item.image">
@@ -26,7 +27,7 @@
                             <h2>{{item.name}}</h2>
                             <h3>Rs. {{item.price | numberWithCommas}}</h3>
                         </div>
-                    </a>
+                    </a> -->
                 </div>
             </div>
         </div>
@@ -35,6 +36,6 @@
         </div>
         <div class="center" ng-show="shownodata">
             <p>No Data Found</p>
-        </div> -->
+        </div>
     </ion-content>
 </ion-view>

@@ -17,7 +17,7 @@
         </div>
         <div class="cat-c">
             <div class="row pad0" ng-repeat="cato in cats">
-                <div class="col-33" ng-repeat="cat in cato" ui-sref="app.category({name:cat.name,id:cat.id})">
+                <div class="col-50" ng-repeat="cat in cato" ui-sref="app.category({name:cat.name,id:cat.id})">
                     <div class="cat-i">
                         <figure class="text-center">
                             <img ng-src="{{cat.image1 | serverimage}}" class="w40">

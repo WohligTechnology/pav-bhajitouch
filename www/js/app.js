@@ -321,18 +321,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
 .directive('product', function() {
     return {
-        restrict: 'A',
+        restrict: 'E',
         scope: {
             data: '='
         },
         replace: true,
         templateUrl: 'templates/productsGrid.html',
-        controller: "@",
-        name: "controllerName",
         link: function(scope, element, attrs) {
-            scope.$watch('data', function(productsArray) {
-                if (productsArray) {
-                    scope.products = productsArray;
+            scope.$watch('data', function(singleProduct) {
+                if (singleProduct) {
+                    scope.item = singleProduct;
                 }
             });
         }
