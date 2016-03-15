@@ -295,7 +295,7 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
 
 .controller('HomeCtrl', function($scope, MyServices, $ionicLoading, $location, $ionicSlideBoxDelegate) {
     //    $templateCache.removeAll();
-
+    $.jStorage.set("filters", null);
     MyServices.getHomeSlider(function(data) {
         if (data) {
             $scope.slides = data;
@@ -370,7 +370,7 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
 })
 
 .controller('DealsCtrl', function($scope, $stateParams, MyServices, $ionicLoading, $ionicSlideBoxDelegate) {
-
+    $.jStorage.set("filters", null);
     allfunction.loading();
     $scope.dealsimg = [];
     $scope.offers = [];
@@ -402,7 +402,7 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
 })
 
 .controller('NewArrivalsCtrl', function($scope, $stateParams, MyServices, $ionicLoading) {
-
+    $.jStorage.set("filters", null);
     allfunction.loading();
     $scope.pageno = 0;
     $scope.products = [];
@@ -463,77 +463,80 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
 })
 
 .controller('MyAccountCtrl', function($scope, $stateParams) {})
-    .controller('EditInfoCtrl', function($scope, $ionicScrollDelegate, $stateParams, MyServices, $ionicLoading) {
-        $scope.userdetails = {};
-        $scope.userdetails = $.jStorage.get("user");
-        console.log($scope.userdetails);
-        $scope.edit_save = "Edit information";
-        $scope.disabled = true;
-        $scope.saved = false;
-        $scope.editSave = function(userdetails) {
 
-            $scope.allvalidation = [{
-                field: $scope.userdetails.firstname,
-                validation: ""
-            }, {
-                field: $scope.userdetails.lastname,
-                validation: ""
-            }, {
-                field: $scope.userdetails.billingaddress,
-                validation: ""
-            }, {
-                field: $scope.userdetails.billingcity,
-                validation: ""
-            }, {
-                field: $scope.userdetails.billingstate,
-                validation: ""
-            }, {
-                field: $scope.userdetails.billingcountry,
-                validation: ""
-            }, {
-                field: $scope.userdetails.billingpincode,
-                validation: ""
-            }, {
-                field: $scope.userdetails.email,
-                validation: ""
-            }, {
-                field: $scope.userdetails.phone,
-                validation: ""
-            }];
-            var check = formvalidation($scope.allvalidation);
-            console.log(check);
-            if (check) {
-                console.log($scope.userdetails);
-                allfunction.loading();
-                MyServices.updateuser($scope.userdetails, function(data) {
-                    console.log(data);
-                    if (data != "false") {
-                        $ionicLoading.hide();
-                        // MyServices.setuser(data);
-                        allfunction.msg("Successfully Edited", 'Thankyou!');
-                    } else {
-                        $ionicLoading.hide();
-                        allfunction.msg("Sorry Try Again", 'Sorry!');
-                    }
-                });
-            } else {
-                allfunction.msg("Fill all mandatory fields", "Error !");
-            }
-            //            if ($scope.edit_save === "Edit information") {
-            //                $scope.edit_save = "Save";
-            //                $scope.disabled = false;
-            //
-            //            } else {
-            //                $scope.edit_save = "Edit information";
-            //                //                SAVE OPERATIONS
-            //                $scope.disabled = true;
-            //                $scope.saved = true;
-            //                $ionicScrollDelegate.scrollTop();
-            //            }
+.controller('EditInfoCtrl', function($scope, $ionicScrollDelegate, $stateParams, MyServices, $ionicLoading) {
+    $.jStorage.set("filters", null);
+    $scope.userdetails = {};
+    $scope.userdetails = $.jStorage.get("user");
+    console.log($scope.userdetails);
+    $scope.edit_save = "Edit information";
+    $scope.disabled = true;
+    $scope.saved = false;
+    $scope.editSave = function(userdetails) {
+
+        $scope.allvalidation = [{
+            field: $scope.userdetails.firstname,
+            validation: ""
+        }, {
+            field: $scope.userdetails.lastname,
+            validation: ""
+        }, {
+            field: $scope.userdetails.billingaddress,
+            validation: ""
+        }, {
+            field: $scope.userdetails.billingcity,
+            validation: ""
+        }, {
+            field: $scope.userdetails.billingstate,
+            validation: ""
+        }, {
+            field: $scope.userdetails.billingcountry,
+            validation: ""
+        }, {
+            field: $scope.userdetails.billingpincode,
+            validation: ""
+        }, {
+            field: $scope.userdetails.email,
+            validation: ""
+        }, {
+            field: $scope.userdetails.phone,
+            validation: ""
+        }];
+        var check = formvalidation($scope.allvalidation);
+        console.log(check);
+        if (check) {
+            console.log($scope.userdetails);
+            allfunction.loading();
+            MyServices.updateuser($scope.userdetails, function(data) {
+                console.log(data);
+                if (data != "false") {
+                    $ionicLoading.hide();
+                    // MyServices.setuser(data);
+                    allfunction.msg("Successfully Edited", 'Thankyou!');
+                } else {
+                    $ionicLoading.hide();
+                    allfunction.msg("Sorry Try Again", 'Sorry!');
+                }
+            });
+        } else {
+            allfunction.msg("Fill all mandatory fields", "Error !");
         }
-    })
+        //            if ($scope.edit_save === "Edit information") {
+        //                $scope.edit_save = "Save";
+        //                $scope.disabled = false;
+        //
+        //            } else {
+        //                $scope.edit_save = "Edit information";
+        //                //                SAVE OPERATIONS
+        //                $scope.disabled = true;
+        //                $scope.saved = true;
+        //                $ionicScrollDelegate.scrollTop();
+        //            }
+    }
+})
 
 .controller('ContactUsCtrl', function($scope, $stateParams, MyServices, $ionicLoading) {
+    $.jStorage.set("filters", null);
     $scope.contactus = {};
     $scope.usercontact = function() {
         $scope.allvalidation = [{
@@ -573,7 +576,7 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
 })
 
 .controller('ProductCategoriesCtrl', function($scope, $stateParams, $location, MyServices, $ionicLoading) {
-
+    $.jStorage.set("filters", null);
     allfunction.loading();
     MyServices.getallcategories(function(data) {
         console.log(data);
@@ -652,6 +655,7 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
 })
 
 .controller('CartCtrl', function($scope, $stateParams, $location, $ionicHistory, MyServices, $ionicLoading) {
+    $.jStorage.set("filters", null);
     $scope.goHome = function() {
         console.log($ionicHistory.viewHistory());
         $location.path('app/home');
@@ -865,6 +869,7 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
 })
 
 .controller('CheckoutCtrl', function($scope, $stateParams, MyServices, $ionicLoading, $location) {
+    $.jStorage.set("filters", null);
     $scope.chklogin = $.jStorage.get("user");
     $scope.showlogreg = true;
     $scope.paymentinfo = false;
@@ -1048,6 +1053,7 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
 })
 
 .controller('MyOrdersCtrl', function($scope, $stateParams, $location, $ionicHistory, MyServices, $ionicLoading) {
+    $.jStorage.set("filters", null);
     MyServices.orderhistory(function(data) {
         console.log(data);
 
@@ -1064,7 +1070,7 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
 })
 
 .controller('CategoryCtrl', function($scope, $stateParams, $location, $ionicHistory, MyServices, $ionicLoading) {
-
+    $.jStorage.set("filters", null);
     allfunction.loading();
     $scope.parent = $stateParams.id;
     $scope.categoryName = $stateParams.name;
@@ -1077,7 +1083,7 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
 })
 
 .controller('MyWishlistCtrl', function($scope, $stateParams, $location, $ionicHistory, MyServices, $ionicLoading) {
-
+    $.jStorage.set("filters", null);
     allfunction.loading();
 
     $scope.showLoginToContinue = false;
@@ -1117,7 +1123,7 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
 })
 
 .controller('DistributionCtrl', function($scope, $stateParams, MyServices, $ionicLoading, $location) {
-
+    $.jStorage.set("filters", null);
     allfunction.loading();
 
     $scope.pageno = 0;
@@ -1209,6 +1215,7 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
         // console.log(data);
         lastpage = data.data.lastpage;
         currentpage = data.data.pageno;
+        $scope.keepscrolling = true;
         if (data.data.queryresult.length == 0) {
             $scope.keepscrolling = false;
         } else {
@@ -1322,7 +1329,7 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
                 if (data.filter.price && data.filter.price.max) {
                     $scope.filters.pricemax = data.filter.price.max;
                 }
-                // console.log($scope.showfilter);
+                console.log($scope.showfilter);
             }
             $scope.$broadcast('scroll.infiniteScrollComplete');
         }
@@ -1336,6 +1343,8 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
     }
 
     $scope.addMoreItems = function() {
+        allfunction.loading();
+        $scope.keepscrolling = false;
         console.log($scope.filters);
         if (lastpage > $scope.pageno) {
             ++$scope.pageno;
@@ -1355,12 +1364,12 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
     // $scope.addMoreItems();
 
     $scope.getFilterResults = function() {
-        console.log("in getFilterResults");
+        $.jStorage.set("filters", $scope.filters);
         $ionicScrollDelegate.scrollTop();
         $scope.pageno = 1;
         $scope.productsarr = [];
         // $scope.closeFilter();
-        $ionicLoading.show();
+        allfunction.loading();
         if ($stateParams.brand != 0) {
             MyServices.getproductbybrand(1, $stateParams.brand, $scope.filters, getproductbybrandcallback);
         } else if ($stateParams.parent != 0) {
@@ -1404,6 +1413,7 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
 
     $scope.clearFilters = function() {
         console.log("in clearFilters");
+        $scope.keepscrolling = false;
         MyServices.getFilters($stateParams.parent, $stateParams.brand, function(data) {
             if (data) {
                 $scope.showfilter = data;
@@ -1435,22 +1445,26 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
                 $scope.filters.pricemax = data.price.max;
                 $scope.pageno = 1;
                 $scope.products = [];
-                $scope.filters = {};
-                $scope.filters.category = "";
-                $scope.filters.color = "";
-                $scope.filters.type = "";
-                $scope.filters.material = "";
-                $scope.filters.finish = "";
-                $scope.filters.compatibledevice = "";
-                $scope.filters.compatiblewith = "";
-                $scope.filters.brand = "";
-                $scope.filters.pricemin = "";
-                $scope.filters.pricemax = "";
-                $scope.filters.microphone = "";
-                $scope.filters.size = "";
-                $scope.filters.clength = "";
-                $scope.filters.voltage = "";
-                $scope.filters.capacity = "";
+                if (!$.jStorage.get("filters")) {
+                    $scope.filters = {};
+                    $scope.filters.category = "";
+                    $scope.filters.color = "";
+                    $scope.filters.type = "";
+                    $scope.filters.material = "";
+                    $scope.filters.finish = "";
+                    $scope.filters.compatibledevice = "";
+                    $scope.filters.compatiblewith = "";
+                    $scope.filters.brand = "";
+                    $scope.filters.pricemin = "";
+                    $scope.filters.pricemax = "";
+                    $scope.filters.microphone = "";
+                    $scope.filters.size = "";
+                    $scope.filters.clength = "";
+                    $scope.filters.voltage = "";
+                    $scope.filters.capacity = "";
+                } else {
+                    $scope.filters = $.jStorage.get("filters");
+                }
 
                 if ($stateParams.brand != 0) {
                     MyServices.getproductbybrand(1, $stateParams.brand, $scope.filters, getproductbybrandcallback);
@@ -1682,6 +1696,7 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
 
 //dhaval start
 .controller('BrandsCtrl', function($scope, $stateParams, $rootScope, MyServices, $location, $ionicLoading) {
+    $.jStorage.set("filters", null);
     $rootScope.nosearch = true;
     allfunction.loading();
     var lastpage = 1;
@@ -1721,6 +1736,7 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
 //dhaval end
 
 .controller('AboutCtrl', function($scope, $ionicScrollDelegate, $stateParams, MyServices, $ionicLoading) {
+    $.jStorage.set("filters", null);
     $scope.activate = true;
     $scope.tab = {
         left: true,
@@ -1770,7 +1786,7 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
 })
 
 .controller('SearchresultCtrl', function($scope, $ionicScrollDelegate, $stateParams, MyServices, $ionicLoading) {
-
+    $.jStorage.set("filters", null);
     $scope.searchfor = '';
     $scope.showSearchForSomething = true;
     $scope.shownodata = false;

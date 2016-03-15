@@ -14,9 +14,12 @@
                     <product data="item"></product>
                 </div>
             </div>
+            <div class="text-center">
+              <button class="button button-positive" ng-if="keepscrolling" ng-click="addMoreItems()">Not Over Yet</button>
+            </div>
         </div>
-        <ion-infinite-scroll immediate-check="true" on-infinite="addMoreItems()" style="height:0px" ng-if="keepscrolling">
-        </ion-infinite-scroll>
+        <!-- <ion-infinite-scroll immediate-check="true" on-infinite="addMoreItems()" style="height:0px" ng-if="keepscrolling">
+        </ion-infinite-scroll> -->
         <div class="center" ng-show="shownodata">
             <p>Nothing to Show, Folks!</p>
         </div>
