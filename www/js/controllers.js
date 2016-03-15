@@ -1216,6 +1216,9 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
         lastpage = data.data.lastpage;
         currentpage = data.data.pageno;
         $scope.keepscrolling = true;
+        if (currentpage == lastpage) {
+            $scope.keepscrolling = false;
+        }
         if (data.data.queryresult.length == 0) {
             $scope.keepscrolling = false;
         } else {
