@@ -1268,19 +1268,41 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
                 }
                 if ($scope.filters.color == "" && data.filter.color) {
                     $scope.showfilter.color = data.filter.color;
+                } else {
+                    _.each(data.filter.color, function(n) {
+                        var index = _.findIndex($scope.showfilter.color, {
+                            "color": n.color
+                        });
+                        $scope.showfilter.color[index].status = true;
+                    })
                 }
                 if ($scope.filters.type == "" && data.filter.type) {
                     $scope.showfilter.type = data.filter.type;
                 }
                 if ($scope.filters.material === "" && data.filter.material) {
                     $scope.showfilter.material = data.filter.material;
+                } else {
+                    _.each(data.filter.material, function(n) {
+                        var index = _.findIndex($scope.showfilter.material, {
+                            "material": n.material
+                        });
+                        $scope.showfilter.material[index].status = true;
+                    })
                 }
                 if ($scope.filters.finish === "" && data.filter.finish) {
                     $scope.showfilter.finish = data.filter.finish;
+                } else {
+                    _.each(data.filter.finish, function(n) {
+                        var index = _.findIndex($scope.showfilter.finish, {
+                            "finish": n.finish
+                        });
+                        $scope.showfilter.finish[index].status = true;
+                    })
                 }
                 var arr = [];
                 if ($scope.filters.compatibledevice === "" && data.filter.compatibledevice) {
                     if (data.filter.compatibledevice.length > 1) {
+
                         _.each(data.filter.compatibledevice, function(n) {
                             n.compatibledevice = n.compatibledevice.split(",");
                             _.each(n.compatibledevice, function(m) {
@@ -1295,6 +1317,7 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
                 }
                 var arr2 = [];
                 if ($scope.filters.compatiblewith === "" && data.filter.compatiblewith) {
+
                     if (data.filter.compatiblewith.length > 1) {
                         _.each(data.filter.compatiblewith, function(n) {
                             n.compatiblewith = n.compatiblewith.split(",");
@@ -1307,15 +1330,43 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
                         arr2 = _.uniq(arr2, 'compatiblewith');
                         $scope.showfilter.compatiblewith = arr2;
                     }
+                } else {
+                    _.each(data.filter.compatiblewith, function(n) {
+                        var index = _.findIndex($scope.showfilter.compatiblewith, {
+                            "compatiblewith": n.compatiblewith
+                        });
+                        $scope.showfilter.compatiblewith[index].status = true;
+                    })
                 }
                 if ($scope.filters.brand === "" && data.filter.brand) {
                     $scope.showfilter.brand = data.filter.brand;
+                } else {
+                    _.each(data.filter.brand, function(n) {
+                        var index = _.findIndex($scope.showfilter.brand, {
+                            "id": n.id
+                        });
+                        $scope.showfilter.brand[index].status = true;
+                    })
                 }
                 if ($scope.filters.microphone === "" && data.filter.microphone) {
                     $scope.showfilter.microphone = data.filter.microphone;
+                } else {
+                    _.each(data.filter.microphone, function(n) {
+                        var index = _.findIndex($scope.showfilter.microphone, {
+                            "microphone": n.microphone
+                        });
+                        $scope.showfilter.microphone[index].status = true;
+                    })
                 }
                 if ($scope.filters.size === "" && data.filter.size) {
                     $scope.showfilter.size = data.filter.size;
+                } else {
+                    _.each(data.filter.size, function(n) {
+                        var index = _.findIndex($scope.showfilter.size, {
+                            "size": n.size
+                        });
+                        $scope.showfilter.size[index].status = true;
+                    })
                 }
                 if ($scope.filters.clength === "" && data.filter.clength) {
                     $scope.showfilter.clength = data.filter.clength;
