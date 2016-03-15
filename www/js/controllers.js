@@ -840,7 +840,7 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
             $scope.cart = data;
             if (data == '' || data.length == 0) {
                 $scope.nodatafound = true;
-                $scope.nodata = "No Data found.";
+                $scope.nodata = "Nothing to Show, Folks!.";
             } else {
                 $scope.nodatafound = false;
             }
