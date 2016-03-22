@@ -10,9 +10,6 @@
         <ion-slide-box on-slide-changed="slideHasChanged($index)" auto-play="true" does-continue="true">
             <ion-slide ng-repeat="slide in slides">
                 <img ng-src="{{slide.image | serverimage}}" class="full-image" ng-click="goToProduct(slide.product);">
-                <div class="play-btn">
-                  <i class="ln-circle-play"></i>
-                </div>
             </ion-slide>
 
         </ion-slide-box>
