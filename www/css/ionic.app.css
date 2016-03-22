@@ -338,7 +338,7 @@ $dark:                            #444 !default;
   .product .col + .col, .newarrivals .col + .col, .deals .deal .col + .col {
     border-left: 1px solid #ddd; }
   .product .image-holder-product, .newarrivals .image-holder-product, .deals .deal .image-holder-product {
-    height: 90px;
+    height: 200px;
     margin: 15px 0 20px; }
   .product .product-details, .newarrivals .product-details, .deals .deal .product-details, .newarrivals .newarrivals-details, .deals .deal .deal-details {
     margin: 0 15px; }
@@ -389,12 +389,12 @@ $dark:                            #444 !default;
   color: #ddd; }
 
 .filters .accordion-header .panel-heading {
-  border-bottom: 1px solid #7EE1EA; }
+  border-bottom: 1px solid #E7E7E7; }
   .filters .accordion-header .panel-heading .panel-title {
     background-color: white;
     text-decoration: none;
-    padding: 8px 0 8px 15px;
-    color: #7ee1ea; }
+    padding: 12px 0 12px 15px;
+    color: #5C5C5C; }
 
 .filters .accordion-header a:-webkit-any-link {
   text-decoration: none; }
@@ -1005,7 +1005,7 @@ $dark:                            #444 !default;
   margin: 0 auto; }
 
 .f-z {
-  font-size: 12px;
+  font-size: 14px;
   line-height: 130%; }
 
 .m-p {
@@ -1020,7 +1020,8 @@ $dark:                            #444 !default;
   margin-top: 10px; }
 
 .w40 {
-  width: 40px; }
+  width: 80px;
+  border-radius: 4px; }
 
 .cat-i {
   padding: 20px 0; }
@@ -1118,6 +1119,20 @@ $dark:                            #444 !default;
   text-decoration: line-through;
   font-size: 12px;
   color: #C5C5C5; }
+
+.play-btn i {
+  font-size: 50px;
+  color: #FFFFFF; }
+
+.play-btn {
+  position: absolute;
+  z-index: 9;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.77);
+  border-radius: 100%;
+  padding: 5px; }
 
 /*!
   Ionicons, v2.0.1
