@@ -10,7 +10,7 @@
                     <div class="image-holder-productimg">
                         <img ng-click="openModal(images.image);" ng-src="{{images.image}}" class="product-img" alt="" ng-if="images.image">
                         <img src="img/icon.png" class="product-img" alt="" ng-if="!images.image">
-                        <div class="play-btn">
+                        <div class="play-btn" ng-if="images.check==0">
                           <i class="ln-circle-play"></i>
                         </div>
                     </div>

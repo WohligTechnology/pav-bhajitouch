@@ -1134,6 +1134,10 @@ $dark:                            #444 !default;
   border-radius: 100%;
   padding: 5px; }
 
+.specification .item-note {
+  float: none;
+  display: block; }
+
 /*!
   Ionicons, v2.0.1
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/

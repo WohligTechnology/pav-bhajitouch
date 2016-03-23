@@ -31,7 +31,7 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
         });
         $timeout(function() {
             $ionicLoading.hide();
-        }, 30000);
+        }, 40000);
     };
 
     $scope.logout = function() {
@@ -1393,6 +1393,7 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
             $scope.keepscrolling = false;
         }
         console.log($scope.filters);
+        console.log($scope.showfilter);
         $ionicLoading.hide();
     }
 
