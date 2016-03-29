@@ -1,14 +1,14 @@
-<ion-view view-title="">
+<ion-view view-title="Product Detail">
     <div class="bar bar-subheader bar-positive" ng-hide="transparent_header">
         <h1 class="title">{{product.product.name}}</h1>
     </div>
-    <!--    <ion-content ng-class="{'no-header':transparent_header}" on-scroll="pageScrolled()">-->
-    <ion-content ng-class="has-header" on-scroll="pageScrolled()">
+       <ion-content ng-class="{'no-header':transparent_header}" on-scroll="pageScrolled()">
+    <!-- <ion-content ng-class="has-header" on-scroll="pageScrolled()"> -->
         <div class="product-detail">
             <ion-slide-box on-slide-changed="slideHasChanged($index)">
                 <ion-slide ng-repeat="images in productdetail">
-                    <div class="image-holder-productimg">
-                        <img ng-click="openModal(images.image);" ng-src="{{images.image}}" class="product-img" alt="" ng-if="images.image">
+                    <div class="image-holder-productimg" ng-click="openModal(images.image);">
+                        <img ng-src="{{images.image}}" class="product-img" alt="" ng-if="images.image">
                         <img src="img/icon.png" class="product-img" alt="" ng-if="!images.image">
                         <div class="play-btn" ng-if="images.check==0">
                           <i class="ln-circle-play"></i>
