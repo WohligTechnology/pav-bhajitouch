@@ -268,6 +268,11 @@ angular.module('starter.services', [])
                 data: forgot
             }).success(callback);
         },
+        getorderbyorderid: function(orderid, callback) {
+            return $http.get(adminurl + 'getorderbyorderid?id=' + orderid, {}, {
+                withCredentials: true
+            }).success(callback);
+        },
         setNotify: function(data) {
             $.jStorage.set("notify", data);
         },

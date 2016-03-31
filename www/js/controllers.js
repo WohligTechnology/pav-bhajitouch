@@ -2,7 +2,7 @@ var allfunction = {};
 var myfunction = '';
 angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova'])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $location, $ionicPopup, $rootScope, MyServices, $ionicLoading, $interval, $window, $templateCache) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $location, $ionicPopup, $rootScope, MyServices, $ionicLoading, $interval, $window, $templateCache, $state) {
     $rootScope.transparent_header = false;
     $scope.userSignup = {};
     $scope.loginData = {};
@@ -22,6 +22,17 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
         });
         $timeout(function() {
             myPopup.close(); //close the popup after 3 seconds for some reason
+        }, 2500);
+    };
+    allfunction.msgHome = function(msg, title) {
+        var myPopup = $ionicPopup.show({
+            template: '<p class="text-center">' + msg + '!</p>',
+            title: title,
+            scope: $scope,
+        });
+        $timeout(function() {
+            myPopup.close(); //close the popup after 3 seconds for some reason
+            $state.go('app.home');
         }, 2500);
     };
     allfunction.loading = function() {
@@ -133,6 +144,8 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
         }
     };
 
+    var ref = '';
+    var stopinterval = '';
     var checktwitter = function(data, status) {
         console.log(data);
         if (data != "false") {
@@ -868,7 +881,7 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
 
 })
 
-.controller('CheckoutCtrl', function($scope, $stateParams, MyServices, $ionicLoading, $location) {
+.controller('CheckoutCtrl', function($scope, $stateParams, MyServices, $ionicLoading, $location, $interval, $cordovaInAppBrowser) {
     $.jStorage.set("filters", null);
     $scope.chklogin = $.jStorage.get("user");
     $scope.showlogreg = true;
@@ -876,8 +889,12 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
 
     if ($.jStorage.get("user")) {
         $scope.showlogreg = false;
+        $scope.openbilling = true;
+        $scope.showOrderReview = true;
     } else {
         $scope.showlogreg = true;
+        $scope.openbilling = false;
+        $scope.showOrderReview = false;
     }
     $scope.different_address = false;
     $scope.address_select = "Ship to different address";
@@ -890,7 +907,7 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
             $scope.address_select = "Ship to different address";
         }
     };
-    $scope.openbilling = false;
+
     $scope.totalcart = $stateParams.totalcart;
     console.log("totalcart");
     console.log($scope.totalcart);
@@ -899,8 +916,10 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
             if (ch === 'login') {
                 $scope.openbilling = false;
                 $scope.login();
+                $scope.showOrderReview = true;
             } else if (ch === 'guest') {
                 $scope.openbilling = true;
+                $scope.showOrderReview = true;
             } else {
                 allfunction.msg("Please select checkout type ", "Please Select")
             }
@@ -912,17 +931,19 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
     // form integrate pooja
     $scope.checkout = {};
     if ($.jStorage.get("user")) {
-        var userDetails = $.jStorage.get("user");
-        $scope.checkout.userid = userDetails.id;
-        $scope.checkout.firstname = userDetails.firstname;
-        $scope.checkout.lastname = userDetails.lastname;
-        $scope.checkout.email = userDetails.email;
-        $scope.checkout.billingaddress = userDetails.billingaddress;
-        $scope.checkout.billingcity = userDetails.billingcity;
-        $scope.checkout.billingstate = userDetails.billingstate;
-        $scope.checkout.billingpincode = userDetails.billingpincode;
-        $scope.checkout.billingcountry = userDetails.billingcountry;
-        $scope.checkout.billingcontact = userDetails.phone;
+        MyServices.getuserdetails(function(data) {
+            console.log(data);
+            $scope.checkout.userid = data.id;
+            $scope.checkout.firstname = data.firstname;
+            $scope.checkout.lastname = data.lastname;
+            $scope.checkout.email = data.email;
+            $scope.checkout.billingaddress = data.billingaddress;
+            $scope.checkout.billingcity = data.billingcity;
+            $scope.checkout.billingstate = data.billingstate;
+            $scope.checkout.billingpincode = data.billingpincode;
+            $scope.checkout.billingcountry = data.billingcountry;
+            $scope.checkout.billingcontact = data.phone;
+        });
     }
     // MyServices.getcart(function(data) {
     //     $scope.cart = data;
@@ -934,6 +955,7 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
     //order products
     MyServices.totalcart(function(data) {
         $scope.totalcart = data;
+        $scope.allamount = data;
         if ($.jStorage.get('coupon').couponcode && $.jStorage.get('coupon').couponcode != null) {
             $scope.couponhave = $.jStorage.get('coupon').couponcode;
         } else {
@@ -979,6 +1001,13 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
                 field: $scope.checkout.billingcontact,
                 validation: ""
             }];
+            $scope.checkout.shippingname = $scope.checkout.firstname + " " + $scope.checkout.lastname;
+            $scope.checkout.shippingaddress = $scope.checkout.billingaddress;
+            $scope.checkout.shippingcity = $scope.checkout.billingcity;
+            $scope.checkout.shippingstate = $scope.checkout.billingstate;
+            $scope.checkout.shippingpincode = $scope.checkout.billingpincode;
+            $scope.checkout.shippingcountry = $scope.checkout.billingcountry;
+            $scope.checkout.shippingcontact = $scope.checkout.billingcontact;
         } else if ($scope.different_address == true) {
             $scope.allvalidation = [{
                 field: $scope.checkout.firstname,
@@ -1039,9 +1068,41 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
                 console.log(data);
                 $ionicLoading.hide();
                 if (data != 'false') {
+                    $scope.checkout.orderid = data;
                     // allfunction.msg("Your Order has been placed", 'Thankyou!');
                     $scope.paymentinfo = true;
                     // $location.url("/app/home/");
+
+                    var options = {
+                        location: 'no',
+                        clearcache: 'yes',
+                        toolbar: 'no'
+                    };
+
+                    var ref = $cordovaInAppBrowser.open("http://accessinfoworld.com/admin/paymentgateway/ccavRequestHandlerGet.php?tid=&order_id=" + $scope.checkout.orderid + "&merchant_id=76752&amount=" + $scope.allamount + "&billing_name=" + $scope.checkout.firstname + "&currency=INR&merchant_param1=" + $scope.couponhave + "&redirect_url=http://accessinfoworld.com/admin/index.php/json/payumoneysuccess&cancel_url=http://accessinfoworld.com/admin/index.php/json/payumoneysuccess&language=EN&billing_address=" + $scope.checkout.billingaddress + "&billing_country=" + $scope.checkout.billingcountry + "&billing_state=" + $scope.checkout.billingstate + "&billing_city=" + $scope.checkout.billingcity + "&billing_zip=" + $scope.checkout.billingpincode + "&billing_tel=" + $scope.checkout.billingcontact + "&billing_email=" + $scope.checkout.email + "&delivery_name=" + $scope.checkout.shippingname + "&delivery_address=" + $scope.checkout.shippingaddress + "&delivery_country=" + $scope.checkout.shippingcountry + "&delivery_city=" + $scope.checkout.shippingcity + "&delivery_state=" + $scope.checkout.shippingstate + "&delivery_zip=" + $scope.checkout.shippingpincode + "&delivery_tel=" + $scope.checkout.shippingcontact + "&integration_type=iframe_normal", '_blank', options)
+                        .then(function(event) {
+                            // success
+                        })
+                        .catch(function(event) {
+                            // error
+                        });
+
+                    // var ref = window.open("http://accessinfoworld.com/admin/paymentgateway/ccavRequestHandlerGet.php?tid=&order_id=" + $scope.checkout.orderid + "&merchant_id=76752&amount=" + $scope.allamount + "&billing_name=" + $scope.checkout.firstname + "&currency=INR&merchant_param1=" + $scope.couponhave + "&redirect_url=http://accessinfoworld.com/admin/index.php/json/payumoneysuccess&cancel_url=http://accessinfoworld.com/admin/index.php/json/payumoneysuccess&language=EN&billing_address=" + $scope.checkout.billingaddress + "&billing_country=" + $scope.checkout.billingcountry + "&billing_state=" + $scope.checkout.billingstate + "&billing_city=" + $scope.checkout.billingcity + "&billing_zip=" + $scope.checkout.billingpincode + "&billing_tel=" + $scope.checkout.billingcontact + "&billing_email=" + $scope.checkout.email + "&delivery_name=" + $scope.checkout.shippingname + "&delivery_address=" + $scope.checkout.shippingaddress + "&delivery_country=" + $scope.checkout.shippingcountry + "&delivery_city=" + $scope.checkout.shippingcity + "&delivery_state=" + $scope.checkout.shippingstate + "&delivery_zip=" + $scope.checkout.shippingpincode + "&delivery_tel=" + $scope.checkout.shippingcontact + "&integration_type=iframe_normal");
+
+                    var interval = $interval(function() {
+                        MyServices.getorderbyorderid(data, function(orderData) {
+                            console.log(orderData);
+                            if (orderData.orderstatus == 5 || orderData.orderstatus == "5") {
+                                $cordovaInAppBrowser.close();
+                                $interval.cancel(interval);
+                                allfunction.msgHome("Payment Failed", 'Sorry!');
+                            } else if (orderData.orderstatus == 2 || orderData.orderstatus == "2") {
+                                $cordovaInAppBrowser.close();
+                                $interval.cancel(interval);
+                                allfunction.msgHome("Thank you for shopping", 'Payment Successfull');
+                            }
+                        })
+                    }, 2000);
                 } else {
                     allfunction.msg("Sorry Try Again", 'Sorry!');
                 }

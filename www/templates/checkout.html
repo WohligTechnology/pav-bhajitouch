@@ -1,14 +1,14 @@
 <ion-view view-title="Checkout">
     <ion-content>
         <div class="checkout">
-            <div class="row">
+            <div class="row" ng-show="showlogreg">
                 <div class="col">
                     <div class="easycheckout">
                         <ul class="list">
                             <li class="chkbx-head">
                                 <h2>Checkout</h2>
                             </li>
-                            <li class="chkbx-head" ng-show="showlogreg">
+                            <li class="chkbx-head">
                                 <p>Register with us for future convenience</p>
                             </li>
                             <ion-radio class="chkbx" ng-show="showlogreg" ng-model="choice" ng-value="'guest'">Checkout as guest</ion-radio>
@@ -201,7 +201,7 @@
 -->
                         </div>
                     </div>
-                    <div class="order-review no-border">
+                    <div class="order-review no-border" ng-show="showOrderReview">
                         <h2>Order review</h2>
                         <div class="item item-icon-left"><i class="icon ln-cash"></i>
                             <h3>Sub total <span class="item-note">Rs. {{totalcart | numberWithCommas}}</span>
@@ -219,25 +219,25 @@
                           </h3>
                         </div>
                     </div>
-                    <button class="button button-positive order-button" type="submit" ng-click="paymentOption()">
+                    <button class="button button-positive order-button" type="submit" ng-click="paymentOption()" ng-show="showOrderReview">
                         Order
                     </button>
                 </div>
             </div>
         </div>
-        <div class="placeorder" ng-show="paymentinfo">
+        <div class="placeorder" ng-show="paymentinfo" style="display:none;">
             <form action="http://accessworld.in/admin/paymentgateway/ccavRequestHandler.php" method="post" style="padding-top:20px;">
                 <!--                                    <span style="font-weight:600; padding-top:20px">Order Id:</span> {{payment.orderid}}-->
                 <!--               CHECKOUT POST FORM START                    -->
                 <input type="text" hidden name="tid" id="tid" />
-                <input type="text" hidden name="order_id" ng-model="orderid">
+                <input type="text" hidden name="order_id" ng-model="checkout.orderid">
                 <input type="text" hidden name="merchant_id" value="76752">
                 <input type="text" hidden name="amount" ng-model="allamount">
                 <input type="text" hidden name="billing_name" ng-model="checkout.firstname">
                 <input type="text" hidden name="currency" value="INR">
                 <input type="text" hidden name="merchant_param1" ng-model="couponhave">
                 <input type="text" hidden name="redirect_url" value="http://accessinfoworld.com/admin/index.php/json/payumoneysuccess">
-                <input type="text" hidden name="cancel_url" value="htt://accessinfoworld.com/#/checkout" />
+                <input type="text" hidden name="cancel_url" value="http://accessinfoworld.com/#/checkout" />
                 <input type="text" hidden name="language" value="EN" />
                 <!-- <input type="text" name="lastname" ng-model="checkout.lastname"> -->
                 <input type="text" hidden name="billing_address" ng-model="checkout.billingaddress">
