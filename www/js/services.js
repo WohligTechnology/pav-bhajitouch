@@ -1,9 +1,9 @@
-var adminbase = "http://accessworld.in/admin/";
+var adminbase = "http://admin.accessworld.in/";
 // var adminbase = "http://localhost/accessback/";
 var adminurl = adminbase + "index.php/json/";
 var adminhauth = adminbase + "index.php/hauth/";
 var adminimage = adminbase + "uploads/";
-var adminimage = "http://accessworld.in/admin/uploads/";
+var adminimage = "http://admin.accessworld.in/uploads/";
 //var adminimage = "http://localhost/accessback/uploads/";
 
 angular.module('starter.services', [])
