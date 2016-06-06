@@ -143,7 +143,7 @@ angular.module('starter.services', [])
             }).success(callback);
         },
         addtocart: function(product, callback) {
-            return $http.get(adminurl + 'addtocart?product=' + product.product + '&productname=' + product.productname + '&price=' + product.price + '&quantity=' + product.quantity, {}, {
+            return $http.get(adminurl + 'addtocart?product=' + product.product + '&productname=' + product.productname + '&price=' + product.price + '&quantity=1', {}, {
                 withCredentials: true
             }).success(callback);
         },

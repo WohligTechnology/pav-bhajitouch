@@ -1205,6 +1205,7 @@ angular.module('starter.controllers', ['ui.bootstrap', 'ui.slider', 'ngCordova']
             if ($scope.brandimages.length == 0) {
                 $scope.shownodata = true;
             }
+              $scope.brandimages=_.uniq($scope.brandimages,"id");
             $scope.brands = _.chunk($scope.brandimages, 3);
             lastpage = data.lastpage;
             $ionicLoading.hide();
