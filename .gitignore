@@ -19,3 +19,4 @@ platforms/
 plugins/
 .brackets.json
 *.zip
+*.apk
